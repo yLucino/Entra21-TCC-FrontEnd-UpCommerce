@@ -1,1 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    /* Cores Primárias */
+    --primary-002442: #002442;
+    --primary-053B69: #053B69;
+    --primary-0E548F: #0E548F;
+    --primary-006699: #006699;
+    --primary-0A8FCC: #0A8FCC;
+    --primary-00AEFF: #00AEFF;
+    --primary-808080: #808080;
+    --primary-A6A6A6: #A6A6A6;
+    --primary-D9D9D9: #D9D9D9;
+    --primary-000000: #000000;
+    --primary-333333: #333333;
+    --primary-666666: #666666;
+    --primary-E0E0E0: #E0E0E0;
+    --primary-E9E9E9: #E9E9E9;
+    --primary-FFFFFF: #FFFFFF;
+  
+    /* Cores Secundárias */
+    --secondary-9E1010: #9E1010;
+    --secondary-C41D1D: #C41D1D;
+    --secondary-EB3030: #EB3030;
+    --secondary-2C8F41: #2C8F41;
+    --secondary-41B65A: #41B65A;
+    --secondary-5ADB76: #5ADB76;
+    --secondary-9FC1D1: #9FC1D1;
+    --secondary-C8E8F7: #C8E8F7;
+    --secondary-CADAE5: #CADAE5;
+
+    /* Gradientes */
+    --gradient-Light-LeftToRight: linear-gradient(90deg,rgba(1, 171, 250, 1) 0%, rgba(3, 57, 103, 1) 100%);
+    --gradient-Medium-BottomToTop: linear-gradient(180deg,rgba(0, 48, 91, 1) 0%, rgba(21, 107, 167, 1) 100%);
+    --gradient-Dark-TopToBottom: linear-gradient(180deg,rgba(3, 61, 107, 1) 0%, rgba(0, 25, 45, 1) 100%);
+  }
+  
