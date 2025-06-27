@@ -36,3 +36,19 @@
     --gradient-Dark-TopToBottom: linear-gradient(180deg,rgba(3, 61, 107, 1) 0%, rgba(0, 25, 45, 1) 100%);
   }
   
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul li {
+  list-style-type: none;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
