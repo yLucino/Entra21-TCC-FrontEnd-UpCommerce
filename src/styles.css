@@ -4,7 +4,6 @@
 :root {
   /* Cores Primárias */
   --primary-002442: #002442;
-  --primary-ALPHA-002442-04: rgb(0, 36, 66, 0.4);
   --primary-053B69: #053B69;
   --primary-0E548F: #0E548F;
   --primary-006699: #006699;
@@ -18,7 +17,12 @@
   --primary-666666: #666666;
   --primary-E0E0E0: #E0E0E0;
   --primary-E9E9E9: #E9E9E9;
+  --primary-818181: #818181;
   --primary-FFFFFF: #FFFFFF;
+
+  /* Cores Primárias ALPHA */
+  --primary-ALPHA-002442-04: rgba(0, 36, 66, 0.4);
+  --primary-ALPHA-000000-06: rgba(0, 0, 0, 0.6);
 
   /* Cores Secundárias */
   --secondary-9E1010: #9E1010;
@@ -33,9 +37,10 @@
   --secondary-EEEEEE: #EEEEEE;
 
   /* Gradientes */
-  --gradient-Light-LeftToRight: linear-gradient(90deg,rgba(1, 171, 250, 1) 0%, rgba(3, 57, 103, 1) 100%);
-  --gradient-Medium-BottomToTop: linear-gradient(180deg,rgba(0, 48, 91, 1) 0%, rgba(21, 107, 167, 1) 100%);
-  --gradient-Dark-TopToBottom: linear-gradient(180deg,rgba(3, 61, 107, 1) 0%, rgba(0, 25, 45, 1) 100%);
+  --gradient-Light-LeftToRight: linear-gradient(90deg,#01abfa 0%, #033967 100%);
+  --gradient-Dark-LeftToRight: linear-gradient(90deg,#033d6b 0%, #00192d 100%);
+  --gradient-Medium-BottomToTop: linear-gradient(180deg,#00305b 0%, #156ba7 100%);
+  --gradient-Dark-TopToBottom: linear-gradient(180deg,#033d6b 0%, #00192d 100%);
 
   /* Fonts Guides */
   /* BOLD */
@@ -55,11 +60,12 @@
   --font-REGULAR-P-8:   normal 8px "Poppins", sans-serif;
 }
   
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
+  scroll-behavior: smooth;
 }
 
 a {
@@ -69,5 +75,12 @@ a {
 ul li {
   list-style-type: none;
 }
+
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+span {
+  background: var(--gradient-Light-LeftToRight);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
