@@ -37,11 +37,13 @@ npm install
 
 <div style="display: inline_block">
   <img align="center" alt="GitHub" height="20" width="20" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg">
-  <a href="https://www.github.com/yLucino" target="_blank"><img src="" target="_blank">Luciano Chiodini - yLucino</a><br>
+  <a href="https://www.github.com/yLucino" target="_blank">Luciano Chiodini - yLucino</a><br>
+
   <img align="center" alt="GitHub" height="20" width="20" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg">
-  <a href="https://www.github.com/cunha24025"><img src="" target="_blank">João Gabriel da Cunha - cunha24025</a><br>
+  <a href="https://www.github.com/cunha24025" target="_blank">João Gabriel da Cunha - cunha24025</a><br>
+  
   <img align="center" alt="GitHub" height="20" width="20" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg">
-  <a href="https://www.github.com/sgarciaisabela" target="_blank"><img src="" target="_blank">Isabela Garcia - sgarciaisabela</a>
+  <a href="https://www.github.com/sgarciaisabela" target="_blank">Isabela Garcia - sgarciaisabela</a>
 </div>
 
 ## Tecnologias
