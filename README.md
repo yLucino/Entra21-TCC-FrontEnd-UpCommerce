@@ -1,31 +1,63 @@
-<<<<<<< HEAD
-# Entra21-TCC-UpCommerce
-=======
-# TCCAngular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
 
-## Development server
+# Entra21 C# - TCC UpCommerce FrontEnd
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Layout Desktop
+<img src="./src/assets/images/Preview/Desktop.png" alt="imagem do projeto final Desktop">
 
-## Code scaffolding
+### Layout Mobile
+<img src="./src/assets/images/Preview/Mobile.png" alt="imagem do projeto final Mobile">
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Layout Responsivo para Desktop | Laptop | Tablet | Mobile
 
-## Build
+## Índice
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- [Instalação](#instalação)
+- [Autor](#autor)
+- [Tecnologias](#tecnologias)
+- [Referências](#referências)
+- [Agradecimentos](#agradecimentos)
 
-## Running unit tests
+## Instalação
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Instruções para instalar e configurar o projeto.
 
-## Running end-to-end tests
+```sh
+# Clone o repositório
+git clone https://github.com/yLucino/Entra21-TCC-UpCommerce.git
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+# Navegue até o diretório do projeto
+cd Entra21-TCC-UpCommerce
 
-## Further help
+# Instale as dependências
+npm install
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
->>>>>>> d1c69b1 (initial commit)
+## Autor
+
+<div style="display: inline_block">
+  <img align="center" alt="GitHub" height="20" width="20" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg">
+  <a href="https://www.github.com/yLucino" target="_blank"><img src="" target="_blank">Luciano Chiodini - yLucino</a><br>
+  <img align="center" alt="GitHub" height="20" width="20" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg">
+  <a href="https://www.github.com/cunha24025"><img src="" target="_blank">João Gabriel da Cunha - cunha24025</a><br>
+  <img align="center" alt="GitHub" height="20" width="20" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg">
+  <a href="https://www.github.com/sgarciaisabela" target="_blank"><img src="" target="_blank">Isabela Garcia - sgarciaisabela</a>
+</div>
+
+## Tecnologias
+
+<div style="display: inline_block"><br>
+  <img align="center" alt="Angular" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/angular/angular-original.svg">
+  <img align="center" alt="C#" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg">
+  <img align="center" alt="Ts" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-plain.svg">
+  <img align="center" alt="HTML" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg">
+  <img align="center" alt="CSS" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg">
+  <img align="center" alt="MYSQL" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg">
+</div>
+
+## Referências
+
+
+## Agradecimentos
+
+Obrigado por visitar o repositório! 🙂🫡
