@@ -1,0 +1,86 @@
+/* Section Middle CSS */
+section.middle-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-items: right;
+  height: 100vh;
+  margin-top: 60px;
+  gap: 30px;
+}
+
+section.middle-content .text-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 500px;
+  height: 425px;
+  margin-right: 50px;
+}
+
+section.middle-content .text-content h3 {
+  font: var(--font-BOLD-H3-21);
+}
+
+section.middle-content .text-content h3 span {
+  background: var(--gradient-Dark-LeftToRight);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+section.middle-content .text-content h1 {
+  font: var(--font-BOLD-H1-38);
+}
+
+section.middle-content .text-content hr {
+  margin: 10px 0 30px 0;
+  background: var(--gradient-Light-LeftToRight);
+  border: none;
+  border-radius: 10px;
+  height: 20px;
+}
+
+section.middle-content .text-content p {
+  font: var(--font-REGULAR-H4-16);
+  color: var(--primary-818181);
+}
+
+section.middle-content .img-content {
+  display: flex;
+  justify-content: center;
+}
+
+section.middle-content .img-content img.image-background {
+  border-radius: 74px 0 0 74px;
+  max-width: 100%;
+}
+
+/* Decorations Circles Section */
+.decoration {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  top: 0;
+  z-index: 1;
+}
+
+.decoration .top-circles {
+  position: relative;
+  left: -40px;
+  top: 80px;
+}
+
+.decoration .bottom-circles {
+  position: relative;
+  bottom: -50px;
+  left: -90px;
+}
+
+.decoration .bottom-circles .circle-02-bottom {
+  position: relative;
+  bottom: 50px;
+  left: -100px;
+}

@@ -1,14 +1,16 @@
 /* Header CSS */
 header {
-    position: absolute;
+    position: fixed;
+    top: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 35px;
+    padding: 35px 35px;
     width: 100%;
     border-radius: 0 0 20px 20px;
     box-shadow: 0 1px 15px -3px var(--primary-000000);
     background: var(--primary-E9E9E9);
+    z-index: 10;
   }
   
   header .logo-section a {
