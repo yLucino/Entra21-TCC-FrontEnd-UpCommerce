@@ -5,11 +5,15 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './Pages/home/home.component';
+import { HomeComponent } from './Pages/main/home/home.component';
 import { LoginComponent } from './Components/login/login.component';
-import { HeaderComponent } from './Contents/header/header.component';
+import { HeaderComponent } from './Components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FooterComponent } from './contents/footer/footer.component';
+import { AboutComponent } from './Pages/main/about/about.component';
+import { MainComponent } from './Pages/main/main.component';
+import { ServicesComponent } from './Pages/main/services/services.component';
+import { ContactsComponent } from './Pages/main/contacts/contacts.component';
+import { PlansComponent } from './Pages/main/plans/plans.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +21,11 @@ import { FooterComponent } from './contents/footer/footer.component';
     HomeComponent,
     LoginComponent,
     HeaderComponent,
-    FooterComponent
+    AboutComponent,
+    MainComponent,
+    ServicesComponent,
+    ContactsComponent,
+    PlansComponent,
   ],
   imports: [
     BrowserModule,

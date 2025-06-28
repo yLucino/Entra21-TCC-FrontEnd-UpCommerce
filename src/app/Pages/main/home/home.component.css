@@ -5,7 +5,8 @@ section.middle-content {
   align-items: center;
   justify-items: right;
   height: 100vh;
-  margin-top: 60px;
+  max-width: 100vw;
+  padding-top: 60px;
   gap: 30px;
 }
 
@@ -22,11 +23,6 @@ section.middle-content .text-content h3 {
   font: var(--font-BOLD-H3-21);
 }
 
-section.middle-content .text-content h3 span {
-  background: var(--gradient-Dark-LeftToRight);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 
 section.middle-content .text-content h1 {
   font: var(--font-BOLD-H1-38);
@@ -64,18 +60,16 @@ section.middle-content .img-content img.image-background {
   height: 100%;
   justify-content: space-between;
   top: 0;
-  z-index: 1;
+  z-index: -1;
 }
 
 .decoration .top-circles {
   position: relative;
   left: -40px;
-  top: 80px;
 }
 
 .decoration .bottom-circles {
   position: relative;
-  bottom: -50px;
   left: -90px;
 }
 
