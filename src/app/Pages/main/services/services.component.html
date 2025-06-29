@@ -44,8 +44,10 @@
         <hr>
         <p>Soluções rápidas, eficientes e descomplicadas para impulsionar seu negócio.</p>
 
-        <button>Saiba mais</button>
+        <button (click)="openPopup()">Saiba mais</button>
       </div>
     </div>
   </div>
 </section>
+
+<app-agility-practicality-pop-up *ngIf="showAgilityPopUp" (close)="closePopup()"></app-agility-practicality-pop-up>

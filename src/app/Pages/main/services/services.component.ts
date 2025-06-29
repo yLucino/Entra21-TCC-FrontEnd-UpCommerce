@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./services.component.css']
 })
 export class ServicesComponent {
+  showAgilityPopUp = false;
 
+  openPopup() {
+    this.showAgilityPopUp = true;
+  }
+
+  closePopup() {
+    this.showAgilityPopUp = false;
+  }
 }
