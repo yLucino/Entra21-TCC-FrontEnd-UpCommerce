@@ -6,5 +6,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+  currentComponent: 'login' | 'register' | null = null;
 
+  openLogin() {
+    this.currentComponent = 'login';
+  }
+
+  openRegister() {
+    this.currentComponent = 'register';
+  }
+
+  closePopup() {
+    this.currentComponent = null;
+  }
 }

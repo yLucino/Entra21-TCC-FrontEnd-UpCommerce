@@ -1,38 +1,40 @@
 <header>
-    <div class="logo-section">
-      <a href="#Home">
-        <img src="../../../assets/images/Logo/LogoUpCommerce-3.png" alt="Imagem logo circular da DigitalizaJá.">
-        <h1>UpCommerce</h1>
-      </a>
+  <div class="logo-section">
+    <a href="#Home">
+      <img src="../../../assets/images/Logo/LogoUpCommerce-3.png" alt="Imagem logo circular da DigitalizaJá.">
+      <h1>UpCommerce</h1>
+    </a>
+  </div>
+
+  <nav>
+    <ul class="nav-header-box">
+      <li>
+        <a href="#About">Sobre nós</a>
+      </li>
+      <li>
+        <a href="#Services">Serviços</a>
+      </li>
+      <li>
+        <a href="#Contacts">Contatos</a>
+      </li>
+      <li>
+        <a href="#Plans">Assinaturas</a>
+      </li>
+    </ul>
+
+    <div class="search-box">
+      <input class="search-input" placeholder="Pesquisar..." type="text">
+      <mat-icon class="search-icon">search</mat-icon>
     </div>
+  </nav>
 
-    <nav>
-      <ul class="nav-header-box">
-        <li>
-          <a href="#About">Sobre nós</a>
-        </li>
-        <li>
-          <a href="#Services">Serviços</a>
-        </li>
-        <li>
-          <a href="#Contacts">Contatos</a>
-        </li>
-        <li>
-          <a href="#Plans">Assinaturas</a>
-        </li>
-      </ul>
+  <div class="login-register-section">
+    <a (click)="openLogin()">
+      <mat-icon class="search-user">account_circle</mat-icon>
+      <p>Login</p>
+    </a>
+  </div>
+</header>
 
-      <div class="search-box">
-        <input class="search-input" placeholder="Pesquisar..." type="text">
-        <mat-icon class="search-icon">search</mat-icon>
-      </div>
-    </nav>
-
-    <div class="login-register-section">
-      <a routerLink="/Login" routerLinkActive="active">
-        <mat-icon class="search-user">account_circle</mat-icon>
-        <p>Login</p>
-      </a>
-    </div>
-
-  </header>
+<app-login *ngIf="currentComponent === 'login'" (closeLogin)="closePopup()" (goToRegister)="openRegister()"></app-login>
+<app-register *ngIf="currentComponent === 'register'" (closeRegister)="closePopup()" (goToLogin)="openLogin()"></app-register>

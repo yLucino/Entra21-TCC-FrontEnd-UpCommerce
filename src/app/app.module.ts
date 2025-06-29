@@ -14,6 +14,7 @@ import { MainComponent } from './Pages/main/main.component';
 import { ServicesComponent } from './Pages/main/services/services.component';
 import { ContactsComponent } from './Pages/main/contacts/contacts.component';
 import { PlansComponent } from './Pages/main/plans/plans.component';
+import { RegisterComponent } from './Components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { PlansComponent } from './Pages/main/plans/plans.component';
     ServicesComponent,
     ContactsComponent,
     PlansComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
