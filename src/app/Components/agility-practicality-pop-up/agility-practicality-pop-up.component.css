@@ -1,0 +1,115 @@
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1000;
+  background: var(--primary-ALPHA-002442-04);
+}
+
+.content-all {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background: var(--primary-FFFFFF);
+  padding: 30px;
+  border-radius: 10px;
+  width: 1080px;
+  height: 720px;
+  box-shadow: 0 3px 30px var(--primary-ALPHA-000000-06);
+}
+
+.content-all .close {
+  position: absolute;
+  top: 35px;
+  left: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--primary-135087);
+  cursor: pointer;
+  transition: .2s;
+  z-index: 10;
+}
+
+.content-all .close:hover {
+  background: var(--primary-00AEFF);
+  box-shadow: 0 1px 5px var(--primary-006699);
+  transform: scale(1.02);
+}
+
+.content-all .close:hover mat-icon {
+  color: var(--primary-333333);
+}
+
+.content-all .close mat-icon {
+  color: var(--primary-FFFFFF);
+  height: 28px;
+  width: 28px;
+  font-size: 28px;
+}
+
+.content-all .title {
+  background: var(--primary-135087);
+  border-radius: 28px;
+  padding: 11px 60px;
+  box-shadow: 0 1px 10px var(--primary-ALPHA-000000-06);
+  margin-bottom: 30px;
+}
+
+.content-all .title h1 {
+  font: var(--font-BOLD-H1-38);
+  color: var(--primary-FFFFFF);
+}
+
+.content-all ul.cards li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 450px;
+  height: 120px;
+  margin-top: 30px;
+  box-shadow: 0 0 20px var(--primary-ALPHA-000000-03);
+  border-radius: 10px;
+  padding: 15px 45px 10px 45px;
+}
+
+.content-all ul.cards li h2 {
+  font: var(--font-REGULAR-H3-21);
+  background: var(--gradient-Light-LeftToRight);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
+}
+
+.content-all ul.cards li p {
+  font: var(--font-REGULAR-P-12);
+  text-align: center;
+}
+
+.content-all .decorations {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+}
+
+.content-all .decorations .img-01 {
+  position: relative;
+  left: 20px;
+  top: 220px;
+}
+
+.content-all .decorations .img-02 {
+  position: relative;
+  left: 615px;
+  top: 360px;
+}

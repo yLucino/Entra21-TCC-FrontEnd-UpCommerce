@@ -1,0 +1,31 @@
+<section>
+  <div class="content-all" *ngIf="visible" @fadeInOut (@fadeInOut.done)="onAnimationDone($event)">
+    <div (click)="closePopup()" class="close">
+      <mat-icon>arrow_back</mat-icon>
+    </div>
+
+    <div class="title">
+      <h1>Agilidade e Praticidade</h1>
+    </div>
+
+    <ul class="cards">
+      <li>
+        <h2>Gestão Descomplicada</h2>
+        <p>Gerencie seu negócio com facilidade através de uma interface intuitiva, feita para que qualquer pessoa possa usar com eficiência.</p>
+      </li>
+      <li>
+        <h2>Implementação Rápida</h2>
+        <p>Tenha sua plataforma no ar em tempo recorde. Nossos processos otimizados garantem entregas ágeis, sem abrir mão da qualidade.</p>
+      </li>
+      <li>
+        <h2>Atendimento Dinâmico</h2>
+        <p>Conte com uma equipe pronta para responder com agilidade e resolver qualquer demanda em poucos cliques.</p>
+      </li>
+    </ul>
+
+    <div class="decorations">
+      <img class="img-01" src="../../../assets/images/ServicesPage/Agility-img.png" alt="Imagem de foguete para representar agilidade no ecommerce">
+      <img class="img-02" src="../../../assets/images/ServicesPage/Suport-img.png" alt="Imagem de uma pessoa conversando com o suporte técnico virtual">
+    </div>
+  </div>
+</section>

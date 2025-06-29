@@ -15,6 +15,7 @@ import { ServicesComponent } from './Pages/main/services/services.component';
 import { ContactsComponent } from './Pages/main/contacts/contacts.component';
 import { PlansComponent } from './Pages/main/plans/plans.component';
 import { RegisterComponent } from './Components/register/register.component';
+import { AgilityPracticalityPopUpComponent } from './components/agility-practicality-pop-up/agility-practicality-pop-up.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { RegisterComponent } from './Components/register/register.component';
     ContactsComponent,
     PlansComponent,
     RegisterComponent,
+    AgilityPracticalityPopUpComponent,
   ],
   imports: [
     BrowserModule,
