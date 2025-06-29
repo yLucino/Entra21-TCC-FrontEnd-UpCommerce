@@ -20,9 +20,8 @@ section {
   padding: 30px;
   border-radius: 20px;
   width: 420px;
-  height: 560px;
+  height: 665px;
   box-shadow: 0 3px 30px var(--primary-ALPHA-000000-06);
-
 }
 
 .content-all .logo {
@@ -66,18 +65,6 @@ section {
 
 .content-all .Inputs form input:hover {
   transform: scale(1.02);
-}
-
-.content-all .Inputs form a {
-  font: var(--font-REGULAR-P-12);
-  color: var(--primary-333333);
-  margin-top: 5px;
-  text-decoration: underline;
-  transition: .2s;
-}
-
-.content-all .Inputs form a:hover {
-  color: var(--primary-00AEFF);
 }
 
 .content-all .Inputs form button {

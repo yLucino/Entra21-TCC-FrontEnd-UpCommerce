@@ -1,6 +1,6 @@
 <section>
-  <div class="content-all" *ngIf="visible" @fadeInOut (@fadeInOut.done)="onAnimationDone($event)">
-    <div (click)="closeLoginComponent()" class="close">
+  <div class="content-all" class="content-all" *ngIf="visible" @fadeInOut (@fadeInOut.done)="onAnimationDone($event)">
+    <div (click)="closeRegisterComponent()"  class="close">
       <mat-icon>close</mat-icon>
     </div>
 
@@ -11,21 +11,22 @@
 
     <div class="Inputs">
       <form action="" method="get">
+        <label for="Name">Nome</label>
+        <input type="text" name="Name" placeholder="Nome" required>
+
         <label for="Email">Email</label>
         <input type="text" name="Email" placeholder="Email" required>
         
         <label for="Password">Senha</label>
         <input type="password" name="Password" placeholder="Senha" required>
 
-        <a href="">Esqueceu a senha?</a>
-
-        <button type="submit">Entrar</button>
+        <button type="submit">Cadastrar</button>
       </form>
     </div>
 
     <div class="footer">
-      <p>Não possui conta? 
-        <a (click)="goToRegister.emit()">Crie uma agora</a>
+      <p>Já possui conta? 
+        <a (click)="goToLogin.emit()">Faça login</a>
       </p>
     </div>
   </div>  

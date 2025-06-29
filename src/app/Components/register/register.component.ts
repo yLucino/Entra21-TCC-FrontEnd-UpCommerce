@@ -2,9 +2,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { trigger, transition, style, animate, AnimationEvent } from '@angular/animations';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css'],
   animations: [
     trigger('fadeInOut', [
       transition(':enter', [
@@ -17,19 +17,19 @@ import { trigger, transition, style, animate, AnimationEvent } from '@angular/an
     ])
   ]
 })
-export class LoginComponent {
-  @Output() closeLogin = new EventEmitter<void>();
-  @Output() goToRegister = new EventEmitter<void>();
+export class RegisterComponent {
+  @Output() closeRegister = new EventEmitter<void>();
+  @Output() goToLogin = new EventEmitter<void>();
 
   visible = true;
 
-  closeLoginComponent() {
+  closeRegisterComponent() {
     this.visible = false;
   }
 
   onAnimationDone(event: AnimationEvent) {
     if (event.toState === 'void') {
-      this.closeLogin.emit();
+      this.closeRegister.emit();
     }
   }
 }
