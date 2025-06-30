@@ -3,7 +3,7 @@
 
 :root {
   /* Cores Primárias */
-  --primary-002442: #002442;
+  --primary-002442: #00192d;
   --primary-053B69: #053B69;
   --primary-135087: #135087;
   --primary-0E548F: #0E548F;
@@ -42,7 +42,7 @@
   /* Gradientes */
   --gradient-Light-LeftToRight: linear-gradient(90deg,#01abfa 0%, #033967 100%);
   --gradient-Dark-LeftToRight: linear-gradient(90deg,#033d6b 0%, #00192d 100%);
-  --gradient-Medium-BottomToTop: linear-gradient(180deg,#00305b 0%, #156ba7 100%);
+  --gradient-Medium-BottomToTop: linear-gradient(180deg,#00305b 0%, #0a6fb7 100%);
   --gradient-Dark-TopToBottom: linear-gradient(180deg,#033d6b 0%, #00192d 100%);
 
   /* Fonts Guides */
