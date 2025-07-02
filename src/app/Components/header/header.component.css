@@ -8,7 +8,7 @@ header {
     padding: 20px 30px;
     width: 100%;
     border-radius: 0 0 20px 20px;
-    box-shadow: 0 1px 15px -3px var(--primary-000000);
+    box-shadow: 0 1px 15px -3px var(--primary-ALPHA-000000-06);
     background: var(--primary-E9E9E9);
     z-index: 10;
   }

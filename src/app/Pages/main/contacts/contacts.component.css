@@ -1,9 +1,178 @@
-textarea {
+.container-contacts {
+  width: 100%;
+  height: 100vh;
+}
+
+.content-all {
+  padding-top: 85px;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Form CSS */
+.content-all .box-form form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  min-height: 600px;
+  max-height: 800px;
+  border: 1px solid var(--primary-ALPHA-01335E-04);
+  border-radius: 10px;
+  padding: 30px 40px;
+}
+.content-all .box-form form label {
+  font: var(--font-REGULAR-H4-16);
+  margin-top: 25px;
+}
+
+.content-all .box-form form input {
   padding: 0.75rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
   border-radius: 6px;
+  font: var(--font-REGULAR-P-12);
+  border: 1px solid var(--primary-ALPHA-01335E-04);
+}
+
+.content-all .box-form form button {
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  height: 44px;
+  width: 318px;
+  margin-top: 25px;
+  background: var(--primary-333333);
+  color: var(--primary-FFFFFF);
+  transition: .3s;
+}
+
+.content-all .box-form form button:hover {
+  background: var(--primary-00AEFF);
+  box-shadow: 0 0px 5px var(--primary-006699);
+  color: var(--primary-333333);
+  transform: scale(1.02);
+}
+
+.content-all .box-form form textarea {
+  padding: 0.75rem;
+  font: var(--font-REGULAR-P-12);
+  border: 1px solid var(--primary-ALPHA-01335E-04);
+  border-radius: 6px 6px 0 6px;
   resize: vertical;
   min-height: 100px;
   max-height: 400px;
+}
+
+/* Imagem CSS */
+.content-all .box-img {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 30px;
+}
+
+.content-all .box-img img.circle-01 {
+  position: absolute;
+  top: 80px;
+  right: 80px;
+  width: 140px;
+  z-index: -1;
+}
+
+.content-all .box-img img.circle-02 {
+  position: absolute;
+  bottom: 85px;
+  left: 85px;
+  width: 140px;
+  z-index: -1;
+}
+
+.content-all .box-img img.background-balls {
+  position: absolute;
+  z-index: -2;
+}
+
+/* .content-all .box-img img.contacts-img {
+} */
+
+/* Text CSS */
+.content-all .box-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
+.content-all .box-text .text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: center;
+  width: 400px;
+  height: 380px;
+}
+
+.content-all .box-text .text h1 {
+  font: var(--font-BOLD-H2-28);
+  background: var(--gradient-Light-LeftToRight);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.content-all .box-text .text p {
+  font: var(--font-REGULAR-H3-21);
+  color: var(--primary-333333);
+}
+
+.content-all .box-text .text address {
+  font: var(--font-REGULAR-H4-16);
+  background: var(--gradient-Light-LeftToRight);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.content-all .box-text .social {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+} 
+
+.content-all .box-text .social h1 {
+  font: var(--font-REGULAR-H4-16);
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+} 
+
+.content-all .box-text .social ul {
+  display: flex;
+  gap: 5px;
+  justify-content: space-evenly;
+  padding: 0 10px;
+  align-items: center;
+  width: 215px;
+  height: 65px;
+  border-radius: 20px;
+  background: var(--gradient-Medium-BottomToTop);
+} 
+
+.content-all .box-text .social ul li i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  width: 25px;
+  height: 25px;
+  color: var(--primary-FFFFFF);
+  cursor: pointer;
+  transition: .3s;
+} 
+
+.content-all .box-text .social ul li:hover i {
+  transform: scale(1.2);
+  color: var(--primary-00AEFF);
 }
