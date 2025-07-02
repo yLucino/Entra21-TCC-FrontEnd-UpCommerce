@@ -1,0 +1,33 @@
+.box-btn-back-to-top a {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 30px;
+  right: 30px;
+  padding: 15px;
+  border-radius: 50%;
+  background: var(--gradient-Dark-TopToBottom);
+  box-shadow: 0 0 30px var(--primary-ALPHA-000000-06);
+  opacity: 0;
+  transition: .3s;
+  cursor: default;
+}
+
+.box-btn-back-to-top a.scrollOn {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.box-btn-back-to-top a:hover {
+  transform: scale(1.1);
+  bottom: 40px;
+  box-shadow: 0 0 30px var(--primary-135087);
+}
+
+.box-btn-back-to-top a mat-icon {
+  color: var(--primary-FFFFFF);
+  width: 26px;
+  height: 26px;
+  font-size: 26px;
+}
