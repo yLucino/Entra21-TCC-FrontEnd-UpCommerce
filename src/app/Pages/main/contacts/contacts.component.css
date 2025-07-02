@@ -94,9 +94,6 @@
   z-index: -2;
 }
 
-/* .content-all .box-img img.contacts-img {
-} */
-
 /* Text CSS */
 .content-all .box-text {
   display: flex;
@@ -123,7 +120,7 @@
 
 .content-all .box-text .text p {
   font: var(--font-REGULAR-H3-21);
-  color: var(--primary-333333);
+  color: var(--primary-666666);
 }
 
 .content-all .box-text .text address {
