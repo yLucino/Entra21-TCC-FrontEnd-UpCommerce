@@ -15,7 +15,9 @@ import { ServicesComponent } from './Pages/main/services/services.component';
 import { ContactsComponent } from './Pages/main/contacts/contacts.component';
 import { PlansComponent } from './Pages/main/plans/plans.component';
 import { RegisterComponent } from './Components/register/register.component';
-import { AgilityPracticalityPopUpComponent } from './components/agility-practicality-pop-up/agility-practicality-pop-up.component';
+import { AgilityPracticalityPopUpComponent } from './Components/agility-practicality-pop-up/agility-practicality-pop-up.component';
+import { FooterComponent } from './Components/footer/footer.component';
+import { BtnBackToTopComponent } from './components/btn-back-to-top/btn-back-to-top.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { AgilityPracticalityPopUpComponent } from './components/agility-practica
     PlansComponent,
     RegisterComponent,
     AgilityPracticalityPopUpComponent,
+    FooterComponent,
+    BtnBackToTopComponent,
   ],
   imports: [
     BrowserModule,
