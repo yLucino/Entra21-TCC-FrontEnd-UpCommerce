@@ -24,7 +24,8 @@
   /* Cores Primárias ALPHA */
   --primary-ALPHA-002442-04: rgba(0, 36, 66, 0.4);
   --primary-ALPHA-000000-06: rgba(0, 0, 0, 0.6);
-  --primary-ALPHA-000000-03: rgba(0, 0, 0, 0.3);
+  --primary-ALPHA-000000-02: rgba(0, 0, 0, 0.2);
+  --primary-ALPHA-000000-00: rgba(0, 0, 0, 0.065);
   --primary-ALPHA-01335E-04: rgba(1, 51, 94, 0.4);
 
   /* Cores Secundárias */
@@ -37,6 +38,7 @@
   --secondary-9FC1D1: #9FC1D1;
   --secondary-C8E8F7: #C8E8F7;
   --secondary-CADAE5: #CADAE5;
+  --secondary-EFEFEF: #EFEFEF;
   --secondary-EEEEEE: #EEEEEE;
 
   /* Gradientes */
@@ -44,6 +46,7 @@
   --gradient-Dark-LeftToRight: linear-gradient(90deg,#033d6b 0%, #00192d 100%);
   --gradient-Medium-BottomToTop: linear-gradient(180deg,#00305b 0%, #156ba7 100%);
   --gradient-Dark-TopToBottom: linear-gradient(180deg,#033d6b 0%, #00192d 100%);
+  --gradient-Light-TopToBottom: linear-gradient(180deg,#42C3FF 0%, #156BA7 100%);
 
   /* Fonts Guides */
   /* BOLD */
