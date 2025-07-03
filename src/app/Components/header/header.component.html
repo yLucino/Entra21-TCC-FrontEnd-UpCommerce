@@ -1,4 +1,4 @@
-<header>
+<header [class.active]="isMenuOpen">
   <div class="logo-section">
     <a href="#Home">
       <img src="../../../assets/images/Logo/LogoUpCommerce-3.png" alt="Imagem logo circular da DigitalizaJá.">
@@ -6,7 +6,7 @@
     </a>
   </div>
 
-  <nav>
+  <nav [class.active]="isMenuOpen">
     <ul class="nav-header-box">
       <li>
         <a href="#About">Sobre nós</a>
@@ -26,14 +26,19 @@
       <input class="search-input" placeholder="Pesquisar..." type="text">
       <mat-icon class="search-icon">search</mat-icon>
     </div>
+    
+    <div class="login-register-section">
+      <a (click)="openLogin()">
+        <mat-icon class="search-user">account_circle</mat-icon>
+        <p>Login</p>
+      </a>
+    </div>
   </nav>
 
-  <div class="login-register-section">
-    <a (click)="openLogin()">
-      <mat-icon class="search-user">account_circle</mat-icon>
-      <p>Login</p>
-    </a>
-  </div>
+  <button class="menu-toggle" [class.active]="isMenuOpen" (click)="toggleMenu()">
+    <mat-icon class="menu" [class.active]="isMenuOpen">menu</mat-icon>
+    <mat-icon class="close" [class.active]="!isMenuOpen">close</mat-icon>
+  </button>
 </header>
 
 <app-login *ngIf="currentComponent === 'login'" (closeLogin)="closePopup()" (goToRegister)="openRegister()"></app-login>

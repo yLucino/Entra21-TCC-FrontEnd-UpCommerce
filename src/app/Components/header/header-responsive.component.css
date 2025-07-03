@@ -1,0 +1,141 @@
+@media (max-width: 1600px) {
+  header .logo-section a img {
+    width: 40px;
+    height: 40px;
+  }
+
+  header .logo-section a h1 {
+    font: var(--font-BOLD-H4-16);
+  }
+
+  header nav {
+    gap: 60px;
+  }
+
+  header nav ul.nav-header-box li a {
+    font: var(--font-BOLD-P-12);
+  }
+
+  header nav div.search-box input {
+    width: 200px;
+  }
+
+  header .login-register-section a {
+    gap: 10px;
+    color: var(--primary-FFFFFF);
+    padding: 10px 25px;
+  }
+
+  header .login-register-section a p {
+    font: var(--font-BOLD-P-12);
+  }
+
+  header .login-register-section a .search-user {
+    width: 22px;
+    height: 22px;
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 1100px) {
+  header button.menu-toggle {
+    display: flex;
+  } 
+  
+  header button.menu-toggle mat-icon.active {
+    display: none;
+  }
+
+  header button.menu-toggle mat-icon {
+    display: block;
+  } 
+
+  header.active button.menu-toggle.active {
+    width: 300px;
+    margin-top: 20px;
+  } 
+
+  header.active .logo-section {
+    margin-bottom: 50px;
+  }
+
+  header.active,
+  header nav.active .nav-header-box {
+    flex-direction: column;
+  }
+
+  header nav.active {
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  header nav {
+    display: none;
+  }
+  
+  header nav.active {
+    display: flex;
+  }
+
+
+
+
+
+
+
+
+
+  header nav div.search-box  {
+    width: 300px;
+  }
+
+  header nav div.search-box input  {
+    width: 100%;
+    padding: 0 30px;
+    border-radius: 10px;
+  }
+
+  header .login-register-section a {
+    justify-content: center;
+    padding: 0;
+    height: 46px;
+    width: 300px;
+    border-radius: 10px;
+  }
+
+  header nav ul.nav-header-box {
+    gap: 8px;
+  }
+
+  header nav ul.nav-header-box li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary-D9D9D9);
+    width: 300px;
+    height: 46px;
+    border-radius: 10px;
+  }
+
+  header nav ul.nav-header-box li a:hover {
+    color: var(--primary-0A8FCC);
+  }
+
+  header nav ul.nav-header-box li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 3px;
+    background-color: var(--primary-0A8FCC);
+    transition: width 0.5s ease-out, left 0.5s ease-out;
+  }
+
+  header nav ul.nav-header-box li a:hover::after {
+    width: 100%;
+    right: 0;
+  }
+}

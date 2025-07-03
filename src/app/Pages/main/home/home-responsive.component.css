@@ -1,0 +1,35 @@
+@media (max-width: 1400px) {
+  section.middle-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: right;
+    height: 100vh;
+    max-width: 100vw;
+    padding: 0 0 0 40px;
+    gap: 0;
+  }
+
+  section.middle-content .text-content {
+    max-width: 500px;
+    height: 325px;
+    margin-right: 50px;
+  }
+    
+  section.middle-content .text-content hr {
+    margin: 10px 0 10px 0;
+    height: 10px;
+  }
+
+  section.middle-content .text-content p {
+    font: var(--font-REGULAR-P-12);
+  }
+    
+  section.middle-content .text-content h3 {
+    font: var(--font-BOLD-H4-16);
+  }
+
+  section.middle-content .text-content h1 {
+    font: var(--font-BOLD-H2-28);
+  }
+}
