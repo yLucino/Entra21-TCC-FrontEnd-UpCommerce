@@ -2,16 +2,22 @@
     width: 50px;
     height: 50px;
 }
+
+nav .logo a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
 nav .logo{
     width: 250px;
-    height: 120px;
+    height: 110px;
     display: flex;
-    border-radius: 0 30px 30px 0;
+    border-radius: 0 0 30px 0;
     align-items: center ;
     justify-content: center;
     background-color: white;
     position: absolute;
-
 }
 
 nav .logo h1{
@@ -26,7 +32,13 @@ nav .logo h1{
     height: 100vh;
     background: var(  --gradient-Medium-BottomToTop);
     color: white;
-    padding: 170px 0 0 20px ;
+    padding: 130px 0 0 20px ;
+}
+
+.menu hr{
+    width: 210px;
+    height: 0.5px;
+    margin: 25px 0 25px 0;
 }
 
 li {
@@ -34,6 +46,23 @@ li {
     align-items: center;
     gap: 10px;
     list-style: none;
-    margin-bottom: 20px;
-    font: var(--font-BOLD-H4-16);
+    margin-top: 12px;
+    font: var(--font-BOLD-P-13);
   }
+
+nav .menu .username{
+    display: flex;
+}
+
+nav .menu .username p{
+    font-size: 11px;
+}
+
+nav .menu .username .img-user img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+
+
