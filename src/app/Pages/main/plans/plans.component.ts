@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-plans',
   templateUrl: './plans.component.html',
-  styleUrls: ['./plans.component.css']
+  styleUrls: ['./plans.component.css', './plans-responsive.component.css']
 })
 export class PlansComponent {
 

@@ -1,0 +1,73 @@
+@media (max-width: 1420px) {
+  .plans-container {
+    padding-top: 180px;
+  }
+  
+  .title {
+    font: var(--font-BOLD-H3-21);
+  }
+
+  .subtitle {
+    font: var(--font-REGULAR-P-12);
+    width: 80%;
+    margin: 5px 0 40px 0;
+  }
+
+  .plans-grid {
+    gap: 30px;
+  }
+
+  .plan {
+    padding: 30px 30px;
+    width: 270px;
+    height: 380px;
+  }
+
+  .plan h3 {
+    font: var(--font-BOLD-P-12);
+    margin-bottom: 10px;
+  }
+
+  .plan .price {
+    font: var(--font-BOLD-H2-28);
+    margin-bottom: 15px;
+  }
+
+  .plan ul {
+    padding-left: 20px;
+    margin-bottom: 20px;
+  }
+
+  .plan ul li {
+    font: var(--font-REGULAR-P-10);
+    margin-bottom: 8px;
+  }
+
+  .plan ul li.span {
+    font: var(--font-BOLD-P-12);
+  }
+
+  .plan button {
+    padding: 10px;
+    font: var(--font-BOLD-P-10);
+  }
+
+  .footer-contact {
+    margin-top: 30px;
+    padding: 15px;
+  }
+
+  .footer-contact img {
+    width: 46px;
+  }
+
+  .footer-contact p {
+    font: var(--font-REGULAR-P-12);
+  }
+
+  .support-button {
+    height: 46px;
+    width: 200px;
+    font: var(--font-BOLD-P-10);
+  }
+}
