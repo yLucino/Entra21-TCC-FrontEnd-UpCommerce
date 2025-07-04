@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './Pages/main/home/home.component';
@@ -15,9 +14,11 @@ import { ServicesComponent } from './Pages/main/services/services.component';
 import { ContactsComponent } from './Pages/main/contacts/contacts.component';
 import { PlansComponent } from './Pages/main/plans/plans.component';
 import { RegisterComponent } from './Components/register/register.component';
+import { NavBarComponent } from './Components/nav-bar/nav-bar.component';
+import { LibraryLayoutsComponent } from './Pages/library-layouts/library-layouts.component';
 import { AgilityPracticalityPopUpComponent } from './Components/agility-practicality-pop-up/agility-practicality-pop-up.component';
 import { FooterComponent } from './Components/footer/footer.component';
-import { BtnBackToTopComponent } from './components/btn-back-to-top/btn-back-to-top.component';
+import { BtnBackToTopComponent } from './Components/btn-back-to-top/btn-back-to-top.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { BtnBackToTopComponent } from './components/btn-back-to-top/btn-back-to-
     PlansComponent,
     RegisterComponent,
     AgilityPracticalityPopUpComponent,
+    NavBarComponent,
     FooterComponent,
     BtnBackToTopComponent,
   ],
