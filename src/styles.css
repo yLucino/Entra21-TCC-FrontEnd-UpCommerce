@@ -24,8 +24,10 @@
   /* Cores Primárias ALPHA */
   --primary-ALPHA-002442-04: rgba(0, 36, 66, 0.4);
   --primary-ALPHA-000000-06: rgba(0, 0, 0, 0.6);
-  --primary-ALPHA-000000-03: rgba(0, 0, 0, 0.3);
+  --primary-ALPHA-000000-02: rgba(0, 0, 0, 0.2);
+  --primary-ALPHA-000000-00: rgba(0, 0, 0, 0.065);
   --primary-ALPHA-01335E-04: rgba(1, 51, 94, 0.4);
+  --primary-ALPHA-001f3a-07: rgba(0, 31, 58, 0.702);
 
   /* Cores Secundárias */
   --secondary-9E1010: #9E1010;
@@ -37,6 +39,7 @@
   --secondary-9FC1D1: #9FC1D1;
   --secondary-C8E8F7: #C8E8F7;
   --secondary-CADAE5: #CADAE5;
+  --secondary-EFEFEF: #EFEFEF;
   --secondary-EEEEEE: #EEEEEE;
 
   /* Gradientes */
@@ -44,6 +47,7 @@
   --gradient-Dark-LeftToRight: linear-gradient(90deg,#033d6b 0%, #00192d 100%);
   --gradient-Medium-BottomToTop: linear-gradient(180deg,#00305b 0%, #0a6fb7 100%);
   --gradient-Dark-TopToBottom: linear-gradient(180deg,#033d6b 0%, #00192d 100%);
+  --gradient-Light-TopToBottom: linear-gradient(180deg,#42C3FF 0%, #156BA7 100%);
 
   /* Fonts Guides */
   /* BOLD */
@@ -53,6 +57,7 @@
   --font-BOLD-H4-16: bold 16px "Poppins", sans-serif;
   --font-BOLD-P-13:  600 13px "Poppins", sans-serif;
   --font-BOLD-P-12:  bold 12px "Poppins", sans-serif;
+  --font-BOLD-P-10:  bold 10px "Poppins", sans-serif;
   --font-BOLD-P-8:   bold 8px "Poppins", sans-serif;
   
   /* REGULAR */
@@ -61,6 +66,7 @@
   --font-REGULAR-H3-21: normal 21px "Poppins", sans-serif;
   --font-REGULAR-H4-16: normal 16px "Poppins", sans-serif;
   --font-REGULAR-P-12:  normal 12px "Poppins", sans-serif;
+  --font-REGULAR-P-10:  normal 10px "Poppins", sans-serif;
   --font-REGULAR-P-8:   normal 8px "Poppins", sans-serif;
 }
   

@@ -21,7 +21,7 @@ section {
   border-radius: 20px;
   width: 420px;
   height: 560px;
-  box-shadow: 0 3px 30px var(--primary-ALPHA-000000-06);
+  box-shadow: 0 3px 30px var(--primary-ALPHA-000000-00);
 
 }
 
@@ -95,7 +95,7 @@ section {
 .content-all .Inputs form button:hover {
   background: var(--primary-00AEFF);
   color: var(--primary-333333);
-  box-shadow: 0 1px 5px var(--primary-006699);
+  box-shadow: 0 0px 5px var(--primary-006699);
   transform: scale(1.02);
 }
 
@@ -134,7 +134,7 @@ section {
 .content-all .close:hover {
   background: var(--primary-00AEFF);
   color: var(--primary-333333);
-  box-shadow: 0 1px 5px var(--primary-006699);
+  box-shadow: 0 0px 5px var(--primary-006699);
   transform: scale(1.01);
 }
 

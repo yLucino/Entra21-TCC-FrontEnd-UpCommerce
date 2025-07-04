@@ -1,0 +1,62 @@
+.container-footer {
+  width: 100%;
+  padding-top: 40px;
+}
+
+.container-all {
+  display: flex;
+  width: 100%;
+  border-radius: 20px 20px 0 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--primary-E9E9E9);
+  color: var(--primary-ALPHA-001f3a-07);
+  padding: 30px;
+}
+
+/* Infos CSS */
+.container-all .infos {
+  display: flex;
+  gap: 40px;
+}
+
+.container-all .infos div ul {
+  width: auto;
+}
+
+.container-all .infos div ul li {
+  width: max-content;
+  font: var(--font-REGULAR-P-12);
+  border-bottom: .5px solid var(--primary-E9E9E9);
+  line-height: 12px;
+  transition: .2s;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.container-all .infos div ul li:hover {
+  border-bottom: .5px solid var(--primary-ALPHA-001f3a-07);
+}
+
+.container-all .infos div ul li.title {
+  font: var(--font-BOLD-H4-16);
+  border: none;
+  cursor: default;
+}
+
+/* Hr CSS */
+.container-all hr {
+  width: 90%;
+  height: 1px;
+  border: none;
+  border-radius: 20px;
+  background: var(--primary-ALPHA-000000-02);
+  margin: 35px 0;
+}
+
+/* CopyRight CSS */
+.container-all .copyright p {
+  font: var(--font-BOLD-P-12);
+  cursor: default;
+}

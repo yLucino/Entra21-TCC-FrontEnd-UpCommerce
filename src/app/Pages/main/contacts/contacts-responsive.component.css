@@ -1,0 +1,9 @@
+@media (max-width: 1460px) {
+  .content-all {
+    justify-content: space-evenly;
+  }
+
+  .content-all .box-img {
+    display: none;
+  }
+}
