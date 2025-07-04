@@ -1,6 +1,5 @@
 .container-footer {
   width: 100%;
-  padding-top: 40px;
 }
 
 .container-all {
@@ -19,10 +18,6 @@
 .container-all .infos {
   display: flex;
   gap: 40px;
-}
-
-.container-all .infos div ul {
-  width: auto;
 }
 
 .container-all .infos div ul li {
