@@ -36,6 +36,7 @@ import { BtnBackToTopComponent } from './Components/btn-back-to-top/btn-back-to-
     NavBarComponent,
     FooterComponent,
     BtnBackToTopComponent,
+    LibraryLayoutsComponent
   ],
   imports: [
     BrowserModule,
