@@ -42,6 +42,13 @@
   --secondary-EFEFEF: #EFEFEF;
   --secondary-EEEEEE: #EEEEEE;
 
+  --secondary-7C87AA: #7C87AA;
+  --secondary-01ABFA: #01ABFA;
+  --secondary-D3F1FF: #D3F1FF;
+  --secondary-DFECF6: #DFECF6;
+  --secondary-F8F9FB: #F8F9FB;
+  --secondary-E8EBF1: #E8EBF1;
+
   /* Gradientes */
   --gradient-Light-LeftToRight: linear-gradient(90deg,#01abfa 0%, #033967 100%);
   --gradient-Dark-LeftToRight: linear-gradient(90deg,#033d6b 0%, #00192d 100%);
@@ -65,6 +72,7 @@
   --font-REGULAR-H2-28: normal 28px "Poppins", sans-serif;
   --font-REGULAR-H3-21: normal 21px "Poppins", sans-serif;
   --font-REGULAR-H4-16: normal 16px "Poppins", sans-serif;
+  --font-REGULAR-P-14:  normal 14px "Poppins", sans-serif;
   --font-REGULAR-P-12:  normal 12px "Poppins", sans-serif;
   --font-REGULAR-P-10:  normal 10px "Poppins", sans-serif;
   --font-REGULAR-P-8:   normal 8px "Poppins", sans-serif;

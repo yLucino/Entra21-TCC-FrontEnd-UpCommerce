@@ -19,6 +19,9 @@ import { LibraryLayoutsComponent } from './Pages/library-layouts/library-layouts
 import { AgilityPracticalityPopUpComponent } from './Components/agility-practicality-pop-up/agility-practicality-pop-up.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { BtnBackToTopComponent } from './Components/btn-back-to-top/btn-back-to-top.component';
+import { PlanSuportComponent } from './Components/plan-suport/plan-suport.component';
+import { PlanPaymentComponent } from './Components/plan-payment/plan-payment.component';
+import { PlanConfirmationComponent } from './Components/plan-confirmation/plan-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,10 @@ import { BtnBackToTopComponent } from './Components/btn-back-to-top/btn-back-to-
     NavBarComponent,
     FooterComponent,
     BtnBackToTopComponent,
-    LibraryLayoutsComponent
+    LibraryLayoutsComponent,
+    PlanSuportComponent,
+    PlanPaymentComponent,
+    PlanConfirmationComponent
   ],
   imports: [
     BrowserModule,

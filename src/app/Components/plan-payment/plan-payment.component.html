@@ -1,0 +1,88 @@
+<section>
+  <div class="content-all" *ngIf="visible" @fadeInOut (@fadeInOut.done)="onAnimationDone($event)">
+    <div class="close" (click)="closePlanComponent()">
+      <mat-icon>arrow_back</mat-icon>
+    </div>
+
+    <div class="title">
+      <h1>Corfimação de assinatura do plano mensal: {{title}}</h1>
+    </div>
+
+    <div class="content-payment">
+      <div class="infos">
+        <div class="type-payment">
+          <mat-icon>credit_card</mat-icon>
+          <h2>VisaCard</h2>
+        </div>
+        <p>Por favor, insira informações completas para que o pagamento seja efetuado.</p>
+
+        <form action="" method="get">
+          <label for="FullName">
+            Nome Completo
+            <i class="fa-solid fa-circle-exclamation"></i>
+          </label>
+          <input type="text" name="FullName" id="FullName" required>
+
+          <label for="credit-card">
+            Número do cartão
+            <i id="credit-card" class="fa-solid fa-circle-exclamation"></i>
+          </label>
+          <input type="text" name="credit-card" id="credit-card" placeholder="1 2 3 4   _ _ _ _   _ _ _ _   _" required>
+
+          <div class="ccv-date">
+            <div class="box-ccv">
+              <label for="ccv">
+                CCV
+                <i class="fa-solid fa-circle-exclamation"></i>
+              </label>
+              <input type="text" name="ccv" id="ccv" placeholder="_ _ _">
+            </div>
+           
+            <div class="box-date">
+              <label for="date">
+                Data de validade
+                <i class="fa-solid fa-circle-exclamation"></i>
+              </label>
+              <input type="text" name="date" id="date" placeholder="A A / Y Y">
+            </div>
+          </div>
+
+          <button type="submit">Concluir pagamento</button>
+        </form>
+      </div>
+
+      <div class="preview">
+        <div class="contents">
+          <div class="top">
+            <h1>Resumo do pagamento</h1>
+
+            <div class="box-price">
+              <ul class="list">
+                <li>Número do pedido</li>
+                <li>ICMS</li>
+                <li>ICMS total</li>
+                <li>Valor do pedido</li>
+              </ul>
+
+              <ul class="data">
+                <li>{{numOrder}}</li>
+                <li>%20</li>
+                <li>R$ {{totalICMS}}</li>
+                <li>R$ {{totalPrice}}</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bottom">
+            <div class="box-price">
+              <p>Valor a ser pago</p>
+              <h2 class="price">R$ {{totalPrice}}</h2>
+            </div>
+
+            <mat-icon>insert_drive_file</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
