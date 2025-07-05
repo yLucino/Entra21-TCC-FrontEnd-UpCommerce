@@ -20,7 +20,7 @@
           <li>Layouts personalizáveis básicos</li>
           <li>Domínio personalizado</li>
         </ul>
-        <button>Começar agora</button>
+        <button (click)="togglePlan('basic')">Começar agora</button>
       </div>
 
       <!-- Plano Pro -->
@@ -36,7 +36,7 @@
           <li>Layouts personalizáveis médios</li>
           <li>Códigos promocionais</li>
         </ul>
-        <button>Começar agora</button>
+        <button (click)="togglePlan('pro')">Começar agora</button>
       </div>
 
       <!-- Plano Avançado -->
@@ -52,7 +52,7 @@
           <li>Layouts personalizáveis avançados</li>
           <li>Área de membros e clube de assinaturas</li>
         </ul>
-        <button>Começar agora</button>
+        <button (click)="togglePlan('advanced')">Começar agora</button>
       </div>
     </div>
 
@@ -66,3 +66,9 @@
     </div>
   </div>
 </section>
+
+<app-plan-payment *ngIf="basicPlanVisible" (closePlan)="togglePlan('basic')" [title]="'BÁSICO'" [price]="299.99" [numOrder]="'AB229087'"></app-plan-payment>
+
+<app-plan-payment *ngIf="proPlanVisible" (closePlan)="togglePlan('pro')" [title]="'PRO'" [price]="499.99" [numOrder]="'YT259600'"></app-plan-payment>
+
+<app-plan-payment *ngIf="advancedPlanVisible" (closePlan)="togglePlan('advanced')" [title]="'AVANÇADO'" [price]="799.99" [numOrder]="'SD2A9767'"></app-plan-payment>
