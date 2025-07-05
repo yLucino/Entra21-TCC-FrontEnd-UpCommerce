@@ -1,1 +1,156 @@
-<p>plan-suport works!</p>
+<section>
+  <div class="content-all" *ngIf="visible" @fadeInOut (@fadeInOut.done)="onAnimationDone($event)">
+    <div class="close" (click)="closeComponent()">
+      <mat-icon>arrow_back</mat-icon>
+    </div>
+
+    <div class="title">
+      <h1>Solicitar auxílio do suporte para desenvolver um plano para meu négocio</h1>
+    </div>
+
+    <div class="content-form">
+      <form action="" method="post">
+        <div class="box-forms">
+          <div class="form-left">
+            <div class="infos-user">
+              <img  class="photoUser" src="../../../assets/images/PlansPage/PhotoUser.png" alt="Imagem foto de perfil usuário">
+              <div class="infos">
+                <p class="name">{{username}}</p>
+                <p class="email">{{email}}</p>
+              </div>
+            </div>
+
+            <label for="nameBusiness">Nome da Empresa *</label>
+            <input type="text" name="nameBusiness" id="nameBusiness" required>
+            
+            <label for="subject">Assunto *</label>
+            <select name="subject" id="subject" [value]="'Assinaturas e Planos'" required>
+              <option value="Assinaturas e Planos">Assinaturas e Planos</option>
+              <option value="Pagamentos e Cobranças">Pagamentos e Cobranças</option>
+              <option value="Problemas Técnicos">Problemas Técnicos</option>
+              <option value="Dúvidas sobre o Serviço">Dúvidas sobre o Serviço</option>
+              <option value="Cancelamentos e Reembolsos">Cancelamentos e Reembolsos</option>
+              <option value="Sugestões e Melhorias">Sugestões e Melhorias</option>
+              <option value="Outros">Outros</option>
+            </select>
+            
+            <label for="observations">Observações</label>
+            <textarea name="observations" id="observations"></textarea>
+          </div>
+
+          <div class="form-right">
+            <label for="businessArea">Área de Atuação da Empresa *</label>
+            <select name="businessArea" id="businessArea" required>
+              <option value="Alimentícia">Alimentícia</option>
+              <option value="Tecnologia">Tecnologia</option>
+              <option value="Educação">Educação</option>
+              <option value="Saúde">Saúde</option>
+              <option value="Varejo">Varejo</option>
+              <option value="Financeira">Financeira</option>
+              <option value="Logística">Logística</option>
+              <option value="Construção Civil">Construção Civil</option>
+              <option value="Agronegócio">Agronegócio</option>
+              <option value="Turismo e Hotelaria">Turismo e Hotelaria</option>
+              <option value="Marketing e Publicidade">Marketing e Publicidade</option>
+              <option value="Moda e Vestuário">Moda e Vestuário</option>
+              <option value="Automotiva">Automotiva</option>
+              <option value="Imobiliária">Imobiliária</option>
+              <option value="Energia e Meio Ambiente">Energia e Meio Ambiente</option>
+              <option value="Consultoria">Consultoria</option>
+              <option value="Entretenimento">Entretenimento</option>
+              <option value="Segurança">Segurança</option>
+              <option value="Esportes e Lazer">Esportes e Lazer</option>
+              <option value="Outros">Outros</option>
+            </select>
+            
+            <label for="legalNature">Naturezas jurídicas da Empresa *</label>
+            <div class="radio legalNature-box">
+              <label class="radio option-legalNature">
+                <div>
+                  <input type="radio" name="legalNature" id="MEI" value="MEI" />
+                  <label class="labelOption" for="MEI">MEI</label>
+                </div>
+                <div>
+                  <input type="radio" name="legalNature" id="SA" value="SA" />
+                  <label class="labelOption" for="SA">SA</label>
+                </div>
+                <div>
+                  <input type="radio" name="legalNature" id="EI" value="EI" />
+                  <label class="labelOption" for="EI">EI</label>
+                </div>
+                <div>
+                  <input type="radio" name="legalNature" id="SLU" value="SLU" />
+                  <label class="labelOption" for="SLU">SLU</label>
+                </div>
+                <div>
+                  <input type="radio" name="legalNature" id="LTDA" value="LTDA" />
+                  <label class="labelOption" for="LTDA">LTDA</label>
+                </div>
+                <div>
+                  <input type="radio" name="legalNature" id="OUTRA" value="OUTRA" />
+                  <label class="labelOption" for="OUTRA">OUTRA</label>
+                </div>
+              </label>
+            </div>
+            
+            <label for="monthlyReports">Preferência por Relatorios Mensais *</label>
+            <div class="radio monthlyReports-box">
+              <label class="radio option-monthlyReports">
+                <div>
+                  <input type="radio" name="monthlyReports" id="BÁSICO" value="BÁSICO">
+                  <label class="labelOption" for="BÁSICO">BÁSICO</label>
+                </div>
+                <div>
+                  <input type="radio" name="monthlyReports" id="COMPLETO" value="COMPLETO">
+                  <label class="labelOption" for="COMPLETO">COMPLETO</label>
+                </div>
+                <div>
+                  <input type="radio" name="monthlyReports" id="AVANÇADO" value="AVANÇADO">
+                  <label class="labelOption" for="AVANÇADO">AVANÇADO</label>
+                </div>
+                <div>
+                  <input type="radio" name="monthlyReports" id="NENHUMA" value="NENHUMA">
+                  <label class="labelOption" for="NENHUMA">NENHUMA</label>
+                </div>
+              </label>
+            </div>
+           
+            <label for="annualBilling">Faturamento Anual da Empresa *</label>
+            <select name="annualBilling" id="annualBilling" required>
+              <option value="Até R$ 81.000,00">Até R$ 81.000,00</option>
+              <option value="De R$ 81.000,01 até R$ 360.000,00">De R$ 81.000,01 até R$ 360.000,00</option>
+              <option value="De R$ 360.000,01 até R$ 4.800.000,00">De R$ 360.000,01 até R$ 4.800.000,00</option>
+              <option value="De R$ 4.800.000,01 até R$ 10.000.000,00">De R$ 4.800.000,01 até R$ 10.000.000,00</option>
+              <option value="Acima de R$ 10.000.000,00">Acima de R$ 10.000.000,00</option>
+            </select>
+           
+            <label for="qtyProducts">Quantidade de produtos da Empresa *</label>
+            <select name="qtyProducts" id="qtyProducts" required>
+              <option value="Até 200 produtos">Até 200 produtos</option>
+              <option value="De 201 a 500 produtos">De 201 a 500 produtos</option>
+              <option value="De 501 a 1.000 produtos">De 501 a 1.000 produtos</option>
+              <option value="De 1.001 a 5.000 produtos">De 1.001 a 5.000 produtos</option>
+              <option value="Mais de 5.000 produtos">Mais de 5.000 produtos</option>
+            </select>
+
+            
+            <label for="preferLayout">Preferência por desenvolvimento do Layout *</label>
+            <select name="preferLayout" id="preferLayout" required>
+              <option value="Solicitar o desenvolvimento do layout aos designers">
+                Solicitar o desenvolvimento do layout aos designers
+              </option>
+              <option value="Desenvolver meu próprio layout">Desenvolver meu próprio layout</option>
+              <option value="Utilizar um template da biblioteca">Utilizar um template da biblioteca</option>
+              <option value="Ainda não sei">Ainda não sei</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="footer">
+          <p>Após o envio da sua solicitação, nossa equipe responderá dentro de 24 a 48 horas.</p>
+          <button type="submit">Enviar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
