@@ -1,1 +1,31 @@
-<p>plan-confirmation works!</p>
+<section>
+  <div class="content-all" *ngIf="visible" @fadeInOut (@fadeInOut.done)="onAnimationDone($event)">
+    <div class="flag-infos">
+      <div class="close" (click)="closeComponent()">
+        <mat-icon>close</mat-icon>
+      </div>
+
+      <h1>Confirmado!</h1>
+
+      <div class="infos-user">
+        <img  class="photoUser" src="../../../assets/images/PlansPage/PhotoUser.png" alt="Imagem foto de perfil usuário">
+        <div class="infos">
+          <p class="name">{{username}}</p>
+          <p class="email">{{email}}</p>
+        </div>
+      </div>
+
+      <p>{{action}} concluído(a) com sucesso. <br> Agradecemos!</p>
+
+      <img class="icon" src="../../../assets/images/PlansPage/Vector.png" alt="Imagem de icon de Confirmado.">
+    </div>
+
+    <div class="footer">
+      <ul>
+        <li>Histórico</li>
+        <li>Configurações</li>
+        <li>Perfil</li>
+      </ul>
+    </div>
+  </div>
+</section>
