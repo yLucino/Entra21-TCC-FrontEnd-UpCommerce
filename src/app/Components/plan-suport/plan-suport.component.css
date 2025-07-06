@@ -66,20 +66,6 @@ section {
   height: 100%;
 }
 
-.content-all .content-form form p#textInfoErro {
-  position: absolute;
-  bottom: 10px;
-  opacity: 0;
-  font: var(--font-BOLD-P-12);
-  color: var(--secondary-EB3030);
-  transition: .3s;
-}
-
-.content-all .content-form form p#textInfoErro.invalid {
-  opacity: 1;
-}
-
-
 .content-all .content-form form .box-forms {
   display: flex;
   height: 100%;

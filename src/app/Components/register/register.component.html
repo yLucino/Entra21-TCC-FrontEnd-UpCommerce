@@ -10,18 +10,20 @@
     </div>
 
     <div class="Inputs">
-      <form action="" method="get">
+      <form #form="ngForm" (ngSubmit)="sendForm(form)">
         <label for="Name">Nome</label>
-        <input type="text" name="Name" id="Name" placeholder="Nome" required>
+        <input type="text" name="Name" id="Name" placeholder="Nome" required [(ngModel)]="name">
 
         <label for="Email">Email</label>
-        <input type="email" name="Email" id="Email" placeholder="Email" required>
+        <input type="email" name="Email" id="Email" placeholder="Email" required [(ngModel)]="email">
         
         <label for="Password">Senha</label>
-        <input type="password" name="Password" id="Password" placeholder="Senha" required>
+        <input type="password" name="Password" id="Password" placeholder="Senha" required [(ngModel)]="password">
 
         <button type="submit">Cadastrar</button>
       </form>
+
+      <p id="textInfoErro" [class.invalid]="erroInForm">Preencha os campos para se registrar.</p>
     </div>
 
     <div class="footer">

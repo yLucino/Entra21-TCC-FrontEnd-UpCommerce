@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-contacts',
@@ -6,5 +7,21 @@ import { Component } from '@angular/core';
   styleUrls: ['./contacts.component.css', './contacts-responsive.component.css']
 })
 export class ContactsComponent {
+  erroInForm = false;
+  successInForm = false;
+  firstname: string = '';
+  lastname: string = '';
+  email: string = '';
+  message: string = '';
 
+  sendForm(form: NgForm) {
+    if (form.valid) 
+    {
+      this.successInForm = true;
+      this.erroInForm = false;
+    } else {
+      this.erroInForm = true;
+      this.successInForm = false;
+    }
+  }
 }

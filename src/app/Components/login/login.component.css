@@ -43,6 +43,11 @@ section {
   -webkit-text-fill-color: transparent;
 }
 
+.content-all .Inputs {
+  display: flex;
+  justify-content: center;
+}
+
 .content-all .Inputs form {
   display: flex;
   flex-direction: column;
