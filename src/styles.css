@@ -103,3 +103,29 @@ span {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+p#textInfoErro {
+  position: absolute;
+  bottom: 10px;
+  opacity: 0;
+  font: var(--font-BOLD-P-12);
+  color: var(--secondary-EB3030);
+  transition: .3s;
+}
+
+p#textInfoErro.invalid {
+  opacity: 1;
+}
+
+p#textInfoSuccess {
+  position: absolute;
+  bottom: 10px;
+  opacity: 0;
+  font: var(--font-BOLD-P-12);
+  color: var(--secondary-5ADB76);
+  transition: .3s;
+}
+
+p#textInfoSuccess.valid {
+  opacity: 1;
+}

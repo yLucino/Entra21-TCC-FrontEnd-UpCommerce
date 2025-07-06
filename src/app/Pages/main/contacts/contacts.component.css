@@ -13,6 +13,12 @@
 }
 
 /* Form CSS */
+.content-all .box-form {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
 .content-all .box-form form {
   display: flex;
   flex-direction: column;
