@@ -1,6 +1,6 @@
 <section>
-  <div class="content-all" *ngIf="visible" @fadeInOut (@fadeInOut.done)="onAnimationDone($event)">
-    <div class="close" (click)="closeComponent()">
+  <div class="content-all" *ngIf="suportPopUpVisible" @fadeInOut (@fadeInOut.done)="onAnimationDone($event)">
+    <div class="close" (click)="toggleComponent('suport')">
       <mat-icon>arrow_back</mat-icon>
     </div>
 
@@ -9,22 +9,23 @@
     </div>
 
     <div class="content-form">
-      <form action="" method="post">
+      <form #form="ngForm" (ngSubmit)="sendForm(form)">
         <div class="box-forms">
           <div class="form-left">
             <div class="infos-user">
-              <img  class="photoUser" src="../../../assets/images/PlansPage/PhotoUser.png" alt="Imagem foto de perfil usuário">
+              <img class="photoUser" src="../../../assets/images/PlansPage/PhotoUser.png" alt="Imagem foto de perfil usuário">
               <div class="infos">
                 <p class="name">{{username}}</p>
                 <p class="email">{{email}}</p>
               </div>
             </div>
 
-            <label for="nameBusiness">Nome da Empresa *</label>
-            <input type="text" name="nameBusiness" id="nameBusiness" required>
-            
-            <label for="subject">Assunto *</label>
-            <select name="subject" id="subject" [value]="'Assinaturas e Planos'" required>
+            <label for="nameBusiness">Nome da Empresa <span class="required">*</span></label>
+            <input type="text" id="nameBusiness" name="nameBusiness" required [(ngModel)]="nameBusiness">
+
+            <label for="subject">Assunto <span class="required">*</span></label>
+            <select id="subject" name="subject" required [(ngModel)]="subject">
+              <option value="">Selecione</option>
               <option value="Assinaturas e Planos">Assinaturas e Planos</option>
               <option value="Pagamentos e Cobranças">Pagamentos e Cobranças</option>
               <option value="Problemas Técnicos">Problemas Técnicos</option>
@@ -33,14 +34,15 @@
               <option value="Sugestões e Melhorias">Sugestões e Melhorias</option>
               <option value="Outros">Outros</option>
             </select>
-            
+
             <label for="observations">Observações</label>
-            <textarea name="observations" id="observations"></textarea>
+            <textarea id="observations" name="observations" [(ngModel)]="observations"></textarea>
           </div>
 
           <div class="form-right">
-            <label for="businessArea">Área de Atuação da Empresa *</label>
-            <select name="businessArea" id="businessArea" required>
+            <label for="businessArea">Área de Atuação da Empresa <span class="required">*</span></label>
+            <select id="businessArea" name="businessArea" required [(ngModel)]="businessArea">
+              <option value="">Selecione</option>
               <option value="Alimentícia">Alimentícia</option>
               <option value="Tecnologia">Tecnologia</option>
               <option value="Educação">Educação</option>
@@ -62,70 +64,36 @@
               <option value="Esportes e Lazer">Esportes e Lazer</option>
               <option value="Outros">Outros</option>
             </select>
-            
-            <label for="legalNature">Naturezas jurídicas da Empresa *</label>
+
+            <label>Naturezas jurídicas da Empresa <span class="required">*</span></label>
             <div class="radio legalNature-box">
-              <label class="radio option-legalNature">
-                <div>
-                  <input type="radio" name="legalNature" id="MEI" value="MEI" />
-                  <label class="labelOption" for="MEI">MEI</label>
-                </div>
-                <div>
-                  <input type="radio" name="legalNature" id="SA" value="SA" />
-                  <label class="labelOption" for="SA">SA</label>
-                </div>
-                <div>
-                  <input type="radio" name="legalNature" id="EI" value="EI" />
-                  <label class="labelOption" for="EI">EI</label>
-                </div>
-                <div>
-                  <input type="radio" name="legalNature" id="SLU" value="SLU" />
-                  <label class="labelOption" for="SLU">SLU</label>
-                </div>
-                <div>
-                  <input type="radio" name="legalNature" id="LTDA" value="LTDA" />
-                  <label class="labelOption" for="LTDA">LTDA</label>
-                </div>
-                <div>
-                  <input type="radio" name="legalNature" id="OUTRA" value="OUTRA" />
-                  <label class="labelOption" for="OUTRA">OUTRA</label>
-                </div>
-              </label>
+              <div class="box-options" *ngFor="let nature of legalNatures">
+                <input type="radio" name="legalNature" [id]="nature" [value]="nature" required [(ngModel)]="legalNature">
+                <label class="labelOption" [for]="nature">{{ nature }}</label>
+              </div>
             </div>
-            
-            <label for="monthlyReports">Preferência por Relatorios Mensais *</label>
+
+            <label>Preferência por Relatórios Mensais <span class="required">*</span></label>
             <div class="radio monthlyReports-box">
-              <label class="radio option-monthlyReports">
-                <div>
-                  <input type="radio" name="monthlyReports" id="BÁSICO" value="BÁSICO">
-                  <label class="labelOption" for="BÁSICO">BÁSICO</label>
-                </div>
-                <div>
-                  <input type="radio" name="monthlyReports" id="COMPLETO" value="COMPLETO">
-                  <label class="labelOption" for="COMPLETO">COMPLETO</label>
-                </div>
-                <div>
-                  <input type="radio" name="monthlyReports" id="AVANÇADO" value="AVANÇADO">
-                  <label class="labelOption" for="AVANÇADO">AVANÇADO</label>
-                </div>
-                <div>
-                  <input type="radio" name="monthlyReports" id="NENHUMA" value="NENHUMA">
-                  <label class="labelOption" for="NENHUMA">NENHUMA</label>
-                </div>
-              </label>
+              <div class="box-options" *ngFor="let option of monthlyReportsOptions">
+                <input type="radio" name="monthlyReports" [id]="option" [value]="option" required [(ngModel)]="monthlyReports">
+                <label class="labelOption" [for]="option">{{ option }}</label>
+              </div>
             </div>
-           
-            <label for="annualBilling">Faturamento Anual da Empresa *</label>
-            <select name="annualBilling" id="annualBilling" required>
+
+            <label for="annualBilling">Faturamento Anual da Empresa <span class="required">*</span></label>
+            <select id="annualBilling" name="annualBilling" required [(ngModel)]="annualBilling">
+              <option value="">Selecione</option>
               <option value="Até R$ 81.000,00">Até R$ 81.000,00</option>
               <option value="De R$ 81.000,01 até R$ 360.000,00">De R$ 81.000,01 até R$ 360.000,00</option>
               <option value="De R$ 360.000,01 até R$ 4.800.000,00">De R$ 360.000,01 até R$ 4.800.000,00</option>
               <option value="De R$ 4.800.000,01 até R$ 10.000.000,00">De R$ 4.800.000,01 até R$ 10.000.000,00</option>
               <option value="Acima de R$ 10.000.000,00">Acima de R$ 10.000.000,00</option>
             </select>
-           
-            <label for="qtyProducts">Quantidade de produtos da Empresa *</label>
-            <select name="qtyProducts" id="qtyProducts" required>
+
+            <label for="qtyProducts">Quantidade de produtos da Empresa <span class="required">*</span></label>
+            <select id="qtyProducts" name="qtyProducts" required [(ngModel)]="qtyProducts">
+              <option value="">Selecione</option>
               <option value="Até 200 produtos">Até 200 produtos</option>
               <option value="De 201 a 500 produtos">De 201 a 500 produtos</option>
               <option value="De 501 a 1.000 produtos">De 501 a 1.000 produtos</option>
@@ -133,12 +101,10 @@
               <option value="Mais de 5.000 produtos">Mais de 5.000 produtos</option>
             </select>
 
-            
-            <label for="preferLayout">Preferência por desenvolvimento do Layout *</label>
-            <select name="preferLayout" id="preferLayout" required>
-              <option value="Solicitar o desenvolvimento do layout aos designers">
-                Solicitar o desenvolvimento do layout aos designers
-              </option>
+            <label for="preferLayout">Preferência por desenvolvimento do Layout <span class="required">*</span></label>
+            <select id="preferLayout" name="preferLayout" required [(ngModel)]="preferLayout">
+              <option value="">Selecione</option>
+              <option value="Solicitar o desenvolvimento do layout aos designers">Solicitar o desenvolvimento do layout aos designers</option>
               <option value="Desenvolver meu próprio layout">Desenvolver meu próprio layout</option>
               <option value="Utilizar um template da biblioteca">Utilizar um template da biblioteca</option>
               <option value="Ainda não sei">Ainda não sei</option>
@@ -148,9 +114,13 @@
 
         <div class="footer">
           <p>Após o envio da sua solicitação, nossa equipe responderá dentro de 24 a 48 horas.</p>
-          <button type="submit">Enviar</button>
+          <button type="submit" >Enviar</button>
         </div>
+
+        <p id="textInfoErro" [class.invalid]="erroInForm">Preencha todos os campos com ' * ' para enviar.</p>
       </form>
     </div>
   </div>
 </section>
+
+<app-plan-confirmation *ngIf="confirmationPopUpVisible" (closePlan)="toggleComponent('confirmation')" [username]="'Username'" [email]="'example@gmail.com'" [action]="'Solicitação'" (@fadeInOut.done)="onAnimationDone($event)"></app-plan-confirmation>

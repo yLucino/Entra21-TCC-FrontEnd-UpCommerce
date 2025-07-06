@@ -1,6 +1,6 @@
 <section>
-  <div class="content-all" *ngIf="visible" @fadeInOut (@fadeInOut.done)="onAnimationDone($event)">
-    <div class="close" (click)="closePlanComponent()">
+  <div class="content-all" *ngIf="planPaymentVisible" @fadeInOut (@fadeInOut.done)="onAnimationDone($event)">
+    <div class="close" (click)="toggleComponent('payment')">
       <mat-icon>arrow_back</mat-icon>
     </div>
 
@@ -16,18 +16,18 @@
         </div>
         <p>Por favor, insira informações completas para que o pagamento seja efetuado.</p>
 
-        <form action="" method="get">
-          <label for="FullName">
+        <form #form="ngForm" (ngSubmit)="sendForm(form)">
+          <label for="fullName">
             Nome Completo
             <i class="fa-solid fa-circle-exclamation"></i>
           </label>
-          <input type="text" name="FullName" id="FullName" required>
+          <input type="text" id="fullName" name="fullName" required [(ngModel)]="fullName">
 
-          <label for="credit-card">
+          <label for="creditCard">
             Número do cartão
-            <i id="credit-card" class="fa-solid fa-circle-exclamation"></i>
+            <i class="fa-solid fa-circle-exclamation"></i>
           </label>
-          <input type="text" name="credit-card" id="credit-card" placeholder="1 2 3 4   _ _ _ _   _ _ _ _   _" required>
+          <input type="text" id="creditCard" name="creditCard" required [(ngModel)]="creditCard" placeholder="1234 5678 9012 3456">
 
           <div class="ccv-date">
             <div class="box-ccv">
@@ -35,20 +35,22 @@
                 CCV
                 <i class="fa-solid fa-circle-exclamation"></i>
               </label>
-              <input type="text" name="ccv" id="ccv" placeholder="_ _ _">
+              <input type="text" id="ccv" name="ccv" required [(ngModel)]="ccv" placeholder="123">
             </div>
-           
+
             <div class="box-date">
-              <label for="date">
+              <label for="expirationDate">
                 Data de validade
                 <i class="fa-solid fa-circle-exclamation"></i>
               </label>
-              <input type="text" name="date" id="date" placeholder="A A / Y Y">
+              <input type="text" id="expirationDate" name="expirationDate" required [(ngModel)]="expirationDate" placeholder="MM / AA">
             </div>
           </div>
 
           <button type="submit">Concluir pagamento</button>
         </form>
+
+        <p id="textInfoErro" [class.invalid]="erroInForm">Preencha todos os campos para enviar.</p>
       </div>
 
       <div class="preview">
@@ -86,3 +88,5 @@
     </div>
   </div>
 </section>
+
+<app-plan-confirmation *ngIf="confirmationPopUpVisible" (closePlan)="toggleComponent('confirmation')" [username]="'Username'" [email]="'example@gmail.com'" [action]="'Pagamento'" (@fadeInOut.done)="onAnimationDone($event)"></app-plan-confirmation>

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { trigger, transition, style, animate, AnimationEvent } from '@angular/animations';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-plan-payment',
@@ -23,12 +24,33 @@ export class PlanPaymentComponent {
   @Input() numOrder: string | null = '12345678';
   @Output() closePlan = new EventEmitter<void>();
 
+  erroInForm = false;
+  fullName: string = '';
+  creditCard: string = '';
+  ccv: string = '';
+  expirationDate: string = '';
+
   totalICMS: number | null = null;
   totalPrice: number | null = null;
-  visible = true;
+  confirmationPopUpVisible = false;
+  planPaymentVisible = true;
 
-  closePlanComponent() {
-    this.visible = false;
+  sendForm(form: NgForm) {
+    if (form.valid) {
+      this.toggleComponent('confirmation');
+    } else {
+      this.erroInForm = true;
+    }
+  }
+
+  toggleComponent(plan: string) {
+    if (plan === 'payment') {
+      this.planPaymentVisible = !this.planPaymentVisible;
+      this.confirmationPopUpVisible = false;
+    } else if (plan === 'confirmation') {
+      this.confirmationPopUpVisible = !this.confirmationPopUpVisible;
+      this.planPaymentVisible = false;
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -39,7 +61,7 @@ export class PlanPaymentComponent {
   }
 
   onAnimationDone(event: AnimationEvent) {
-    if (event.toState === 'void') {
+    if (event.toState === 'void'  && this.confirmationPopUpVisible === false) {
       this.closePlan.emit();
     }
   }
