@@ -1,0 +1,78 @@
+section {
+  height: 100vh;
+}
+
+.content-all {
+  height: 100%;
+}
+
+.content-all .logo {
+  position: absolute;
+  display: flex;
+  justify-content: right;
+  background: var(--primary-FFFFFF);
+  padding: 10px;
+  width: 145px;
+  border-radius: 0 94px 94px 0;
+  box-shadow: 0 10px 10px var(--primary-ALPHA-000000-02);
+
+  img {
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+    transition: .3s;
+  }
+
+  img:hover {
+    transform: scale(0.9);
+  }
+}
+
+.content-all nav.menu {
+  display: flex;
+  justify-content: center;
+  padding-top: 150px;
+  height: 100%;
+  width: 100px;
+  background: var(--gradient-Light-TopToBottom);
+}
+
+.content-all nav.menu ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.content-all nav.menu ul li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 80px;
+  height: 73px;
+  border-radius: 10px;
+  transition: .3s;
+  cursor: pointer;
+
+  i {
+    font-size: 30px;
+    color: var(--primary-FFFFFF);
+  }
+
+  p {
+    font: var(--font-REGULAR-P-12);
+    color: var(--primary-FFFFFF);
+    text-align: center;
+  }
+}
+
+.content-all nav.menu ul li:hover {
+  background: var(--primary-ALPHA-000000-02);
+  transform: scale(0.9);
+}
+
+li#active {
+  background: var(--primary-122B41);
+  transform: scale(1);
+}
