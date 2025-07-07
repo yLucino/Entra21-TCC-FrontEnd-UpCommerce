@@ -1,21 +1,24 @@
 <section class="container-contacts" id="Contacts">
   <div class="content-all">
     <div class="box-form">
-      <form action="" method="post">
+      <form #form="ngForm" (ngSubmit)="sendForm(form)">
         <label for="Name">Nome</label>    
-        <input type="text" name="Name" id="Name" placeholder="Nome" required>
+        <input type="text" name="Name" id="Name" placeholder="Nome" required [(ngModel)]="firstname">
 
         <label for="LastName">Sobrenome</label>    
-        <input type="text" name="LastName" id="LastName" placeholder="Sobrenome" required>
+        <input type="text" name="LastName" id="LastName" placeholder="Sobrenome" required [(ngModel)]="lastname">
 
         <label for="Email">Email</label>    
-        <input type="email" name="Email" id="Email" placeholder="Email" required>
+        <input type="email" name="Email" id="Email" placeholder="Email" required [(ngModel)]="email">
 
         <label for="Message">Mensagem</label>    
-        <textarea name="Massage" id="Message" rows="4" placeholder="Sua mensagem" required></textarea>
+        <textarea name="Massage" id="Message" rows="4" placeholder="Sua mensagem" required [(ngModel)]="message"></textarea>
 
         <button type="submit">Enviar</button>
       </form>
+
+      <p id="textInfoErro" [class.invalid]="erroInForm">Preencha os campos para enviar.</p>
+      <p id="textInfoSuccess" [class.valid]="successInForm">Enviado com successo.</p>
     </div>
 
     <div class="box-img">

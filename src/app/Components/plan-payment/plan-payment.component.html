@@ -1,0 +1,92 @@
+<section>
+  <div class="content-all" *ngIf="planPaymentVisible" @fadeInOut (@fadeInOut.done)="onAnimationDone($event)">
+    <div class="close" (click)="toggleComponent('payment')">
+      <mat-icon>arrow_back</mat-icon>
+    </div>
+
+    <div class="title">
+      <h1>Corfimação de assinatura do plano mensal: {{title}}</h1>
+    </div>
+
+    <div class="content-payment">
+      <div class="infos">
+        <div class="type-payment">
+          <mat-icon>credit_card</mat-icon>
+          <h2>VisaCard</h2>
+        </div>
+        <p>Por favor, insira informações completas para que o pagamento seja efetuado.</p>
+
+        <form #form="ngForm" (ngSubmit)="sendForm(form)">
+          <label for="fullName">
+            Nome Completo
+            <i class="fa-solid fa-circle-exclamation"></i>
+          </label>
+          <input type="text" id="fullName" name="fullName" required [(ngModel)]="fullName">
+
+          <label for="creditCard">
+            Número do cartão
+            <i class="fa-solid fa-circle-exclamation"></i>
+          </label>
+          <input type="text" id="creditCard" name="creditCard" required [(ngModel)]="creditCard" placeholder="1234 5678 9012 3456">
+
+          <div class="ccv-date">
+            <div class="box-ccv">
+              <label for="ccv">
+                CCV
+                <i class="fa-solid fa-circle-exclamation"></i>
+              </label>
+              <input type="text" id="ccv" name="ccv" required [(ngModel)]="ccv" placeholder="123">
+            </div>
+
+            <div class="box-date">
+              <label for="expirationDate">
+                Data de validade
+                <i class="fa-solid fa-circle-exclamation"></i>
+              </label>
+              <input type="text" id="expirationDate" name="expirationDate" required [(ngModel)]="expirationDate" placeholder="MM / AA">
+            </div>
+          </div>
+
+          <button type="submit">Concluir pagamento</button>
+        </form>
+
+        <p id="textInfoErro" [class.invalid]="erroInForm">Preencha todos os campos para enviar.</p>
+      </div>
+
+      <div class="preview">
+        <div class="contents">
+          <div class="top">
+            <h1>Resumo do pagamento</h1>
+
+            <div class="box-price">
+              <ul class="list">
+                <li>Número do pedido</li>
+                <li>ICMS</li>
+                <li>ICMS total</li>
+                <li>Valor do pedido</li>
+              </ul>
+
+              <ul class="data">
+                <li>{{numOrder}}</li>
+                <li>%20</li>
+                <li>R$ {{totalICMS}}</li>
+                <li>R$ {{totalPrice}}</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bottom">
+            <div class="box-price">
+              <p>Valor a ser pago</p>
+              <h2 class="price">R$ {{totalPrice}}</h2>
+            </div>
+
+            <mat-icon>insert_drive_file</mat-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-plan-confirmation *ngIf="confirmationPopUpVisible" (closePlan)="toggleComponent('confirmation')" [username]="'Username'" [email]="'example@gmail.com'" [action]="'Pagamento'" (@fadeInOut.done)="onAnimationDone($event)"></app-plan-confirmation>

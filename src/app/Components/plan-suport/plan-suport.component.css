@@ -1,0 +1,203 @@
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1000;
+  background: var(--primary-ALPHA-002442-04);
+}
+
+.content-all {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--primary-FFFFFF);
+  padding: 40px 100px;
+  border-radius: 20px;
+  height: 750px;
+  box-shadow: 0 3px 30px var(--primary-ALPHA-000000-00);
+}
+
+.content-all .close {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 40px;
+  top: 40px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background: var(--gradient-Light-LeftToRight);
+  cursor: pointer;
+  transition: .3s;
+
+  mat-icon {
+    color: var(--primary-FFFFFF);
+  }
+}
+
+.content-all .close:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0px 10px var(--primary-006699);
+}
+
+.content-all .title {
+  font: var(--font-BOLD-H4-16);
+  background: var(--gradient-Light-LeftToRight);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Forms CSS */
+.content-all .content-form {
+  margin-top: 50px;
+  height: 100%;
+}
+
+.content-all .content-form form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.content-all .content-form form .box-forms {
+  display: flex;
+  height: 100%;
+  gap: 40px;
+}
+
+.content-all .content-form form .box-forms .form-left,
+.content-all .content-form form .box-forms .form-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 450px;
+}
+
+.content-all .content-form form .box-forms .form-left .infos-user {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  p.name {
+    font: var(--font-BOLD-H3-21);
+    color: var(--primary-156BA7);
+    line-height: 18px;
+  }
+
+  p.email {
+    font: var(--font-REGULAR-H4-16);
+    color: var(--primary-666666);
+    line-height: 18px;
+  }
+}
+
+.content-all .content-form form .box-forms .form-right div.radio {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.content-all .content-form form .box-forms .form-right div.radio div.box-options {
+  display: flex;
+
+  input {
+    cursor: pointer;
+  }
+
+  label {
+    padding-left: 5px;
+    cursor: pointer;
+  }
+}
+
+/* Footer CSS */
+.content-all .content-form form .footer {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 50px;
+  width: 100%;
+  gap: 30px;
+
+  p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-E9E9E9);
+    font: var(--font-REGULAR-P-12);
+    border-radius: 10px;
+  }
+
+  button {
+    height: 50px;
+    width: 200px;
+    background: var(--gradient-Light-LeftToRight);
+    border: none;
+    border-radius: 10px;
+    color: var(--primary-FFFFFF);
+    font: var(--font-BOLD-H4-16);
+    cursor: pointer;
+    transition: .3s;
+  }
+
+  button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0px 10px var(--primary-006699);
+  }
+}
+
+/* Global tags CSS */
+input#nameBusiness {
+  width: 100%;
+  height: 45px;
+  padding: 0 20px;
+  border-radius: 10px;
+  background: var(--secondary-D3F1FF);
+  border: 1px solid var(--primary-156BA7);
+}
+
+label {
+  font: var(--font-BOLD-P-12);
+  color: var(--primary-808080);
+}
+
+select {
+  height: 45px;
+  padding: 0 20px;
+  border-radius: 10px;
+  background: var(--primary-E9E9E9);
+  border: 1px solid var(--primary-666666);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='16' width='16' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 20px center;
+  background-size: 16px;
+}
+
+textarea {
+  padding: 10px 20px;
+  background: var(--primary-E9E9E9);
+  border: 1px solid var(--primary-666666);
+  border-radius: 10px;
+  resize: none;
+  height: 200px;
+}
+
+span.required {
+  color: var(--secondary-EB3030);
+  background: none;
+  -webkit-text-fill-color: var(--secondary-EB3030);
+}

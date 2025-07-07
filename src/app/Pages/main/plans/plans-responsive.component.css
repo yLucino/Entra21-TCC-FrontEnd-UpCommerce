@@ -71,3 +71,10 @@
     font: var(--font-BOLD-P-10);
   }
 }
+
+@media (max-height: 860px) {
+  .plans-container {
+    justify-content: center;
+    padding-top: 30px;
+  }
+}

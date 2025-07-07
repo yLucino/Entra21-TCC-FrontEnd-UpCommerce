@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +20,9 @@ import { LibraryLayoutsComponent } from './Pages/library-layouts/library-layouts
 import { AgilityPracticalityPopUpComponent } from './Components/agility-practicality-pop-up/agility-practicality-pop-up.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { BtnBackToTopComponent } from './Components/btn-back-to-top/btn-back-to-top.component';
+import { PlanSuportComponent } from './Components/plan-suport/plan-suport.component';
+import { PlanPaymentComponent } from './Components/plan-payment/plan-payment.component';
+import { PlanConfirmationComponent } from './Components/plan-confirmation/plan-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -36,12 +40,17 @@ import { BtnBackToTopComponent } from './Components/btn-back-to-top/btn-back-to-
     NavBarComponent,
     FooterComponent,
     BtnBackToTopComponent,
+    LibraryLayoutsComponent,
+    PlanSuportComponent,
+    PlanPaymentComponent,
+    PlanConfirmationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

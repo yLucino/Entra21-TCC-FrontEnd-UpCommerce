@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { trigger, transition, style, animate, AnimationEvent } from '@angular/animations';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -21,7 +22,19 @@ export class RegisterComponent {
   @Output() closeRegister = new EventEmitter<void>();
   @Output() goToLogin = new EventEmitter<void>();
 
+  erroInForm = false;
+  name: string = '';
+  email: string = '';
+  password: string = '';
+
   visible = true;
+
+  sendForm(form: NgForm) {
+      if (form.valid) {    }
+      else {
+        this.erroInForm = true;
+      }
+  }
 
   closeRegisterComponent() {
     this.visible = false;
