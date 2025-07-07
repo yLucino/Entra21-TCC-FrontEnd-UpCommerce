@@ -27,18 +27,30 @@ nav .logo h1{
     -webkit-text-fill-color: transparent;
 }
 
-.menu{
+nav .menu{
     width: 250px;
     height: 100vh;
-    background: var(  --gradient-Medium-BottomToTop);
+    background: var( --gradient-Medium-BottomToTop);
     color: white;
     padding: 130px 0 0 20px ;
 }
 
-.menu hr{
+nav .menu ul{
+    display: flex;
+    flex-direction: column;
+    align-items: first baseline;
+    justify-content:center ;
+    width: 150px;
+}
+
+nav .menu ul button:hover{
+    background-color: var(--primary-ALPHA-002442-04);
+}
+
+nav .menu hr{
     width: 210px;
     height: 0.5px;
-    margin: 25px 0 25px 0;
+    margin: 22px 0 22px 0;
 }
 
 li {
@@ -51,12 +63,14 @@ li {
   }
 
 nav .menu ul button{
+    width: 160px;
+    height: 30px;
     background-color: transparent;
     color: var(--primary-FFFFFF);
     border: none;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: first baseline;
     gap: 10px;
 }
 
