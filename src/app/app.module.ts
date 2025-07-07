@@ -23,6 +23,8 @@ import { BtnBackToTopComponent } from './Components/btn-back-to-top/btn-back-to-
 import { PlanSuportComponent } from './Components/plan-suport/plan-suport.component';
 import { PlanPaymentComponent } from './Components/plan-payment/plan-payment.component';
 import { PlanConfirmationComponent } from './Components/plan-confirmation/plan-confirmation.component';
+import { CreateLayoutsComponent } from './Pages/create-layouts/create-layouts.component';
+import { NavBarWorkshopComponent } from './components/nav-bar-workshop/nav-bar-workshop.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { PlanConfirmationComponent } from './Components/plan-confirmation/plan-c
     LibraryLayoutsComponent,
     PlanSuportComponent,
     PlanPaymentComponent,
-    PlanConfirmationComponent
+    PlanConfirmationComponent,
+    CreateLayoutsComponent,
+    NavBarWorkshopComponent
   ],
   imports: [
     BrowserModule,
