@@ -16,6 +16,7 @@
   width: 1100px;
   display: flex;
   align-items: center;
+  justify-content: space-evenly;
   padding: 10px;
   background-color: var( --primary-FFFFFF);
   border-radius: 78px;
@@ -34,4 +35,24 @@
 .container .container-search .search-box button {
     color: var( --primary-FFFFFF);
     background: var(--gradient-Medium-BottomToTop);
+    border-radius: 60px;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+  }
+
+  .container .container-search .search-box .pesquisar{
+    width: 120px; 
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .container .container-search .search-box .filtro{
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
