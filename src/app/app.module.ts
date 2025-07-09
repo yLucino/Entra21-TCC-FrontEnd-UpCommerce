@@ -25,6 +25,10 @@ import { PlanPaymentComponent } from './Components/plan-payment/plan-payment.com
 import { PlanConfirmationComponent } from './Components/plan-confirmation/plan-confirmation.component';
 import { CreateLayoutsComponent } from './Pages/create-layouts/create-layouts.component';
 import { NavBarWorkshopComponent } from './components/nav-bar-workshop/nav-bar-workshop.component';
+import { HeaderWorkshopComponent } from './components/header-workshop/header-workshop.component';
+import { ToolsWorkshopComponent } from './components/tools-workshop/tools-workshop.component';
+import { SmartphoneScreenWorkshopComponent } from './components/smartphone-screen-workshop/smartphone-screen-workshop.component';
+import { PropertiesWorkshopComponent } from './components/properties-workshop/properties-workshop.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +51,11 @@ import { NavBarWorkshopComponent } from './components/nav-bar-workshop/nav-bar-w
     PlanPaymentComponent,
     PlanConfirmationComponent,
     CreateLayoutsComponent,
-    NavBarWorkshopComponent
+    NavBarWorkshopComponent,
+    HeaderWorkshopComponent,
+    ToolsWorkshopComponent,
+    SmartphoneScreenWorkshopComponent,
+    PropertiesWorkshopComponent
   ],
   imports: [
     BrowserModule,
