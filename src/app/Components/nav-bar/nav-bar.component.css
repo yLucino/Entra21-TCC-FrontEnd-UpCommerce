@@ -45,12 +45,26 @@ nav .menu ul{
 
 nav .menu ul button:hover{
     background-color: var(--primary-ALPHA-002442-04);
+    border-radius: 5px;
+}
+
+nav .menu ul button{
+    width: 180px;
+    height: 45px;
+    background-color: transparent;
+    color: var(--primary-FFFFFF);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: first baseline;
+    gap: 10px;
+    padding: 10px;
 }
 
 nav .menu hr{
     width: 210px;
     height: 0.5px;
-    margin: 22px 0 22px 0;
+    margin: 18px 0 28px 0;
 }
 
 li {

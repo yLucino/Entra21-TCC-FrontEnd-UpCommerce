@@ -25,6 +25,7 @@ import { PlanPaymentComponent } from './Components/plan-payment/plan-payment.com
 import { PlanConfirmationComponent } from './Components/plan-confirmation/plan-confirmation.component';
 import { CreateLayoutsComponent } from './Pages/create-layouts/create-layouts.component';
 import { NavBarWorkshopComponent } from './components/nav-bar-workshop/nav-bar-workshop.component';
+import { CardLayoutsComponent } from './Components/card-layouts/card-layouts.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { NavBarWorkshopComponent } from './components/nav-bar-workshop/nav-bar-w
     PlanPaymentComponent,
     PlanConfirmationComponent,
     CreateLayoutsComponent,
-    NavBarWorkshopComponent
+    NavBarWorkshopComponent,
+    CardLayoutsComponent
   ],
   imports: [
     BrowserModule,

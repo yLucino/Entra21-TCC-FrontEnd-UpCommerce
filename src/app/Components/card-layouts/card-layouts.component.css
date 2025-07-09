@@ -1,0 +1,71 @@
+.card{
+    width: 65vw;
+    height: 39vh;
+    background-color: var(--primary-FFFFFF);
+    border-radius: 25px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card p{
+    font: var( --font-REGULAR-P-10);
+    color: var(--primary-A6A6A6);
+}
+
+.card .dados{
+    width: 750px;
+    height: 70px;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card .imagens{
+    width: 50%;
+    height: 40vh;
+}
+
+.card .icones{
+    width: 200px;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.card .usar{
+    width: 40px;
+    height: 40px;
+    background: var(--gradient-Light-RightToLeft);
+    border-radius: 50px;
+    color: var(--primary-FFFFFF);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card .favoritar{
+    width: 40px;
+    height: 40px;
+    background: var(--gradient-Red-RightToLeft);
+    border-radius: 50px;
+    color: var(--primary-FFFFFF);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card .login{
+    width: 40px;
+    height: 40px;
+    background: var(--gradient-Grey-RightToLeft);
+    border-radius: 50px;
+    color: var(--primary-FFFFFF);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
