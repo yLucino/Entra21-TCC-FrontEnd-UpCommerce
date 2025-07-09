@@ -3,14 +3,22 @@
         <app-nav-bar></app-nav-bar>
     </div>
 
-    <div class="container-search">
-        <div class="search-box">
-            <button class="filtro">
-                <mat-icon>filter_alt</mat-icon>
-            </button>
-            <input class="search-input" placeholder="Pesquisar..." type="text">
-            <button class="pesquisar">Pesquisar</button>
-          </div>
+    <div class="content">
+        <div class="container-search">
+            <div class="search-box">
+                <button class="filtro">
+                    <mat-icon>filter_alt</mat-icon>
+                </button>
+                <input class="search-input" placeholder="Pesquisar..." type="text">
+                <button class="pesquisar">Pesquisar</button>
+              </div>
+        </div>
+    
+        <div class="container-cards">
+            <app-card-layouts></app-card-layouts>
+            <app-card-layouts></app-card-layouts>
+        </div>
+
     </div>
     
 </div>
