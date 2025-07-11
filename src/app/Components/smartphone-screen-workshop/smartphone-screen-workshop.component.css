@@ -1,0 +1,10 @@
+section {
+  margin-bottom: 25px;
+}
+
+.content-all {
+  width: 300px;
+  height: 70vh;
+  background: var(--primary-FFFFFF);
+  border-radius: 35px;
+}

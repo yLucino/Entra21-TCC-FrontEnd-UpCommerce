@@ -1,0 +1,6 @@
+.content-all {
+  width: 400px;
+  height: 80vh;
+  background: var(--primary-FFFFFF);
+  border-radius: 35px 35px 0 0;
+}

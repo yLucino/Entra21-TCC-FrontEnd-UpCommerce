@@ -2,4 +2,21 @@ section#workshop {
   width: 100vw;
   height: 100vh;
   background: var(--primary-122B41);
+  display: flex;
+}
+
+header {
+  position: absolute;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-left: 50px;
 }
