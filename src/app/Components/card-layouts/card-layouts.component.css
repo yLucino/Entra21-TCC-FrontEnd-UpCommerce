@@ -1,6 +1,6 @@
 .card{
-    width: 65vw;
-    height: 39vh;
+    width: 1050px;
+    height: 350px;
     background-color: var(--primary-FFFFFF);
     border-radius: 25px;
     display: flex;
@@ -23,14 +23,25 @@
     align-items: center;
 }
 
+.card .imagens img{
+    width: 300px;
+    height: 130px;
+    border-radius: 15px;
+}
+
 .card .imagens{
-    width: 50%;
-    height: 40vh;
+    width: 1050px;
+    height: 150px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--primary-c8c7c7);
+    
 }
 
 .card .icones{
     width: 200px;
-    height: 70px;
+    height: 50px;
     display: flex;
     flex-direction: row;
     align-items: center;

@@ -24,7 +24,7 @@ import { PlanSuportComponent } from './Components/plan-suport/plan-suport.compon
 import { PlanPaymentComponent } from './Components/plan-payment/plan-payment.component';
 import { PlanConfirmationComponent } from './Components/plan-confirmation/plan-confirmation.component';
 import { CreateLayoutsComponent } from './Pages/create-layouts/create-layouts.component';
-import { NavBarWorkshopComponent } from './components/nav-bar-workshop/nav-bar-workshop.component';
+import { NavBarWorkshopComponent } from './Components/nav-bar-workshop/nav-bar-workshop.component';
 import { CardLayoutsComponent } from './Components/card-layouts/card-layouts.component';
 
 @NgModule({
