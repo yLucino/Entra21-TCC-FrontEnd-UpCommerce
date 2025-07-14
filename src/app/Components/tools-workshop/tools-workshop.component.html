@@ -1,5 +1,31 @@
 <section>
   <div class="content-all">
-    
+    <div class="box-buttons">
+      <button *ngFor="let item of btnsItems; let i = index"
+      [class.active]="selectedIndex === i"
+      (click)="selectItem(i)">
+        <i class="{{ item.icon }}"></i>
+        {{item.text}}
+      </button>
+    </div>
+
+    <div class="box-input">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" name="search" id="search" placeholder="Pesquise por Telas ou Componentes...">
+    </div>
+
+    <div class="box-component" *ngIf="selectedIndex == 1">
+      <div class="component" *ngFor="let component of components">
+        <i [class]="component.icon"></i>
+        <p>{{ component.text }}</p>
+      </div>
+    </div>
+
+    <div class="box-screens" *ngIf="selectedIndex == 0">
+      <div class="screen" *ngFor="let screen of screens">
+        <i [class]="screen.icon"></i>
+        <p>{{ screen.text }}</p>
+      </div>
+    </div>
   </div>
 </section>
