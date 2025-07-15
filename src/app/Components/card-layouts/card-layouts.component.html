@@ -1,31 +1,37 @@
 <div class="card">
-    <div class="dados">
-        <h1>{{title}}</h1>
-        <h6>{{infos}}</h6>
-    </div>
+  <div class="dados">
+    <h1>{{ title }}</h1>
+    <h6>{{ infos }}</h6>
+  </div>
 
-    <div class="tag" [class]="tag[0].text">
-        <p>{{tag[0].text}}</p>
-    </div>
+  <div class="tag" [class]="tag[0].text">
+    <mat-icon>{{ tag[0].icon }}</mat-icon>
+    <p>{{ tag[0].text }}</p>
+  </div>
 
-    <div class="imagens">
-        <div class="seta-esquerda"><mat-icon>arrow_back</mat-icon></div>
+  <div class="imagens">
+    <div class="seta-esquerda"><mat-icon>arrow_back</mat-icon></div>
 
-        <img src={{img1}} alt="">
-        <img src={{img2}} alt="">
-        <img src="https://s2.glbimg.com/ghFXiTWz85oCFk-SHWci8rrMz44=/e.glbimg.com/og/ed/f/original/2016/05/02/y3hp4en.jpg" alt="">
-        
-        <div class="seta-direita"><mat-icon>arrow_forward</mat-icon></div>
-    </div>
+    <img src="{{ img1 }}" alt="" />
+    <img src="{{ img2 }}" alt="" />
+    <img
+      src="https://s2.glbimg.com/ghFXiTWz85oCFk-SHWci8rrMz44=/e.glbimg.com/og/ed/f/original/2016/05/02/y3hp4en.jpg"
+      alt=""
+    />
 
-    <div class="icones">
-        <div class="usar"><mat-icon>login</mat-icon></div>
-        
-        <div class="favoritar"><mat-icon>favorite</mat-icon></div>
+    <div class="seta-direita"><mat-icon>arrow_forward</mat-icon></div>
+  </div>
 
-        <div class="login"><mat-icon>person</mat-icon></div>
-    </div>
+  <div class="icones">
+    <div class="usar"><mat-icon>login</mat-icon></div>
 
-    <p>© 2025 - Direitos do designer reservados. Layout exclusivo para uso no site UpCommerce.</p>
+    <div class="favoritar"><mat-icon>favorite</mat-icon></div>
 
+    <div class="login"><mat-icon>person</mat-icon></div>
+  </div>
+
+  <p>
+    © 2025 - Direitos do designer reservados. Layout exclusivo para uso no site
+    UpCommerce.
+  </p>
 </div>

@@ -1,82 +1,97 @@
-.card{
-    width: 1050px;
-    height: 350px;
-    background-color: var(--primary-FFFFFF);
-    border-radius: 25px;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-direction: column;
+.card {
+  width: 1050px;
+  height: 350px;
+  background-color: var(--primary-FFFFFF);
+  border-radius: 25px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
 }
 
-.card p{
-    font: var( --font-REGULAR-P-10);
-    color: var(--primary-A6A6A6);
+.card p {
+  font: var(--font-REGULAR-P-10);
+  color: var(--primary-A6A6A6);
 }
 
-.card .dados{
-    width: 750px;
-    height: 70px;
-    flex-direction: column;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.card .dados {
+  width: 750px;
+  height: 70px;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.card .imagens img{
-    width: 300px;
-    height: 130px;
-    border-radius: 15px;
+.card .tag {
+  width: 200px;
+  height: 50px;
+  display: flex;
+  transform: rotate(-20deg);
+  left: -8px;
+  top: 10px;
+  position: absolute;
+  align-items: center;
+  justify-content: space-around;
+  color: var(--primary-FFFFFF);
+  background-color: rgb(24, 213, 65);
+  clip-path: polygon(99% 0, 52% 0, 0 35%, 0 73%);
 }
 
-.card .imagens{
-    width: 1050px;
-    height: 150px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: var(--primary-c8c7c7);
-    
+.card .imagens img {
+  width: 300px;
+  height: 130px;
+  border-radius: 15px;
 }
 
-.card .icones{
-    width: 200px;
-    height: 50px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
+.card .imagens {
+  width: 1050px;
+  height: 150px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: var(--primary-c8c7c7);
 }
 
-.card .usar{
-    width: 40px;
-    height: 40px;
-    background: var(--gradient-Light-RightToLeft);
-    border-radius: 50px;
-    color: var(--primary-FFFFFF);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.card .icones {
+  width: 200px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
 }
 
-.card .favoritar{
-    width: 40px;
-    height: 40px;
-    background: var(--gradient-Red-RightToLeft);
-    border-radius: 50px;
-    color: var(--primary-FFFFFF);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.card .usar {
+  width: 40px;
+  height: 40px;
+  background: var(--gradient-Light-RightToLeft);
+  border-radius: 50px;
+  color: var(--primary-FFFFFF);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.card .login{
-    width: 40px;
-    height: 40px;
-    background: var(--gradient-Grey-RightToLeft);
-    border-radius: 50px;
-    color: var(--primary-FFFFFF);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.card .favoritar {
+  width: 40px;
+  height: 40px;
+  background: var(--gradient-Red-RightToLeft);
+  border-radius: 50px;
+  color: var(--primary-FFFFFF);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card .login {
+  width: 40px;
+  height: 40px;
+  background: var(--gradient-Grey-RightToLeft);
+  border-radius: 50px;
+  color: var(--primary-FFFFFF);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
