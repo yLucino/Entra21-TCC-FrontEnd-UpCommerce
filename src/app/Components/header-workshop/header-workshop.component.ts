@@ -6,5 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./header-workshop.component.css']
 })
 export class HeaderWorkshopComponent {
+  hidden = true;
+  icon = 'fa-arrow-left';
 
+  toggleHeaderHidden() {
+    this.hidden = !this.hidden;
+    if (this.hidden === true) {
+      this.icon = 'fa-arrow-left';
+    } else {
+      this.icon = 'fa-arrow-right';
+    }
+  }
 }

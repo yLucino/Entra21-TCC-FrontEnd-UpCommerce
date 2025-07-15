@@ -40,6 +40,17 @@ section {
   height: 70px;
   border-radius: 17px 0 0 17px;
   background: var(--primary-FFFFFF);
+  transition: 0s;
+}
+
+.content-all .box-header.hidden {
+  width: 70px;
+  padding: 0;
+  transition: .5s;
+
+  .box-input button.btn-hidden-header {
+    margin: 0 14px;
+  }
 }
 
 .content-all .box-header .box-input {
@@ -101,4 +112,10 @@ section {
     transform: scale(1.05);
     box-shadow: 0 0 10px var(--primary-ALPHA-000000-02);
   }
+}
+
+.content-all .box-header.hidden .box-input input,
+.content-all .box-header.hidden .box-input button.config,
+.content-all .box-header.hidden .box-btns {
+  display: none;
 }
