@@ -26,6 +26,8 @@ import { PlanPaymentComponent } from './Components/plan-payment/plan-payment.com
 import { PlanConfirmationComponent } from './Components/plan-confirmation/plan-confirmation.component';
 import { CreateLayoutsComponent } from './Pages/create-layouts/create-layouts.component';
 import { NavBarWorkshopComponent } from './Components/nav-bar-workshop/nav-bar-workshop.component';
+import { CardLayoutsComponent } from './Components/card-layouts/card-layouts.component';
+import { NavBarWorkshopComponent } from './Components/nav-bar-workshop/nav-bar-workshop.component';
 import { HeaderWorkshopComponent } from './Components/header-workshop/header-workshop.component';
 import { ToolsWorkshopComponent } from './Components/tools-workshop/tools-workshop.component';
 import { SmartphoneScreenWorkshopComponent } from './Components/smartphone-screen-workshop/smartphone-screen-workshop.component';
@@ -53,6 +55,7 @@ import { PropertiesWorkshopComponent } from './Components/properties-workshop/pr
     PlanConfirmationComponent,
     CreateLayoutsComponent,
     NavBarWorkshopComponent,
+    CardLayoutsComponent
     HeaderWorkshopComponent,
     ToolsWorkshopComponent,
     SmartphoneScreenWorkshopComponent,

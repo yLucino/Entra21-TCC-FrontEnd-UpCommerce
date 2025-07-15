@@ -3,8 +3,8 @@
 
 :root {
   /* Cores Primárias */
-  --primary-002442: #00192d;
-  --primary-122B41: #122B41;
+  --primary-002442: #001221;
+  --primary-122B41: #122b41;
   --primary-053B69: #053B69;
   --primary-135087: #135087;
   --primary-0E548F: #0E548F;
@@ -53,6 +53,8 @@
   --secondary-E8EBF1: #E8EBF1;
 
   /* Gradientes */
+  --gradient-Grey-RightToLeft: linear-gradient(90deg,#575757 0%, #B7B7B7 100%);
+  --gradient-Red-RightToLeft: linear-gradient(90deg,#711818 0%, #FF4A4A 100%);
   --gradient-Light-RightToLeft: linear-gradient(90deg,#00567a 0%, #42C3FF 100%);
   --gradient-Light-LeftToRight: linear-gradient(90deg,#01abfa 0%, #033967 100%);
   --gradient-Dark-LeftToRight: linear-gradient(90deg,#033d6b 0%, #00192d 100%);

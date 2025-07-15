@@ -1,7 +1,25 @@
 .container{
-    background-color:var(  --primary-052c4e);
+    background-color:var(--primary-002442);
     display: flex;
     width: 100vw;
+    justify-content: center;
+}
+
+.content{
+  width: 99%;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content .container-cards{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
 .container-search{
