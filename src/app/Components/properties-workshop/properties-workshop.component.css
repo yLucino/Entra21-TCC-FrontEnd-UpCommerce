@@ -1,0 +1,21 @@
+.content-all {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+.content-all .main-prop  {
+  width: 250px;
+  height: 350px;
+  background: var(--primary-FFFFFF);
+  border-radius: 35px 0 0 35px;
+}
+
+.content-all .secundary-prop {
+  width: 250px;
+  height: 170px;
+  background: var(--primary-FFFFFF);
+  border-radius: 35px 0 0 35px;
+}

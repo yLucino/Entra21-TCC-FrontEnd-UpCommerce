@@ -30,7 +30,6 @@ export class PlanSuportComponent {
   legalNatures = ['MEI', 'SA', 'EI', 'SLU', 'LTDA', 'OUTRA'];
   monthlyReportsOptions = ['BÁSICO', 'COMPLETO', 'AVANÇADO', 'NENHUMA'];
 
-  // Variáveis do formulário
   nameBusiness = '';
   subject = '';
   observations = '';

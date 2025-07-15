@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,8 +25,13 @@ import { PlanSuportComponent } from './Components/plan-suport/plan-suport.compon
 import { PlanPaymentComponent } from './Components/plan-payment/plan-payment.component';
 import { PlanConfirmationComponent } from './Components/plan-confirmation/plan-confirmation.component';
 import { CreateLayoutsComponent } from './Pages/create-layouts/create-layouts.component';
-import { NavBarWorkshopComponent } from './components/nav-bar-workshop/nav-bar-workshop.component';
+import { NavBarWorkshopComponent } from './Components/nav-bar-workshop/nav-bar-workshop.component';
 import { CardLayoutsComponent } from './Components/card-layouts/card-layouts.component';
+import { NavBarWorkshopComponent } from './Components/nav-bar-workshop/nav-bar-workshop.component';
+import { HeaderWorkshopComponent } from './Components/header-workshop/header-workshop.component';
+import { ToolsWorkshopComponent } from './Components/tools-workshop/tools-workshop.component';
+import { SmartphoneScreenWorkshopComponent } from './Components/smartphone-screen-workshop/smartphone-screen-workshop.component';
+import { PropertiesWorkshopComponent } from './Components/properties-workshop/properties-workshop.component';
 
 @NgModule({
   declarations: [
@@ -50,13 +56,18 @@ import { CardLayoutsComponent } from './Components/card-layouts/card-layouts.com
     CreateLayoutsComponent,
     NavBarWorkshopComponent,
     CardLayoutsComponent
+    HeaderWorkshopComponent,
+    ToolsWorkshopComponent,
+    SmartphoneScreenWorkshopComponent,
+    PropertiesWorkshopComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

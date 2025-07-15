@@ -1,0 +1,22 @@
+@media (max-height: 750px) {
+  .content-all nav.menu {
+    padding-top: 110px;
+    width: 90px;
+  }
+
+  .content-all .logo {
+    width: 135px;
+  }
+
+  .content-all nav.menu ul {
+    gap: 5px;
+  }
+
+  .content-all nav.menu ul li {
+    gap: 2px;
+  
+    i {
+      font-size: 26px;
+    }
+  }
+}

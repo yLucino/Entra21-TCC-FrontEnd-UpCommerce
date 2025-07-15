@@ -1,0 +1,121 @@
+section {
+  position: absolute;
+}
+
+.content-all {
+  display: flex;
+  width: 100vw;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+
+.content-all .logo {
+  display: flex;
+  justify-content: right;
+  background: var(--primary-FFFFFF);
+  padding: 10px;
+  width: 145px;
+  border-radius: 0 94px 94px 0;
+  box-shadow: 0 10px 10px var(--primary-ALPHA-000000-02);
+
+  img {
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+    transition: .3s;
+  }
+
+  img:hover {
+    transform: scale(0.9);
+  }
+}
+
+.content-all .box-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 14px;
+  align-items: center;
+  width: 88%;
+  height: 70px;
+  border-radius: 17px 0 0 17px;
+  background: var(--primary-FFFFFF);
+  transition: 0s;
+}
+
+.content-all .box-header.hidden {
+  width: 70px;
+  padding: 0;
+  transition: .5s;
+
+  .box-input button.btn-hidden-header {
+    margin: 0 14px;
+  }
+}
+
+.content-all .box-header .box-input {
+  display: flex;
+  gap: 5px;
+
+  input {
+    height: 40px;
+    width: 300px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 1px solid var(--primary-333333);
+    color: var(--primary-333333);
+  }
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    border: 1px solid var(--primary-333333);
+    color: var(--primary-333333);
+    transition: .3s;
+  }
+
+  button:hover {
+    cursor: pointer;
+    transform: scale(0.93);
+  }
+}
+
+.content-all .box-header .box-btns {
+  display: flex;
+  gap: 10px;
+
+  button.publish {
+    height: 40px;
+    width: 200px;
+    border-radius: 10px;
+    border: 1px solid var(--primary-009AEC);
+    background: var(--primary-009AEC);
+    color: var(--primary-FFFFFF);
+    transition: .3s;
+  }
+
+  button.preview {
+    height: 40px;
+    width: 200px;
+    border-radius: 10px;
+    border: 1px solid var(--primary-333333);
+    color: var(--primary-333333);
+    transition: .3s;
+  }
+
+  button:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px var(--primary-ALPHA-000000-02);
+  }
+}
+
+.content-all .box-header.hidden .box-input input,
+.content-all .box-header.hidden .box-input button.config,
+.content-all .box-header.hidden .box-btns {
+  display: none;
+}

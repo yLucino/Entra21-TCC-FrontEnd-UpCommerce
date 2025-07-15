@@ -1,0 +1,31 @@
+<section>
+  <div class="content-all">
+    <div class="logo">
+      <img routerLink="/" src="../../../assets/images/Logo/LogoUpCommerce-3.png" alt="Imagem logo UpCommerce">
+    </div>
+
+    <div class="box-header" [class.hidden]="hidden">
+      <div class="box-input">
+        <button class="btn-hidden-header" (click)="toggleHeaderHidden()">
+          <i class="fa-solid {{icon}}"></i>
+        </button>
+
+        <input type="text" placeholder="Nome do projeto">
+        <button class="config">
+          <i class="fa-solid fa-gear"></i>
+        </button>
+      </div>
+
+      <div class="box-btns">
+        <button class="publish">
+          <i class="fa-solid fa-cloud-arrow-up"></i>  
+          Publicar
+        </button>
+        <button class="preview">
+          <i class="fa-solid fa-eye"></i>
+          Preview
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

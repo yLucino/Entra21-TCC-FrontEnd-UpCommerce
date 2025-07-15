@@ -1,0 +1,99 @@
+.content-all {
+  width: 350px;
+  height: 80vh;
+  background: var(--primary-FFFFFF);
+  border-radius: 35px 35px 0 0;
+  padding: 20px;
+}
+
+.content-all .box-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.content-all .box-buttons button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  height: 50px;
+  width: 47%;
+  background: var(--primary-D9D9D9);
+  border: none;
+  border-radius: 60px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.content-all .box-buttons button:hover {
+  transform: scale(.95);
+}
+
+.content-all .box-buttons button.active {
+  background: var(--primary-00AEFF);
+  color: var(--primary-FFFFFF);
+}
+
+.content-all .box-input {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+
+  i {
+    position: absolute;
+    color: var(--primary-666666);
+    right: 15px;
+  }
+}
+
+.content-all .box-input input {
+  width: 100%;
+  height: 50px;
+  padding: 0 35px 0 10px;
+  border-radius: 10px;
+  border: 2px solid var(--primary-666666);
+}
+
+/* Components/Screens */
+.box-component,
+.box-screens {
+  width: 100%;
+  height: 75%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.component,
+.screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 48%;
+  border: 1px dashed var(--primary-A6A6A6);
+  border-radius: 10px;
+  gap: 5px;
+  cursor: grab;
+}
+
+.component i,
+.screen i {
+  color: var(--primary-666666);
+  size: 27px;
+  font-size: 27px;
+}
+
+.component p,
+.screen p {
+  color: var(--primary-666666);
+  font: var(--font-REGULAR-P-12);
+}
