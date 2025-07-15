@@ -2,16 +2,20 @@
     background-color:var(--primary-002442);
     display: flex;
     width: 100vw;
+    height: 100vh;
     justify-content: center;
 }
 
 .content{
   width: 99%;
-  height: 90vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  gap: 10px;
 }
 
 .content .container-cards{
