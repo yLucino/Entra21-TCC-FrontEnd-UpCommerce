@@ -53,9 +53,10 @@
   --secondary-E8EBF1: #E8EBF1;
 
   /* Gradientes */
-  --gradient-Grey-RightToLeft: linear-gradient(90deg,#575757 0%, #B7B7B7 100%);
-  --gradient-Red-RightToLeft: linear-gradient(90deg,#711818 0%, #FF4A4A 100%);
-  --gradient-Light-RightToLeft: linear-gradient(90deg,#00567a 0%, #42C3FF 100%);
+  --gradient-Grey-RightToLeft: linear-gradient(90deg,#6c6c6c 0%, #B7B7B7 100%);
+  --gradient-Green-RightToLeft: linear-gradient(90deg,#096e00 0%, #11C900 100%);
+  --gradient-Red-RightToLeft: linear-gradient(90deg,#7a1515 0%, #FF4A4A 100%);
+  --gradient-Light-RightToLeft: linear-gradient(90deg,#006996 0%, #42C3FF 100%);
   --gradient-Light-LeftToRight: linear-gradient(90deg,#01abfa 0%, #033967 100%);
   --gradient-Dark-LeftToRight: linear-gradient(90deg,#033d6b 0%, #00192d 100%);
   --gradient-Medium-BottomToTop: linear-gradient(180deg,#00305b 0%, #0a6fb7 100%);

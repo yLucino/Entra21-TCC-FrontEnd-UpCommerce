@@ -25,18 +25,33 @@
 }
 
 .card .tag {
-  width: 200px;
-  height: 50px;
+  width: 120px;
+  height: 120px;
   display: flex;
-  transform: rotate(-20deg);
-  left: -8px;
-  top: 10px;
+  left: 0px;
+  top: 0px;
   position: absolute;
   align-items: center;
   justify-content: space-around;
   color: var(--primary-FFFFFF);
-  background-color: rgb(24, 213, 65);
-  clip-path: polygon(99% 0, 52% 0, 0 35%, 0 73%);
+  background: var(--gradient-Green-RightToLeft);
+  clip-path: polygon(0 50%, 50% 0, 100% 0, 0 100%);
+  box-shadow: 0 0 15px var(--primary-000000);
+}
+
+.card .tag2{
+  width: 80px;
+  height: 50px;
+  padding-bottom: 40px;
+  transform: rotate(-45deg);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.card .tag p{
+  color: var(--primary-FFFFFF);
+  font:var(--font-BOLD-P-13);
 }
 
 .card .imagens img {
