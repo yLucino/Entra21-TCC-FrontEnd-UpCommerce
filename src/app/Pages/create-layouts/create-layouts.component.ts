@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./create-layouts.component.css']
 })
 export class CreateLayoutsComponent {
-
+  currentStep = 0;
 }

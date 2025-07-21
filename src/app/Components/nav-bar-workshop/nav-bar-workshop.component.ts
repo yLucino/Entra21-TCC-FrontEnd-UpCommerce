@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-nav-bar-workshop',
@@ -6,7 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./nav-bar-workshop.component.css', './nav-bar-workshop-responsive.component.css']
 })
 export class NavBarWorkshopComponent {
-  selectedIndex: number = 4;
+  @Output() stepChange = new EventEmitter<number>();
+  selectedIndex: number = 0;
 
   menuItems = [
     { label: 'Projetos', icon: 'fa-solid fa-folder' },
@@ -19,5 +20,6 @@ export class NavBarWorkshopComponent {
 
   selectItem(index: number) {
     this.selectedIndex = index;
+    this.stepChange.emit(index);
   }
 }

@@ -31,6 +31,7 @@ import { HeaderWorkshopComponent } from './Components/header-workshop/header-wor
 import { ToolsWorkshopComponent } from './Components/tools-workshop/tools-workshop.component';
 import { SmartphoneScreenWorkshopComponent } from './Components/smartphone-screen-workshop/smartphone-screen-workshop.component';
 import { PropertiesWorkshopComponent } from './Components/properties-workshop/properties-workshop.component';
+import { ButtonDragComponent } from './dragAnDrop/button-drag/button-drag.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { PropertiesWorkshopComponent } from './Components/properties-workshop/pr
     ToolsWorkshopComponent,
     SmartphoneScreenWorkshopComponent,
     PropertiesWorkshopComponent,
+    ButtonDragComponent,
   ],
   imports: [
     BrowserModule,
