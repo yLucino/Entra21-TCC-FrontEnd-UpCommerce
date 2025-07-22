@@ -6,29 +6,29 @@
   </header>
 
   <main>
-    <div class="project" *ngIf="currentStep === 0"> <!-- 0 -->
+    <div class="project" *ngIf="currentStep === 0">
 
     </div>
 
-    <div class="module" *ngIf="currentStep === 1"> <!-- 1 -->
+    <div class="module" *ngIf="currentStep === 1">
 
     </div>
 
-    <div class="backend" *ngIf="currentStep === 2"> <!-- 2 -->
+    <div class="backend" *ngIf="currentStep === 2"> 
 
     </div>
 
-    <div class="web" *ngIf="currentStep === 3"> <!-- 3 -->
+    <div class="web" *ngIf="currentStep === 3"> 
 
     </div>
 
-    <div class="mobile" *ngIf="currentStep === 4"> <!-- 4 -->
-      <app-tools-workshop></app-tools-workshop>
-      <app-smartphone-screen-workshop></app-smartphone-screen-workshop>
-      <app-properties-workshop></app-properties-workshop>
+    <div class="mobile" *ngIf="currentStep === 4"> 
+        <app-tools-workshop></app-tools-workshop> <!-- Envia -->
+        <app-smartphone-screen-workshop></app-smartphone-screen-workshop> <!-- Recebe -->
+        <app-properties-workshop></app-properties-workshop> <!-- Envia -->
     </div>
  
-    <div class="cicd" *ngIf="currentStep === 5"> <!-- 5 -->
+    <div class="cicd" *ngIf="currentStep === 5">
 
     </div>
   </main>

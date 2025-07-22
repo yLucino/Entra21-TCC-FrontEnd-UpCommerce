@@ -13,6 +13,12 @@
     </div>
 
     <!-- List for Drag and Drop -->
+    <div cdkDropList class="drop-zone" (cdkDropListDropped)="onDrop($event)">
+      <div class="dropped" *ngFor="let item of droppedItems">
+        <i [class]="item.icon"></i>
+        <p>{{ item.text }}</p>
+      </div>
+    </div>
 
     <div class="footer-bar"></div>
   </div>

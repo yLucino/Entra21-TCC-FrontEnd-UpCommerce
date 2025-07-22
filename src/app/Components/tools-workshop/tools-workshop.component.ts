@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ButtonDragComponent } from 'src/app/dragAnDrop/button-drag/button-drag.component';
+import { ComponentDragDrop } from 'src/app/interfaces/component.dragdrop.interface';
 
 @Component({
   selector: 'app-tools-workshop',
@@ -22,7 +24,7 @@ export class ToolsWorkshopComponent {
     { text: 'Webview', icon: 'fa-solid fa-globe' },
     { text: 'Gráfico', icon: 'fa-solid fa-chart-pie' },
     { text: 'Inputs', icon: 'fa-solid fa-sliders' },
-    { text: 'Botões', icon: 'fa-solid fa-toggle-on' },
+    { text: 'Botões', icon: 'fa-solid fa-toggle-on', component: ButtonDragComponent },
     { text: 'Ícones', icon: 'fa-solid fa-icons' },
     { text: 'Notificações', icon: 'fa-solid fa-bell' },
     { text: 'Formulário', icon: 'fa-solid fa-file-lines' },
