@@ -22,14 +22,14 @@
 
     </div>
 
-    <div class="mobile" *ngIf="currentStep === 4"> 
-        <app-tools-workshop></app-tools-workshop> <!-- Envia -->
-        <app-smartphone-screen-workshop></app-smartphone-screen-workshop> <!-- Recebe -->
-        <app-properties-workshop></app-properties-workshop> <!-- Envia -->
+    <div class="mobile" *ngIf="currentStep === 4">
+      <app-tools-workshop [connectedDropListId]="'smartphoneList'"></app-tools-workshop>
+      <app-smartphone-screen-workshop [connectedDropListId]="'toolsList'"></app-smartphone-screen-workshop>
+      <app-properties-workshop></app-properties-workshop>
     </div>
  
     <div class="cicd" *ngIf="currentStep === 5">
-
+     
     </div>
   </main>
 </section>

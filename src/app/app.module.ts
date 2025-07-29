@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -68,7 +69,8 @@ import { ButtonDragComponent } from './dragAnDrop/button-drag/button-drag.compon
     BrowserAnimationsModule,
     MatIconModule,
     FormsModule,
-    DragDropModule
+    DragDropModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
