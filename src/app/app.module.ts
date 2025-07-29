@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,11 +28,11 @@ import { PlanConfirmationComponent } from './Components/plan-confirmation/plan-c
 import { CreateLayoutsComponent } from './Pages/create-layouts/create-layouts.component';
 import { NavBarWorkshopComponent } from './Components/nav-bar-workshop/nav-bar-workshop.component';
 import { CardLayoutsComponent } from './Components/card-layouts/card-layouts.component';
-import { NavBarWorkshopComponent } from './Components/nav-bar-workshop/nav-bar-workshop.component';
 import { HeaderWorkshopComponent } from './Components/header-workshop/header-workshop.component';
 import { ToolsWorkshopComponent } from './Components/tools-workshop/tools-workshop.component';
 import { SmartphoneScreenWorkshopComponent } from './Components/smartphone-screen-workshop/smartphone-screen-workshop.component';
 import { PropertiesWorkshopComponent } from './Components/properties-workshop/properties-workshop.component';
+import { ButtonDragComponent } from './dragAnDrop/button-drag/button-drag.component';
 
 @NgModule({
   declarations: [
@@ -55,11 +56,12 @@ import { PropertiesWorkshopComponent } from './Components/properties-workshop/pr
     PlanConfirmationComponent,
     CreateLayoutsComponent,
     NavBarWorkshopComponent,
-    CardLayoutsComponent
+    CardLayoutsComponent,
     HeaderWorkshopComponent,
     ToolsWorkshopComponent,
     SmartphoneScreenWorkshopComponent,
     PropertiesWorkshopComponent,
+    ButtonDragComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +69,8 @@ import { PropertiesWorkshopComponent } from './Components/properties-workshop/pr
     BrowserAnimationsModule,
     MatIconModule,
     FormsModule,
-    DragDropModule
+    DragDropModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

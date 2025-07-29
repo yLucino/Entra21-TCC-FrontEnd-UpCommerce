@@ -20,7 +20,7 @@ section {
   padding: 30px;
   border-radius: 10px;
   width: 1080px;
-  height: 720px;
+  height: 620px;
   box-shadow: 0 3px 30px var(--primary-ALPHA-000000-06);
 }
 
@@ -105,11 +105,11 @@ section {
 .content-all .decorations .img-01 {
   position: relative;
   left: 20px;
-  top: 220px;
+  top: 120px;
 }
 
 .content-all .decorations .img-02 {
   position: relative;
   left: 615px;
-  top: 360px;
+  top: 260px;
 }

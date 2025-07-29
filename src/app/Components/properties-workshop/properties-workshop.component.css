@@ -8,14 +8,14 @@
 
 .content-all .main-prop  {
   width: 250px;
-  height: 350px;
+  height: 360px;
   background: var(--primary-FFFFFF);
   border-radius: 35px 0 0 35px;
 }
 
 .content-all .secundary-prop {
   width: 250px;
-  height: 170px;
+  height: 230px;
   background: var(--primary-FFFFFF);
   border-radius: 35px 0 0 35px;
 }

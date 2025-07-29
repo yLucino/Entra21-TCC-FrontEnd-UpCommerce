@@ -14,15 +14,20 @@
       <input type="text" name="search" id="search" placeholder="Pesquise por Telas ou Componentes...">
     </div>
 
-    <div class="box-component" *ngIf="selectedIndex == 1">
-      <div class="component" *ngFor="let component of components">
+    <div class="box-component" *ngIf="selectedIndex == 1" 
+    cdkDropList
+    #toolsList="cdkDropList"
+    [id]="'toolsList'"
+    [cdkDropListData]="components"
+    [cdkDropListConnectedTo]="[connectedDropListId]">
+      <div cdkDrag [cdkDragData]="component" class="component" *ngFor="let component of components">
         <i [class]="component.icon"></i>
         <p>{{ component.text }}</p>
       </div>
     </div>
 
     <div class="box-screens" *ngIf="selectedIndex == 0">
-      <div class="screen" *ngFor="let screen of screens">
+      <div cdkDrag [cdkDragData]="screen" class="screen" *ngFor="let screen of screens">
         <i [class]="screen.icon"></i>
         <p>{{ screen.text }}</p>  
       </div>

@@ -13,6 +13,18 @@
     </div>
 
     <!-- List for Drag and Drop -->
+    <div cdkDropList class="drop-zone"cdkDropList
+    #smartphoneList="cdkDropList"
+    [id]="'smartphoneList'"
+    [cdkDropListData]="droppedItems"
+    [cdkDropListConnectedTo]="[connectedDropListId]"
+    (cdkDropListDropped)="drop($event)">
+      <ng-container *ngFor="let item of droppedItems">
+        <ng-container
+          *ngComponentOutlet="item.component; injector: item.injector">
+        </ng-container>
+      </ng-container>
+    </div>
 
     <div class="footer-bar"></div>
   </div>
