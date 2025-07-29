@@ -63,6 +63,7 @@
 .box-screens {
   width: 100%;
   height: 75%;
+  align-content: flex-start;
   overflow-y: scroll;
   overflow-x: hidden;
   display: flex;

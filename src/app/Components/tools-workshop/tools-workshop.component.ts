@@ -59,6 +59,7 @@ export class ToolsWorkshopComponent {
 
   screens = [
     { text: 'Home', icon: 'fa-solid fa-house' },
+    { text: 'Área', icon: 'fa-regular fa-object-group' },
     { text: 'Pagamento', icon: 'fa-solid fa-credit-card' },
     { text: 'Perfil', icon: 'fa-solid fa-user' },
     { text: 'Configurações', icon: 'fa-solid fa-gear' },
@@ -75,5 +76,26 @@ export class ToolsWorkshopComponent {
   
   selectItem(index: number) {
     this.selectedIndex = index;
+  }
+
+  searchTerm: string = '';
+
+  get filteredComponents() {
+    return this.components.filter(component =>
+      this.normalize(component.text).includes(this.normalize(this.searchTerm))
+    );
+  }
+
+  get filteredScreens() {
+    return this.screens.filter(screen =>
+      this.normalize(screen.text).includes(this.normalize(this.searchTerm))
+    );
+  }
+
+  normalize(text: string): string {
+    return text
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
   }
 }
