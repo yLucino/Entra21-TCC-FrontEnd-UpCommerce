@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { ButtonDragComponent } from 'src/app/dragAnDrop/button-drag/button-drag.component';
+import { AreaComponent } from 'src/app/dragAndDrop/area/area.component';
+
+import { ButtonDragComponent } from 'src/app/dragAndDrop/button-drag/button-drag.component';
 import { ComponentDragDrop } from 'src/app/interfaces/component.dragdrop.interface';
 
 @Component({
@@ -8,7 +10,7 @@ import { ComponentDragDrop } from 'src/app/interfaces/component.dragdrop.interfa
   styleUrls: ['./tools-workshop.component.css']
 })
 export class ToolsWorkshopComponent {
-  @Input() connectedDropListId: string = '';
+  @Input() connectedDropListId: string[] = ['', ''];
   selectedIndex: number = 1;
 
   btnsItems = [
@@ -57,21 +59,21 @@ export class ToolsWorkshopComponent {
     { text: 'Tema Escuro', icon: 'fa-solid fa-moon', component: null }
   ];
 
-  screens = [
-    { text: 'Home', icon: 'fa-solid fa-house' },
-    { text: 'Área', icon: 'fa-regular fa-object-group' },
-    { text: 'Pagamento', icon: 'fa-solid fa-credit-card' },
-    { text: 'Perfil', icon: 'fa-solid fa-user' },
-    { text: 'Configurações', icon: 'fa-solid fa-gear' },
-    { text: 'Notificações', icon: 'fa-solid fa-bell' },
-    { text: 'Mensagens', icon: 'fa-solid fa-envelope' },
-    { text: 'Ajuda', icon: 'fa-solid fa-circle-question' },
-    { text: 'Favoritos', icon: 'fa-solid fa-heart' },
-    { text: 'Carrinho', icon: 'fa-solid fa-cart-shopping' },
-    { text: 'Histórico', icon: 'fa-solid fa-clock-rotate-left' },
-    { text: 'Relatórios', icon: 'fa-solid fa-file-invoice' },
-    { text: 'Login', icon: 'fa-solid fa-right-to-bracket' },
-    { text: 'Logout', icon: 'fa-solid fa-right-from-bracket' },
+  screens: ComponentDragDrop[] = [
+    { text: 'Home', icon: 'fa-solid fa-house', component: null },
+    { text: 'Área', icon: 'fa-regular fa-object-group', component: AreaComponent },
+    { text: 'Pagamento', icon: 'fa-solid fa-credit-card', component: null },
+    { text: 'Perfil', icon: 'fa-solid fa-user', component: null },
+    { text: 'Configurações', icon: 'fa-solid fa-gear', component: null },
+    { text: 'Notificações', icon: 'fa-solid fa-bell', component: null },
+    { text: 'Mensagens', icon: 'fa-solid fa-envelope', component: null },
+    { text: 'Ajuda', icon: 'fa-solid fa-circle-question', component: null },
+    { text: 'Favoritos', icon: 'fa-solid fa-heart', component: null },
+    { text: 'Carrinho', icon: 'fa-solid fa-cart-shopping', component: null },
+    { text: 'Histórico', icon: 'fa-solid fa-clock-rotate-left', component: null },
+    { text: 'Relatórios', icon: 'fa-solid fa-file-invoice', component: null },
+    { text: 'Login', icon: 'fa-solid fa-right-to-bracket', component: null },
+    { text: 'Logout', icon: 'fa-solid fa-right-from-bracket', component: null },
   ];
   
   selectItem(index: number) {

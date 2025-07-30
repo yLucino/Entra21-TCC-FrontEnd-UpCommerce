@@ -23,8 +23,13 @@
     </div>
 
     <div class="mobile" *ngIf="currentStep === 4">
-      <app-tools-workshop [connectedDropListId]="'smartphoneList'"></app-tools-workshop>
-      <app-smartphone-screen-workshop [connectedDropListId]="'toolsComponentList'" [connectedDropListId]="'toolsScreenList'"></app-smartphone-screen-workshop>
+      <app-tools-workshop
+        [connectedDropListId]="['smartphoneList', 'areaList']">
+      </app-tools-workshop>
+      <app-smartphone-screen-workshop 
+        [connectedDropListId]="['toolsComponentList', 'toolsScreenList']">
+      </app-smartphone-screen-workshop>
+
       <app-properties-workshop></app-properties-workshop>
     </div>
  
