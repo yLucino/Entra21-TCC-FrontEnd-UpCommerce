@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class CreateLayoutsComponent {
   currentStep = 0;
+
+  areaIds: string[] = [];
+
+  handleNewAreaId(id: string) {
+    if (!this.areaIds.includes(id)) {
+      this.areaIds = [...this.areaIds, id];
+    }
+  }
 }

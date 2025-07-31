@@ -1,32 +1,34 @@
-import { Component, EnvironmentInjector, EventEmitter, HostListener, Injector, Output } from '@angular/core';
+import {
+  Component,
+  EnvironmentInjector,
+  EventEmitter,
+  HostListener,
+  Injector,
+  OnInit,
+  Output
+} from '@angular/core';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-area',
-  template: `
-    <div 
-      class="child-drop-zone"
-      cdkDropList
-      #areaList="cdkDropList"
-      [id]="'areaList'"
-      [cdkDropListData]="droppedItems"
-      [cdkDropListConnectedTo]="['toolsComponentList', 'toolsScreenList']"
-      (cdkDropListDropped)="drop($event)">
-      <ng-container *ngFor="let item of droppedItems">
-        <ng-container
-          *ngComponentOutlet="item.component; injector: item.injector">
-        </ng-container>
-      </ng-container>
-    </div>`,
+  templateUrl: './area.component.html',
   styleUrls: ['./area.component.css']
 })
-export class AreaComponent{
+export class AreaComponent implements OnInit {
+  areaListId: string = '';
+  @Output() hovering = new EventEmitter<boolean>();
+  @Output() created = new EventEmitter<string>();
+
   droppedItems: { component: any, injector: Injector }[] = [];
-  
-  constructor(
-    private injector: EnvironmentInjector,
-  ) {}
-  
+
+  constructor(private injector: EnvironmentInjector) {}
+
+  ngOnInit(): void {
+    const uniqueId = Math.floor(Math.random() * 10000000);
+    this.areaListId = `areaList-${uniqueId}`;
+    this.created.emit(this.areaListId); // emite para o pai
+  }
+
   drop(event: CdkDragDrop<any[]>) {
     const data = event.previousContainer.data[event.previousIndex];
 
@@ -43,8 +45,6 @@ export class AreaComponent{
       injector
     });
   }
-
-  @Output() hovering = new EventEmitter<boolean>();
 
   @HostListener('mouseenter') onEnter() {
     this.hovering.emit(true);

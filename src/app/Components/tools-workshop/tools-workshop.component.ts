@@ -10,8 +10,14 @@ import { ComponentDragDrop } from 'src/app/interfaces/component.dragdrop.interfa
   styleUrls: ['./tools-workshop.component.css']
 })
 export class ToolsWorkshopComponent {
-  @Input() connectedDropListId: string[] = ['', ''];
+  @Input() baseDropListIds: string[] = ['smartphoneList'];
+  @Input() areaDropListIds: string[] = [];
+
   selectedIndex: number = 1;
+
+  get connectedDropListId(): string[] {
+    return [...this.baseDropListIds, ...this.areaDropListIds];
+  }
 
   btnsItems = [
     { text: 'Telas', icon: 'fa-solid fa-expand' },
