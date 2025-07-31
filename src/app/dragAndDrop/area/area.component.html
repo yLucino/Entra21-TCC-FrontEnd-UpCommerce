@@ -2,10 +2,9 @@
   class="child-drop-zone"
   cdkDropList
   [id]="areaListId"
-  [cdkDropListData]="droppedItems"
+  [cdkDropListEnterPredicate]="canEnterArea"
   [cdkDropListConnectedTo]="['toolsComponentList', 'toolsScreenList']"
   (cdkDropListDropped)="drop($event)">
-  <ng-container *ngFor="let item of droppedItems">
-    <ng-container *ngComponentOutlet="item.component; injector: item.injector"></ng-container>
-  </ng-container>
+  
+  <ng-container #dropHost></ng-container>
 </div>

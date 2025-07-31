@@ -18,7 +18,7 @@ import { AreaComponent } from 'src/app/dragAndDrop/area/area.component';
 })
 export class SmartphoneScreenWorkshopComponent {
   @Input() connectedDropListId: string[] = [];
-  @Output() areaCreated = new EventEmitter<string>(); // 👈 Emissor para o pai
+  @Output() areaCreated = new EventEmitter<string>();
 
   @ViewChild('dropHost', { read: ViewContainerRef }) viewContainerRef!: ViewContainerRef;
 
@@ -43,7 +43,7 @@ export class SmartphoneScreenWorkshopComponent {
     if (data.text === 'Área') {
       const instance = componentRef.instance as AreaComponent;
       instance.hovering.subscribe((hover: boolean) => this.isHoveringOverArea = hover);
-      instance.created.subscribe((id: string) => this.areaCreated.emit(id)); // 👈 emite novo ID
+      instance.created.subscribe((id: string) => this.areaCreated.emit(id));
     }
   }
 }
