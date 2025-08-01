@@ -18,6 +18,7 @@
   --primary-c8c7c7: #c8c7c7;
   --primary-D9D9D9: #D9D9D9;
   --primary-000000: #000000;
+  --primary-000000b5: #000000b5;
   --primary-333333: #333333;
   --primary-666666: #666666;
   --primary-E0E0E0: #E0E0E0;
@@ -36,16 +37,17 @@
   /* Cores Secundárias */
   --secondary-9E1010: #9E1010;
   --secondary-C41D1D: #C41D1D;
+  --secondary-AE2D2D: #AE2D2D;
   --secondary-EB3030: #EB3030;
   --secondary-2C8F41: #2C8F41;
   --secondary-41B65A: #41B65A;
   --secondary-5ADB76: #5ADB76;
+  --secondary-4E66D3: #4E66D3;
   --secondary-9FC1D1: #9FC1D1;
   --secondary-C8E8F7: #C8E8F7;
   --secondary-CADAE5: #CADAE5;
   --secondary-EFEFEF: #EFEFEF;
   --secondary-EEEEEE: #EEEEEE;
-
   --secondary-7C87AA: #7C87AA;
   --secondary-01ABFA: #01ABFA;
   --secondary-D3F1FF: #D3F1FF;
@@ -69,6 +71,7 @@
   --font-BOLD-H2-28: bold 28px "Poppins", sans-serif;
   --font-BOLD-H3-21: bold 21px "Poppins", sans-serif;
   --font-BOLD-H4-16: bold 16px "Poppins", sans-serif;
+  --font-BOLD-P-14:  bold 14px "Poppins", sans-serif;
   --font-BOLD-P-13:  600 13px "Poppins", sans-serif;
   --font-BOLD-P-12:  bold 12px "Poppins", sans-serif;
   --font-BOLD-P-10:  bold 10px "Poppins", sans-serif;

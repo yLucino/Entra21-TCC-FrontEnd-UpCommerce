@@ -2,7 +2,7 @@
   <app-nav-bar-workshop (stepChange)="currentStep = $event"></app-nav-bar-workshop>
 
   <header>
-    <app-header-workshop></app-header-workshop>
+    <app-header-workshop [currentMenu]="currentStep"></app-header-workshop>
   </header>
 
   <main>

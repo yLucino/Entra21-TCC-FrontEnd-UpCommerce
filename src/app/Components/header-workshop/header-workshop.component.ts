@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-header-workshop',
@@ -6,7 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./header-workshop.component.css']
 })
 export class HeaderWorkshopComponent {
-  hidden = true;
+  @Input() currentMenu: number = 0;
+  hidden = false;
   icon = 'fa-arrow-left';
 
   toggleHeaderHidden() {
