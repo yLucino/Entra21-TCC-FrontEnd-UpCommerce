@@ -4,7 +4,7 @@
       <img routerLink="/" src="../../../assets/images/Logo/LogoUpCommerce-3.png" alt="Imagem logo UpCommerce">
     </div>
 
-    <div class="box-header" [class.hidden]="hidden">
+    <div class="box-header" [class.hidden]="hidden" *ngIf="!(currentMenu === 0 || currentMenu === 1)">
       <div class="box-input">
         <button class="btn-hidden-header" (click)="toggleHeaderHidden()">
           <i class="fa-solid {{icon}}"></i>
