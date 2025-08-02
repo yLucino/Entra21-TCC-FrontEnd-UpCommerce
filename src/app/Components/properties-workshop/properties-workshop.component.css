@@ -135,7 +135,7 @@
   padding: 8px 0;
   border-bottom: 3px solid var(--primary-009AEC);
   gap: 7px;
-  margin: 15px 0;
+  margin: 35px 0 15px 0;
   cursor: pointer;
 
   i {
@@ -152,14 +152,58 @@
 }
 
 /* Properties Component CSS */
+.properties-box hr {
+  border: none;
+  height: 2px;
+  background: var(--primary-D9D9D9);
+  border-radius: 20px;
+  margin: 20px 0;
+}
+
+.parting {
+  width: 100%;
+  background-color: var(--primary-D9D9D9);
+  border-radius: 5px;
+  padding: 8px 10px;
+
+  p {
+    font: var(--font-BOLD-H4-16);
+    color: var(--primary-808080);
+  }
+}
+
+.property input,
+.property select {
+  width: 100%;
+  height: 30px;
+  border: 1px solid var(--primary-808080);
+  border-radius: 5px;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.property input#range-opacity {
+  padding: 0;
+  cursor: pointer;
+}
+
+.property input.colorInput {
+  padding: 0 3px;
+  cursor: pointer;
+}
+
+.sub-text-option {
+  font: var(--font-REGULAR-P-13);
+  color: var(--primary-000000b5);
+  margin-top: 10px;
+}
+
 /* Visible Prop */
 .visible-prop {
   display: flex;
   width: 100%;
   justify-content: space-between;
   align-items: center;
-
-
 }
 
 .title-prop {
