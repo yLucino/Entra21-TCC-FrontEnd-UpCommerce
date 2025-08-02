@@ -19,10 +19,12 @@
             <button class="mark-btn">
               <i id="action-mark" class="fa-solid fa-expand"></i>
             </button>
+
             <button class="info-btn" title="explicação do componente">
               <!-- Fazer um title adaptativo para explicar oq cada component faz -->
               <i id="action-info" class="fa-solid fa-circle-info"></i>
             </button>
+
             <button class="remove-btn">
               <i id="action-remove" class="fa-solid fa-trash-can"></i>
             </button>
@@ -55,19 +57,22 @@
               <div class="parting">
                 <p>Tamanho</p>
               </div>
-              <div class="property-size-height">
+
+              <div class="property size-height">
                 <div class="title-prop">
                   <p>Altura</p>
                   <i class="fa-solid fa-circle-question" title="Altura do componente em pixels."></i>
                 </div>
+
                 <input type="number" placeholder="Ex: 655" />
               </div>
         
-              <div class="property-size-width">
+              <div class="property size-width">
                 <div class="title-prop">
                   <p>Largura</p>
                   <i class="fa-solid fa-circle-question" title="Largura do componente em pixels."></i>
                 </div>
+
                 <input type="number" placeholder="Ex: 320" />
               </div>
             </div>
@@ -77,18 +82,22 @@
               <div class="parting">
                 <p>Espaçamento</p>
               </div>
-              <div class="property-spacing-margin">
+
+              <div class="property spacing-margin">
                 <div class="title-prop">
                   <p>Espaço exterior</p>
                   <i class="fa-solid fa-circle-question" title="Espaço externo (margem) ao redor do componente."></i>
                 </div>
+
                 <input type="number" placeholder="Ex: 10" />
               </div>
-              <div class="property-spacing-padding">
+
+              <div class="property spacing-padding">
                 <div class="title-prop">
                   <p>Espaço interior</p>
                   <i class="fa-solid fa-circle-question" title="Espaço interno (padding) dentro do componente."></i>
                 </div>
+
                 <input type="number" placeholder="Ex: 15" />
               </div>
             </div>
@@ -98,47 +107,56 @@
               <div class="parting">
                 <p>Aparência</p>
               </div>
-              <div class="property-appearance-border">
+              <div class="property appearance-border">
                 <div class="title-prop">
                   <p>Borda</p>
                   <i class="fa-solid fa-circle-question" title="Configuração da borda do componente, incluindo cor e tipo."></i>
                 </div>
-                <p>Tamanho</p>
+                
+                <p class="sub-text-option">Tamanho:</p>
                 <input type="number" placeholder="Ex: 2" />
-                <p>Curva de Canto</p>
+                
+                <p class="sub-text-option">Curva de Canto:</p>
                 <input type="number" placeholder="Ex: 20" />
-                <p>Cor</p>
-                <input type="color"/>
-                <p>Tipo</p>
+                
+                <p class="sub-text-option">Cor:</p>
+                <input class="colorInput" type="color"/>
+                
+                <p class="sub-text-option">Tipo:</p>
                 <select class="border-type">
                   <option value="solid">Sólida</option>
                   <option value="dashed">Tracejada</option>
                   <option value="dotted">Pontilhada</option>
                 </select>
               </div>
-              <div class="property-appearance-background">
+
+              <div class="property appearance-background">
                 <div class="title-prop">
                   <p>Cor de fundo</p>
                   <i class="fa-solid fa-circle-question" title="Cor de fundo do componente."></i>
                 </div>
-                <p>Cor</p>
-                <input type="color" />
+
+                <input class="colorInput" type="color" />
               </div>
         
-              <div class="property-appearance-color">
+              <div class="property appearance-color">
                 <div class="title-prop">
                   <p>Cor</p>
                   <i class="fa-solid fa-circle-question" title="Cor dos textos ou ícones do componente."></i>
                 </div>
-                <input type="color" />
-                <p>Transparência</p>
+
+                <input class="colorInput" type="color" />
+
+                <p class="sub-text-option">Transparência:</p>
                 <input type="number" placeholder="Ex: 0.5" />
               </div>
-              <div class="property-apperance-font">
+
+              <div class="property apperance-font">
                 <div class="title-prop">
                   <p>Fonte</p>
                   <i class="fa-solid fa-circle-question" title="Estilo, Tamanho, Espaçamento e Cor da fonte usada no componente."></i>
                 </div>
+
                 <select class="font-family">
                   <option value="Arial">Arial</option>
                   <option value="Verdana">Verdana</option>
@@ -146,9 +164,11 @@
                   <option value="Poppins">Poppins</option>
                   <option value="Inter">Inter</option>
                 </select>
-                <p>Tamanho</p>
+
+                <p class="sub-text-option">Tamanho:</p>
                 <input type="number" placeholder="Ex: 16" />
-                <p>Largura (Afinar ou Engrossar)</p>
+
+                <p class="sub-text-option">Largura (Afinar ou Engrossar):</p>
                 <select class="font-family">
                   <option value="100">Thin</option>
                   <option value="300">Normal</option>
@@ -156,27 +176,40 @@
                   <option value="700">Bold</option>
                   <option value="900">Extra Bold</option>
                 </select>
-                <p>Espaçamento entre letras</p>
+
+                <p class="sub-text-option">Espaçamento entre letras:</p>
                 <input type="number" placeholder="Ex: 1" />
-                <p>Cor</p>
-                <input type="color" />
+                
+                <p class="sub-text-option">Cor:</p>
+                <input class="colorInput" type="color" />
               </div>
-              <div class="property-opacity">
+
+              <div class="property opacity">
                 <div class="title-prop">
                   <p>Opacidade</p>
                   <i class="fa-solid fa-circle-question" title="Opacidade visual do componente, de 0 (invisível) a 1 (totalmente visível)."></i>
                 </div>
-                <input type="range" min="0" max="1" step="0.01" value="1">
+
+                <input id="range-opacity" type="range" min="0" max="1" step="0.01" value="1">
               </div>
-              <div class="property-shadow">
+
+              <div class="property shadow">
                 <div class="title-prop">
                   <p>Sombra</p>
                   <i class="fa-solid fa-circle-question" title="Sombra aplicada ao redor do componente."></i>
                 </div>
-                <p>Deslocamento X</p><input type="number" placeholder="Ex: 5" />
-                <p>Deslocamento Y</p><input type="number" placeholder="Ex: 5" />
-                <p>Blur</p><input type="number" placeholder="Ex: 10" />
-                <p>Cor</p><input type="color" />
+
+                <p class="sub-text-option">Deslocamento X:</p>
+                <input type="number" placeholder="Ex: 5" />
+                
+                <p class="sub-text-option">Deslocamento Y:</p>
+                <input type="number" placeholder="Ex: 5" />
+                
+                <p class="sub-text-option">Blur:</p>
+                <input type="number" placeholder="Ex: 10" />
+                
+                <p class="sub-text-option">Cor:</p>
+                <input class="colorInput" type="color" />
               </div>
             </div>
 
@@ -185,27 +218,39 @@
               <div class="parting">
                 <p>Posicionamento</p>
               </div>
-              <div class="property-position">
+
+              <div class="property position">
                 <div class="title-prop">
                   <p>Posição</p>
                   <i class="fa-solid fa-circle-question" title="Define o tipo de posicionamento CSS do componente."></i>
                 </div>
+
                 <select>
                   <option value="static">Estática</option>
                   <option value="relative">Relativa</option>
                   <option value="absolute">Absoluta</option>
                   <option value="fixed">Fixa</option>
                 </select>
-                <p>Acima</p><input type="number" placeholder="Ex: 1" />
-                <p>Esquerda</p><input type="number" placeholder="Ex: 2" />
-                <p>Direita</p><input type="number" placeholder="Ex: 3" />
-                <p>Abaixo</p><input type="number" placeholder="Ex: 4" />
+
+                <p class="sub-text-option">Acima:</p>
+                <input type="number" placeholder="Ex: 1" />
+                
+                <p class="sub-text-option">Esquerda:</p>
+                <input type="number" placeholder="Ex: 2" />
+                
+                <p class="sub-text-option">Direita:</p>
+                <input type="number" placeholder="Ex: 3" />
+                
+                <p class="sub-text-option">Abaixo:</p>
+                <input type="number" placeholder="Ex: 4" />
               </div>
-              <div class="property-zindex">
+
+              <div class="property zindex">
                 <div class="title-prop">
                   <p>Ordem (z-index)</p>
                   <i class="fa-solid fa-circle-question" title="Controla a sobreposição entre componentes. Quanto maior, mais acima fica."></i>
                 </div>
+
                 <input type="number" placeholder="Ex: 10" />
               </div>
             </div>
@@ -215,13 +260,17 @@
               <div class="parting">
                 <p>Animação e Transições</p>
               </div>
-              <div class="property-animation">
+
+              <div class="property animation">
                 <div class="title-prop">
                   <p>Transição</p>
                   <i class="fa-solid fa-circle-question" title="Configuração de transições animadas (ex: suavidade ao mudar de estado)."></i>
                 </div>
-                <p>Duração (s)</p><input type="number" placeholder="Ex: 3" />
-                <p>Tipo</p>
+
+                <p class="sub-text-option">Duração (s):</p>
+                <input type="number" placeholder="Ex: 0.3" />
+
+                <p class="sub-text-option">Tipo:</p>
                 <select>
                   <option value="ease">Ease</option>
                   <option value="linear">Linear</option>
@@ -236,11 +285,13 @@
               <div class="parting">
                 <p>Layout Flexível</p>
               </div>
-              <div class="property-display">
+
+              <div class="property display">
                 <div class="title-prop">
                   <p>Display</p>
                   <i class="fa-solid fa-circle-question" title="Define se o componente usará layout flexível."></i>
                 </div>
+
                 <select>
                   <option value="block" selected>Block</option>
                   <option value="inline-block">Inline Block</option>
@@ -249,11 +300,13 @@
                   <option value="none">None</option>
                 </select>
               </div>
-              <div class="property-flex-direction">
+
+              <div class="property flex-direction">
                 <div class="title-prop">
                   <p>Direção dos Itens</p>
                   <i class="fa-solid fa-circle-question" title="Define o eixo principal do layout flex."></i>
                 </div>
+                
                 <select>
                   <option value="row" selected>Horizontal (row)</option>
                   <option value="row-reverse">Horizontal reverso</option>
@@ -261,11 +314,13 @@
                   <option value="column-reverse">Vertical reverso</option>
                 </select>
               </div>
-              <div class="property-flex-justify">
+
+              <div class="property flex-justify">
                 <div class="title-prop">
                   <p>Alinhamento horizontal</p>
                   <i class="fa-solid fa-circle-question" title="Controla o espaçamento entre os itens."></i>
                 </div>
+
                 <select>
                   <option value="flex-start">Início</option>
                   <option value="center">Centro</option>
@@ -275,11 +330,13 @@
                   <option value="space-evenly">Espaço igual</option>
                 </select>
               </div>
-              <div class="property-flex-align">
+
+              <div class="property flex-align">
                 <div class="title-prop">
                   <p>Alinhamento vertical</p>
                   <i class="fa-solid fa-circle-question" title="Alinha os itens no eixo transversal."></i>
                 </div>
+
                 <select>
                   <option value="stretch">Esticar</option>
                   <option value="flex-start">Topo</option>
@@ -288,23 +345,27 @@
                   <option value="baseline">Linha base</option>
                 </select>
               </div>
-              <div class="property-flex-wrap">
+
+              <div class="property flex-wrap">
                 <div class="title-prop">
                   <p>Quebra de linha</p>
                   <i class="fa-solid fa-circle-question" title="Permite que os itens quebrem para a próxima linha."></i>
                 </div>
+
                 <select>
                   <option value="nowrap">Não quebrar</option>
                   <option value="wrap">Quebrar</option>
                   <option value="wrap-reverse">Quebrar reverso</option>
                 </select>
               </div>
-              <div class="property-flex-gap">
+
+              <div class="property flex-gap">
                 <div class="title-prop">
                   <p>Espaçamento entre os itens</p>
                   <i class="fa-solid fa-circle-question" title="Define o espaçamento entre os itens do container."></i>
                 </div>
-                <input type="number" placeholder="Ex: 10 (px)" />
+
+                <input type="number" placeholder="Ex: 10" />
               </div>
             </div>
           </div>
