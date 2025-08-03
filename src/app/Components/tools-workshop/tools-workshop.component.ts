@@ -57,7 +57,7 @@ export class ToolsWorkshopComponent {
     { text: 'Segurança', icon: 'fa-solid fa-shield-halved', component: null },
     { text: 'Scanner', icon: 'fa-solid fa-print', component: null },
     { text: 'Impressora', icon: 'fa-solid fa-print', component: null },
-    { text: 'Tempo', icon: 'fa-solid fa-cloud-sun', component: null },
+    { text: 'Texto', icon: 'fa-solid fa-font', component: null },
     { text: 'Pesquisa', icon: 'fa-solid fa-magnifying-glass', component: null },
     { text: 'Histórico', icon: 'fa-solid fa-clock-rotate-left', component: null },
     { text: 'Mensagens', icon: 'fa-solid fa-envelope', component: null },

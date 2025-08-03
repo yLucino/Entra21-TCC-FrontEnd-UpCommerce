@@ -6,7 +6,7 @@ import { CreateLayoutsComponent } from './Pages/create-layouts/create-layouts.co
 
 const routes: Routes = [
   { path: '', component: MainComponent },
-  { path:'Library', component: LibraryLayoutsComponent },
+  { path: 'Library', component: LibraryLayoutsComponent },
   { path: 'Workshop', component: CreateLayoutsComponent }
 ];
 

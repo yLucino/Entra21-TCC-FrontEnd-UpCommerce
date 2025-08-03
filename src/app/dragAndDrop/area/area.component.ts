@@ -4,7 +4,6 @@ import {
   EventEmitter,
   HostListener,
   Injector,
-  OnInit,
   Output,
   ViewChild,
   ViewContainerRef
@@ -16,19 +15,13 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
   templateUrl: './area.component.html',
   styleUrls: ['./area.component.css']
 })
-export class AreaComponent implements OnInit {
+export class AreaComponent {
   areaListId: string = '';
   @Output() hovering = new EventEmitter<boolean>();
   @Output() created = new EventEmitter<string>();
   @ViewChild('dropHost', { read: ViewContainerRef }) viewContainerRef!: ViewContainerRef;
-  
-  constructor(private injector: EnvironmentInjector) {}
 
-  ngOnInit(): void {
-    const uniqueId = Math.floor(Math.random() * 10000000);
-    this.areaListId = `areaList-${uniqueId}`;
-    this.created.emit(this.areaListId);
-  }
+  constructor(private injector: EnvironmentInjector) {}
 
   isHoveringOverArea = false;
   canEnterArea = () => !this.isHoveringOverArea;
@@ -44,14 +37,12 @@ export class AreaComponent implements OnInit {
       parent: this.injector
     });
 
-   const componentRef = this.viewContainerRef.createComponent(data.component, { injector });
+    const componentRef = this.viewContainerRef.createComponent(data.component, { injector });
 
     if (data.text === 'Área') {
       const instance = componentRef.instance as AreaComponent;
       instance.hovering.subscribe((hover: boolean) => this.isHoveringOverArea = hover);
-      instance.created.subscribe((id: string) => {
-        this.created.emit(id);
-      });
+      instance.created.subscribe((id: string) => this.created.emit(id));
     }
   }
 
@@ -61,5 +52,10 @@ export class AreaComponent implements OnInit {
 
   @HostListener('mouseleave') onLeave() {
     this.hovering.emit(false);
+  }
+
+  onUniqueIdCreated(id: string) {
+    this.areaListId = id;
+    this.created.emit(id);
   }
 }

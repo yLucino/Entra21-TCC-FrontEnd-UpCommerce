@@ -4,7 +4,10 @@
   [id]="areaListId"
   [cdkDropListEnterPredicate]="canEnterArea"
   [cdkDropListConnectedTo]="['toolsComponentList', 'toolsScreenList']"
-  (cdkDropListDropped)="drop($event)">
+  (cdkDropListDropped)="drop($event)"
+  appUniqueId
+  [nameTag]="'areaList'"
+  (uniqueIdCreated)="onUniqueIdCreated($event)">
   
   <ng-container #dropHost></ng-container>
 </div>

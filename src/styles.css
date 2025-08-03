@@ -108,7 +108,7 @@ ul li {
 html, body { height: 100%; }
 
 
-span {
+span.gradientText {
   background: var(--gradient-Light-LeftToRight);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

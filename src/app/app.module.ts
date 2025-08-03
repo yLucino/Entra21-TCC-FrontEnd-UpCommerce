@@ -34,6 +34,7 @@ import { SmartphoneScreenWorkshopComponent } from './Components/smartphone-scree
 import { PropertiesWorkshopComponent } from './Components/properties-workshop/properties-workshop.component';
 import { ButtonDragComponent } from './dragAndDrop/button-drag/button-drag.component';
 import { AreaComponent } from './dragAndDrop/area/area.component';
+import { UniqueIdDirective } from './directives/uniqueId-component.directive';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { AreaComponent } from './dragAndDrop/area/area.component';
     PropertiesWorkshopComponent,
     ButtonDragComponent,
     AreaComponent,
+    UniqueIdDirective,
   ],
   imports: [
     BrowserModule,
