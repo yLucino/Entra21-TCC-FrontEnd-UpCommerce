@@ -15,11 +15,20 @@ export class PropertiesWorkshopComponent {
   @Input() width!: number;
   @Input() height!: number;
 
+  @Input() marginLeft!: number;
+  @Input() marginTop!: number;
+  @Input() marginRight!: number;
+  @Input() marginBottom!: number;
+
+  @Input() paddingLeft!: number;
+  @Input() paddingTop!: number;
+  @Input() paddingRight!: number;
+  @Input() paddingBottom!: number;
+
   widthOption: string = 'auto';
   heightOption: string = 'auto';
 
   selectedElement: HTMLElement | null = null;
-  private lastSelectedElement: HTMLElement | null = null;
 
   constructor(private propertyService: PropertyService) {}
 
@@ -43,6 +52,16 @@ export class PropertiesWorkshopComponent {
         this.visibility = el.style.visibility !== 'hidden';
         this.width = el.offsetWidth;
         this.height = el.offsetHeight;
+
+        this.marginLeft = parseInt(getComputedStyle(el).marginLeft, 10);
+        this.marginTop = parseInt(getComputedStyle(el).marginTop, 10);
+        this.marginRight = parseInt(getComputedStyle(el).marginRight, 10);
+        this.marginBottom = parseInt(getComputedStyle(el).marginBottom, 10);
+
+        this.paddingLeft = parseInt(getComputedStyle(el).paddingLeft, 10);
+        this.paddingTop = parseInt(getComputedStyle(el).paddingTop, 10);
+        this.paddingRight = parseInt(getComputedStyle(el).paddingRight, 10);
+        this.paddingBottom = parseInt(getComputedStyle(el).paddingBottom, 10);
       }
     });
   }
