@@ -1,37 +1,17 @@
-import { Component, Inject, Optional } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-button-drag',
-  template: `
-    <ng-container [ngSwitch]="matType">
-      <button *ngSwitchCase="'mat-button'" mat-button>
-        {{ textBtn }}
-      </button>
-
-      <button *ngSwitchCase="'mat-raised-button'" mat-raised-button>
-        {{ textBtn }}
-      </button>
-
-      <button *ngSwitchCase="'mat-stroked-button'" mat-stroked-button>
-        {{ textBtn }}
-      </button>
-
-      <button *ngSwitchCase="'mat-flat-button'" mat-flat-button>
-        {{ textBtn }}
-      </button>
-
-      <button *ngSwitchDefault mat-button>
-        {{ textBtn }}
-      </button>
-    </ng-container>
-  `
+  templateUrl: './button-drag.component.html',
 })
 export class ButtonDragComponent {
-  constructor(
-    @Optional() @Inject('textBtn') public textBtn: string,
-    @Optional() @Inject('matType') public matType: string,
-  ) {
-    this.textBtn = this.textBtn || 'Botão';
-    this.matType = this.matType || 'mat-button';
+  btnDragId: string = '';
+  @Output() created = new EventEmitter<string>();
+  @Input() textBtn: string = 'Botão';
+  @Input() matType: string = 'mat-button';
+
+  onUniqueIdCreated(id: string) {
+    this.btnDragId = id;
+    this.created.emit(id);
   }
 }

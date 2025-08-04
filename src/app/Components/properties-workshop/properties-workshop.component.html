@@ -9,23 +9,22 @@
 
         <div class="info-component-box">
           <div class="infos">
-            <!-- Icon -->
-            <i class="fa-solid fa-map"></i>
-            <!-- Title -->
-            <p>Map-6</p>
+            <i [class]="icon"></i>
+            <p>{{title}}</p>
           </div>
 
           <div class="actions">
             <button class="mark-btn">
+              <!-- Função para desselecionar o component -->
               <i id="action-mark" class="fa-solid fa-expand"></i>
             </button>
 
-            <button class="info-btn" title="explicação do componente">
-              <!-- Fazer um title adaptativo para explicar oq cada component faz -->
+            <button class="info-btn" [title]="textPreviewComponent">
               <i id="action-info" class="fa-solid fa-circle-info"></i>
             </button>
 
             <button class="remove-btn">
+              <!-- Função para remover o component -->
               <i id="action-remove" class="fa-solid fa-trash-can"></i>
             </button>
           </div>
@@ -47,7 +46,7 @@
               </div>
 
               <label class="switch">
-                <input type="checkbox" checked>
+                <input type="checkbox" [checked]="visibility" [(ngModel)]="visibility" (input)="updateStyle('visibility', visibility ? 'hidden' : 'visible')">
                 <span class="slider"></span>
               </label>
             </div>
@@ -64,7 +63,13 @@
                   <i class="fa-solid fa-circle-question" title="Altura do componente em pixels."></i>
                 </div>
 
-                <input type="number" placeholder="Ex: 655" />
+                <select [(ngModel)]="heightOption" (change)="onOptionChange('height')">
+                  <option value="100%">Altura: 100%</option>
+                  <option value="auto">Altura: automática</option>
+                  <option value="custom">Altura: Personalizada</option>
+                </select>
+
+                <input style="margin-top: 10px;" *ngIf="heightOption === 'custom'" type="number" placeholder="Ex: 655" [(ngModel)]="height" (input)="updateStyle('height', height + 'px')"/>
               </div>
         
               <div class="property size-width">
@@ -73,7 +78,13 @@
                   <i class="fa-solid fa-circle-question" title="Largura do componente em pixels."></i>
                 </div>
 
-                <input type="number" placeholder="Ex: 320" />
+                <select [(ngModel)]="widthOption" (change)="onOptionChange('width')">
+                  <option value="100%">Largura: 100%</option>
+                  <option value="auto">Largura: automática</option>
+                  <option value="custom">Largura: Personalizada</option>
+                </select>
+
+                <input style="margin-top: 10px;" *ngIf="widthOption === 'custom'" type="number" placeholder="Ex: 320" [(ngModel)]="width" (input)="updateStyle('width', width + 'px')"/>
               </div>
             </div>
 

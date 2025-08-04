@@ -1,11 +1,8 @@
 .child-drop-zone {
-  width: 100%;
-  min-height: 100px;
-  max-height: auto;
+  width: auto;
+  height: auto;
   border: 2px dashed #ccc;
   border-radius: 4px;
   background-color: #f9f9f9;
   padding: 10px;  
-  z-index: 10;
-  transition: .2s;
 }

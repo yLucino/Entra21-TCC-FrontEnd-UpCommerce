@@ -7,25 +7,61 @@ import {
   Injector,
   ViewChild,
   ViewContainerRef,
+  OnInit
 } from '@angular/core';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { AreaComponent } from 'src/app/dragAndDrop/area/area.component';
+import { PropertyService } from 'src/app/services/property.service';
 
 @Component({
   selector: 'app-smartphone-screen-workshop',
   templateUrl: './smartphone-screen-workshop.component.html',
   styleUrls: ['./smartphone-screen-workshop.component.css']
 })
-export class SmartphoneScreenWorkshopComponent {
+export class SmartphoneScreenWorkshopComponent implements OnInit {
   @Input() connectedDropListId: string[] = [];
   @Output() areaCreated = new EventEmitter<string>();
 
   @ViewChild('dropHost', { read: ViewContainerRef }) viewContainerRef!: ViewContainerRef;
 
+  private lastSelectedElement: HTMLElement | null = null;
+
   isHoveringOverArea = false;
   canEnterSmartphone = () => !this.isHoveringOverArea;
 
-  constructor(private injector: EnvironmentInjector) {}
+  constructor(
+    private injector: EnvironmentInjector,
+    private propertyService: PropertyService
+  ) {}
+
+ngOnInit() {
+  this.propertyService.getSelectedElement().subscribe(el => {
+    if (el) {
+      // Remove wrapper anterior
+      if (this.lastSelectedElement) {
+        const parent = this.lastSelectedElement.parentElement;
+        if (parent?.classList.contains('selected-component')) {
+          const grandParent = parent.parentElement;
+          if (grandParent) {
+            grandParent.replaceChild(this.lastSelectedElement, parent);
+          }
+        }
+      }
+
+      const wrapper = document.createElement('div');
+      wrapper.classList.add('selected-component');
+      wrapper.style.width = el.offsetWidth + 'px';
+
+      const parent = el.parentElement;
+      if (parent) {
+        parent.replaceChild(wrapper, el);
+        wrapper.appendChild(el);
+      }
+
+      this.lastSelectedElement = el;
+    }
+  });
+}
 
   drop(event: CdkDragDrop<any[]>) {
     const data = event.previousContainer.data[event.previousIndex];
@@ -39,11 +75,21 @@ export class SmartphoneScreenWorkshopComponent {
     });
 
     const componentRef = this.viewContainerRef.createComponent(data.component, { injector });
+    const nativeElement = componentRef.location.nativeElement;
+
+    nativeElement.addEventListener('click', () => {
+      this.propertyService.setSelectedElement(nativeElement);
+    });
 
     if (data.text === 'Área') {
       const instance = componentRef.instance as AreaComponent;
       instance.hovering.subscribe((hover: boolean) => this.isHoveringOverArea = hover);
       instance.created.subscribe((id: string) => this.areaCreated.emit(id));
+    }
+
+    // Se o componente possuir um Output chamado "created", escuta o evento
+    if ((componentRef.instance as any).created instanceof EventEmitter) {
+      (componentRef.instance as any).created.subscribe();
     }
   }
 }
