@@ -83,7 +83,7 @@
   --font-REGULAR-H3-21: normal 21px "Poppins", sans-serif;
   --font-REGULAR-H4-16: normal 16px "Poppins", sans-serif;
   --font-REGULAR-P-14:  normal 14px "Poppins", sans-serif;
-    --font-REGULAR-P-13:  normal 13px "Poppins", sans-serif;
+  --font-REGULAR-P-13:  normal 13px "Poppins", sans-serif;
   --font-REGULAR-P-12:  normal 12px "Poppins", sans-serif;
   --font-REGULAR-P-10:  normal 10px "Poppins", sans-serif;
   --font-REGULAR-P-8:   normal 8px "Poppins", sans-serif;
@@ -141,3 +141,11 @@ p#textInfoSuccess.valid {
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* Selected Component CSS in SmartPhone CDK Table*/
+.selected-component {
+  outline: 2px solid var(--primary-009AEC) !important;
+  outline-offset: 1px !important;
+  border-radius: 4px !important;
+}
