@@ -12,7 +12,6 @@ export class PropertiesWorkshopComponent {
   @Input() icon!: string;
   @Input() textPreviewComponent!: string;
 
-  @Input() visibility!: boolean;
   @Input() width!: number;
   @Input() height!: number;
 
@@ -35,10 +34,17 @@ export class PropertiesWorkshopComponent {
   @Input() borderRadiusBottomLeft!: number;
   @Input() borderRadiusBottomRight!: number;
 
+  @Input() backgroundColor!: string;
+  @Input() color!: string;
+
   // Options for Component Change
   widthOption: string = 'auto';
   heightOption: string = 'auto';
+  backgroundColorOption: string = 'custom';
 
+  // Min/Max variables
+  maxWidth: number = 179;
+  maxHeight: number = 179;
 
   // Code 
   selectedElement: HTMLElement | null = null;
@@ -61,8 +67,20 @@ export class PropertiesWorkshopComponent {
           this.textPreviewComponent = found.description;
         }
 
+        // Propriedades HTML
+        const fatherComponent = el.parentElement?.parentElement!;
+        const rect = fatherComponent.getBoundingClientRect();
+        const styles = window.getComputedStyle(fatherComponent);
+
+        const paddingLeft = parseFloat(styles.paddingLeft);
+        const paddingRight = parseFloat(styles.paddingRight);
+        const paddingTop = parseFloat(styles.paddingTop);
+        const paddingBottom = parseFloat(styles.paddingBottom);
+
+        this.maxWidth = rect.width - paddingLeft - paddingRight;
+        this.maxHeight = rect.height - paddingTop - paddingBottom;
+
         // Propriedades CSS
-        this.visibility = el.style.visibility !== 'hidden';
         this.width = el.offsetWidth;
         this.height = el.offsetHeight;
 
@@ -77,13 +95,16 @@ export class PropertiesWorkshopComponent {
         this.paddingBottom = parseInt(getComputedStyle(el).paddingBottom, 10);
 
         this.borderSize = parseInt(getComputedStyle(el).borderWidth, 10);
-        this.borderColor = getComputedStyle(el).borderColor;
+        this.borderColor = this.rgbToHex(getComputedStyle(el).borderColor);
         this.borderType = getComputedStyle(el).borderStyle;
 
         this.borderRadiusTopLeft = parseInt(getComputedStyle(el).borderTopLeftRadius, 10);
         this.borderRadiusTopRight = parseInt(getComputedStyle(el).borderTopRightRadius, 10);
         this.borderRadiusBottomLeft = parseInt(getComputedStyle(el).borderBottomLeftRadius, 10);
         this.borderRadiusBottomRight = parseInt(getComputedStyle(el).borderBottomRightRadius, 10);
+
+        this.backgroundColor = this.rgbToHex(getComputedStyle(el).backgroundColor);
+        this.color = this.rgbToHex(getComputedStyle(el).color);
       }
     });
   }
@@ -91,21 +112,45 @@ export class PropertiesWorkshopComponent {
   updateStyle(property: string, value: any) {
     if (this.selectedElement) {
       this.selectedElement.style[property as any] = value;
+
+      const wrapper = this.selectedElement.parentElement;
+      if (property === 'width' || property === 'height') {
+        if (wrapper && wrapper.classList.contains('selected-component')) {
+          wrapper.style[property as any] = value;
+        }
+      }
     }
   }
 
   onOptionChange(type: string) {
-    if (this.widthOption === 'custom') {
-      this.updateStyle(type, this.width + 'px');
-    } else {
-      this.updateStyle(type, this.widthOption);
+    if (type === 'width') {
+      const value = this.widthOption !== 'custom' ? this.widthOption : this.width + 'px';
+      this.updateStyle('width', value);
     }
 
-    if (this.heightOption === 'custom') {
-      this.updateStyle(type, this.height + 'px');
-    } else {
-      this.updateStyle(type, this.heightOption);
+    if (type === 'height') {
+      const value = this.heightOption !== 'custom' ? this.heightOption : this.height + 'px' ;
+      this.updateStyle('height', value);
     }
+
+    if (type === 'background-color') {
+      const value = this.backgroundColorOption !== 'custom' ? this.backgroundColorOption : this.backgroundColor;
+      this.updateStyle(type, value);
+    }
+  }
+
+  rgbToHex(rgb: string): string {
+    const result = rgb.match(/\d+/g);
+    if (!result) return '#000000';
+    return (
+      '#' +
+      result
+        .map(x => {
+          const hex = parseInt(x).toString(16);
+          return hex.length === 1 ? '0' + hex : hex;
+        })
+        .join('')
+    );
   }
 }
 

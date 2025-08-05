@@ -39,18 +39,6 @@
           </div>
 
           <div class="properties-component">
-            <div class="visible-prop">
-              <div class="title-prop">
-                <p>Visível</p>
-                <i class="fa-solid fa-circle-question" title="Define se o componente estará visível ou oculto."></i>
-              </div>
-
-              <label class="switch">
-                <input type="checkbox" [checked]="visibility" [(ngModel)]="visibility" (input)="updateStyle('visibility', visibility ? 'hidden' : 'visible')">
-                <span class="slider"></span>
-              </label>
-            </div>
-
             <div class="size-prop">
               <hr>
               <div class="parting">
@@ -69,7 +57,7 @@
                   <option value="custom">Altura: Personalizada</option>
                 </select>
 
-                <input style="margin-top: 10px;" *ngIf="heightOption === 'custom'" type="number" placeholder="Ex: 655" [(ngModel)]="height" (input)="updateStyle('height', height + 'px')"/>
+                <input style="margin-top: 10px;" *ngIf="heightOption === 'custom'" type="number" placeholder="Ex: 655" min="0" [max]="maxHeight" [(ngModel)]="height" (input)="updateStyle('height', height + 'px')"/>
               </div>
         
               <div class="property size-width">
@@ -84,7 +72,7 @@
                   <option value="custom">Largura: Personalizada</option>
                 </select>
 
-                <input style="margin-top: 10px;" *ngIf="widthOption === 'custom'" type="number" placeholder="Ex: 320" [(ngModel)]="width" (input)="updateStyle('width', width + 'px')"/>
+                <input style="margin-top: 10px;" *ngIf="widthOption === 'custom'" type="number" placeholder="Ex: 320" min="0" [max]="maxWidth" [(ngModel)]="width" (input)="updateStyle('width', width + 'px')"/>
               </div>
             </div>
 
@@ -184,7 +172,14 @@
                   <i class="fa-solid fa-circle-question" title="Cor de fundo do componente."></i>
                 </div>
 
-                <input class="colorInput" type="color" />
+                <select [(ngModel)]="backgroundColorOption" (change)="onOptionChange('background-color')">
+                  <option value="transparent">Cor: Transparente/Nenhuma</option>
+                  <option value="#FFFFFF">Cor: Branco</option>
+                  <option value="#000000">Cor: Preto</option>
+                  <option value="custom">Cor: Personalizada</option>
+                </select>
+
+                <input style="margin-top: 10px;" *ngIf="backgroundColorOption === 'custom'" class="colorInput" type="color" [(ngModel)]="backgroundColor" (input)="updateStyle('background-color', backgroundColor)"/>
               </div>
         
               <div class="property appearance-color">
@@ -193,7 +188,7 @@
                   <i class="fa-solid fa-circle-question" title="Cor dos textos ou ícones do componente."></i>
                 </div>
 
-                <input class="colorInput" type="color" />
+                <input class="colorInput" type="color" [(ngModel)]="color" (input)="updateStyle('color', color)"/>
 
                 <p class="sub-text-option">Transparência:</p>
                 <input type="number" placeholder="Ex: 0.5" />
