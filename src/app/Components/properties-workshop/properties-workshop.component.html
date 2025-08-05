@@ -145,20 +145,37 @@
                 </div>
                 
                 <p class="sub-text-option">Tamanho:</p>
-                <input type="number" placeholder="Ex: 2" />
-                
-                <p class="sub-text-option">Curva de Canto:</p>
-                <input type="number" placeholder="Ex: 20" />
+                <input type="number" placeholder="Ex: 2" min="0" max="10" [(ngModel)]="borderSize" (input)="updateStyle('border-width', borderSize + 'px')"/>
                 
                 <p class="sub-text-option">Cor:</p>
-                <input class="colorInput" type="color"/>
+                <input class="colorInput" type="color" [(ngModel)]="borderColor" (input)="updateStyle('border-color', borderColor)"/>
                 
                 <p class="sub-text-option">Tipo:</p>
-                <select class="border-type">
+                <select class="border-type" [(ngModel)]="borderType" (change)="updateStyle('border-style', borderType)">
+                  <option value="none">Nenhuma</option>
                   <option value="solid">Sólida</option>
                   <option value="dashed">Tracejada</option>
                   <option value="dotted">Pontilhada</option>
                 </select>
+              </div>
+
+              <div class="property appearance-border-radius">
+                <div class="title-prop">
+                  <p>Curva de Canto</p>
+                  <i class="fa-solid fa-circle-question" title="Curvatura dos cantos do componente (Corner, Border Radius)."></i>
+                </div>
+
+                <p class="sub-text-option">Superior Esquerda:</p>
+                <input type="number" placeholder="Ex: 20" min="0" [(ngModel)]="borderRadiusTopLeft" (input)="updateStyle('border-top-left-radius', borderRadiusTopLeft + 'px')"/>
+
+                <p class="sub-text-option">Superior Direita:</p>
+                <input type="number" placeholder="Ex: 19" min="0" [(ngModel)]="borderRadiusTopRight" (input)="updateStyle('border-top-right-radius', borderRadiusTopRight + 'px')"/>
+
+                <p class="sub-text-option">Inferior Esquerda:</p>
+                <input type="number" placeholder="Ex: 18" min="0" [(ngModel)]="borderRadiusBottomLeft" (input)="updateStyle('border-bottom-left-radius', borderRadiusBottomLeft + 'px')"/>
+
+                <p class="sub-text-option">Inferiro Direita:</p>
+                <input type="number" placeholder="Ex: 17" min="0" [(ngModel)]="borderRadiusBottomRight" (input)="updateStyle('border-bottom-right-radius', borderRadiusBottomRight + 'px')"/>
               </div>
 
               <div class="property appearance-background">
