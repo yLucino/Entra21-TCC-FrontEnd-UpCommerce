@@ -37,10 +37,36 @@ export class PropertiesWorkshopComponent {
   @Input() backgroundColor!: string;
   @Input() color!: string;
 
+  @Input() fontFamily!: string;
+  @Input() textContent!: string;
+  @Input() fontSize!: number;
+  @Input() fontWeight!: string;
+  @Input() textAlign!: string;
+
+  @Input() opacity!: number;
+
+  @Input() shadowX: number = 0;
+  @Input() shadowY: number = 0;
+  @Input() shadowBlur: number  = 0;
+  @Input() shadowColor: string = '#000000';
+
+  @Input() position!: string;
+  @Input() top!: number;
+  @Input() left!: number;
+  @Input() right!: number;
+  @Input() bottom!: number;
+
+  @Input() zIndex!: number;
+
   // Options for Component Change
   widthOption: string = 'auto';
   heightOption: string = 'auto';
   backgroundColorOption: string = 'custom';
+  boxShadowOption: string = 'none';
+  topOption: string = 'auto';
+  leftOption: string = 'auto';
+  rightOption: string = 'auto';
+  bottomOption: string = 'auto';
 
   // Min/Max variables
   maxWidth: number = 179;
@@ -105,12 +131,32 @@ export class PropertiesWorkshopComponent {
 
         this.backgroundColor = this.rgbToHex(getComputedStyle(el).backgroundColor);
         this.color = this.rgbToHex(getComputedStyle(el).color);
+
+        this.fontFamily = getComputedStyle(el).fontFamily;
+        this.textContent = el.textContent || '';
+        this.fontSize = parseInt(getComputedStyle(el).fontSize, 10);
+        this.fontWeight = getComputedStyle(el).fontWeight;
+        this.textAlign = getComputedStyle(el).textAlign;
+
+        this.opacity = parseFloat(getComputedStyle(el).opacity);
+
+        this.position = getComputedStyle(el).position;
+        this.top = parseInt(getComputedStyle(el).top, 10);
+        this.left = parseInt(getComputedStyle(el).left, 10);
+        this.right = parseInt(getComputedStyle(el).right, 10);
+        this.bottom = parseInt(getComputedStyle(el).bottom, 10);
+
+        this.zIndex = parseInt(getComputedStyle(el).zIndex, 10);
       }
     });
   }
 
   updateStyle(property: string, value: any) {
     if (this.selectedElement) {
+      if (property === 'font-size' && typeof value === 'number') {
+        value = `${value}px`;
+      }
+      
       this.selectedElement.style[property as any] = value;
 
       const wrapper = this.selectedElement.parentElement;
@@ -122,20 +168,75 @@ export class PropertiesWorkshopComponent {
     }
   }
 
+  updateText(text: string) {
+    if (this.selectedElement) {
+      this.selectedElement.textContent = text;
+    }
+  }
+
+  updateBoxShadow(shadowX: number, shadowY: number, shadowBlur: number, shadowColor: string) {
+    if (this.selectedElement) {
+      this.shadowX = shadowX;
+      this.shadowY = shadowY;
+      this.shadowBlur = shadowBlur;
+      this.shadowColor = shadowColor;
+
+      const boxShadow = `${this.shadowX}px ${this.shadowY}px ${this.shadowBlur}px ${this.shadowColor}`;
+      this.selectedElement.style.boxShadow = boxShadow;
+    }
+  }
+
   onOptionChange(type: string) {
-    if (type === 'width') {
-      const value = this.widthOption !== 'custom' ? this.widthOption : this.width + 'px';
-      this.updateStyle('width', value);
-    }
+    let value: any;
 
-    if (type === 'height') {
-      const value = this.heightOption !== 'custom' ? this.heightOption : this.height + 'px' ;
-      this.updateStyle('height', value);
-    }
+    switch (type) {
+      case 'width':
+        value = this.widthOption !== 'custom' ? this.widthOption : this.width + 'px';
+        this.updateStyle('width', value);
+        break;
 
-    if (type === 'background-color') {
-      const value = this.backgroundColorOption !== 'custom' ? this.backgroundColorOption : this.backgroundColor;
-      this.updateStyle(type, value);
+      case 'height':
+        value = this.heightOption !== 'custom' ? this.heightOption : this.height + 'px';
+        this.updateStyle('height', value);
+        break;
+
+      case 'background-color':
+        value = this.backgroundColorOption !== 'custom' ? this.backgroundColorOption : this.backgroundColor;
+        this.updateStyle('background-color', value);
+        break;
+
+      case 'box-shadow':
+        if (this.boxShadowOption !== 'custom') {
+          this.updateStyle('box-shadow', this.boxShadowOption);
+          console.log(this.boxShadowOption);
+        } else {
+          this.updateBoxShadow(this.shadowX, this.shadowY, this.shadowBlur, this.shadowColor);
+        }
+        break;
+
+      case 'top':
+        value = this.topOption !== 'custom' ? this.topOption : this.top;
+        this.updateStyle('top', value);
+        break;
+
+      case 'left':
+        value = this.leftOption !== 'custom' ? this.leftOption : this.left;
+        this.updateStyle('left', value);
+        break;
+
+      case 'right':
+        value = this.rightOption !== 'custom' ? this.rightOption : this.right;
+        this.updateStyle('right', value);
+        break;
+
+      case 'bottom':
+        value = this.bottomOption !== 'custom' ? this.bottomOption : this.bottom;
+        this.updateStyle('bottom', value);
+        break;
+
+      default:
+        console.warn(`Unhandled option type: ${type}`);
+        break;
     }
   }
 
