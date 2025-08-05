@@ -65,7 +65,7 @@
 
                 <select [(ngModel)]="heightOption" (change)="onOptionChange('height')">
                   <option value="100%">Altura: 100%</option>
-                  <option value="auto">Altura: automática</option>
+                  <option value="auto">Altura: Automática</option>
                   <option value="custom">Altura: Personalizada</option>
                 </select>
 
@@ -80,7 +80,7 @@
 
                 <select [(ngModel)]="widthOption" (change)="onOptionChange('width')">
                   <option value="100%">Largura: 100%</option>
-                  <option value="auto">Largura: automática</option>
+                  <option value="auto">Largura: Automática</option>
                   <option value="custom">Largura: Personalizada</option>
                 </select>
 
@@ -100,7 +100,17 @@
                   <i class="fa-solid fa-circle-question" title="Espaço externo (margem) ao redor do componente."></i>
                 </div>
 
-                <input type="number" placeholder="Ex: 10" />
+                <p class="sub-text-option">Acima:</p>
+                <input type="number" placeholder="Ex: 10" [(ngModel)]="marginTop" (input)="updateStyle('margin-top', marginTop + 'px')"/>
+                
+                <p class="sub-text-option">Esquerda:</p>
+                <input type="number" placeholder="Ex: 9" [(ngModel)]="marginLeft" (input)="updateStyle('margin-left', marginLeft + 'px')"/>
+
+                <p class="sub-text-option">Direita:</p>
+                <input type="number" placeholder="Ex: 8" [(ngModel)]="marginRight" (input)="updateStyle('margin-right', marginRight + 'px')"/>
+
+                <p class="sub-text-option">Abaixo:</p>
+                <input type="number" placeholder="Ex: 7" [(ngModel)]="marginBottom" (input)="updateStyle('margin-bottom', marginBottom + 'px')"/>
               </div>
 
               <div class="property spacing-padding">
@@ -109,7 +119,17 @@
                   <i class="fa-solid fa-circle-question" title="Espaço interno (padding) dentro do componente."></i>
                 </div>
 
-                <input type="number" placeholder="Ex: 15" />
+                <p class="sub-text-option">Acima:</p>
+                <input type="number" placeholder="Ex: 15" [(ngModel)]="paddingTop" (input)="updateStyle('padding-top', paddingTop + 'px')"/>
+                
+                <p class="sub-text-option">Esquerda:</p>
+                <input type="number" placeholder="Ex: 15" [(ngModel)]="paddingLeft" (input)="updateStyle('padding-left', paddingLeft + 'px')"/>
+
+                <p class="sub-text-option">Direita:</p>
+                <input type="number" placeholder="Ex: 15" [(ngModel)]="paddingRight" (input)="updateStyle('padding-right', paddingRight + 'px')"/>
+
+                <p class="sub-text-option">Abaixo:</p>
+                <input type="number" placeholder="Ex: 15" [(ngModel)]="paddingBottom" (input)="updateStyle('padding-bottom', paddingBottom + 'px')"/>
               </div>
             </div>
 
@@ -125,20 +145,37 @@
                 </div>
                 
                 <p class="sub-text-option">Tamanho:</p>
-                <input type="number" placeholder="Ex: 2" />
-                
-                <p class="sub-text-option">Curva de Canto:</p>
-                <input type="number" placeholder="Ex: 20" />
+                <input type="number" placeholder="Ex: 2" min="0" max="10" [(ngModel)]="borderSize" (input)="updateStyle('border-width', borderSize + 'px')"/>
                 
                 <p class="sub-text-option">Cor:</p>
-                <input class="colorInput" type="color"/>
+                <input class="colorInput" type="color" [(ngModel)]="borderColor" (input)="updateStyle('border-color', borderColor)"/>
                 
                 <p class="sub-text-option">Tipo:</p>
-                <select class="border-type">
+                <select class="border-type" [(ngModel)]="borderType" (change)="updateStyle('border-style', borderType)">
+                  <option value="none">Nenhuma</option>
                   <option value="solid">Sólida</option>
                   <option value="dashed">Tracejada</option>
                   <option value="dotted">Pontilhada</option>
                 </select>
+              </div>
+
+              <div class="property appearance-border-radius">
+                <div class="title-prop">
+                  <p>Curva de Canto</p>
+                  <i class="fa-solid fa-circle-question" title="Curvatura dos cantos do componente (Corner, Border Radius)."></i>
+                </div>
+
+                <p class="sub-text-option">Superior Esquerda:</p>
+                <input type="number" placeholder="Ex: 20" min="0" [(ngModel)]="borderRadiusTopLeft" (input)="updateStyle('border-top-left-radius', borderRadiusTopLeft + 'px')"/>
+
+                <p class="sub-text-option">Superior Direita:</p>
+                <input type="number" placeholder="Ex: 19" min="0" [(ngModel)]="borderRadiusTopRight" (input)="updateStyle('border-top-right-radius', borderRadiusTopRight + 'px')"/>
+
+                <p class="sub-text-option">Inferior Esquerda:</p>
+                <input type="number" placeholder="Ex: 18" min="0" [(ngModel)]="borderRadiusBottomLeft" (input)="updateStyle('border-bottom-left-radius', borderRadiusBottomLeft + 'px')"/>
+
+                <p class="sub-text-option">Inferiro Direita:</p>
+                <input type="number" placeholder="Ex: 17" min="0" [(ngModel)]="borderRadiusBottomRight" (input)="updateStyle('border-bottom-right-radius', borderRadiusBottomRight + 'px')"/>
               </div>
 
               <div class="property appearance-background">
