@@ -58,6 +58,15 @@ export class PropertiesWorkshopComponent {
 
   @Input() zIndex!: number;
 
+  @Input() hoverScale!: string;
+  @Input() hoverBorderRadius!: number;
+  @Input() hoverShadowX: number = 0;
+  @Input() hoverShadowY: number = 0;
+  @Input() hoverShadowBlur: number  = 0;
+  @Input() hoverShadowColor: string = '#000000';
+
+  @Input() cursor!: string;
+
   // Options for Component Change
   widthOption: string = 'auto';
   heightOption: string = 'auto';
@@ -67,6 +76,10 @@ export class PropertiesWorkshopComponent {
   leftOption: string = 'auto';
   rightOption: string = 'auto';
   bottomOption: string = 'auto';
+  animationOption: string = 'none';
+  hoverBackgroundColorOption: string = 'custom';
+  hoverBoxShadowOption: string = 'none';
+
 
   // Min/Max variables
   maxWidth: number = 179;
@@ -81,6 +94,7 @@ export class PropertiesWorkshopComponent {
     this.propertyService.getSelectedElement().subscribe(el => {
       if (el) {
         this.selectedElement = el;
+        this.resetProperties();
 
         const nameTag = el.getAttribute('ng-reflect-name-tag');
         const foundInComponents = this.propertyService.components.find(c => c.nameTag === nameTag);
@@ -107,46 +121,7 @@ export class PropertiesWorkshopComponent {
         this.maxHeight = rect.height - paddingTop - paddingBottom;
 
         // Propriedades CSS
-        this.width = el.offsetWidth;
-        this.height = el.offsetHeight;
-
-        this.marginLeft = parseInt(getComputedStyle(el).marginLeft, 10);
-        this.marginTop = parseInt(getComputedStyle(el).marginTop, 10);
-        this.marginRight = parseInt(getComputedStyle(el).marginRight, 10);
-        this.marginBottom = parseInt(getComputedStyle(el).marginBottom, 10);
-
-        this.paddingLeft = parseInt(getComputedStyle(el).paddingLeft, 10);
-        this.paddingTop = parseInt(getComputedStyle(el).paddingTop, 10);
-        this.paddingRight = parseInt(getComputedStyle(el).paddingRight, 10);
-        this.paddingBottom = parseInt(getComputedStyle(el).paddingBottom, 10);
-
-        this.borderSize = parseInt(getComputedStyle(el).borderWidth, 10);
-        this.borderColor = this.rgbToHex(getComputedStyle(el).borderColor);
-        this.borderType = getComputedStyle(el).borderStyle;
-
-        this.borderRadiusTopLeft = parseInt(getComputedStyle(el).borderTopLeftRadius, 10);
-        this.borderRadiusTopRight = parseInt(getComputedStyle(el).borderTopRightRadius, 10);
-        this.borderRadiusBottomLeft = parseInt(getComputedStyle(el).borderBottomLeftRadius, 10);
-        this.borderRadiusBottomRight = parseInt(getComputedStyle(el).borderBottomRightRadius, 10);
-
-        this.backgroundColor = this.rgbToHex(getComputedStyle(el).backgroundColor);
-        this.color = this.rgbToHex(getComputedStyle(el).color);
-
-        this.fontFamily = getComputedStyle(el).fontFamily;
-        this.textContent = el.textContent || '';
-        this.fontSize = parseInt(getComputedStyle(el).fontSize, 10);
-        this.fontWeight = getComputedStyle(el).fontWeight;
-        this.textAlign = getComputedStyle(el).textAlign;
-
-        this.opacity = parseFloat(getComputedStyle(el).opacity);
-
-        this.position = getComputedStyle(el).position;
-        this.top = parseInt(getComputedStyle(el).top, 10);
-        this.left = parseInt(getComputedStyle(el).left, 10);
-        this.right = parseInt(getComputedStyle(el).right, 10);
-        this.bottom = parseInt(getComputedStyle(el).bottom, 10);
-
-        this.zIndex = parseInt(getComputedStyle(el).zIndex, 10);
+        this.loadStylesFromElement(el)
       }
     });
   }
@@ -170,19 +145,84 @@ export class PropertiesWorkshopComponent {
 
   updateText(text: string) {
     if (this.selectedElement) {
-      this.selectedElement.textContent = text;
+        this.selectedElement.textContent = text;
+      }
     }
+
+  updateHoverStyle(property: string, value: string) {
+    if (!this.selectedElement) return;
+
+    const hoverClass = `hover-style-${this.selectedElement.id}`;
+    this.selectedElement.classList.add(hoverClass);
+
+    let styleEl = document.getElementById('dynamic-hover-style') as HTMLStyleElement;
+    if (!styleEl) {
+      styleEl = document.createElement('style');
+      styleEl.id = 'dynamic-hover-style';
+      document.head.appendChild(styleEl);
+    }
+
+    const sheet = styleEl.sheet as CSSStyleSheet;
+    const selector = `.${hoverClass}:hover`;
+    let ruleIndex = -1;
+    let existingStyles: Record<string, string> = {};
+
+    // Busca a regra já existente no CSS
+    for (let i = 0; i < sheet.cssRules.length; i++) {
+      const rule = sheet.cssRules[i] as CSSStyleRule;
+      if (rule.selectorText === selector) {
+        ruleIndex = i;
+
+        // Coleta propriedades existentes corretamente (mesmo com !important)
+        const declarations = rule.style;
+        for (let j = 0; j < declarations.length; j++) {
+          const prop = declarations[j];
+          const val = declarations.getPropertyValue(prop).trim();
+          existingStyles[prop] = val.replace('!important', '').trim();
+        }
+
+        break;
+      }
+    }
+
+    // Atualiza/insere a nova propriedade com !important
+    existingStyles[property] = value;
+
+    const newStyleText = Object.entries(existingStyles)
+      .map(([k, v]) => `${k}: ${v} !important`)
+      .join('; ');
+
+    // Atualiza regra
+    if (ruleIndex >= 0) {
+      sheet.deleteRule(ruleIndex);
+    }
+
+    sheet.insertRule(`${selector} { ${newStyleText}; }`, sheet.cssRules.length);
   }
 
-  updateBoxShadow(shadowX: number, shadowY: number, shadowBlur: number, shadowColor: string) {
+  updateBoxShadow(type: string, shadowX: number, shadowY: number, shadowBlur: number, shadowColor: string) {
     if (this.selectedElement) {
-      this.shadowX = shadowX;
-      this.shadowY = shadowY;
-      this.shadowBlur = shadowBlur;
-      this.shadowColor = shadowColor;
+      if (type === 'css') {
+        this.shadowX = shadowX;
+        this.shadowY = shadowY;
+        this.shadowBlur = shadowBlur;
+        this.shadowColor = shadowColor;
+  
+        const boxShadow = `${this.shadowX}px ${this.shadowY}px ${this.shadowBlur}px ${this.shadowColor}`;
+        this.selectedElement.style.boxShadow = boxShadow;
+      } else if (type === 'hover') {
+        this.hoverShadowX = shadowX;
+        this.hoverShadowY = shadowY;
+        this.hoverShadowBlur = shadowBlur;
+        this.hoverShadowColor = shadowColor;
 
-      const boxShadow = `${this.shadowX}px ${this.shadowY}px ${this.shadowBlur}px ${this.shadowColor}`;
-      this.selectedElement.style.boxShadow = boxShadow;
+        const boxShadow = `${this.shadowX}px ${this.shadowY}px ${this.shadowBlur}px ${this.shadowColor}`;
+        this.updateHoverStyle('box-shadow', boxShadow);
+      } else if (type === 'hoverSelect') {
+
+        const boxShadow = shadowColor;
+        this.updateHoverStyle('box-shadow', boxShadow);
+      }
     }
   }
 
@@ -204,13 +244,20 @@ export class PropertiesWorkshopComponent {
         value = this.backgroundColorOption !== 'custom' ? this.backgroundColorOption : this.backgroundColor;
         this.updateStyle('background-color', value);
         break;
-
+      
       case 'box-shadow':
         if (this.boxShadowOption !== 'custom') {
           this.updateStyle('box-shadow', this.boxShadowOption);
-          console.log(this.boxShadowOption);
         } else {
-          this.updateBoxShadow(this.shadowX, this.shadowY, this.shadowBlur, this.shadowColor);
+          this.updateBoxShadow('css', this.shadowX, this.shadowY, this.shadowBlur, this.shadowColor);
+        }
+        break;
+      
+      case 'hover-box-shadow':
+        if (this.hoverBoxShadowOption !== 'custom') {
+          this.updateBoxShadow('hoverSelect', 0, 0, 0, this.hoverBoxShadowOption);
+        } else {
+          this.updateBoxShadow('hover', this.hoverShadowX, this.hoverShadowY, this.hoverShadowBlur, this.hoverShadowColor);
         }
         break;
 
@@ -233,7 +280,7 @@ export class PropertiesWorkshopComponent {
         value = this.bottomOption !== 'custom' ? this.bottomOption : this.bottom;
         this.updateStyle('bottom', value);
         break;
-
+      
       default:
         console.warn(`Unhandled option type: ${type}`);
         break;
@@ -252,6 +299,139 @@ export class PropertiesWorkshopComponent {
         })
         .join('')
     );
+  }
+
+  resetProperties() {
+    this.title = '';
+    this.icon = '';
+    this.textPreviewComponent = '';
+
+    this.width = 0;
+    this.height = 0;
+
+    this.marginLeft = 0;
+    this.marginTop = 0;
+    this.marginRight = 0;
+    this.marginBottom = 0;
+
+    this.paddingLeft = 0;
+    this.paddingTop = 0;
+    this.paddingRight = 0;
+    this.paddingBottom = 0;
+
+    this.borderSize = 0;
+    this.borderColor = '#000000';
+    this.borderType = 'solid';
+
+    this.borderRadiusTopLeft = 0;
+    this.borderRadiusTopRight = 0;
+    this.borderRadiusBottomLeft = 0;
+    this.borderRadiusBottomRight = 0;
+
+    this.backgroundColor = '#FFFFFF';
+    this.color = '#000000';
+
+    this.fontFamily = 'Arial, sans-serif';
+    this.textContent = '';
+    this.fontSize = 16;
+    this.fontWeight = '400';
+    this.textAlign = 'left';
+
+    this.opacity = 1;
+
+    this.shadowX = 0;
+    this.shadowY = 0;
+    this.shadowBlur = 0;
+    this.shadowColor = '#000000';
+
+    this.position = 'static';
+    this.top = 0;
+    this.left = 0;
+    this.right = 0;
+    this.bottom = 0;
+
+    this.zIndex = 1;
+
+    this.hoverScale = '1';
+    this.hoverBorderRadius = 0;
+    this.hoverShadowX = 0;
+    this.hoverShadowY = 0;
+    this.hoverShadowBlur = 0;
+    this.hoverShadowColor = '#000000';
+
+    // Options
+    this.widthOption = 'auto';
+    this.heightOption = 'auto';
+    this.backgroundColorOption = 'custom';
+    this.boxShadowOption = 'none';
+    this.topOption = 'auto';
+    this.leftOption = 'auto';
+    this.rightOption = 'auto';
+    this.bottomOption = 'auto';
+    this.animationOption = 'none';
+    this.hoverBackgroundColorOption = 'custom';
+    this.hoverBoxShadowOption = 'none';
+    this.cursor = 'auto';
+
+    // Limites
+    this.maxWidth = 179;
+    this.maxHeight = 179;
+  }
+
+  loadStylesFromElement(el: HTMLElement) {
+    const computed = getComputedStyle(el);
+
+    // Dimensões e box model
+    this.width = el.offsetWidth;
+    this.height = el.offsetHeight;
+
+    this.marginLeft = parseInt(computed.marginLeft, 10);
+    this.marginTop = parseInt(computed.marginTop, 10);
+    this.marginRight = parseInt(computed.marginRight, 10);
+    this.marginBottom = parseInt(computed.marginBottom, 10);
+
+    this.paddingLeft = parseInt(computed.paddingLeft, 10);
+    this.paddingTop = parseInt(computed.paddingTop, 10);
+    this.paddingRight = parseInt(computed.paddingRight, 10);
+    this.paddingBottom = parseInt(computed.paddingBottom, 10);
+
+    // Borda
+    this.borderSize = parseInt(computed.borderWidth, 10);
+    this.borderType = computed.borderStyle;
+
+    this.borderRadiusTopLeft = parseInt(computed.borderTopLeftRadius, 10);
+    this.borderRadiusTopRight = parseInt(computed.borderTopRightRadius, 10);
+    this.borderRadiusBottomLeft = parseInt(computed.borderBottomLeftRadius, 10);
+    this.borderRadiusBottomRight = parseInt(computed.borderBottomRightRadius, 10);
+
+    // Cores e fonte
+    this.fontFamily = computed.fontFamily;
+    this.textContent = el.textContent || '';
+    this.fontSize = parseInt(computed.fontSize, 10);
+    this.fontWeight = computed.fontWeight;
+    this.textAlign = computed.textAlign;
+    this.opacity = parseFloat(computed.opacity);
+
+    // Posição
+    this.position = computed.position;
+    this.topOption = computed.top !== 'auto' ? 'custom' : 'auto';
+    this.leftOption = computed.left !== 'auto' ? 'custom' : 'auto';
+    this.rightOption = computed.right !== 'auto' ? 'custom' : 'auto';
+    this.bottomOption = computed.bottom !== 'auto' ? 'custom' : 'auto';
+
+    this.top = computed.top !== 'auto' ? parseInt(computed.top, 10) : 0;
+    this.left = computed.left !== 'auto' ? parseInt(computed.left, 10) : 0;
+    this.right = computed.right !== 'auto' ? parseInt(computed.right, 10) : 0;
+    this.bottom = computed.bottom !== 'auto' ? parseInt(computed.bottom, 10) : 0;
+
+    this.zIndex = parseInt(computed.zIndex, 10);
+
+    // Cursor
+    this.cursor = computed.cursor;
+
+    this.color = this.rgbToHex(computed.color);
+    this.backgroundColor = this.rgbToHex(computed.backgroundColor);
+    this.borderColor = this.rgbToHex(computed.borderColor);
   }
 }
 

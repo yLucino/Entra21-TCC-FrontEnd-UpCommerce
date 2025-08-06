@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 export class HeaderWorkshopComponent {
   @Input() currentMenu: number = 0;
   hidden = false;
-  icon = 'fa-arrow-left';
+  icon = 'fa-arrow-right';
 
   toggleHeaderHidden() {
     this.hidden = !this.hidden;
