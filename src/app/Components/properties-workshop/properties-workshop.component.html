@@ -467,7 +467,7 @@
                   <i class="fa-solid fa-circle-question" title="Define se o componente usará layout flexível."></i>
                 </div>
 
-                <select>
+                <select [(ngModel)]="display" (change)="updateStyle('display', display)">
                   <option value="block" selected>Block</option>
                   <option value="inline-block">Inline Block</option>
                   <option value="flex">Flex</option>
@@ -482,7 +482,7 @@
                   <i class="fa-solid fa-circle-question" title="Define o eixo principal do layout flex."></i>
                 </div>
                 
-                <select>
+                <select [(ngModel)]="flexDirection" (change)="updateStyle('flex-direction', flexDirection)">
                   <option value="row" selected>Horizontal (row)</option>
                   <option value="row-reverse">Horizontal reverso</option>
                   <option value="column">Vertical (column)</option>
@@ -496,7 +496,7 @@
                   <i class="fa-solid fa-circle-question" title="Controla o espaçamento entre os itens."></i>
                 </div>
 
-                <select>
+                <select [(ngModel)]="flexJustify" (change)="updateStyle('justify-content', flexJustify)">
                   <option value="flex-start">Início</option>
                   <option value="center">Centro</option>
                   <option value="flex-end">Fim</option>
@@ -506,13 +506,28 @@
                 </select>
               </div>
 
+              <div class="property flex-align-items">
+                <div class="title-prop">
+                  <p>Alinhamento dos Itens</p>
+                  <i class="fa-solid fa-circle-question" title="Alinha verticalmente os itens dentro da linha atual."></i>
+                </div>
+
+                <select [(ngModel)]="flexAlignItems" (change)="updateStyle('align-items', flexAlignItems)">
+                  <option value="stretch">Esticar</option>
+                  <option value="flex-start">Topo</option>
+                  <option value="center">Centro</option>
+                  <option value="flex-end">Base</option>
+                  <option value="baseline">Linha base</option>
+                </select>
+              </div>
+
               <div class="property flex-align">
                 <div class="title-prop">
                   <p>Alinhamento vertical</p>
                   <i class="fa-solid fa-circle-question" title="Alinha os itens no eixo transversal."></i>
                 </div>
 
-                <select>
+                <select [(ngModel)]="flexAlign" (change)="updateStyle('align-content', flexAlign)">
                   <option value="stretch">Esticar</option>
                   <option value="flex-start">Topo</option>
                   <option value="center">Centro</option>
@@ -527,7 +542,7 @@
                   <i class="fa-solid fa-circle-question" title="Permite que os itens quebrem para a próxima linha."></i>
                 </div>
 
-                <select>
+                <select [(ngModel)]="flexWrap" (change)="updateStyle('flex-wrap', flexWrap)">
                   <option value="nowrap">Não quebrar</option>
                   <option value="wrap">Quebrar</option>
                   <option value="wrap-reverse">Quebrar reverso</option>
@@ -540,7 +555,22 @@
                   <i class="fa-solid fa-circle-question" title="Define o espaçamento entre os itens do container."></i>
                 </div>
 
-                <input type="number" placeholder="Ex: 10" />
+                <input type="number" placeholder="Ex: 10" [(ngModel)]="flexGap" (input)="updateStyle('gap', flexGap + 'px')"/>
+              </div>
+
+              <div class="property flex-align-self">
+                <div class="title-prop">
+                  <p>Alinhamento Individual</p>
+                  <i class="fa-solid fa-circle-question" title="Sobrescreve o alinhamento vertical para este item específico."></i>
+                </div>
+                <select [(ngModel)]="alignSelf" (change)="updateStyle('align-self', alignSelf)">
+                  <option value="auto">Auto</option>
+                  <option value="flex-start">Topo</option>
+                  <option value="center">Centro</option>
+                  <option value="flex-end">Base</option>
+                  <option value="stretch">Esticar</option>
+                  <option value="baseline">Linha base</option>
+                </select>
               </div>
             </div>
           </div>

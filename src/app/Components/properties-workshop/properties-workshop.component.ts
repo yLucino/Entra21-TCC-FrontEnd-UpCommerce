@@ -67,6 +67,15 @@ export class PropertiesWorkshopComponent {
 
   @Input() cursor!: string;
 
+  @Input() display!: string;
+  @Input() flexDirection!: string;
+  @Input() flexJustify!: string;
+  @Input() flexAlign!: string;
+  @Input() flexWrap!: string;
+  @Input() flexGap!: number;
+  @Input() flexAlignItems!: string;
+  @Input() alignSelf!: string;
+
   // Options for Component Change
   widthOption: string = 'auto';
   heightOption: string = 'auto';
@@ -376,6 +385,15 @@ export class PropertiesWorkshopComponent {
     // Limites
     this.maxWidth = 179;
     this.maxHeight = 179;
+
+    this.display = 'block';
+    this.flexDirection = 'row';
+    this.flexJustify = 'flex-start';
+    this.flexAlign = 'flex-start';
+    this.flexWrap = 'nowrap';
+    this.flexGap = 0;
+    this.flexAlignItems = 'flex-start';
+    this.alignSelf = 'auto';
   }
 
   loadStylesFromElement(el: HTMLElement) {
@@ -432,6 +450,15 @@ export class PropertiesWorkshopComponent {
     this.color = this.rgbToHex(computed.color);
     this.backgroundColor = this.rgbToHex(computed.backgroundColor);
     this.borderColor = this.rgbToHex(computed.borderColor);
+
+    this.display = computed.display;
+    this.flexDirection = computed.flexDirection;
+    this.flexJustify = computed.justifyContent;
+    this.flexAlign = computed.alignContent;
+    this.flexWrap = computed.flexWrap;
+    this.flexGap = parseInt(computed.gap, 10);
+    this.flexAlignItems = computed.alignItems
+    this.alignSelf = computed.alignSelf;
   }
 }
 
