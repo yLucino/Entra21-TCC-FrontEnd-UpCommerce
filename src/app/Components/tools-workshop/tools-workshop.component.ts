@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { AreaComponent } from 'src/app/dragAndDrop/area/area.component';
 
 import { ButtonDragComponent } from 'src/app/dragAndDrop/button-drag/button-drag.component';
+import { TextComponent } from 'src/app/dragAndDrop/text/text.component';
 import { ComponentDragDrop } from 'src/app/interfaces/component.dragdrop.interface';
 import { PropertyService } from 'src/app/services/property.service';
 
@@ -65,7 +66,7 @@ export class ToolsWorkshopComponent {
     { text: 'Segurança', icon: 'fa-solid fa-shield-halved', nameTag: 'securityComponent', description: 'Funcionalidades de autenticação ou proteção de dados.', component: null },
     { text: 'Scanner', icon: 'fa-solid fa-print', nameTag: 'scannerComponent', description: 'Permite escanear documentos ou imagens.', component: null },
     { text: 'Impressora', icon: 'fa-solid fa-print', nameTag: 'printComponent', description: 'Componente para envio de conteúdo à impressora.', component: null },
-    { text: 'Texto', icon: 'fa-solid fa-font', nameTag: 'textComponent', description: 'Exibe textos simples ou estilizados.', component: null },
+    { text: 'Texto', icon: 'fa-solid fa-font', nameTag: 'textComponent', description: 'Exibe textos simples ou estilizados.', component: TextComponent },
     { text: 'Pesquisa', icon: 'fa-solid fa-magnifying-glass', nameTag: 'scearhComponent', description: 'Campo de busca para localizar informações.', component: null },
     { text: 'Histórico', icon: 'fa-solid fa-clock-rotate-left', nameTag: 'historyComponent', description: 'Exibe registros de ações ou atividades.', component: null },
     { text: 'Mensagens', icon: 'fa-solid fa-envelope', nameTag: 'mesageComponent', description: 'Lista de mensagens recebidas e enviadas.', component: null },

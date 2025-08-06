@@ -12,7 +12,6 @@ export class PropertiesWorkshopComponent {
   @Input() icon!: string;
   @Input() textPreviewComponent!: string;
 
-  @Input() visibility!: boolean;
   @Input() width!: number;
   @Input() height!: number;
 
@@ -35,10 +34,43 @@ export class PropertiesWorkshopComponent {
   @Input() borderRadiusBottomLeft!: number;
   @Input() borderRadiusBottomRight!: number;
 
+  @Input() backgroundColor!: string;
+  @Input() color!: string;
+
+  @Input() fontFamily!: string;
+  @Input() textContent!: string;
+  @Input() fontSize!: number;
+  @Input() fontWeight!: string;
+  @Input() textAlign!: string;
+
+  @Input() opacity!: number;
+
+  @Input() shadowX: number = 0;
+  @Input() shadowY: number = 0;
+  @Input() shadowBlur: number  = 0;
+  @Input() shadowColor: string = '#000000';
+
+  @Input() position!: string;
+  @Input() top!: number;
+  @Input() left!: number;
+  @Input() right!: number;
+  @Input() bottom!: number;
+
+  @Input() zIndex!: number;
+
   // Options for Component Change
   widthOption: string = 'auto';
   heightOption: string = 'auto';
+  backgroundColorOption: string = 'custom';
+  boxShadowOption: string = 'none';
+  topOption: string = 'auto';
+  leftOption: string = 'auto';
+  rightOption: string = 'auto';
+  bottomOption: string = 'auto';
 
+  // Min/Max variables
+  maxWidth: number = 179;
+  maxHeight: number = 179;
 
   // Code 
   selectedElement: HTMLElement | null = null;
@@ -61,8 +93,20 @@ export class PropertiesWorkshopComponent {
           this.textPreviewComponent = found.description;
         }
 
+        // Propriedades HTML
+        const fatherComponent = el.parentElement?.parentElement!;
+        const rect = fatherComponent.getBoundingClientRect();
+        const styles = window.getComputedStyle(fatherComponent);
+
+        const paddingLeft = parseFloat(styles.paddingLeft);
+        const paddingRight = parseFloat(styles.paddingRight);
+        const paddingTop = parseFloat(styles.paddingTop);
+        const paddingBottom = parseFloat(styles.paddingBottom);
+
+        this.maxWidth = rect.width - paddingLeft - paddingRight;
+        this.maxHeight = rect.height - paddingTop - paddingBottom;
+
         // Propriedades CSS
-        this.visibility = el.style.visibility !== 'hidden';
         this.width = el.offsetWidth;
         this.height = el.offsetHeight;
 
@@ -77,35 +121,137 @@ export class PropertiesWorkshopComponent {
         this.paddingBottom = parseInt(getComputedStyle(el).paddingBottom, 10);
 
         this.borderSize = parseInt(getComputedStyle(el).borderWidth, 10);
-        this.borderColor = getComputedStyle(el).borderColor;
+        this.borderColor = this.rgbToHex(getComputedStyle(el).borderColor);
         this.borderType = getComputedStyle(el).borderStyle;
 
         this.borderRadiusTopLeft = parseInt(getComputedStyle(el).borderTopLeftRadius, 10);
         this.borderRadiusTopRight = parseInt(getComputedStyle(el).borderTopRightRadius, 10);
         this.borderRadiusBottomLeft = parseInt(getComputedStyle(el).borderBottomLeftRadius, 10);
         this.borderRadiusBottomRight = parseInt(getComputedStyle(el).borderBottomRightRadius, 10);
+
+        this.backgroundColor = this.rgbToHex(getComputedStyle(el).backgroundColor);
+        this.color = this.rgbToHex(getComputedStyle(el).color);
+
+        this.fontFamily = getComputedStyle(el).fontFamily;
+        this.textContent = el.textContent || '';
+        this.fontSize = parseInt(getComputedStyle(el).fontSize, 10);
+        this.fontWeight = getComputedStyle(el).fontWeight;
+        this.textAlign = getComputedStyle(el).textAlign;
+
+        this.opacity = parseFloat(getComputedStyle(el).opacity);
+
+        this.position = getComputedStyle(el).position;
+        this.top = parseInt(getComputedStyle(el).top, 10);
+        this.left = parseInt(getComputedStyle(el).left, 10);
+        this.right = parseInt(getComputedStyle(el).right, 10);
+        this.bottom = parseInt(getComputedStyle(el).bottom, 10);
+
+        this.zIndex = parseInt(getComputedStyle(el).zIndex, 10);
       }
     });
   }
 
   updateStyle(property: string, value: any) {
     if (this.selectedElement) {
+      if (property === 'font-size' && typeof value === 'number') {
+        value = `${value}px`;
+      }
+      
       this.selectedElement.style[property as any] = value;
+
+      const wrapper = this.selectedElement.parentElement;
+      if (property === 'width' || property === 'height') {
+        if (wrapper && wrapper.classList.contains('selected-component')) {
+          wrapper.style[property as any] = value;
+        }
+      }
+    }
+  }
+
+  updateText(text: string) {
+    if (this.selectedElement) {
+      this.selectedElement.textContent = text;
+    }
+  }
+
+  updateBoxShadow(shadowX: number, shadowY: number, shadowBlur: number, shadowColor: string) {
+    if (this.selectedElement) {
+      this.shadowX = shadowX;
+      this.shadowY = shadowY;
+      this.shadowBlur = shadowBlur;
+      this.shadowColor = shadowColor;
+
+      const boxShadow = `${this.shadowX}px ${this.shadowY}px ${this.shadowBlur}px ${this.shadowColor}`;
+      this.selectedElement.style.boxShadow = boxShadow;
     }
   }
 
   onOptionChange(type: string) {
-    if (this.widthOption === 'custom') {
-      this.updateStyle(type, this.width + 'px');
-    } else {
-      this.updateStyle(type, this.widthOption);
-    }
+    let value: any;
 
-    if (this.heightOption === 'custom') {
-      this.updateStyle(type, this.height + 'px');
-    } else {
-      this.updateStyle(type, this.heightOption);
+    switch (type) {
+      case 'width':
+        value = this.widthOption !== 'custom' ? this.widthOption : this.width + 'px';
+        this.updateStyle('width', value);
+        break;
+
+      case 'height':
+        value = this.heightOption !== 'custom' ? this.heightOption : this.height + 'px';
+        this.updateStyle('height', value);
+        break;
+
+      case 'background-color':
+        value = this.backgroundColorOption !== 'custom' ? this.backgroundColorOption : this.backgroundColor;
+        this.updateStyle('background-color', value);
+        break;
+
+      case 'box-shadow':
+        if (this.boxShadowOption !== 'custom') {
+          this.updateStyle('box-shadow', this.boxShadowOption);
+          console.log(this.boxShadowOption);
+        } else {
+          this.updateBoxShadow(this.shadowX, this.shadowY, this.shadowBlur, this.shadowColor);
+        }
+        break;
+
+      case 'top':
+        value = this.topOption !== 'custom' ? this.topOption : this.top;
+        this.updateStyle('top', value);
+        break;
+
+      case 'left':
+        value = this.leftOption !== 'custom' ? this.leftOption : this.left;
+        this.updateStyle('left', value);
+        break;
+
+      case 'right':
+        value = this.rightOption !== 'custom' ? this.rightOption : this.right;
+        this.updateStyle('right', value);
+        break;
+
+      case 'bottom':
+        value = this.bottomOption !== 'custom' ? this.bottomOption : this.bottom;
+        this.updateStyle('bottom', value);
+        break;
+
+      default:
+        console.warn(`Unhandled option type: ${type}`);
+        break;
     }
+  }
+
+  rgbToHex(rgb: string): string {
+    const result = rgb.match(/\d+/g);
+    if (!result) return '#000000';
+    return (
+      '#' +
+      result
+        .map(x => {
+          const hex = parseInt(x).toString(16);
+          return hex.length === 1 ? '0' + hex : hex;
+        })
+        .join('')
+    );
   }
 }
 

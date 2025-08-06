@@ -35,6 +35,7 @@ import { PropertiesWorkshopComponent } from './Components/properties-workshop/pr
 import { ButtonDragComponent } from './dragAndDrop/button-drag/button-drag.component';
 import { AreaComponent } from './dragAndDrop/area/area.component';
 import { UniqueIdDirective } from './directives/uniqueId-component.directive';
+import { TextComponent } from './dragAndDrop/text/text.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { UniqueIdDirective } from './directives/uniqueId-component.directive';
     ButtonDragComponent,
     AreaComponent,
     UniqueIdDirective,
+    TextComponent,
   ],
   imports: [
     BrowserModule,

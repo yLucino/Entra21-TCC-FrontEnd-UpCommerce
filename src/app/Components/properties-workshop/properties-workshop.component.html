@@ -39,18 +39,6 @@
           </div>
 
           <div class="properties-component">
-            <div class="visible-prop">
-              <div class="title-prop">
-                <p>Visível</p>
-                <i class="fa-solid fa-circle-question" title="Define se o componente estará visível ou oculto."></i>
-              </div>
-
-              <label class="switch">
-                <input type="checkbox" [checked]="visibility" [(ngModel)]="visibility" (input)="updateStyle('visibility', visibility ? 'hidden' : 'visible')">
-                <span class="slider"></span>
-              </label>
-            </div>
-
             <div class="size-prop">
               <hr>
               <div class="parting">
@@ -69,7 +57,7 @@
                   <option value="custom">Altura: Personalizada</option>
                 </select>
 
-                <input style="margin-top: 10px;" *ngIf="heightOption === 'custom'" type="number" placeholder="Ex: 655" [(ngModel)]="height" (input)="updateStyle('height', height + 'px')"/>
+                <input style="margin-top: 10px;" *ngIf="heightOption === 'custom'" type="number" placeholder="Ex: 655" min="0" [max]="maxHeight" [(ngModel)]="height" (input)="updateStyle('height', height + 'px')"/>
               </div>
         
               <div class="property size-width">
@@ -84,7 +72,7 @@
                   <option value="custom">Largura: Personalizada</option>
                 </select>
 
-                <input style="margin-top: 10px;" *ngIf="widthOption === 'custom'" type="number" placeholder="Ex: 320" [(ngModel)]="width" (input)="updateStyle('width', width + 'px')"/>
+                <input style="margin-top: 10px;" *ngIf="widthOption === 'custom'" type="number" placeholder="Ex: 320" min="0" [max]="maxWidth" [(ngModel)]="width" (input)="updateStyle('width', width + 'px')"/>
               </div>
             </div>
 
@@ -184,7 +172,14 @@
                   <i class="fa-solid fa-circle-question" title="Cor de fundo do componente."></i>
                 </div>
 
-                <input class="colorInput" type="color" />
+                <select [(ngModel)]="backgroundColorOption" (change)="onOptionChange('background-color')">
+                  <option value="transparent">Cor: Transparente/Nenhuma</option>
+                  <option value="#FFFFFF">Cor: Branco</option>
+                  <option value="#000000">Cor: Preto</option>
+                  <option value="custom">Cor: Personalizada</option>
+                </select>
+
+                <input style="margin-top: 10px;" *ngIf="backgroundColorOption === 'custom'" class="colorInput" type="color" [(ngModel)]="backgroundColor" (input)="updateStyle('background-color', backgroundColor)"/>
               </div>
         
               <div class="property appearance-color">
@@ -193,10 +188,7 @@
                   <i class="fa-solid fa-circle-question" title="Cor dos textos ou ícones do componente."></i>
                 </div>
 
-                <input class="colorInput" type="color" />
-
-                <p class="sub-text-option">Transparência:</p>
-                <input type="number" placeholder="Ex: 0.5" />
+                <input class="colorInput" type="color" [(ngModel)]="color" (input)="updateStyle('color', color)"/>
               </div>
 
               <div class="property apperance-font">
@@ -205,31 +197,63 @@
                   <i class="fa-solid fa-circle-question" title="Estilo, Tamanho, Espaçamento e Cor da fonte usada no componente."></i>
                 </div>
 
-                <select class="font-family">
-                  <option value="Arial">Arial</option>
-                  <option value="Verdana">Verdana</option>
-                  <option value="Times New Roman">Times New Roman</option>
-                  <option value="Poppins">Poppins</option>
-                  <option value="Inter">Inter</option>
+                <select class="font-family" [(ngModel)]="fontFamily" (change)="updateStyle('font-family', fontFamily)">
+                    <option value="Arial, sans-serif">Arial</option>
+                    <option value="Verdana, sans-serif">Verdana</option>
+                    <option value="Tahoma, sans-serif">Tahoma</option>
+                    <option value="Trebuchet MS, sans-serif">Trebuchet MS</option>
+                    <option value="Gill Sans, sans-serif">Gill Sans</option>
+                    <option value="Helvetica, sans-serif">Helvetica</option>
+                    <option value="Segoe UI, sans-serif">Segoe UI</option>
+
+                    <option value="Times New Roman, serif">Times New Roman</option>
+                    <option value="Georgia, serif">Georgia</option>
+                    <option value="Garamond, serif">Garamond</option>
+
+                    <option value="Courier New, monospace">Courier New</option>
+                    <option value="Lucida Console, monospace">Lucida Console</option>
+                    <option value="Consolas, monospace">Consolas</option>
+
+                    <option value="Poppins, sans-serif">Poppins</option>
+                    <option value="Boldonse, system-ui, sans-serif">Boldonse</option>
+                    <option value="Outfit, sans-serif">Outfit</option>
+                    <option value="Inter, sans-serif">Inter</option>
+                    <option value="Roboto, sans-serif">Roboto</option>
+                    <option value="Open Sans, sans-serif">Open Sans</option>
+                    <option value="Lato, sans-serif">Lato</option>
+                    <option value="Montserrat, sans-serif">Montserrat</option>
+                    <option value="Ubuntu, sans-serif">Ubuntu</option>
+                    <option value="Ubuntu Condensed, sans-serif">Ubuntu Condensed</option>
                 </select>
 
+                <p class="sub-text-option">Texto:</p>
+                <input type="text" placeholder="Seu texto" [(ngModel)]="textContent" (input)="updateText(textContent)" />
+                
                 <p class="sub-text-option">Tamanho:</p>
-                <input type="number" placeholder="Ex: 16" />
+                <input type="number" placeholder="Ex: 16" [(ngModel)]="fontSize" (input)="updateStyle('font-size', fontSize)" />
 
                 <p class="sub-text-option">Largura (Afinar ou Engrossar):</p>
-                <select class="font-family">
-                  <option value="100">Thin</option>
-                  <option value="300">Normal</option>
-                  <option value="500">Semi Bold</option>
-                  <option value="700">Bold</option>
-                  <option value="900">Extra Bold</option>
+                <select class="font-width" [(ngModel)]="fontWeight" (change)="updateStyle('font-weight', fontWeight)">
+                  <option value="100">Thin (100)</option>
+                  <option value="200">Extra Light (200)</option>
+                  <option value="300">Light (300)</option>
+                  <option value="400">Regular (400)</option>
+                  <option value="500">Medium (500)</option>
+                  <option value="600">Semi Bold (600)</option>
+                  <option value="700">Bold (700)</option>
+                  <option value="800">Extra Bold (800)</option>
+                  <option value="900">Black (900)</option>
                 </select>
 
-                <p class="sub-text-option">Espaçamento entre letras:</p>
-                <input type="number" placeholder="Ex: 1" />
-                
-                <p class="sub-text-option">Cor:</p>
-                <input class="colorInput" type="color" />
+                <p class="sub-text-option">Alinhamento do Texto:</p>
+                <select class="text-align" [(ngModel)]="textAlign" (change)="updateStyle('text-align', textAlign)">
+                  <option value="start">Começo</option>
+                  <option value="end">Fim</option>
+                  <option value="center">Centro</option>
+                  <option value="left">Esquerda</option>
+                  <option value="right">Direita</option>
+                  <option value="justify">Justificado</option>
+                </select>
               </div>
 
               <div class="property opacity">
@@ -238,7 +262,7 @@
                   <i class="fa-solid fa-circle-question" title="Opacidade visual do componente, de 0 (invisível) a 1 (totalmente visível)."></i>
                 </div>
 
-                <input id="range-opacity" type="range" min="0" max="1" step="0.01" value="1">
+                <input id="range-opacity" type="range" min="0" max="1" step="0.01" [(ngModel)]="opacity" (input)="updateStyle('opacity', opacity)">
               </div>
 
               <div class="property shadow">
@@ -247,17 +271,27 @@
                   <i class="fa-solid fa-circle-question" title="Sombra aplicada ao redor do componente."></i>
                 </div>
 
-                <p class="sub-text-option">Deslocamento X:</p>
-                <input type="number" placeholder="Ex: 5" />
-                
-                <p class="sub-text-option">Deslocamento Y:</p>
-                <input type="number" placeholder="Ex: 5" />
-                
-                <p class="sub-text-option">Blur:</p>
-                <input type="number" placeholder="Ex: 10" />
-                
-                <p class="sub-text-option">Cor:</p>
-                <input class="colorInput" type="color" />
+                <select [(ngModel)]="boxShadowOption" (change)="onOptionChange('box-shadow')">
+                  <option value="none">Sombra: Transparente/Nenhuma</option>
+                  <option value="0px 0px 15px #ABABAB">Sombra: Extra Forte</option>
+                  <option value="0px 0px 10px #9E9E9E">Sombra: Forte</option>
+                  <option value="0px 0px 10px #D9D9D9">Sombra: Suave</option>
+                  <option value="custom">Sombra: Personalizada</option>
+                </select>
+
+                <div *ngIf="boxShadowOption === 'custom'" class="shadow-custom">
+                  <p class="sub-text-option">Deslocamento X:</p>
+                  <input type="number" placeholder="Ex: 5" [(ngModel)]="shadowX" (input)="updateBoxShadow(shadowX, shadowY, shadowBlur, shadowColor)"/>
+                  
+                  <p class="sub-text-option">Deslocamento Y:</p>
+                  <input type="number" placeholder="Ex: 5" [(ngModel)]="shadowY" (input)="updateBoxShadow(shadowX, shadowY, shadowBlur, shadowColor)"/>
+                  
+                  <p class="sub-text-option">Blur:</p>
+                  <input type="number" placeholder="Ex: 10" [(ngModel)]="shadowBlur" (input)="updateBoxShadow(shadowX, shadowY, shadowBlur, shadowColor)"/>
+                  
+                  <p class="sub-text-option">Cor:</p>
+                  <input class="colorInput" type="color" [(ngModel)]="shadowColor" (input)="updateBoxShadow(shadowX, shadowY, shadowBlur, shadowColor)"/>
+                </div>
               </div>
             </div>
 
@@ -273,7 +307,7 @@
                   <i class="fa-solid fa-circle-question" title="Define o tipo de posicionamento CSS do componente."></i>
                 </div>
 
-                <select>
+                <select [(ngModel)]="position" (change)="updateStyle('position', position)">
                   <option value="static">Estática</option>
                   <option value="relative">Relativa</option>
                   <option value="absolute">Absoluta</option>
@@ -281,16 +315,36 @@
                 </select>
 
                 <p class="sub-text-option">Acima:</p>
-                <input type="number" placeholder="Ex: 1" />
+                <select [(ngModel)]="topOption" (change)="onOptionChange('top')">
+                  <option value="auto">Acima: Automático</option>
+                  <option value="0px">Acima: 0px</option>
+                  <option value="custom">Acima: Personalizada</option>
+                </select>
+                <input style="margin-top: 10px;" *ngIf="topOption ===  'custom'" type="number" placeholder="Ex: 1" [(ngModel)]="top" (input)="updateStyle('top', top + 'px')"/>
                 
                 <p class="sub-text-option">Esquerda:</p>
-                <input type="number" placeholder="Ex: 2" />
+                <select [(ngModel)]="leftOption" (change)="onOptionChange('left')">
+                  <option value="auto">Acima: Automático</option>
+                  <option value="0px">Acima: 0px</option>
+                  <option value="custom">Acima: Personalizada</option>
+                </select>
+                <input style="margin-top: 10px;" *ngIf="leftOption ===  'custom'" type="number" placeholder="Ex: 2" [(ngModel)]="left" (input)="updateStyle('left', left + 'px')"/>
                 
                 <p class="sub-text-option">Direita:</p>
-                <input type="number" placeholder="Ex: 3" />
+                <select [(ngModel)]="rightOption" (change)="onOptionChange('right')">
+                  <option value="auto">Acima: Automático</option>
+                  <option value="0px">Acima: 0px</option>
+                  <option value="custom">Acima: Personalizada</option>
+                </select>
+                <input style="margin-top: 10px;" *ngIf="rightOption ===  'custom'" type="number" placeholder="Ex: 3" [(ngModel)]="right" (input)="updateStyle('right', right + 'px')"/>
                 
                 <p class="sub-text-option">Abaixo:</p>
-                <input type="number" placeholder="Ex: 4" />
+                <select [(ngModel)]="bottomOption" (change)="onOptionChange('bottom')">
+                  <option value="auto">Acima: Automático</option>
+                  <option value="0px">Acima: 0px</option>
+                  <option value="custom">Acima: Personalizada</option>
+                </select>
+                <input style="margin-top: 10px;" *ngIf="bottomOption ===  'custom'" type="number" placeholder="Ex: 4" [(ngModel)]="bottom" (input)="updateStyle('bottom', bottom + 'px')"/>
               </div>
 
               <div class="property zindex">
@@ -299,7 +353,7 @@
                   <i class="fa-solid fa-circle-question" title="Controla a sobreposição entre componentes. Quanto maior, mais acima fica."></i>
                 </div>
 
-                <input type="number" placeholder="Ex: 10" />
+                <input type="number" placeholder="Ex: 10" min="0" [(ngModel)]="zIndex" (input)="updateStyle('z-index', zIndex)"/>
               </div>
             </div>
 

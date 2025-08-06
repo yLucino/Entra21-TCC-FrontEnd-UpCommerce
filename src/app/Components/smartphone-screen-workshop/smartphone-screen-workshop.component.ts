@@ -34,34 +34,17 @@ export class SmartphoneScreenWorkshopComponent implements OnInit {
     private propertyService: PropertyService
   ) {}
 
-ngOnInit() {
-  this.propertyService.getSelectedElement().subscribe(el => {
-    if (el) {
-      // Remove wrapper anterior
-      if (this.lastSelectedElement) {
-        const parent = this.lastSelectedElement.parentElement;
-        if (parent?.classList.contains('selected-component')) {
-          const grandParent = parent.parentElement;
-          if (grandParent) {
-            grandParent.replaceChild(this.lastSelectedElement, parent);
-          }
+  ngOnInit() {
+    this.propertyService.getSelectedElement().subscribe(el => {
+      if (el) {
+        if (this.lastSelectedElement) {
+          this.lastSelectedElement.classList.remove('selected-component');
         }
+        el.classList.add('selected-component');
+        this.lastSelectedElement = el;
       }
-
-      const wrapper = document.createElement('div');
-      wrapper.classList.add('selected-component');
-      wrapper.style.width = el.offsetWidth + 'px';
-
-      const parent = el.parentElement;
-      if (parent) {
-        parent.replaceChild(wrapper, el);
-        wrapper.appendChild(el);
-      }
-
-      this.lastSelectedElement = el;
-    }
-  });
-}
+    });
+  }
 
   drop(event: CdkDragDrop<any[]>) {
     const data = event.previousContainer.data[event.previousIndex];
