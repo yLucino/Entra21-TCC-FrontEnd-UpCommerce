@@ -67,6 +67,7 @@ export class ToolsWorkshopComponent {
     { text: 'Scanner', icon: 'fa-solid fa-print', nameTag: 'scannerComponent', description: 'Permite escanear documentos ou imagens.', component: null },
     { text: 'Impressora', icon: 'fa-solid fa-print', nameTag: 'printComponent', description: 'Componente para envio de conteúdo à impressora.', component: null },
     { text: 'Texto', icon: 'fa-solid fa-font', nameTag: 'textComponent', description: 'Exibe textos simples ou estilizados.', component: TextComponent },
+    { text: 'Link', icon: 'fa-solid fa-link', nameTag: 'linkComponent', description: 'Disponibiliza link para imagens e textos.', component: null },
     { text: 'Pesquisa', icon: 'fa-solid fa-magnifying-glass', nameTag: 'scearhComponent', description: 'Campo de busca para localizar informações.', component: null },
     { text: 'Histórico', icon: 'fa-solid fa-clock-rotate-left', nameTag: 'historyComponent', description: 'Exibe registros de ações ou atividades.', component: null },
     { text: 'Mensagens', icon: 'fa-solid fa-envelope', nameTag: 'mesageComponent', description: 'Lista de mensagens recebidas e enviadas.', component: null },

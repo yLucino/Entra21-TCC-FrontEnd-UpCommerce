@@ -281,17 +281,42 @@
 
                 <div *ngIf="boxShadowOption === 'custom'" class="shadow-custom">
                   <p class="sub-text-option">Deslocamento X:</p>
-                  <input type="number" placeholder="Ex: 5" [(ngModel)]="shadowX" (input)="updateBoxShadow(shadowX, shadowY, shadowBlur, shadowColor)"/>
+                  <input type="number" placeholder="Ex: 5" [(ngModel)]="shadowX" (input)="updateBoxShadow('css', shadowX, shadowY, shadowBlur, shadowColor)"/>
                   
                   <p class="sub-text-option">Deslocamento Y:</p>
-                  <input type="number" placeholder="Ex: 5" [(ngModel)]="shadowY" (input)="updateBoxShadow(shadowX, shadowY, shadowBlur, shadowColor)"/>
+                  <input type="number" placeholder="Ex: 5" [(ngModel)]="shadowY" (input)="updateBoxShadow('css', shadowX, shadowY, shadowBlur, shadowColor)"/>
                   
                   <p class="sub-text-option">Blur:</p>
-                  <input type="number" placeholder="Ex: 10" [(ngModel)]="shadowBlur" (input)="updateBoxShadow(shadowX, shadowY, shadowBlur, shadowColor)"/>
+                  <input type="number" placeholder="Ex: 10" [(ngModel)]="shadowBlur" (input)="updateBoxShadow('css', shadowX, shadowY, shadowBlur, shadowColor)"/>
                   
                   <p class="sub-text-option">Cor:</p>
-                  <input class="colorInput" type="color" [(ngModel)]="shadowColor" (input)="updateBoxShadow(shadowX, shadowY, shadowBlur, shadowColor)"/>
+                  <input class="colorInput" type="color" [(ngModel)]="shadowColor" (input)="updateBoxShadow('css', shadowX, shadowY, shadowBlur, shadowColor)"/>
                 </div>
+              </div>
+
+              <div class="property cursor">
+                <div class="title-prop">
+                  <p>Cursor</p>
+                  <i class="fa-solid fa-circle-question" title="Cursor mostrado ao passar com o mouse por cima do elemento"></i>
+                </div>
+
+                <select [(ngModel)]="cursor" (change)="updateStyle('cursor', cursor)">
+                  <option value="auto">Cursor: Automático</option>
+                  <option value="default">Cursor: Padrão</option>
+                  <option value="pointer">Cursor: Mão (Clique)</option>
+                  <option value="text">Cursor: Texto (Seleção)</option>
+                  <option value="move">Cursor: Mover</option>
+                  <option value="grab">Cursor: Pegar (Grab)</option>
+                  <option value="grabbing">Cursor: Pegando (Grabbing)</option>
+                  <option value="crosshair">Cursor: Mira (Crosshair)</option>
+                  <option value="not-allowed">Cursor: Proibido</option>
+                  <option value="wait">Cursor: Espera (Relógio)</option>
+                  <option value="help">Cursor: Ajuda</option>
+                  <option value="progress">Cursor: Carregando</option>
+                  <option value="zoom-in">Cursor: Zoom In</option>
+                  <option value="zoom-out">Cursor: Zoom Out</option>
+                  <option value="none">Cursor: Nenhum (Invisível)</option>
+                </select>
               </div>
             </div>
 
@@ -366,19 +391,67 @@
               <div class="property animation">
                 <div class="title-prop">
                   <p>Transição</p>
-                  <i class="fa-solid fa-circle-question" title="Configuração de transições animadas (ex: suavidade ao mudar de estado)."></i>
+                  <i class="fa-solid fa-circle-question" title="Controla a suavidade e a duração das mudanças visuais no componente."></i>
                 </div>
 
-                <p class="sub-text-option">Duração (s):</p>
-                <input type="number" placeholder="Ex: 0.3" />
-
                 <p class="sub-text-option">Tipo:</p>
-                <select>
-                  <option value="ease">Ease</option>
-                  <option value="linear">Linear</option>
-                  <option value="ease-in">Ease-in</option>
-                  <option value="ease-out">Ease-out</option>
+                <select [(ngModel)]="animationOption" (change)="updateStyle('transition', animationOption)">
+                  <option value="none">Nenhuma</option>
+                  
+                  <option value="0.3s ease">Curta (0.3s) - Ease</option>
+                  <option value="0.3s ease-in">Curta (0.3s) - Ease-in</option>
+                  <option value="0.3s ease-out">Curta (0.3s) - Ease-out</option>
+                  <option value="0.3s linear">Curta (0.3s) - Linear</option>
+                  <option value="0.3s all">Curta (0.3s) - All</option>
+
+                  <option value="0.6s ease">Média (0.6s) - Ease</option>
+                  <option value="0.6s ease-in">Média (0.6s) - Ease-in</option>
+                  <option value="0.6s ease-out">Média (0.6s) - Ease-out</option>
+                  <option value="0.6s linear">Média (0.6s) - Linear</option>
+                  <option value="0.6s all">Média (0.6s) - All</option>
+
+                  <option value="1s ease">Longa (1s) - Ease</option>
+                  <option value="1s ease-in">Longa (1s) - Ease-in</option>
+                  <option value="1s ease-out">Longa (1s) - Ease-out</option>
+                  <option value="1s linear">Longa (1s) - Linear</option>
+                  <option value="1s all">Longa (1s) - All</option>
                 </select>
+
+                <div *ngIf="animationOption !==  'none'">
+                  <div class="title-prop">
+                    <p>Animação Hover</p>
+                    <i class="fa-solid fa-circle-question" title="Cria efeitos visuais interativos, como mudança de cor, tamanho, sombra ou exibição de conteúdo adicional quando o usuário interage com um elemento. ."></i>
+                  </div>
+  
+                  <p class="sub-text-option">Transformar escala ao passar o mouse:</p>
+                  <input type="number" min="0.7" max="2" step="0.05" placeholder="Ex: 1,15" [(ngModel)]="hoverScale" (input)="updateHoverStyle('transform', 'scale('+ hoverScale + ')')" />
+                  
+                  <p class="sub-text-option">Curvatura dos cantos ao passar o mouse:</p>
+                  <input type="number" min="0" placeholder="Ex: 20" [(ngModel)]="hoverBorderRadius" (input)="updateHoverStyle('border-radius', hoverBorderRadius + 'px')" />
+                  
+                  <p class="sub-text-option">Sombra ao passar o mouse:</p>
+                  <select [(ngModel)]="hoverBoxShadowOption" (change)="onOptionChange('hover-box-shadow')">
+                    <option value="none">Sombra: Transparente/Nenhuma</option>
+                    <option value="0px 0px 15px #545454">Sombra: Extra Forte</option>
+                    <option value="0px 0px 10px #7D7D7D">Sombra: Forte</option>
+                    <option value="0px 0px 10px #B5B5B5">Sombra: Suave</option>
+                    <option value="custom">Sombra: Personalizada</option>
+                  </select>
+
+                  <div *ngIf="hoverBoxShadowOption === 'custom'" class="shadow-custom">
+                    <p class="sub-text-option">Deslocamento X:</p>
+                    <input type="number" placeholder="Ex: 5" [(ngModel)]="hoverShadowX" (input)="updateBoxShadow('hover', hoverShadowX, hoverShadowY, hoverShadowBlur, hoverShadowColor)"/>
+                    
+                    <p class="sub-text-option">Deslocamento Y:</p>
+                    <input type="number" placeholder="Ex: 5" [(ngModel)]="hoverShadowY" (input)="updateBoxShadow('hover', hoverShadowX, hoverShadowY, hoverShadowBlur, hoverShadowColor)"/>
+                    
+                    <p class="sub-text-option">Blur:</p>
+                    <input type="number" placeholder="Ex: 10" [(ngModel)]="hoverShadowBlur" (input)="updateBoxShadow('hover', hoverShadowX, hoverShadowY, hoverShadowBlur, hoverShadowColor)"/>
+                    
+                    <p class="sub-text-option">Cor:</p>
+                    <input class="colorInput" type="color" [(ngModel)]="hoverShadowColor" (input)="updateBoxShadow('hover', hoverShadowX, hoverShadowY, hoverShadowBlur, hoverShadowColor)"/>
+                  </div>
+                </div>
               </div>
             </div>
 
