@@ -10,8 +10,9 @@ import {
   OnInit
 } from '@angular/core';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { AreaComponent } from 'src/app/dragAndDrop/area/area.component';
+import { AreaComponent } from 'src/app/dragAndDrop/screen/area/area.component';
 import { PropertyService } from 'src/app/services/property.service';
+import { PropertiesWorkshopComponent } from '../properties-workshop/properties-workshop.component';
 
 @Component({
   selector: 'app-smartphone-screen-workshop',
@@ -19,8 +20,10 @@ import { PropertyService } from 'src/app/services/property.service';
   styleUrls: ['./smartphone-screen-workshop.component.css']
 })
 export class SmartphoneScreenWorkshopComponent implements OnInit {
+  @ViewChild('propertiesWorkshop') propertiesWorkshop!: PropertiesWorkshopComponent;
   @Input() connectedDropListId: string[] = [];
   @Output() areaCreated = new EventEmitter<string>();
+  @Output() elementDeselected = new EventEmitter<void>();
 
   @ViewChild('dropHost', { read: ViewContainerRef }) viewContainerRef!: ViewContainerRef;
 
@@ -73,6 +76,18 @@ export class SmartphoneScreenWorkshopComponent implements OnInit {
     // Se o componente possuir um Output chamado "created", escuta o evento
     if ((componentRef.instance as any).created instanceof EventEmitter) {
       (componentRef.instance as any).created.subscribe();
+    }
+  }
+
+  deselectElement(event: MouseEvent) {
+    const clickedElement = event.target as HTMLElement;
+    const hasSelectedComponent = clickedElement.closest('.selected-component');
+
+    if (!hasSelectedComponent && this.lastSelectedElement) {
+      this.lastSelectedElement.classList.remove('selected-component');
+      this.lastSelectedElement = null;
+      this.propertyService.setSelectedElement(null);
+      this.elementDeselected.emit();
     }
   }
 }

@@ -2,576 +2,642 @@
   <div class="content-all">
     <div class="main-prop">
       <div class="content">
-        <button class="btn-save">
-          Salvar
-          <div class="status-circle" title="Você possui mudanças a serem salvas."></div>
-        </button>
+        <div class="header">
+          <button class="btn-save">
+            Salvar
+            <div class="status-circle" title="Você possui mudanças a serem salvas."></div>
+          </button>
 
-        <div class="info-component-box">
-          <div class="infos">
-            <i [class]="icon"></i>
-            <p>{{title}}</p>
-          </div>
-
-          <div class="actions">
-            <button class="mark-btn">
-              <!-- Função para desselecionar o component -->
-              <i id="action-mark" class="fa-solid fa-expand"></i>
+          <div class="box-prop-explorer">
+            <button class="btn-window btn-w-properties" [class.active]="displayWindow === 'properties'" (click)="toggleWindow('properties')">
+              <i class="fa-solid fa-brush"></i>
+              <h1>Propriedades</h1>
             </button>
 
-            <button class="info-btn" [title]="textPreviewComponent">
-              <i id="action-info" class="fa-solid fa-circle-info"></i>
-            </button>
-
-            <button class="remove-btn">
-              <!-- Função para remover o component -->
-              <i id="action-remove" class="fa-solid fa-trash-can"></i>
+            <button class="btn-window btn-w-explorer" [class.active]="displayWindow === 'explorer'" (click)="toggleWindow('explorer')" (click)="renderComponents()">
+              <i class="fa-solid fa-folder"></i>
+              <h1>Explorer</h1>
             </button>
           </div>
 
-          <hr id="line-info-component"/>
+          <div class="nothingSelected" *ngIf="selectedElement === null && displayWindow === 'properties'">
+            <i class="fa-solid fa-computer-mouse"></i>
+            <p>Nenhum componente selecionado</p>
+            <span>Selecione um componente na área de trabalho para editar suas propriedades.</span>
+          </div>
         </div>
+        
+        <div class="properties-scroll" *ngIf="selectedElement !== null && displayWindow === 'properties'">
+          <div class="info-component-box" >
+            <div class="infos">
+              <i [class]="icon"></i>
 
-        <div class="properties-box">
-          <div class="title">
-            <i class="fa-solid fa-brush"></i>
-            <h1>Propriedades</h1>
+              <div class="text">
+                <p>{{title}}</p>
+                <p id="componentId">{{id}}</p>
+              </div>
+            </div>
+  
+            <div class="actions">
+              <button class="info-btn" [title]="textPreviewComponent">
+                <i id="action-info" class="fa-solid fa-circle-info"></i>
+              </button>
+  
+              <button class="remove-btn" (click)="deleteComponent(selectedElement)" title="Remover Componente">
+                <i id="action-remove" class="fa-solid fa-trash-can"></i>
+              </button>
+            </div>
+  
+            <hr id="line-info-component"/>
           </div>
-
-          <div class="properties-component">
-            <div class="size-prop">
-              <hr>
-              <div class="parting">
-                <p>Tamanho</p>
-              </div>
-
-              <div class="property size-height">
-                <div class="title-prop">
-                  <p>Altura</p>
-                  <i class="fa-solid fa-circle-question" title="Altura do componente em pixels."></i>
+  
+          <div class="properties-box">
+            <div class="properties-component">
+              <div class="size-prop">
+                <div class="parting">
+                  <p>Tamanho</p>
                 </div>
-
-                <select [(ngModel)]="heightOption" (change)="onOptionChange('height')">
-                  <option value="100%">Altura: 100%</option>
-                  <option value="auto">Altura: Automática</option>
-                  <option value="custom">Altura: Personalizada</option>
-                </select>
-
-                <input style="margin-top: 10px;" *ngIf="heightOption === 'custom'" type="number" placeholder="Ex: 655" min="0" [max]="maxHeight" [(ngModel)]="height" (input)="updateStyle('height', height + 'px')"/>
-              </div>
-        
-              <div class="property size-width">
-                <div class="title-prop">
-                  <p>Largura</p>
-                  <i class="fa-solid fa-circle-question" title="Largura do componente em pixels."></i>
-                </div>
-
-                <select [(ngModel)]="widthOption" (change)="onOptionChange('width')">
-                  <option value="100%">Largura: 100%</option>
-                  <option value="auto">Largura: Automática</option>
-                  <option value="custom">Largura: Personalizada</option>
-                </select>
-
-                <input style="margin-top: 10px;" *ngIf="widthOption === 'custom'" type="number" placeholder="Ex: 320" min="0" [max]="maxWidth" [(ngModel)]="width" (input)="updateStyle('width', width + 'px')"/>
-              </div>
-            </div>
-
-            <div class="spacing-prop">
-              <hr>
-              <div class="parting">
-                <p>Espaçamento</p>
-              </div>
-
-              <div class="property spacing-margin">
-                <div class="title-prop">
-                  <p>Espaço exterior</p>
-                  <i class="fa-solid fa-circle-question" title="Espaço externo (margem) ao redor do componente."></i>
-                </div>
-
-                <p class="sub-text-option">Acima:</p>
-                <input type="number" placeholder="Ex: 10" [(ngModel)]="marginTop" (input)="updateStyle('margin-top', marginTop + 'px')"/>
-                
-                <p class="sub-text-option">Esquerda:</p>
-                <input type="number" placeholder="Ex: 9" [(ngModel)]="marginLeft" (input)="updateStyle('margin-left', marginLeft + 'px')"/>
-
-                <p class="sub-text-option">Direita:</p>
-                <input type="number" placeholder="Ex: 8" [(ngModel)]="marginRight" (input)="updateStyle('margin-right', marginRight + 'px')"/>
-
-                <p class="sub-text-option">Abaixo:</p>
-                <input type="number" placeholder="Ex: 7" [(ngModel)]="marginBottom" (input)="updateStyle('margin-bottom', marginBottom + 'px')"/>
-              </div>
-
-              <div class="property spacing-padding">
-                <div class="title-prop">
-                  <p>Espaço interior</p>
-                  <i class="fa-solid fa-circle-question" title="Espaço interno (padding) dentro do componente."></i>
-                </div>
-
-                <p class="sub-text-option">Acima:</p>
-                <input type="number" placeholder="Ex: 15" [(ngModel)]="paddingTop" (input)="updateStyle('padding-top', paddingTop + 'px')"/>
-                
-                <p class="sub-text-option">Esquerda:</p>
-                <input type="number" placeholder="Ex: 15" [(ngModel)]="paddingLeft" (input)="updateStyle('padding-left', paddingLeft + 'px')"/>
-
-                <p class="sub-text-option">Direita:</p>
-                <input type="number" placeholder="Ex: 15" [(ngModel)]="paddingRight" (input)="updateStyle('padding-right', paddingRight + 'px')"/>
-
-                <p class="sub-text-option">Abaixo:</p>
-                <input type="number" placeholder="Ex: 15" [(ngModel)]="paddingBottom" (input)="updateStyle('padding-bottom', paddingBottom + 'px')"/>
-              </div>
-            </div>
-
-            <div class="appearance-prop">
-              <hr>
-              <div class="parting">
-                <p>Aparência</p>
-              </div>
-              <div class="property appearance-border">
-                <div class="title-prop">
-                  <p>Borda</p>
-                  <i class="fa-solid fa-circle-question" title="Configuração da borda do componente, incluindo cor e tipo."></i>
-                </div>
-                
-                <p class="sub-text-option">Tamanho:</p>
-                <input type="number" placeholder="Ex: 2" min="0" max="10" [(ngModel)]="borderSize" (input)="updateStyle('border-width', borderSize + 'px')"/>
-                
-                <p class="sub-text-option">Cor:</p>
-                <input class="colorInput" type="color" [(ngModel)]="borderColor" (input)="updateStyle('border-color', borderColor)"/>
-                
-                <p class="sub-text-option">Tipo:</p>
-                <select class="border-type" [(ngModel)]="borderType" (change)="updateStyle('border-style', borderType)">
-                  <option value="none">Nenhuma</option>
-                  <option value="solid">Sólida</option>
-                  <option value="dashed">Tracejada</option>
-                  <option value="dotted">Pontilhada</option>
-                </select>
-              </div>
-
-              <div class="property appearance-border-radius">
-                <div class="title-prop">
-                  <p>Curva de Canto</p>
-                  <i class="fa-solid fa-circle-question" title="Curvatura dos cantos do componente (Corner, Border Radius)."></i>
-                </div>
-
-                <p class="sub-text-option">Superior Esquerda:</p>
-                <input type="number" placeholder="Ex: 20" min="0" [(ngModel)]="borderRadiusTopLeft" (input)="updateStyle('border-top-left-radius', borderRadiusTopLeft + 'px')"/>
-
-                <p class="sub-text-option">Superior Direita:</p>
-                <input type="number" placeholder="Ex: 19" min="0" [(ngModel)]="borderRadiusTopRight" (input)="updateStyle('border-top-right-radius', borderRadiusTopRight + 'px')"/>
-
-                <p class="sub-text-option">Inferior Esquerda:</p>
-                <input type="number" placeholder="Ex: 18" min="0" [(ngModel)]="borderRadiusBottomLeft" (input)="updateStyle('border-bottom-left-radius', borderRadiusBottomLeft + 'px')"/>
-
-                <p class="sub-text-option">Inferiro Direita:</p>
-                <input type="number" placeholder="Ex: 17" min="0" [(ngModel)]="borderRadiusBottomRight" (input)="updateStyle('border-bottom-right-radius', borderRadiusBottomRight + 'px')"/>
-              </div>
-
-              <div class="property appearance-background">
-                <div class="title-prop">
-                  <p>Cor de fundo</p>
-                  <i class="fa-solid fa-circle-question" title="Cor de fundo do componente."></i>
-                </div>
-
-                <select [(ngModel)]="backgroundColorOption" (change)="onOptionChange('background-color')">
-                  <option value="transparent">Cor: Transparente/Nenhuma</option>
-                  <option value="#FFFFFF">Cor: Branco</option>
-                  <option value="#000000">Cor: Preto</option>
-                  <option value="custom">Cor: Personalizada</option>
-                </select>
-
-                <input style="margin-top: 10px;" *ngIf="backgroundColorOption === 'custom'" class="colorInput" type="color" [(ngModel)]="backgroundColor" (input)="updateStyle('background-color', backgroundColor)"/>
-              </div>
-        
-              <div class="property appearance-color">
-                <div class="title-prop">
-                  <p>Cor</p>
-                  <i class="fa-solid fa-circle-question" title="Cor dos textos ou ícones do componente."></i>
-                </div>
-
-                <input class="colorInput" type="color" [(ngModel)]="color" (input)="updateStyle('color', color)"/>
-              </div>
-
-              <div class="property apperance-font">
-                <div class="title-prop">
-                  <p>Fonte</p>
-                  <i class="fa-solid fa-circle-question" title="Estilo, Tamanho, Espaçamento e Cor da fonte usada no componente."></i>
-                </div>
-
-                <select class="font-family" [(ngModel)]="fontFamily" (change)="updateStyle('font-family', fontFamily)">
-                    <option value="Arial, sans-serif">Arial</option>
-                    <option value="Verdana, sans-serif">Verdana</option>
-                    <option value="Tahoma, sans-serif">Tahoma</option>
-                    <option value="Trebuchet MS, sans-serif">Trebuchet MS</option>
-                    <option value="Gill Sans, sans-serif">Gill Sans</option>
-                    <option value="Helvetica, sans-serif">Helvetica</option>
-                    <option value="Segoe UI, sans-serif">Segoe UI</option>
-
-                    <option value="Times New Roman, serif">Times New Roman</option>
-                    <option value="Georgia, serif">Georgia</option>
-                    <option value="Garamond, serif">Garamond</option>
-
-                    <option value="Courier New, monospace">Courier New</option>
-                    <option value="Lucida Console, monospace">Lucida Console</option>
-                    <option value="Consolas, monospace">Consolas</option>
-
-                    <option value="Poppins, sans-serif">Poppins</option>
-                    <option value="Boldonse, system-ui, sans-serif">Boldonse</option>
-                    <option value="Outfit, sans-serif">Outfit</option>
-                    <option value="Inter, sans-serif">Inter</option>
-                    <option value="Roboto, sans-serif">Roboto</option>
-                    <option value="Open Sans, sans-serif">Open Sans</option>
-                    <option value="Lato, sans-serif">Lato</option>
-                    <option value="Montserrat, sans-serif">Montserrat</option>
-                    <option value="Ubuntu, sans-serif">Ubuntu</option>
-                    <option value="Ubuntu Condensed, sans-serif">Ubuntu Condensed</option>
-                </select>
-
-                <p class="sub-text-option">Texto:</p>
-                <input type="text" placeholder="Seu texto" [(ngModel)]="textContent" (input)="updateText(textContent)" />
-                
-                <p class="sub-text-option">Tamanho:</p>
-                <input type="number" placeholder="Ex: 16" [(ngModel)]="fontSize" (input)="updateStyle('font-size', fontSize)" />
-
-                <p class="sub-text-option">Largura (Afinar ou Engrossar):</p>
-                <select class="font-width" [(ngModel)]="fontWeight" (change)="updateStyle('font-weight', fontWeight)">
-                  <option value="100">Thin (100)</option>
-                  <option value="200">Extra Light (200)</option>
-                  <option value="300">Light (300)</option>
-                  <option value="400">Regular (400)</option>
-                  <option value="500">Medium (500)</option>
-                  <option value="600">Semi Bold (600)</option>
-                  <option value="700">Bold (700)</option>
-                  <option value="800">Extra Bold (800)</option>
-                  <option value="900">Black (900)</option>
-                </select>
-
-                <p class="sub-text-option">Alinhamento do Texto:</p>
-                <select class="text-align" [(ngModel)]="textAlign" (change)="updateStyle('text-align', textAlign)">
-                  <option value="start">Começo</option>
-                  <option value="end">Fim</option>
-                  <option value="center">Centro</option>
-                  <option value="left">Esquerda</option>
-                  <option value="right">Direita</option>
-                  <option value="justify">Justificado</option>
-                </select>
-              </div>
-
-              <div class="property opacity">
-                <div class="title-prop">
-                  <p>Opacidade</p>
-                  <i class="fa-solid fa-circle-question" title="Opacidade visual do componente, de 0 (invisível) a 1 (totalmente visível)."></i>
-                </div>
-
-                <input id="range-opacity" type="range" min="0" max="1" step="0.01" [(ngModel)]="opacity" (input)="updateStyle('opacity', opacity)">
-              </div>
-
-              <div class="property shadow">
-                <div class="title-prop">
-                  <p>Sombra</p>
-                  <i class="fa-solid fa-circle-question" title="Sombra aplicada ao redor do componente."></i>
-                </div>
-
-                <select [(ngModel)]="boxShadowOption" (change)="onOptionChange('box-shadow')">
-                  <option value="none">Sombra: Transparente/Nenhuma</option>
-                  <option value="0px 0px 15px #ABABAB">Sombra: Extra Forte</option>
-                  <option value="0px 0px 10px #9E9E9E">Sombra: Forte</option>
-                  <option value="0px 0px 10px #D9D9D9">Sombra: Suave</option>
-                  <option value="custom">Sombra: Personalizada</option>
-                </select>
-
-                <div *ngIf="boxShadowOption === 'custom'" class="shadow-custom">
-                  <p class="sub-text-option">Deslocamento X:</p>
-                  <input type="number" placeholder="Ex: 5" [(ngModel)]="shadowX" (input)="updateBoxShadow('css', shadowX, shadowY, shadowBlur, shadowColor)"/>
-                  
-                  <p class="sub-text-option">Deslocamento Y:</p>
-                  <input type="number" placeholder="Ex: 5" [(ngModel)]="shadowY" (input)="updateBoxShadow('css', shadowX, shadowY, shadowBlur, shadowColor)"/>
-                  
-                  <p class="sub-text-option">Blur:</p>
-                  <input type="number" placeholder="Ex: 10" [(ngModel)]="shadowBlur" (input)="updateBoxShadow('css', shadowX, shadowY, shadowBlur, shadowColor)"/>
-                  
-                  <p class="sub-text-option">Cor:</p>
-                  <input class="colorInput" type="color" [(ngModel)]="shadowColor" (input)="updateBoxShadow('css', shadowX, shadowY, shadowBlur, shadowColor)"/>
-                </div>
-              </div>
-
-              <div class="property cursor">
-                <div class="title-prop">
-                  <p>Cursor</p>
-                  <i class="fa-solid fa-circle-question" title="Cursor mostrado ao passar com o mouse por cima do elemento"></i>
-                </div>
-
-                <select [(ngModel)]="cursor" (change)="updateStyle('cursor', cursor)">
-                  <option value="auto">Cursor: Automático</option>
-                  <option value="default">Cursor: Padrão</option>
-                  <option value="pointer">Cursor: Mão (Clique)</option>
-                  <option value="text">Cursor: Texto (Seleção)</option>
-                  <option value="move">Cursor: Mover</option>
-                  <option value="grab">Cursor: Pegar (Grab)</option>
-                  <option value="grabbing">Cursor: Pegando (Grabbing)</option>
-                  <option value="crosshair">Cursor: Mira (Crosshair)</option>
-                  <option value="not-allowed">Cursor: Proibido</option>
-                  <option value="wait">Cursor: Espera (Relógio)</option>
-                  <option value="help">Cursor: Ajuda</option>
-                  <option value="progress">Cursor: Carregando</option>
-                  <option value="zoom-in">Cursor: Zoom In</option>
-                  <option value="zoom-out">Cursor: Zoom Out</option>
-                  <option value="none">Cursor: Nenhum (Invisível)</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="position-prop">
-              <hr>
-              <div class="parting">
-                <p>Posicionamento</p>
-              </div>
-
-              <div class="property position">
-                <div class="title-prop">
-                  <p>Posição</p>
-                  <i class="fa-solid fa-circle-question" title="Define o tipo de posicionamento CSS do componente."></i>
-                </div>
-
-                <select [(ngModel)]="position" (change)="updateStyle('position', position)">
-                  <option value="static">Estática</option>
-                  <option value="relative">Relativa</option>
-                  <option value="absolute">Absoluta</option>
-                  <option value="fixed">Fixa</option>
-                </select>
-
-                <p class="sub-text-option">Acima:</p>
-                <select [(ngModel)]="topOption" (change)="onOptionChange('top')">
-                  <option value="auto">Acima: Automático</option>
-                  <option value="0px">Acima: 0px</option>
-                  <option value="custom">Acima: Personalizada</option>
-                </select>
-                <input style="margin-top: 10px;" *ngIf="topOption ===  'custom'" type="number" placeholder="Ex: 1" [(ngModel)]="top" (input)="updateStyle('top', top + 'px')"/>
-                
-                <p class="sub-text-option">Esquerda:</p>
-                <select [(ngModel)]="leftOption" (change)="onOptionChange('left')">
-                  <option value="auto">Acima: Automático</option>
-                  <option value="0px">Acima: 0px</option>
-                  <option value="custom">Acima: Personalizada</option>
-                </select>
-                <input style="margin-top: 10px;" *ngIf="leftOption ===  'custom'" type="number" placeholder="Ex: 2" [(ngModel)]="left" (input)="updateStyle('left', left + 'px')"/>
-                
-                <p class="sub-text-option">Direita:</p>
-                <select [(ngModel)]="rightOption" (change)="onOptionChange('right')">
-                  <option value="auto">Acima: Automático</option>
-                  <option value="0px">Acima: 0px</option>
-                  <option value="custom">Acima: Personalizada</option>
-                </select>
-                <input style="margin-top: 10px;" *ngIf="rightOption ===  'custom'" type="number" placeholder="Ex: 3" [(ngModel)]="right" (input)="updateStyle('right', right + 'px')"/>
-                
-                <p class="sub-text-option">Abaixo:</p>
-                <select [(ngModel)]="bottomOption" (change)="onOptionChange('bottom')">
-                  <option value="auto">Acima: Automático</option>
-                  <option value="0px">Acima: 0px</option>
-                  <option value="custom">Acima: Personalizada</option>
-                </select>
-                <input style="margin-top: 10px;" *ngIf="bottomOption ===  'custom'" type="number" placeholder="Ex: 4" [(ngModel)]="bottom" (input)="updateStyle('bottom', bottom + 'px')"/>
-              </div>
-
-              <div class="property zindex">
-                <div class="title-prop">
-                  <p>Ordem (z-index)</p>
-                  <i class="fa-solid fa-circle-question" title="Controla a sobreposição entre componentes. Quanto maior, mais acima fica."></i>
-                </div>
-
-                <input type="number" placeholder="Ex: 10" min="0" [(ngModel)]="zIndex" (input)="updateStyle('z-index', zIndex)"/>
-              </div>
-            </div>
-
-            <div class="animation-prop">
-              <hr>
-              <div class="parting">
-                <p>Animação e Transições</p>
-              </div>
-
-              <div class="property animation">
-                <div class="title-prop">
-                  <p>Transição</p>
-                  <i class="fa-solid fa-circle-question" title="Controla a suavidade e a duração das mudanças visuais no componente."></i>
-                </div>
-
-                <p class="sub-text-option">Tipo:</p>
-                <select [(ngModel)]="animationOption" (change)="updateStyle('transition', animationOption)">
-                  <option value="none">Nenhuma</option>
-                  
-                  <option value="0.3s ease">Curta (0.3s) - Ease</option>
-                  <option value="0.3s ease-in">Curta (0.3s) - Ease-in</option>
-                  <option value="0.3s ease-out">Curta (0.3s) - Ease-out</option>
-                  <option value="0.3s linear">Curta (0.3s) - Linear</option>
-                  <option value="0.3s all">Curta (0.3s) - All</option>
-
-                  <option value="0.6s ease">Média (0.6s) - Ease</option>
-                  <option value="0.6s ease-in">Média (0.6s) - Ease-in</option>
-                  <option value="0.6s ease-out">Média (0.6s) - Ease-out</option>
-                  <option value="0.6s linear">Média (0.6s) - Linear</option>
-                  <option value="0.6s all">Média (0.6s) - All</option>
-
-                  <option value="1s ease">Longa (1s) - Ease</option>
-                  <option value="1s ease-in">Longa (1s) - Ease-in</option>
-                  <option value="1s ease-out">Longa (1s) - Ease-out</option>
-                  <option value="1s linear">Longa (1s) - Linear</option>
-                  <option value="1s all">Longa (1s) - All</option>
-                </select>
-
-                <div *ngIf="animationOption !==  'none'">
+  
+                <div class="property size-height">
                   <div class="title-prop">
-                    <p>Animação Hover</p>
-                    <i class="fa-solid fa-circle-question" title="Cria efeitos visuais interativos, como mudança de cor, tamanho, sombra ou exibição de conteúdo adicional quando o usuário interage com um elemento. ."></i>
+                    <p>Altura</p>
+                    <i class="fa-solid fa-circle-question" title="Altura do componente em pixels."></i>
                   </div>
   
-                  <p class="sub-text-option">Transformar escala ao passar o mouse:</p>
-                  <input type="number" min="0.7" max="2" step="0.05" placeholder="Ex: 1,15" [(ngModel)]="hoverScale" (input)="updateHoverStyle('transform', 'scale('+ hoverScale + ')')" />
+                  <select [(ngModel)]="heightOption" (change)="onOptionChange('height')">
+                    <option value="100%">Altura: 100%</option>
+                    <option value="auto">Altura: Automática</option>
+                    <option value="custom">Altura: Personalizada</option>
+                  </select>
+  
+                  <input style="margin-top: 10px;" *ngIf="heightOption === 'custom'" type="number" placeholder="Ex: 655" min="0" [max]="maxHeight" [(ngModel)]="height" (input)="updateStyle('height', height + 'px')"/>
+                </div>
+          
+                <div class="property size-width">
+                  <div class="title-prop">
+                    <p>Largura</p>
+                    <i class="fa-solid fa-circle-question" title="Largura do componente em pixels."></i>
+                  </div>
+  
+                  <select [(ngModel)]="widthOption" (change)="onOptionChange('width')">
+                    <option value="100%">Largura: 100%</option>
+                    <option value="auto">Largura: Automática</option>
+                    <option value="custom">Largura: Personalizada</option>
+                  </select>
+  
+                  <input style="margin-top: 10px;" *ngIf="widthOption === 'custom'" type="number" placeholder="Ex: 320" min="0" [max]="maxWidth" [(ngModel)]="width" (input)="updateStyle('width', width + 'px')"/>
+                </div>
+              </div>
+  
+              <div class="spacing-prop">
+                <hr>
+                <div class="parting">
+                  <p>Espaçamento</p>
+                </div>
+  
+                <div class="property spacing-margin">
+                  <div class="title-prop">
+                    <p>Espaço exterior</p>
+                    <i class="fa-solid fa-circle-question" title="Espaço externo (margem) ao redor do componente."></i>
+                  </div>
+  
+                  <p class="sub-text-option">Acima:</p>
+                  <input type="number" placeholder="Ex: 10" [(ngModel)]="marginTop" (input)="updateStyle('margin-top', marginTop + 'px')"/>
                   
-                  <p class="sub-text-option">Curvatura dos cantos ao passar o mouse:</p>
-                  <input type="number" min="0" placeholder="Ex: 20" [(ngModel)]="hoverBorderRadius" (input)="updateHoverStyle('border-radius', hoverBorderRadius + 'px')" />
+                  <p class="sub-text-option">Esquerda:</p>
+                  <input type="number" placeholder="Ex: 9" [(ngModel)]="marginLeft" (input)="updateStyle('margin-left', marginLeft + 'px')"/>
+  
+                  <p class="sub-text-option">Direita:</p>
+                  <input type="number" placeholder="Ex: 8" [(ngModel)]="marginRight" (input)="updateStyle('margin-right', marginRight + 'px')"/>
+  
+                  <p class="sub-text-option">Abaixo:</p>
+                  <input type="number" placeholder="Ex: 7" [(ngModel)]="marginBottom" (input)="updateStyle('margin-bottom', marginBottom + 'px')"/>
+                </div>
+  
+                <div class="property spacing-padding">
+                  <div class="title-prop">
+                    <p>Espaço interior</p>
+                    <i class="fa-solid fa-circle-question" title="Espaço interno (padding) dentro do componente."></i>
+                  </div>
+  
+                  <p class="sub-text-option">Acima:</p>
+                  <input type="number" placeholder="Ex: 15" [(ngModel)]="paddingTop" (input)="updateStyle('padding-top', paddingTop + 'px')"/>
                   
-                  <p class="sub-text-option">Sombra ao passar o mouse:</p>
-                  <select [(ngModel)]="hoverBoxShadowOption" (change)="onOptionChange('hover-box-shadow')">
+                  <p class="sub-text-option">Esquerda:</p>
+                  <input type="number" placeholder="Ex: 15" [(ngModel)]="paddingLeft" (input)="updateStyle('padding-left', paddingLeft + 'px')"/>
+  
+                  <p class="sub-text-option">Direita:</p>
+                  <input type="number" placeholder="Ex: 15" [(ngModel)]="paddingRight" (input)="updateStyle('padding-right', paddingRight + 'px')"/>
+  
+                  <p class="sub-text-option">Abaixo:</p>
+                  <input type="number" placeholder="Ex: 15" [(ngModel)]="paddingBottom" (input)="updateStyle('padding-bottom', paddingBottom + 'px')"/>
+                </div>
+              </div>
+  
+              <div class="appearance-prop">
+                <hr>
+                <div class="parting">
+                  <p>Aparência</p>
+                </div>
+                <div class="property appearance-border">
+                  <div class="title-prop">
+                    <p>Borda</p>
+                    <i class="fa-solid fa-circle-question" title="Configuração da borda do componente, incluindo cor e tipo."></i>
+                  </div>
+                  
+                  <p class="sub-text-option">Tamanho:</p>
+                  <input type="number" placeholder="Ex: 2" min="0" max="10" [(ngModel)]="borderSize" (input)="updateStyle('border-width', borderSize + 'px')"/>
+                  
+                  <p class="sub-text-option">Cor:</p>
+                  <input class="colorInput" type="color" [(ngModel)]="borderColor" (input)="updateStyle('border-color', borderColor)"/>
+                  
+                  <p class="sub-text-option">Tipo:</p>
+                  <select class="border-type" [(ngModel)]="borderType" (change)="updateStyle('border-style', borderType)">
+                    <option value="none">Nenhuma</option>
+                    <option value="solid">Sólida</option>
+                    <option value="dashed">Tracejada</option>
+                    <option value="dotted">Pontilhada</option>
+                  </select>
+                </div>
+  
+                <div class="property appearance-border-radius">
+                  <div class="title-prop">
+                    <p>Curva de Canto</p>
+                    <i class="fa-solid fa-circle-question" title="Curvatura dos cantos do componente (Corner, Border Radius)."></i>
+                  </div>
+  
+                  <p class="sub-text-option">Superior Esquerda:</p>
+                  <input type="number" placeholder="Ex: 20" min="0" [(ngModel)]="borderRadiusTopLeft" (input)="updateStyle('border-top-left-radius', borderRadiusTopLeft + 'px')"/>
+  
+                  <p class="sub-text-option">Superior Direita:</p>
+                  <input type="number" placeholder="Ex: 19" min="0" [(ngModel)]="borderRadiusTopRight" (input)="updateStyle('border-top-right-radius', borderRadiusTopRight + 'px')"/>
+  
+                  <p class="sub-text-option">Inferior Esquerda:</p>
+                  <input type="number" placeholder="Ex: 18" min="0" [(ngModel)]="borderRadiusBottomLeft" (input)="updateStyle('border-bottom-left-radius', borderRadiusBottomLeft + 'px')"/>
+  
+                  <p class="sub-text-option">Inferiro Direita:</p>
+                  <input type="number" placeholder="Ex: 17" min="0" [(ngModel)]="borderRadiusBottomRight" (input)="updateStyle('border-bottom-right-radius', borderRadiusBottomRight + 'px')"/>
+                </div>
+  
+                <div class="property appearance-background">
+                  <div class="title-prop">
+                    <p>Cor de fundo</p>
+                    <i class="fa-solid fa-circle-question" title="Cor de fundo do componente."></i>
+                  </div>
+  
+                  <select [(ngModel)]="backgroundColorOption" (change)="onOptionChange('background-color')">
+                    <option value="transparent">Cor: Transparente/Nenhuma</option>
+                    <option value="#FFFFFF">Cor: Branco</option>
+                    <option value="#000000">Cor: Preto</option>
+                    <option value="custom">Cor: Personalizada</option>
+                  </select>
+  
+                  <input style="margin-top: 10px;" *ngIf="backgroundColorOption === 'custom'" class="colorInput" type="color" [(ngModel)]="backgroundColor" (input)="updateStyle('background-color', backgroundColor)"/>
+                </div>
+          
+                <div class="property appearance-color">
+                  <div class="title-prop">
+                    <p>Cor</p>
+                    <i class="fa-solid fa-circle-question" title="Cor dos textos ou ícones do componente."></i>
+                  </div>
+  
+                  <input class="colorInput" type="color" [(ngModel)]="color" (input)="updateStyle('color', color)"/>
+                </div>
+  
+                <div class="property apperance-font">
+                  <div class="title-prop">
+                    <p>Fonte</p>
+                    <i class="fa-solid fa-circle-question" title="Estilo, Tamanho, Espaçamento e Cor da fonte usada no componente."></i>
+                  </div>
+  
+                  <select class="font-family" [(ngModel)]="fontFamily" (change)="updateStyle('font-family', fontFamily)">
+                      <option value="Arial, sans-serif">Arial</option>
+                      <option value="Verdana, sans-serif">Verdana</option>
+                      <option value="Tahoma, sans-serif">Tahoma</option>
+                      <option value="Trebuchet MS, sans-serif">Trebuchet MS</option>
+                      <option value="Gill Sans, sans-serif">Gill Sans</option>
+                      <option value="Helvetica, sans-serif">Helvetica</option>
+                      <option value="Segoe UI, sans-serif">Segoe UI</option>
+  
+                      <option value="Times New Roman, serif">Times New Roman</option>
+                      <option value="Georgia, serif">Georgia</option>
+                      <option value="Garamond, serif">Garamond</option>
+  
+                      <option value="Courier New, monospace">Courier New</option>
+                      <option value="Lucida Console, monospace">Lucida Console</option>
+                      <option value="Consolas, monospace">Consolas</option>
+  
+                      <option value="Poppins, sans-serif">Poppins</option>
+                      <option value="Boldonse, system-ui, sans-serif">Boldonse</option>
+                      <option value="Outfit, sans-serif">Outfit</option>
+                      <option value="Inter, sans-serif">Inter</option>
+                      <option value="Roboto, sans-serif">Roboto</option>
+                      <option value="Open Sans, sans-serif">Open Sans</option>
+                      <option value="Lato, sans-serif">Lato</option>
+                      <option value="Montserrat, sans-serif">Montserrat</option>
+                      <option value="Ubuntu, sans-serif">Ubuntu</option>
+                      <option value="Ubuntu Condensed, sans-serif">Ubuntu Condensed</option>
+                  </select>
+  
+                  <p class="sub-text-option">Texto:</p>
+                  <input type="text" placeholder="Seu texto" [(ngModel)]="textContent" (input)="updateText(textContent)" />
+                  
+                  <p class="sub-text-option">Tamanho:</p>
+                  <input type="number" placeholder="Ex: 16" [(ngModel)]="fontSize" (input)="updateStyle('font-size', fontSize)" />
+  
+                  <p class="sub-text-option">Largura (Afinar ou Engrossar):</p>
+                  <select class="font-width" [(ngModel)]="fontWeight" (change)="updateStyle('font-weight', fontWeight)">
+                    <option value="100">Thin (100)</option>
+                    <option value="200">Extra Light (200)</option>
+                    <option value="300">Light (300)</option>
+                    <option value="400">Regular (400)</option>
+                    <option value="500">Medium (500)</option>
+                    <option value="600">Semi Bold (600)</option>
+                    <option value="700">Bold (700)</option>
+                    <option value="800">Extra Bold (800)</option>
+                    <option value="900">Black (900)</option>
+                  </select>
+  
+                  <p class="sub-text-option">Alinhamento do Texto:</p>
+                  <select class="text-align" [(ngModel)]="textAlign" (change)="updateStyle('text-align', textAlign)">
+                    <option value="start">Começo</option>
+                    <option value="end">Fim</option>
+                    <option value="center">Centro</option>
+                    <option value="left">Esquerda</option>
+                    <option value="right">Direita</option>
+                    <option value="justify">Justificado</option>
+                  </select>
+                </div>
+  
+                <div class="property opacity">
+                  <div class="title-prop">
+                    <p>Opacidade</p>
+                    <i class="fa-solid fa-circle-question" title="Opacidade visual do componente, de 0 (invisível) a 1 (totalmente visível)."></i>
+                  </div>
+  
+                  <input id="range-opacity" type="range" min="0" max="1" step="0.01" [(ngModel)]="opacity" (input)="updateStyle('opacity', opacity)">
+                </div>
+  
+                <div class="property shadow">
+                  <div class="title-prop">
+                    <p>Sombra</p>
+                    <i class="fa-solid fa-circle-question" title="Sombra aplicada ao redor do componente."></i>
+                  </div>
+  
+                  <select [(ngModel)]="boxShadowOption" (change)="onOptionChange('box-shadow')">
                     <option value="none">Sombra: Transparente/Nenhuma</option>
-                    <option value="0px 0px 15px #545454">Sombra: Extra Forte</option>
-                    <option value="0px 0px 10px #7D7D7D">Sombra: Forte</option>
-                    <option value="0px 0px 10px #B5B5B5">Sombra: Suave</option>
+                    <option value="0px 0px 15px #ABABAB">Sombra: Extra Forte</option>
+                    <option value="0px 0px 10px #9E9E9E">Sombra: Forte</option>
+                    <option value="0px 0px 10px #D9D9D9">Sombra: Suave</option>
                     <option value="custom">Sombra: Personalizada</option>
                   </select>
-
-                  <div *ngIf="hoverBoxShadowOption === 'custom'" class="shadow-custom">
+  
+                  <div *ngIf="boxShadowOption === 'custom'" class="shadow-custom">
                     <p class="sub-text-option">Deslocamento X:</p>
-                    <input type="number" placeholder="Ex: 5" [(ngModel)]="hoverShadowX" (input)="updateBoxShadow('hover', hoverShadowX, hoverShadowY, hoverShadowBlur, hoverShadowColor)"/>
+                    <input type="number" placeholder="Ex: 5" [(ngModel)]="shadowX" (input)="updateBoxShadow('css', shadowX, shadowY, shadowBlur, shadowColor)"/>
                     
                     <p class="sub-text-option">Deslocamento Y:</p>
-                    <input type="number" placeholder="Ex: 5" [(ngModel)]="hoverShadowY" (input)="updateBoxShadow('hover', hoverShadowX, hoverShadowY, hoverShadowBlur, hoverShadowColor)"/>
+                    <input type="number" placeholder="Ex: 5" [(ngModel)]="shadowY" (input)="updateBoxShadow('css', shadowX, shadowY, shadowBlur, shadowColor)"/>
                     
                     <p class="sub-text-option">Blur:</p>
-                    <input type="number" placeholder="Ex: 10" [(ngModel)]="hoverShadowBlur" (input)="updateBoxShadow('hover', hoverShadowX, hoverShadowY, hoverShadowBlur, hoverShadowColor)"/>
+                    <input type="number" placeholder="Ex: 10" [(ngModel)]="shadowBlur" (input)="updateBoxShadow('css', shadowX, shadowY, shadowBlur, shadowColor)"/>
                     
                     <p class="sub-text-option">Cor:</p>
-                    <input class="colorInput" type="color" [(ngModel)]="hoverShadowColor" (input)="updateBoxShadow('hover', hoverShadowX, hoverShadowY, hoverShadowBlur, hoverShadowColor)"/>
+                    <input class="colorInput" type="color" [(ngModel)]="shadowColor" (input)="updateBoxShadow('css', shadowX, shadowY, shadowBlur, shadowColor)"/>
+                  </div>
+                </div>
+  
+                <div class="property cursor">
+                  <div class="title-prop">
+                    <p>Cursor</p>
+                    <i class="fa-solid fa-circle-question" title="Cursor mostrado ao passar com o mouse por cima do elemento"></i>
+                  </div>
+  
+                  <select [(ngModel)]="cursor" (change)="updateStyle('cursor', cursor)">
+                    <option value="auto">Cursor: Automático</option>
+                    <option value="default">Cursor: Padrão</option>
+                    <option value="pointer">Cursor: Mão (Clique)</option>
+                    <option value="text">Cursor: Texto (Seleção)</option>
+                    <option value="move">Cursor: Mover</option>
+                    <option value="grab">Cursor: Pegar (Grab)</option>
+                    <option value="grabbing">Cursor: Pegando (Grabbing)</option>
+                    <option value="crosshair">Cursor: Mira (Crosshair)</option>
+                    <option value="not-allowed">Cursor: Proibido</option>
+                    <option value="wait">Cursor: Espera (Relógio)</option>
+                    <option value="help">Cursor: Ajuda</option>
+                    <option value="progress">Cursor: Carregando</option>
+                    <option value="zoom-in">Cursor: Zoom In</option>
+                    <option value="zoom-out">Cursor: Zoom Out</option>
+                    <option value="none">Cursor: Nenhum (Invisível)</option>
+                  </select>
+                </div>
+              </div>
+  
+              <div class="position-prop">
+                <hr>
+                <div class="parting">
+                  <p>Posicionamento</p>
+                </div>
+  
+                <div class="property position">
+                  <div class="title-prop">
+                    <p>Posição</p>
+                    <i class="fa-solid fa-circle-question" title="Define o tipo de posicionamento CSS do componente."></i>
+                  </div>
+  
+                  <select [(ngModel)]="position" (change)="updateStyle('position', position)">
+                    <option value="static">Estática</option>
+                    <option value="relative">Relativa</option>
+                    <option value="absolute">Absoluta</option>
+                    <option value="fixed">Fixa</option>
+                  </select>
+  
+                  <p class="sub-text-option">Acima:</p>
+                  <select [(ngModel)]="topOption" (change)="onOptionChange('top')">
+                    <option value="auto">Acima: Automático</option>
+                    <option value="0px">Acima: 0px</option>
+                    <option value="custom">Acima: Personalizada</option>
+                  </select>
+                  <input style="margin-top: 10px;" *ngIf="topOption ===  'custom'" type="number" placeholder="Ex: 1" [(ngModel)]="top" (input)="updateStyle('top', top + 'px')"/>
+                  
+                  <p class="sub-text-option">Esquerda:</p>
+                  <select [(ngModel)]="leftOption" (change)="onOptionChange('left')">
+                    <option value="auto">Acima: Automático</option>
+                    <option value="0px">Acima: 0px</option>
+                    <option value="custom">Acima: Personalizada</option>
+                  </select>
+                  <input style="margin-top: 10px;" *ngIf="leftOption ===  'custom'" type="number" placeholder="Ex: 2" [(ngModel)]="left" (input)="updateStyle('left', left + 'px')"/>
+                  
+                  <p class="sub-text-option">Direita:</p>
+                  <select [(ngModel)]="rightOption" (change)="onOptionChange('right')">
+                    <option value="auto">Acima: Automático</option>
+                    <option value="0px">Acima: 0px</option>
+                    <option value="custom">Acima: Personalizada</option>
+                  </select>
+                  <input style="margin-top: 10px;" *ngIf="rightOption ===  'custom'" type="number" placeholder="Ex: 3" [(ngModel)]="right" (input)="updateStyle('right', right + 'px')"/>
+                  
+                  <p class="sub-text-option">Abaixo:</p>
+                  <select [(ngModel)]="bottomOption" (change)="onOptionChange('bottom')">
+                    <option value="auto">Acima: Automático</option>
+                    <option value="0px">Acima: 0px</option>
+                    <option value="custom">Acima: Personalizada</option>
+                  </select>
+                  <input style="margin-top: 10px;" *ngIf="bottomOption ===  'custom'" type="number" placeholder="Ex: 4" [(ngModel)]="bottom" (input)="updateStyle('bottom', bottom + 'px')"/>
+                </div>
+  
+                <div class="property zindex">
+                  <div class="title-prop">
+                    <p>Ordem (z-index)</p>
+                    <i class="fa-solid fa-circle-question" title="Controla a sobreposição entre componentes. Quanto maior, mais acima fica."></i>
+                  </div>
+  
+                  <input type="number" placeholder="Ex: 10" min="0" [(ngModel)]="zIndex" (input)="updateStyle('z-index', zIndex)"/>
+                </div>
+              </div>
+  
+              <div class="animation-prop">
+                <hr>
+                <div class="parting">
+                  <p>Animação e Transições</p>
+                </div>
+  
+                <div class="property animation">
+                  <div class="title-prop">
+                    <p>Transição</p>
+                    <i class="fa-solid fa-circle-question" title="Controla a suavidade e a duração das mudanças visuais no componente."></i>
+                  </div>
+  
+                  <p class="sub-text-option">Tipo:</p>
+                  <select [(ngModel)]="animationOption" (change)="updateStyle('transition', animationOption)">
+                    <option value="none">Nenhuma</option>
+                    
+                    <option value="0.3s ease">Curta (0.3s) - Ease</option>
+                    <option value="0.3s ease-in">Curta (0.3s) - Ease-in</option>
+                    <option value="0.3s ease-out">Curta (0.3s) - Ease-out</option>
+                    <option value="0.3s linear">Curta (0.3s) - Linear</option>
+                    <option value="0.3s all">Curta (0.3s) - All</option>
+  
+                    <option value="0.6s ease">Média (0.6s) - Ease</option>
+                    <option value="0.6s ease-in">Média (0.6s) - Ease-in</option>
+                    <option value="0.6s ease-out">Média (0.6s) - Ease-out</option>
+                    <option value="0.6s linear">Média (0.6s) - Linear</option>
+                    <option value="0.6s all">Média (0.6s) - All</option>
+  
+                    <option value="1s ease">Longa (1s) - Ease</option>
+                    <option value="1s ease-in">Longa (1s) - Ease-in</option>
+                    <option value="1s ease-out">Longa (1s) - Ease-out</option>
+                    <option value="1s linear">Longa (1s) - Linear</option>
+                    <option value="1s all">Longa (1s) - All</option>
+                  </select>
+  
+                  <div *ngIf="animationOption !==  'none'">
+                    <div class="title-prop">
+                      <p>Animação Hover</p>
+                      <i class="fa-solid fa-circle-question" title="Cria efeitos visuais interativos, como mudança de cor, tamanho, sombra ou exibição de conteúdo adicional quando o usuário interage com um elemento. ."></i>
+                    </div>
+    
+                    <p class="sub-text-option">Transformar escala ao passar o mouse:</p>
+                    <input type="number" min="0.7" max="2" step="0.05" placeholder="Ex: 1,15" [(ngModel)]="hoverScale" (input)="updateHoverStyle('transform', 'scale('+ hoverScale + ')')" />
+                    
+                    <p class="sub-text-option">Curvatura dos cantos ao passar o mouse:</p>
+                    <input type="number" min="0" placeholder="Ex: 20" [(ngModel)]="hoverBorderRadius" (input)="updateHoverStyle('border-radius', hoverBorderRadius + 'px')" />
+                    
+                    <p class="sub-text-option">Sombra ao passar o mouse:</p>
+                    <select [(ngModel)]="hoverBoxShadowOption" (change)="onOptionChange('hover-box-shadow')">
+                      <option value="none">Sombra: Transparente/Nenhuma</option>
+                      <option value="0px 0px 15px #545454">Sombra: Extra Forte</option>
+                      <option value="0px 0px 10px #7D7D7D">Sombra: Forte</option>
+                      <option value="0px 0px 10px #B5B5B5">Sombra: Suave</option>
+                      <option value="custom">Sombra: Personalizada</option>
+                    </select>
+  
+                    <div *ngIf="hoverBoxShadowOption === 'custom'" class="shadow-custom">
+                      <p class="sub-text-option">Deslocamento X:</p>
+                      <input type="number" placeholder="Ex: 5" [(ngModel)]="hoverShadowX" (input)="updateBoxShadow('hover', hoverShadowX, hoverShadowY, hoverShadowBlur, hoverShadowColor)"/>
+                      
+                      <p class="sub-text-option">Deslocamento Y:</p>
+                      <input type="number" placeholder="Ex: 5" [(ngModel)]="hoverShadowY" (input)="updateBoxShadow('hover', hoverShadowX, hoverShadowY, hoverShadowBlur, hoverShadowColor)"/>
+                      
+                      <p class="sub-text-option">Blur:</p>
+                      <input type="number" placeholder="Ex: 10" [(ngModel)]="hoverShadowBlur" (input)="updateBoxShadow('hover', hoverShadowX, hoverShadowY, hoverShadowBlur, hoverShadowColor)"/>
+                      
+                      <p class="sub-text-option">Cor:</p>
+                      <input class="colorInput" type="color" [(ngModel)]="hoverShadowColor" (input)="updateBoxShadow('hover', hoverShadowX, hoverShadowY, hoverShadowBlur, hoverShadowColor)"/>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div class="display-flex-prop">
-              <hr>
-              <div class="parting">
-                <p>Layout Flexível</p>
-              </div>
-
-              <div class="property display">
-                <div class="title-prop">
-                  <p>Display</p>
-                  <i class="fa-solid fa-circle-question" title="Define se o componente usará layout flexível."></i>
+  
+              <div class="display-flex-prop">
+                <hr>
+                <div class="parting">
+                  <p>Layout Flexível</p>
                 </div>
-
-                <select [(ngModel)]="display" (change)="updateStyle('display', display)">
-                  <option value="block" selected>Block</option>
-                  <option value="inline-block">Inline Block</option>
-                  <option value="flex">Flex</option>
-                  <option value="inline-flex">Inline Flex</option>
-                  <option value="none">None</option>
-                </select>
+  
+                <div class="property display">
+                  <div class="title-prop">
+                    <p>Display</p>
+                    <i class="fa-solid fa-circle-question" title="Define se o componente usará layout flexível."></i>
+                  </div>
+  
+                  <select [(ngModel)]="display" (change)="updateStyle('display', display)">
+                    <option value="block" selected>Block</option>
+                    <option value="inline-block">Inline Block</option>
+                    <option value="flex">Flex</option>
+                    <option value="inline-flex">Inline Flex</option>
+                    <option value="none">None</option>
+                  </select>
+                </div>
+  
+                <div class="property flex-direction">
+                  <div class="title-prop">
+                    <p>Direção dos Itens</p>
+                    <i class="fa-solid fa-circle-question" title="Define o eixo principal do layout flex."></i>
+                  </div>
+                  
+                  <select [(ngModel)]="flexDirection" (change)="updateStyle('flex-direction', flexDirection)">
+                    <option value="row" selected>Horizontal (row)</option>
+                    <option value="row-reverse">Horizontal reverso</option>
+                    <option value="column">Vertical (column)</option>
+                    <option value="column-reverse">Vertical reverso</option>
+                  </select>
+                </div>
+  
+                <div class="property flex-justify">
+                  <div class="title-prop">
+                    <p>Alinhamento horizontal</p>
+                    <i class="fa-solid fa-circle-question" title="Controla o espaçamento entre os itens."></i>
+                  </div>
+  
+                  <select [(ngModel)]="flexJustify" (change)="updateStyle('justify-content', flexJustify)">
+                    <option value="flex-start">Início</option>
+                    <option value="center">Centro</option>
+                    <option value="flex-end">Fim</option>
+                    <option value="space-between">Espaço entre</option>
+                    <option value="space-around">Espaço ao redor</option>
+                    <option value="space-evenly">Espaço igual</option>
+                  </select>
+                </div>
+  
+                <div class="property flex-align-items">
+                  <div class="title-prop">
+                    <p>Alinhamento dos Itens</p>
+                    <i class="fa-solid fa-circle-question" title="Alinha verticalmente os itens dentro da linha atual."></i>
+                  </div>
+  
+                  <select [(ngModel)]="flexAlignItems" (change)="updateStyle('align-items', flexAlignItems)">
+                    <option value="stretch">Esticar</option>
+                    <option value="flex-start">Topo</option>
+                    <option value="center">Centro</option>
+                    <option value="flex-end">Base</option>
+                    <option value="baseline">Linha base</option>
+                  </select>
+                </div>
+  
+                <div class="property flex-align">
+                  <div class="title-prop">
+                    <p>Alinhamento vertical</p>
+                    <i class="fa-solid fa-circle-question" title="Alinha os itens no eixo transversal."></i>
+                  </div>
+  
+                  <select [(ngModel)]="flexAlign" (change)="updateStyle('align-content', flexAlign)">
+                    <option value="stretch">Esticar</option>
+                    <option value="flex-start">Topo</option>
+                    <option value="center">Centro</option>
+                    <option value="flex-end">Base</option>
+                    <option value="baseline">Linha base</option>
+                  </select>
+                </div>
+  
+                <div class="property flex-wrap">
+                  <div class="title-prop">
+                    <p>Quebra de linha</p>
+                    <i class="fa-solid fa-circle-question" title="Permite que os itens quebrem para a próxima linha."></i>
+                  </div>
+  
+                  <select [(ngModel)]="flexWrap" (change)="updateStyle('flex-wrap', flexWrap)">
+                    <option value="nowrap">Não quebrar</option>
+                    <option value="wrap">Quebrar</option>
+                    <option value="wrap-reverse">Quebrar reverso</option>
+                  </select>
+                </div>
+  
+                <div class="property flex-gap">
+                  <div class="title-prop">
+                    <p>Espaçamento entre os itens</p>
+                    <i class="fa-solid fa-circle-question" title="Define o espaçamento entre os itens do container."></i>
+                  </div>
+  
+                  <input type="number" placeholder="Ex: 10" [(ngModel)]="flexGap" (input)="updateStyle('gap', flexGap + 'px')"/>
+                </div>
+  
+                <div class="property flex-align-self">
+                  <div class="title-prop">
+                    <p>Alinhamento Individual</p>
+                    <i class="fa-solid fa-circle-question" title="Sobrescreve o alinhamento vertical para este item específico."></i>
+                  </div>
+                  <select [(ngModel)]="alignSelf" (change)="updateStyle('align-self', alignSelf)">
+                    <option value="auto">Auto</option>
+                    <option value="flex-start">Topo</option>
+                    <option value="center">Centro</option>
+                    <option value="flex-end">Base</option>
+                    <option value="stretch">Esticar</option>
+                    <option value="baseline">Linha base</option>
+                  </select>
+                </div>
               </div>
+            </div>
+          </div>
+        </div>
 
-              <div class="property flex-direction">
-                <div class="title-prop">
-                  <p>Direção dos Itens</p>
-                  <i class="fa-solid fa-circle-question" title="Define o eixo principal do layout flex."></i>
+        <div class="explorer-scroll" *ngIf="components !== null && displayWindow === 'explorer'">
+          <ul>
+            <li *ngFor="let el of components">
+              <div class="componet-explorer">
+                <div class="info">
+                  <i class="fa-solid fa-caret-right"></i>
+                  <i [class]="el.icon"></i>
+                  <p>{{el.component.id}}</p>
                 </div>
                 
-                <select [(ngModel)]="flexDirection" (change)="updateStyle('flex-direction', flexDirection)">
-                  <option value="row" selected>Horizontal (row)</option>
-                  <option value="row-reverse">Horizontal reverso</option>
-                  <option value="column">Vertical (column)</option>
-                  <option value="column-reverse">Vertical reverso</option>
-                </select>
-              </div>
+                <div class="actions">
+                  <button (click)="selectComponent(el.component)" class="select-button" title="Selecionar Componente">
+                    <i class="fa-solid fa-expand action-mark"></i>
+                  </button>
 
-              <div class="property flex-justify">
-                <div class="title-prop">
-                  <p>Alinhamento horizontal</p>
-                  <i class="fa-solid fa-circle-question" title="Controla o espaçamento entre os itens."></i>
+                  <button class="info-button" [title]="el.description">
+                    <i class="fa-solid fa-circle-info action-info"></i>
+                  </button>
+
+                  <button (click)="deleteComponent(el.component)" class="delete-button" title="Remover Componente">
+                    <i class="fa-solid fa-trash-can action-remove"></i>
+                  </button>
                 </div>
-
-                <select [(ngModel)]="flexJustify" (change)="updateStyle('justify-content', flexJustify)">
-                  <option value="flex-start">Início</option>
-                  <option value="center">Centro</option>
-                  <option value="flex-end">Fim</option>
-                  <option value="space-between">Espaço entre</option>
-                  <option value="space-around">Espaço ao redor</option>
-                  <option value="space-evenly">Espaço igual</option>
-                </select>
               </div>
 
-              <div class="property flex-align-items">
-                <div class="title-prop">
-                  <p>Alinhamento dos Itens</p>
-                  <i class="fa-solid fa-circle-question" title="Alinha verticalmente os itens dentro da linha atual."></i>
-                </div>
+              <hr>
+            </li>
+          </ul>
+        </div>
 
-                <select [(ngModel)]="flexAlignItems" (change)="updateStyle('align-items', flexAlignItems)">
-                  <option value="stretch">Esticar</option>
-                  <option value="flex-start">Topo</option>
-                  <option value="center">Centro</option>
-                  <option value="flex-end">Base</option>
-                  <option value="baseline">Linha base</option>
-                </select>
-              </div>
+        <div class="delete-component-box-ask" *ngIf="askDeleteComponent">
+          <div class="delete-component-box">
+            <h3>Tem certeza que deseja excluir este componente/tela?</h3>
+            <div class="delete-component-text">
+              <p>*Esta ação não pode ser desfeita*</p>
+              <p>*Todos elementos detro serão excluidos juntos*</p>
+            </div>
 
-              <div class="property flex-align">
-                <div class="title-prop">
-                  <p>Alinhamento vertical</p>
-                  <i class="fa-solid fa-circle-question" title="Alinha os itens no eixo transversal."></i>
-                </div>
-
-                <select [(ngModel)]="flexAlign" (change)="updateStyle('align-content', flexAlign)">
-                  <option value="stretch">Esticar</option>
-                  <option value="flex-start">Topo</option>
-                  <option value="center">Centro</option>
-                  <option value="flex-end">Base</option>
-                  <option value="baseline">Linha base</option>
-                </select>
-              </div>
-
-              <div class="property flex-wrap">
-                <div class="title-prop">
-                  <p>Quebra de linha</p>
-                  <i class="fa-solid fa-circle-question" title="Permite que os itens quebrem para a próxima linha."></i>
-                </div>
-
-                <select [(ngModel)]="flexWrap" (change)="updateStyle('flex-wrap', flexWrap)">
-                  <option value="nowrap">Não quebrar</option>
-                  <option value="wrap">Quebrar</option>
-                  <option value="wrap-reverse">Quebrar reverso</option>
-                </select>
-              </div>
-
-              <div class="property flex-gap">
-                <div class="title-prop">
-                  <p>Espaçamento entre os itens</p>
-                  <i class="fa-solid fa-circle-question" title="Define o espaçamento entre os itens do container."></i>
-                </div>
-
-                <input type="number" placeholder="Ex: 10" [(ngModel)]="flexGap" (input)="updateStyle('gap', flexGap + 'px')"/>
-              </div>
-
-              <div class="property flex-align-self">
-                <div class="title-prop">
-                  <p>Alinhamento Individual</p>
-                  <i class="fa-solid fa-circle-question" title="Sobrescreve o alinhamento vertical para este item específico."></i>
-                </div>
-                <select [(ngModel)]="alignSelf" (change)="updateStyle('align-self', alignSelf)">
-                  <option value="auto">Auto</option>
-                  <option value="flex-start">Topo</option>
-                  <option value="center">Centro</option>
-                  <option value="flex-end">Base</option>
-                  <option value="stretch">Esticar</option>
-                  <option value="baseline">Linha base</option>
-                </select>
-              </div>
+            <div class="buttons">
+              <button class="confirm-delete" (click)="confirmDelete()">
+                <i class="fa-solid fa-trash-can"></i>
+                Confirmar
+              </button>
+              
+              <button class="cancel-delete" (click)="cancelDelete()">
+                <i class="fa-solid fa-xmark"></i>
+                Cancelar
+              </button>
             </div>
           </div>
         </div>
