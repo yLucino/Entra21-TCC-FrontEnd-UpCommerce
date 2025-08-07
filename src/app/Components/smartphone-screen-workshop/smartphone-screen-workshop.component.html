@@ -21,7 +21,8 @@
       [id]="'smartphoneList'"
       [cdkDropListEnterPredicate]="canEnterSmartphone"
       [cdkDropListConnectedTo]="connectedDropListId"
-      (cdkDropListDropped)="drop($event)">
+      (cdkDropListDropped)="drop($event)"
+      (click)="deselectElement($event)">
       
       <ng-container #dropHost></ng-container>
     </div>

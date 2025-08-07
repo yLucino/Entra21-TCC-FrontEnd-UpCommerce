@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { AreaComponent } from 'src/app/dragAndDrop/area/area.component';
+import { AreaComponent } from 'src/app/dragAndDrop/screen/area/area.component';
 
-import { ButtonDragComponent } from 'src/app/dragAndDrop/button-drag/button-drag.component';
-import { TextComponent } from 'src/app/dragAndDrop/text/text.component';
+import { ButtonDragComponent } from 'src/app/dragAndDrop/component/button-drag/button-drag.component';
+import { TextComponent } from 'src/app/dragAndDrop/component/text/text.component';
 import { ComponentDragDrop } from 'src/app/interfaces/component.dragdrop.interface';
 import { PropertyService } from 'src/app/services/property.service';
 
@@ -99,13 +99,13 @@ export class ToolsWorkshopComponent {
 
   searchTerm: string = '';
 
-  get filteredComponents() {
+  get filteredComponents(): ComponentDragDrop[] {
     return this.components.filter(component =>
       this.normalize(component.text).includes(this.normalize(this.searchTerm))
     );
   }
 
-  get filteredScreens() {
+  get filteredScreens(): ComponentDragDrop[] {
     return this.screens.filter(screen =>
       this.normalize(screen.text).includes(this.normalize(this.searchTerm))
     );

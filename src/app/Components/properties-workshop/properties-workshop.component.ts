@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ComponentDragDrop } from 'src/app/interfaces/component.dragdrop.interface';
 import { PropertyService } from 'src/app/services/property.service';
 
 @Component({
@@ -11,6 +12,7 @@ export class PropertiesWorkshopComponent {
   @Input() title!: string;
   @Input() icon!: string;
   @Input() textPreviewComponent!: string;
+  @Input() id!: string;
 
   @Input() width!: number;
   @Input() height!: number;
@@ -96,44 +98,24 @@ export class PropertiesWorkshopComponent {
 
   // Code 
   selectedElement: HTMLElement | null = null;
+  fatherComponent: HTMLElement | null = null;
+  displayWindow: string = 'properties';
+  components: ComponentDragDrop[] = [];
+  askDeleteComponent = false;
+  componentToDelete: HTMLElement | null = null;
+
+  private mutationObserver!: MutationObserver;
 
   constructor(private propertyService: PropertyService) {}
 
   ngOnInit() {
     this.propertyService.getSelectedElement().subscribe(el => {
       if (el) {
-        this.selectedElement = el;
-        this.resetProperties();
-
-        const nameTag = el.getAttribute('ng-reflect-name-tag');
-        const foundInComponents = this.propertyService.components.find(c => c.nameTag === nameTag);
-        const foundInScreens = this.propertyService.screens.find(s => s.nameTag === nameTag);
-        const found = foundInComponents || foundInScreens;
-
-        if (found) {
-          this.title = found.text;
-          this.icon = found.icon;
-          this.textPreviewComponent = found.description;
-        }
-
-        // Propriedades HTML
-        const fatherComponent = el.parentElement?.parentElement!;
-        const rect = fatherComponent.getBoundingClientRect();
-        const styles = window.getComputedStyle(fatherComponent);
-
-        const paddingLeft = parseFloat(styles.paddingLeft);
-        const paddingRight = parseFloat(styles.paddingRight);
-        const paddingTop = parseFloat(styles.paddingTop);
-        const paddingBottom = parseFloat(styles.paddingBottom);
-
-        this.maxWidth = rect.width - paddingLeft - paddingRight;
-        this.maxHeight = rect.height - paddingTop - paddingBottom;
-
-        // Propriedades CSS
-        this.loadStylesFromElement(el)
+        this.selectComponent(el); 
       }
     });
   }
+
 
   updateStyle(property: string, value: any) {
     if (this.selectedElement) {
@@ -459,6 +441,128 @@ export class PropertiesWorkshopComponent {
     this.flexGap = parseInt(computed.gap, 10);
     this.flexAlignItems = computed.alignItems
     this.alignSelf = computed.alignSelf;
+  }
+
+
+
+  // Explorer Logic
+  selectComponent(component: HTMLElement) {
+    this.deselectElement();
+    this.selectedElement = component;
+    this.selectedElement.classList.add('selected-component');
+    this.resetProperties();
+
+    const nameTag = component.getAttribute('ng-reflect-name-tag');
+    const foundInComponents = this.propertyService.components.find(c => c.nameTag === nameTag);
+    const foundInScreens = this.propertyService.screens.find(s => s.nameTag === nameTag);
+    const found = foundInComponents || foundInScreens;
+
+    if (found) {
+      this.title = found.text;
+      this.icon = found.icon;
+      this.textPreviewComponent = found.description;
+      this.id = component.id;
+    }
+
+    // Propriedades HTML
+    this.fatherComponent = component.parentElement?.parentElement!;
+    const rect = this.fatherComponent.getBoundingClientRect();
+    const styles = window.getComputedStyle(this.fatherComponent);
+
+    const paddingLeft = parseFloat(styles.paddingLeft);
+    const paddingRight = parseFloat(styles.paddingRight);
+    const paddingTop = parseFloat(styles.paddingTop);
+    const paddingBottom = parseFloat(styles.paddingBottom);
+
+    this.maxWidth = rect.width - paddingLeft - paddingRight;
+    this.maxHeight = rect.height - paddingTop - paddingBottom;
+
+    // Propriedades CSS
+    this.loadStylesFromElement(component);
+  }
+
+  deleteComponent(component: HTMLElement) {
+    this.askDeleteComponent = true;
+    this.componentToDelete = component;
+  }
+
+  confirmDelete() {
+    if (this.componentToDelete?.parentElement) {
+      this.componentToDelete.parentElement.remove();
+      this.deselectElement();
+      this.propertyService.setSelectedElement(null);
+    }
+
+    this.closeDeleteDialog();
+  }
+
+  cancelDelete() {
+    this.closeDeleteDialog();
+  }
+
+  private closeDeleteDialog() {
+    this.askDeleteComponent = false;
+    this.componentToDelete = null;
+  }
+  
+  deselectElement() {
+    this.selectedElement?.classList.remove('selected-component');
+    this.selectedElement = null;
+    this.fatherComponent = null;
+    this.resetProperties();
+  }
+
+ ngAfterViewInit() {
+    const smartphoneCDK = document.getElementById('smartphoneList');
+
+    if (smartphoneCDK) {
+      this.observeComponentChanges(smartphoneCDK);
+      this.renderComponents(); 
+    }
+  }
+
+  observeComponentChanges(container: HTMLElement) {
+    this.mutationObserver = new MutationObserver(() => {
+      this.renderComponents();
+    });
+
+    this.mutationObserver.observe(container, {
+      childList: true,
+      subtree: true,
+    });
+  }
+
+  renderComponents() {
+    const smartphoneCDK = document.getElementById('smartphoneList');
+    if (!smartphoneCDK) return;
+
+    const elements = Array.from(
+      smartphoneCDK.querySelectorAll('.component, .screen')
+    ) as HTMLElement[];
+
+    this.components = [];
+
+    elements.forEach(element => {
+      const nameTag = element.getAttribute('ng-reflect-name-tag');
+      const foundInComponents = this.propertyService.components.find(c => c.nameTag === nameTag);
+      const foundInScreens = this.propertyService.screens.find(s => s.nameTag === nameTag);
+      const found = foundInComponents || foundInScreens;
+
+      if (found) {
+        this.components.push({
+          text: found.text,
+          icon: found.icon,
+          nameTag: nameTag || '',
+          description: found.description,
+          component: element
+        });
+      }
+    });
+  }
+
+
+  toggleWindow(window: string) {
+    this.displayWindow = window;
   }
 }
 

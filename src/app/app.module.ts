@@ -32,10 +32,10 @@ import { HeaderWorkshopComponent } from './Components/header-workshop/header-wor
 import { ToolsWorkshopComponent } from './Components/tools-workshop/tools-workshop.component';
 import { SmartphoneScreenWorkshopComponent } from './Components/smartphone-screen-workshop/smartphone-screen-workshop.component';
 import { PropertiesWorkshopComponent } from './Components/properties-workshop/properties-workshop.component';
-import { ButtonDragComponent } from './dragAndDrop/button-drag/button-drag.component';
-import { AreaComponent } from './dragAndDrop/area/area.component';
+import { ButtonDragComponent } from './dragAndDrop/component/button-drag/button-drag.component';
+import { AreaComponent } from './dragAndDrop/screen/area/area.component';
 import { UniqueIdDirective } from './directives/uniqueId-component.directive';
-import { TextComponent } from './dragAndDrop/text/text.component';
+import { TextComponent } from './dragAndDrop/component/text/text.component';
 
 @NgModule({
   declarations: [

@@ -9,8 +9,8 @@ export class PropertyService {
   components: ComponentDragDrop[] = [];
   screens: ComponentDragDrop[] = [];
 
-  setSelectedElement(element: HTMLElement) {
-    const childWithId = element.querySelector('[id]') as HTMLElement | null;
+  setSelectedElement(element: HTMLElement | null) {
+    const childWithId = element?.querySelector('[id]') as HTMLElement | null;
 
     if (childWithId) element = childWithId;
 

@@ -30,10 +30,11 @@
 
       <app-smartphone-screen-workshop
         [connectedDropListId]="['toolsComponentList', 'toolsScreenList']"
-        (areaCreated)="handleNewAreaId($event)">
+        (areaCreated)="handleNewAreaId($event)"
+        (elementDeselected)="propertiesWorkshop.deselectElement()">
       </app-smartphone-screen-workshop>
 
-      <app-properties-workshop></app-properties-workshop>
+      <app-properties-workshop #propertiesWorkshop></app-properties-workshop>
     </div>
  
     <div class="cicd" *ngIf="currentStep === 5">
