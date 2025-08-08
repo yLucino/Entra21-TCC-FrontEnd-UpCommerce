@@ -78,6 +78,8 @@ export class PropertiesWorkshopComponent {
   @Input() flexAlignItems!: string;
   @Input() alignSelf!: string;
 
+  @Input() newComponentId: string = '';
+
   // Options for Component Change
   widthOption: string = 'auto';
   heightOption: string = 'auto';
@@ -91,7 +93,6 @@ export class PropertiesWorkshopComponent {
   hoverBackgroundColorOption: string = 'custom';
   hoverBoxShadowOption: string = 'none';
 
-
   // Min/Max variables
   maxWidth: number = 179;
   maxHeight: number = 179;
@@ -102,7 +103,10 @@ export class PropertiesWorkshopComponent {
   displayWindow: string = 'properties';
   components: ComponentDragDrop[] = [];
   askDeleteComponent = false;
+  askRanameComponent = false;
   componentToDelete: HTMLElement | null = null;
+  componentToRename: HTMLElement | null = null;
+  searchTerm: string = '';
 
   private mutationObserver!: MutationObserver;
 
@@ -115,7 +119,6 @@ export class PropertiesWorkshopComponent {
       }
     });
   }
-
 
   updateStyle(property: string, value: any) {
     if (this.selectedElement) {
@@ -443,8 +446,6 @@ export class PropertiesWorkshopComponent {
     this.alignSelf = computed.alignSelf;
   }
 
-
-
   // Explorer Logic
   selectComponent(component: HTMLElement) {
     this.deselectElement();
@@ -481,9 +482,14 @@ export class PropertiesWorkshopComponent {
     this.loadStylesFromElement(component);
   }
 
-  deleteComponent(component: HTMLElement) {
-    this.askDeleteComponent = true;
-    this.componentToDelete = component;
+  actionComponent(component: HTMLElement, action: string) {
+    if (action === 'delete') {
+      this.askDeleteComponent = true;
+      this.componentToDelete = component;
+    } else if (action === 'rename') {
+      this.askRanameComponent = true;
+      this.componentToRename = component;
+    }
   }
 
   confirmDelete() {
@@ -495,14 +501,26 @@ export class PropertiesWorkshopComponent {
 
     this.closeDeleteDialog();
   }
+  
+  confirmRename() {
+    if (this.componentToRename?.parentElement && this.newComponentId !== '') {
+      this.componentToRename.id = this.newComponentId;
+      this.id = this.newComponentId;
+    }
 
-  cancelDelete() {
+    this.closeDeleteDialog();
+  }
+
+  cancel() {
     this.closeDeleteDialog();
   }
 
   private closeDeleteDialog() {
     this.askDeleteComponent = false;
     this.componentToDelete = null;
+    this.askRanameComponent = false;
+    this.componentToRename = null;
+    this.newComponentId = '';
   }
   
   deselectElement() {
@@ -512,7 +530,7 @@ export class PropertiesWorkshopComponent {
     this.resetProperties();
   }
 
- ngAfterViewInit() {
+  ngAfterViewInit() {
     const smartphoneCDK = document.getElementById('smartphoneList');
 
     if (smartphoneCDK) {
@@ -560,9 +578,34 @@ export class PropertiesWorkshopComponent {
     });
   }
 
-
   toggleWindow(window: string) {
     this.displayWindow = window;
   }
-}
 
+  // Search functionality to Explorer
+  get filteredComponents(): ComponentDragDrop[] {
+    return this.components.filter(el => {
+      const search = this.normalize(this.searchTerm);
+
+      const idMatch = el.component?.id 
+        ? this.normalize(el.component.id).includes(search) 
+        : false;
+
+      const textMatch = el.text 
+        ? this.normalize(el.text).includes(search) 
+        : false;
+      
+      const tagMatch = el.nameTag 
+        ? this.normalize(el.nameTag).includes(search) 
+        : false;
+
+      return idMatch || tagMatch || textMatch;
+    });
+  }
+
+  normalize(text: string): string {
+    return text
+      ? text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      : '';
+  }
+}
