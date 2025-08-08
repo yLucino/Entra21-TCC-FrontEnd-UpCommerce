@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-button-drag',
@@ -7,8 +7,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ButtonDragComponent {
   btnDragId: string = '';
   @Output() created = new EventEmitter<string>();
-  @Input() textBtn: string = 'Botão';
-  @Input() matType: string = 'mat-button';
 
   onUniqueIdCreated(id: string) {
     this.btnDragId = id;

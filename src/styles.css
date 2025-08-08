@@ -148,5 +148,5 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .selected-component {
   outline: 2px solid var(--primary-009AEC) !important;
   outline-offset: 1px !important;
-  border-radius: 4px !important;
+  border-radius: 4px;
 }

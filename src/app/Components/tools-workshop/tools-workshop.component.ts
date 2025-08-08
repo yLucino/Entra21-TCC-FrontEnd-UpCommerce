@@ -23,7 +23,6 @@ export class ToolsWorkshopComponent {
     this.propertyService.setComponentData(this.components, this.screens);
   }
 
-
   get connectedDropListId(): string[] {
     return [...this.baseDropListIds, ...this.areaDropListIds];
   }
@@ -92,7 +91,6 @@ export class ToolsWorkshopComponent {
     { text: 'Logout', icon: 'fa-solid fa-right-from-bracket', nameTag: 'logoutScreens', description: 'Encerra sessão do usuário e retorna ao início.', component: null }
   ];
 
-  
   selectItem(index: number) {
     this.selectedIndex = index;
   }
@@ -116,5 +114,9 @@ export class ToolsWorkshopComponent {
       .toLowerCase()
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '');
+  }
+
+  trackByFn(index: number, item: ComponentDragDrop) {
+    return item.nameTag;
   }
 }

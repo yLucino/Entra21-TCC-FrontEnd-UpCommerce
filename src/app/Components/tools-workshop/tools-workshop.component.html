@@ -19,9 +19,9 @@
     cdkDropList
     #toolsComponentList="cdkDropList"
     [id]="'toolsComponentList'"
-    [cdkDropListData]="components"
+    [cdkDropListData]="filteredComponents"
     [cdkDropListConnectedTo]="connectedDropListId">
-      <div cdkDrag [cdkDragData]="component" class="component" *ngFor="let component of filteredComponents">
+      <div cdkDrag [cdkDragData]="component" class="component" *ngFor="let component of filteredComponents; trackBy: trackByFn">
         <i [class]="component.icon"></i>
         <p>{{ component.text }}</p>
       </div>
@@ -32,9 +32,9 @@
     cdkDropList
     #toolsScreenList="cdkDropList"
     [id]="'toolsScreenList'"
-    [cdkDropListData]="screens"
+    [cdkDropListData]="filteredScreens"
     [cdkDropListConnectedTo]="connectedDropListId">
-      <div cdkDrag [cdkDragData]="screen" class="screen" *ngFor="let screen of filteredScreens">
+      <div cdkDrag [cdkDragData]="screen" class="screen" *ngFor="let screen of filteredScreens; trackBy: trackByFn">
         <i [class]="screen.icon"></i>
         <p>{{ screen.text }}</p>  
       </div>

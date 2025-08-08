@@ -1,46 +1,8 @@
-<ng-container [ngSwitch]="matType">
-  <button *ngSwitchCase="'mat-button'" mat-button
-    class="component"
-    [id]="btnDragId"
-    appUniqueId
-    [nameTag]="'buttonComponent'"
-    (uniqueIdCreated)="onUniqueIdCreated($event)">
-    {{ textBtn }}
-  </button>
-
-  <button *ngSwitchCase="'mat-raised-button'" mat-raised-button
-    class="component"
-    [id]="btnDragId" 
-    appUniqueId
-    [nameTag]="'buttonComponent'"
-    (uniqueIdCreated)="onUniqueIdCreated($event)">
-    {{ textBtn }}
-  </button>
-
-  <button *ngSwitchCase="'mat-flat-button'" mat-flat-button
-    class="component"
-    [id]="btnDragId"
-    appUniqueId
-    [nameTag]="'buttonComponent'"
-    (uniqueIdCreated)="onUniqueIdCreated($event)">
-    {{ textBtn }}
-  </button>
-
-  <button *ngSwitchCase="'mat-stroked-button'" mat-stroked-button
-    class="component"  
-    [id]="btnDragId"
-    appUniqueId
-    [nameTag]="'buttonComponent'"
-    (uniqueIdCreated)="onUniqueIdCreated($event)">
-    {{ textBtn }}
-  </button>
-
-  <button *ngSwitchDefault mat-button
-    class="component"
-    [id]="btnDragId"
-    appUniqueId
-    [nameTag]="'buttonComponent'"
-    (uniqueIdCreated)="onUniqueIdCreated($event)">
-    {{ textBtn }}
-  </button>
-</ng-container>
+<button mat-button
+  class="component"
+  [id]="btnDragId"
+  appUniqueId
+  [nameTag]="'buttonComponent'"
+  (uniqueIdCreated)="onUniqueIdCreated($event)">
+  Botão
+</button>
