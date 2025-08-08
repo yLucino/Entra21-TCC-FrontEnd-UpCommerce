@@ -39,11 +39,15 @@
             </div>
   
             <div class="actions">
+              <button class="rename-btn" (click)="actionComponent(selectedElement, 'rename')" title="Renomear Componente">
+                <i id="action-rename" class="fa-solid fa-edit"></i>
+              </button>
+              
               <button class="info-btn" [title]="textPreviewComponent">
                 <i id="action-info" class="fa-solid fa-circle-info"></i>
               </button>
   
-              <button class="remove-btn" (click)="deleteComponent(selectedElement)" title="Remover Componente">
+              <button class="remove-btn" (click)="actionComponent(selectedElement, 'delete')" title="Remover Componente">
                 <i id="action-remove" class="fa-solid fa-trash-can"></i>
               </button>
             </div>
@@ -590,14 +594,19 @@
           </div>
         </div>
 
-        <div class="explorer-scroll" *ngIf="components !== null && displayWindow === 'explorer'">
+        <div class="search-box" *ngIf="displayWindow === 'explorer'">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input class="search-explorer" type="text" placeholder="Filtrar por Componente ou ID..." [(ngModel)]="searchTerm">
+        </div>
+
+        <div class="explorer-scroll" *ngIf="displayWindow === 'explorer'">
           <ul>
-            <li *ngFor="let el of components">
+            <li *ngFor="let el of filteredComponents">
               <div class="componet-explorer">
                 <div class="info">
                   <i class="fa-solid fa-caret-right"></i>
                   <i [class]="el.icon"></i>
-                  <p>{{el.component.id}}</p>
+                  <p (click)="actionComponent(el.component, 'rename')">{{el.component.id}}</p>
                 </div>
                 
                 <div class="actions">
@@ -609,7 +618,7 @@
                     <i class="fa-solid fa-circle-info action-info"></i>
                   </button>
 
-                  <button (click)="deleteComponent(el.component)" class="delete-button" title="Remover Componente">
+                  <button (click)="actionComponent(el.component, 'delete')" class="delete-button" title="Remover Componente">
                     <i class="fa-solid fa-trash-can action-remove"></i>
                   </button>
                 </div>
@@ -617,15 +626,23 @@
 
               <hr>
             </li>
+
+            <li *ngIf="filteredComponents.length === 0">
+              <div class="no-component">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <p>Nenhum componente encontrado</p>
+                <p class="text-help-tip">Por favor, verifique a escrita e certifique-se de que exista pelo menos um componente ou tela disponível.</p>
+              </div>
+            </li>
           </ul>
         </div>
 
-        <div class="delete-component-box-ask" *ngIf="askDeleteComponent">
-          <div class="delete-component-box">
-            <h3>Tem certeza que deseja excluir este componente/tela?</h3>
-            <div class="delete-component-text">
-              <p>*Esta ação não pode ser desfeita*</p>
-              <p>*Todos elementos detro serão excluidos juntos*</p>
+        <div class="component-box-ask" *ngIf="askDeleteComponent">
+          <div class="component-box">
+            <h3>Confirmação de Exclusão</h3>
+            <div class="component-text">
+              <p>*Esta ação é irreversível*</p>
+              <p>*Todos os elementos contidos serão removidos permanentemente*</p>
             </div>
 
             <div class="buttons">
@@ -634,7 +651,28 @@
                 Confirmar
               </button>
               
-              <button class="cancel-delete" (click)="cancelDelete()">
+              <button class="cancel" (click)="cancel()">
+                <i class="fa-solid fa-xmark"></i>
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="component-box-ask" *ngIf="askRanameComponent">
+          <div class="component-box">
+            <h3>Renomear ID do Componente/Tela</h3>
+            <p style="margin-top: 10px;">*Evite utilizar IDs duplicados para garantir o correto funcionamento do sistema*</p>
+
+            <input type="text" placeholder="Digite o novo ID para o componente" [(ngModel)]="newComponentId"/>
+
+            <div class="buttons">
+              <button class="confirm-rename" (click)="confirmRename()">
+                <i class="fa-solid fa-edit"></i>
+                Confirmar
+              </button>
+              
+              <button class="cancel" (click)="cancel()">
                 <i class="fa-solid fa-xmark"></i>
                 Cancelar
               </button>
