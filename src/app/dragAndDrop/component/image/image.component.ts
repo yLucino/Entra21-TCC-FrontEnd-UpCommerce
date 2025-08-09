@@ -1,15 +1,16 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-button-drag',
-  templateUrl: './button-drag.component.html',
+  selector: 'app-image',
+  templateUrl: './image.component.html',
+  styleUrls: ['./image.component.css']
 })
-export class ButtonDragComponent {
-  btnDragId: string = '';
+export class ImageComponent {
+  imageDragId: string = '';
   @Output() created = new EventEmitter<string>();
 
   onUniqueIdCreated(id: string) {
-    this.btnDragId = id;
+    this.imageDragId = id;
     this.created.emit(id);
   }
 }

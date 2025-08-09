@@ -591,6 +591,22 @@
                   </select>
                 </div>
               </div>
+
+              <div class="image-prop" *ngIf="nameTag === 'imageComponent'">
+                <hr>
+                <div class="parting">
+                  <p>Imagem</p>
+                </div>
+
+                <div class="property image">
+                  <div class="title-prop">
+                    <p>URL da Imagem</p>
+                    <i class="fa-solid fa-circle-question" title="URL ou caminho do arquivo de imagem a ser exibida."></i>
+                  </div>
+
+                  <input type="text" placeholder="Ex: https://example.com/image.png" [(ngModel)]="imageSource" (input)="updateUrlImage(imageSource)"/>
+                </div>
+              </div>
             </div>
           </div>
         </div>

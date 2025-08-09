@@ -1,10 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { AreaComponent } from 'src/app/dragAndDrop/screen/area/area.component';
 
-import { ButtonDragComponent } from 'src/app/dragAndDrop/component/button-drag/button-drag.component';
+import { ButtonComponent } from 'src/app/dragAndDrop/component/button/button.component';
 import { TextComponent } from 'src/app/dragAndDrop/component/text/text.component';
 import { ComponentDragDrop } from 'src/app/interfaces/component.dragdrop.interface';
 import { PropertyService } from 'src/app/services/property.service';
+import { InputComponent } from 'src/app/dragAndDrop/component/input/input.component';
+import { ImageComponent } from 'src/app/dragAndDrop/component/image/image.component';
 
 @Component({
   selector: 'app-tools-workshop',
@@ -34,15 +36,15 @@ export class ToolsWorkshopComponent {
 
   components: ComponentDragDrop[] = [
     { text: 'Mapa', icon: 'fa-solid fa-map', nameTag: 'mapComponent', description: 'Exibe a localização geográfica com suporte a zoom e marcações.', component: null },
-    { text: 'Galeria', icon: 'fa-solid fa-images', nameTag: 'galeryComponent', description: 'Exibe uma coleção de imagens em formato de grade ou carrossel.', component: null },
+    { text: 'Imagem', icon: 'fa-solid fa-image', nameTag: 'imageComponent', description: 'Exibe uma  imagens de seu interesse.', component: ImageComponent },
     { text: 'Audio Player', icon: 'fa-solid fa-music', nameTag: 'audioplayComponent', description: 'Componente para tocar arquivos de áudio com controles de reprodução.', component: null },
     { text: 'Vídeo Player', icon: 'fa-solid fa-video', nameTag: 'videoplayComponent', description: 'Componente para exibir vídeos com controles de mídia.', component: null },
     { text: 'Lista Checkbox', icon: 'fa-solid fa-list-check', nameTag: 'checkboxlistComponent', description: 'Lista de itens com seleção múltipla por checkboxes.', component: null },
     { text: 'Webview', icon: 'fa-solid fa-globe', nameTag: 'graphicComponent', description: 'Permite incorporar páginas web externas no app.', component: null },
     { text: 'Gráfico', icon: 'fa-solid fa-chart-pie', nameTag: 'gra', description: 'Visualiza dados em formato gráfico (pizza, barra, linha, etc).', component: null },
-    { text: 'Inputs', icon: 'fa-solid fa-sliders', nameTag: 'inputComponent', description: 'Conjunto de campos de entrada como texto, número, data, etc.', component: null },
-    { text: 'Botão', icon: 'fa-solid fa-toggle-on', nameTag: 'buttonComponent', description: 'Componente de botão clicável com várias aparências.', component: ButtonDragComponent },
-    { text: 'Ícones', icon: 'fa-solid fa-icons', nameTag: 'iconComponent', description: 'Permite adicionar e exibir ícones visuais no app.', component: null },
+    { text: 'Input', icon: 'fa-solid fa-sliders', nameTag: 'inputComponent', description: 'Conjunto de campos de entrada como texto, número, data, etc.', component: InputComponent },
+    { text: 'Botão', icon: 'fa-solid fa-toggle-on', nameTag: 'buttonComponent', description: 'Componente de botão clicável com várias aparências.', component: ButtonComponent },
+    { text: 'Ícone', icon: 'fa-solid fa-icons', nameTag: 'iconComponent', description: 'Permite adicionar e exibir ícones visuais no app.', component: null },
     { text: 'Notificações', icon: 'fa-solid fa-bell', nameTag: 'notifyComponent', description: 'Exibe mensagens ou alertas importantes para o usuário.', component: null },
     { text: 'Formulário', icon: 'fa-solid fa-file-lines', nameTag: 'formComponent', description: 'Agrupa inputs para envio de dados pelo usuário.', component: null },
     { text: 'Lista de Tarefas', icon: 'fa-solid fa-clipboard-list', nameTag: 'todolistComponent', description: 'Permite o gerenciamento de tarefas com marcação de status.', component: null },

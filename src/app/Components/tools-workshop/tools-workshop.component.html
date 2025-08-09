@@ -25,6 +25,12 @@
         <i [class]="component.icon"></i>
         <p>{{ component.text }}</p>
       </div>
+
+      <div class="no-component" *ngIf="filteredComponents.length === 0">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <p>Nenhum componente encontrado</p>
+        <p class="text-help-tip">Por favor, verifique a escrita e certifique-se de que está procurando no campo correto.</p>
+      </div>
     </div>
 
     <!-- Telas -->
@@ -37,6 +43,12 @@
       <div cdkDrag [cdkDragData]="screen" class="screen" *ngFor="let screen of filteredScreens; trackBy: trackByFn">
         <i [class]="screen.icon"></i>
         <p>{{ screen.text }}</p>  
+      </div>
+
+      <div class="no-component" *ngIf="filteredScreens.length === 0">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <p>Nenhuma tela encontrada</p>
+        <p class="text-help-tip">Por favor, verifique a escrita e certifique-se de que está procurando no campo correto.</p>
       </div>
     </div>
   </div>

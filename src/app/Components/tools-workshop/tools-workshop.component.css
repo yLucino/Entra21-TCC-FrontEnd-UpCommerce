@@ -98,3 +98,30 @@
   color: var(--primary-666666);
   font: var(--font-REGULAR-P-12);
 }
+
+/* Nothing in search CSS */
+.no-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+
+  i {
+    font-size: 50px;
+    color: var(--primary-000000b5);
+    margin-bottom: 10px;
+  }
+
+  p {
+    font: var(--font-BOLD-H4-16);
+    color: var(--primary-000000b5);
+  }
+  
+  p.text-help-tip {
+    font: var(--font-REGULAR-P-13);
+    margin-top: 10px;
+  }
+}

@@ -80,6 +80,8 @@ export class PropertiesWorkshopComponent {
 
   @Input() newComponentId: string = '';
 
+  @Input() imageSource: string = '';
+
   // Options for Component Change
   widthOption: string = 'auto';
   heightOption: string = 'auto';
@@ -106,6 +108,7 @@ export class PropertiesWorkshopComponent {
   askRanameComponent = false;
   componentToDelete: HTMLElement | null = null;
   componentToRename: HTMLElement | null = null;
+  nameTag: string | null = '';
   searchTerm: string = '';
 
   private mutationObserver!: MutationObserver;
@@ -139,9 +142,15 @@ export class PropertiesWorkshopComponent {
 
   updateText(text: string) {
     if (this.selectedElement) {
-        this.selectedElement.textContent = text;
-      }
+      this.selectedElement.textContent = text;
     }
+  }
+  
+  updateUrlImage(url: string) {
+    if (this.selectedElement) {
+      this.selectedElement.setAttribute('src', url);
+    }
+  }
 
   updateHoverStyle(property: string, value: string) {
     if (!this.selectedElement) return;
@@ -444,6 +453,9 @@ export class PropertiesWorkshopComponent {
     this.flexGap = parseInt(computed.gap, 10);
     this.flexAlignItems = computed.alignItems
     this.alignSelf = computed.alignSelf;
+
+    // Image
+    this.imageSource = el.getAttribute('src') || '';
   }
 
   // Explorer Logic
@@ -454,6 +466,8 @@ export class PropertiesWorkshopComponent {
     this.resetProperties();
 
     const nameTag = component.getAttribute('ng-reflect-name-tag');
+    this.nameTag = nameTag;
+
     const foundInComponents = this.propertyService.components.find(c => c.nameTag === nameTag);
     const foundInScreens = this.propertyService.screens.find(s => s.nameTag === nameTag);
     const found = foundInComponents || foundInScreens;

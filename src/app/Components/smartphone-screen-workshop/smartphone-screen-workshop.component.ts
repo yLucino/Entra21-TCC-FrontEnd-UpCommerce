@@ -24,6 +24,7 @@ export class SmartphoneScreenWorkshopComponent implements OnInit {
   @Input() connectedDropListId: string[] = [];
   @Output() areaCreated = new EventEmitter<string>();
   @Output() elementDeselected = new EventEmitter<void>();
+  currentTime: string = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
   @ViewChild('dropHost', { read: ViewContainerRef }) viewContainerRef!: ViewContainerRef;
 

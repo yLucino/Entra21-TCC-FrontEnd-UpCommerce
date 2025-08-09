@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { MatButtonModule } from '@angular/material/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,10 +31,16 @@ import { HeaderWorkshopComponent } from './Components/header-workshop/header-wor
 import { ToolsWorkshopComponent } from './Components/tools-workshop/tools-workshop.component';
 import { SmartphoneScreenWorkshopComponent } from './Components/smartphone-screen-workshop/smartphone-screen-workshop.component';
 import { PropertiesWorkshopComponent } from './Components/properties-workshop/properties-workshop.component';
-import { ButtonDragComponent } from './dragAndDrop/component/button-drag/button-drag.component';
-import { AreaComponent } from './dragAndDrop/screen/area/area.component';
+
+// Directives
 import { UniqueIdDirective } from './directives/uniqueId-component.directive';
+
+// Drag and Drop Components
+import { AreaComponent } from './dragAndDrop/screen/area/area.component';
 import { TextComponent } from './dragAndDrop/component/text/text.component';
+import { InputComponent } from './dragAndDrop/component/input/input.component';
+import { ButtonComponent } from './dragAndDrop/component/button/button.component';
+import { ImageComponent } from './dragAndDrop/component/image/image.component';
 
 @NgModule({
   declarations: [
@@ -64,10 +69,12 @@ import { TextComponent } from './dragAndDrop/component/text/text.component';
     ToolsWorkshopComponent,
     SmartphoneScreenWorkshopComponent,
     PropertiesWorkshopComponent,
-    ButtonDragComponent,
+    ButtonComponent,
     AreaComponent,
     UniqueIdDirective,
     TextComponent,
+    InputComponent,
+    ImageComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,7 +83,6 @@ import { TextComponent } from './dragAndDrop/component/text/text.component';
     MatIconModule,
     FormsModule,
     DragDropModule,
-    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
