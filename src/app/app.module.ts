@@ -41,6 +41,8 @@ import { TextComponent } from './dragAndDrop/component/text/text.component';
 import { InputComponent } from './dragAndDrop/component/input/input.component';
 import { ButtonComponent } from './dragAndDrop/component/button/button.component';
 import { ImageComponent } from './dragAndDrop/component/image/image.component';
+import { IconComponent } from './dragAndDrop/component/icon/icon.component';
+import { LinkComponent } from './dragAndDrop/component/link/link.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +77,8 @@ import { ImageComponent } from './dragAndDrop/component/image/image.component';
     TextComponent,
     InputComponent,
     ImageComponent,
+    IconComponent,
+    LinkComponent,
   ],
   imports: [
     BrowserModule,

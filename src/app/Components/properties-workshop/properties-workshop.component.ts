@@ -81,6 +81,8 @@ export class PropertiesWorkshopComponent {
   @Input() newComponentId: string = '';
 
   @Input() imageSource: string = '';
+  @Input() iconSource: string = '';
+  @Input() linkSource: string = '';
 
   // Options for Component Change
   widthOption: string = 'auto';
@@ -146,9 +148,19 @@ export class PropertiesWorkshopComponent {
     }
   }
   
-  updateUrlImage(url: string) {
+  updateUrl(type:string, url: string) {
     if (this.selectedElement) {
-      this.selectedElement.setAttribute('src', url);
+      if (type === 'src') {
+        this.selectedElement.setAttribute('src', url);
+      } else if (type === 'href') {
+        this.selectedElement.setAttribute('href', url);
+      }
+    }
+  }
+
+  updateIconClass(iconClass: string) {
+    if (this.selectedElement) {
+      this.selectedElement.className = 'component ' + iconClass;
     }
   }
 
@@ -456,6 +468,21 @@ export class PropertiesWorkshopComponent {
 
     // Image
     this.imageSource = el.getAttribute('src') || '';
+
+    // Icon
+    const arrayClassIcons: string[] = el.getAttribute('class')?.split(' ').filter(c => c != 'component' && c != 'selected-component') || [''];
+    let classIcon: string = '';
+
+    arrayClassIcons.forEach(c => {
+      if (c.startsWith('fa-') || c.startsWith('icon-')) {
+        classIcon += ' ' + c;
+      }
+    });
+
+    this.iconSource = classIcon;
+
+    // Link
+    this.linkSource = el.getAttribute('href') || '';
   }
 
   // Explorer Logic

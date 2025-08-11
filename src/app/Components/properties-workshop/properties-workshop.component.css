@@ -528,3 +528,15 @@
     margin-top: 10px;
   }
 }
+
+/* Icon prop */
+a.fontawesomeLink {
+  color: var(--primary-009AEC);
+  font: var(--font-REGULAR-P-13);
+  text-decoration: underline;
+  transition: .3s;
+  
+  &:hover {
+    color: var(--primary-000000b5);
+  }
+}

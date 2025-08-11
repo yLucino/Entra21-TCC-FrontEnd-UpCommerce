@@ -7,6 +7,8 @@ import { ComponentDragDrop } from 'src/app/interfaces/component.dragdrop.interfa
 import { PropertyService } from 'src/app/services/property.service';
 import { InputComponent } from 'src/app/dragAndDrop/component/input/input.component';
 import { ImageComponent } from 'src/app/dragAndDrop/component/image/image.component';
+import { IconComponent } from 'src/app/dragAndDrop/component/icon/icon.component';
+import { LinkComponent } from 'src/app/dragAndDrop/component/link/link.component';
 
 @Component({
   selector: 'app-tools-workshop',
@@ -44,7 +46,7 @@ export class ToolsWorkshopComponent {
     { text: 'Gráfico', icon: 'fa-solid fa-chart-pie', nameTag: 'gra', description: 'Visualiza dados em formato gráfico (pizza, barra, linha, etc).', component: null },
     { text: 'Input', icon: 'fa-solid fa-sliders', nameTag: 'inputComponent', description: 'Conjunto de campos de entrada como texto, número, data, etc.', component: InputComponent },
     { text: 'Botão', icon: 'fa-solid fa-toggle-on', nameTag: 'buttonComponent', description: 'Componente de botão clicável com várias aparências.', component: ButtonComponent },
-    { text: 'Ícone', icon: 'fa-solid fa-icons', nameTag: 'iconComponent', description: 'Permite adicionar e exibir ícones visuais no app.', component: null },
+    { text: 'Ícone', icon: 'fa-solid fa-icons', nameTag: 'iconComponent', description: 'Permite adicionar e exibir ícones visuais no app (2.089 Icons).', component: IconComponent },
     { text: 'Notificações', icon: 'fa-solid fa-bell', nameTag: 'notifyComponent', description: 'Exibe mensagens ou alertas importantes para o usuário.', component: null },
     { text: 'Formulário', icon: 'fa-solid fa-file-lines', nameTag: 'formComponent', description: 'Agrupa inputs para envio de dados pelo usuário.', component: null },
     { text: 'Lista de Tarefas', icon: 'fa-solid fa-clipboard-list', nameTag: 'todolistComponent', description: 'Permite o gerenciamento de tarefas com marcação de status.', component: null },
@@ -68,7 +70,7 @@ export class ToolsWorkshopComponent {
     { text: 'Scanner', icon: 'fa-solid fa-print', nameTag: 'scannerComponent', description: 'Permite escanear documentos ou imagens.', component: null },
     { text: 'Impressora', icon: 'fa-solid fa-print', nameTag: 'printComponent', description: 'Componente para envio de conteúdo à impressora.', component: null },
     { text: 'Texto', icon: 'fa-solid fa-font', nameTag: 'textComponent', description: 'Exibe textos simples ou estilizados.', component: TextComponent },
-    { text: 'Link', icon: 'fa-solid fa-link', nameTag: 'linkComponent', description: 'Disponibiliza link para imagens e textos.', component: null },
+    { text: 'Link', icon: 'fa-solid fa-link', nameTag: 'linkComponent', description: 'Disponibiliza link para imagens e textos.', component: LinkComponent },
     { text: 'Pesquisa', icon: 'fa-solid fa-magnifying-glass', nameTag: 'scearhComponent', description: 'Campo de busca para localizar informações.', component: null },
     { text: 'Histórico', icon: 'fa-solid fa-clock-rotate-left', nameTag: 'historyComponent', description: 'Exibe registros de ações ou atividades.', component: null },
     { text: 'Mensagens', icon: 'fa-solid fa-envelope', nameTag: 'mesageComponent', description: 'Lista de mensagens recebidas e enviadas.', component: null },

@@ -1,4 +1,5 @@
 section {
+  position: relative;
   margin-bottom: 25px;
 }
 
@@ -59,5 +60,76 @@ section {
 .drop-zone {
   height: 100%;
   width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
   padding: 10px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.drop-zone::-webkit-scrollbar {
+  width: 0;  
+  height: 0;
+}
+
+.drop-zone::-webkit-scrollbar-track,
+.drop-zone::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+/* PopUp Current Screen CSS */
+.current-screen {
+  position: absolute;
+  top: -70px;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    font: var(--font-BOLD-H4-16);
+    color: var(--primary-FFFFFF);
+    text-align: center;
+  }
+}
+
+.current-screen .screen .box-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 5px;
+  
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    background: var(--primary-00AEFF);
+    transition: .3s;
+
+    i {
+      font-size: 18px;
+      color: var(--primary-FFFFFF);
+    }
+  }
+  
+  button.selected {
+    background: var(--primary-FFFFFF);
+    transform: scale(1.15);
+
+    i {
+      color: var(--primary-00AEFF);
+    }
+  }
+
+  button:hover {
+    transform: scale(0.94);
+    box-shadow: 0 0 5px var(--primary-00AEFF);
+  }
 }

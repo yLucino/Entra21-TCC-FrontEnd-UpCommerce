@@ -1,0 +1,11 @@
+a {
+  color: var(--primary-009AEC);
+  font-size: 13px;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+a:hover {
+  color: var(--primary-0E548F);
+}
