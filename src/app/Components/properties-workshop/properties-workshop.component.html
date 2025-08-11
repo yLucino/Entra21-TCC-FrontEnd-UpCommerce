@@ -92,6 +92,57 @@
                   <input style="margin-top: 10px;" *ngIf="widthOption === 'custom'" type="number" placeholder="Ex: 320" min="0" [max]="maxWidth" [(ngModel)]="width" (input)="updateStyle('width', width + 'px')"/>
                 </div>
               </div>
+
+              <div class="image-prop" *ngIf="nameTag === 'imageComponent'">
+                <hr>
+                <div class="parting">
+                  <p>Imagem</p>
+                </div>
+
+                <div class="property image">
+                  <div class="title-prop">
+                    <p>URL da Imagem</p>
+                    <i class="fa-solid fa-circle-question" title="URL ou caminho do arquivo de imagem a ser exibida."></i>
+                  </div>
+
+                  <input type="text" placeholder="Ex: https://example.com/image.png" [(ngModel)]="imageSource" (input)="updateUrl('src', imageSource)"/>
+                </div>
+              </div>
+              
+              <div class="icon-prop" *ngIf="nameTag === 'iconComponent'">
+                <hr>
+                <div class="parting">
+                  <p>Ícone</p>
+                </div>
+
+                <div class="property icon">
+                  <div class="title-prop">
+                    <p>Classe do Ícone</p>
+                    <i class="fa-solid fa-circle-question" title="Classe do arquivo de ícone a ser exibida."></i>
+                  </div>
+
+                  <input type="text" placeholder="Ex: fa-solid fa-house" [(ngModel)]="iconSource" (input)="updateIconClass(iconSource)"/>
+
+                  <p style="margin-top: 10px;" class="sub-text-option">*Utilize classes do Font Awesome*</p>
+                  <a class="fontawesomeLink" href="https://fontawesome.com/search?ic=free&o=r" target="_blank">Procure seu ícone aqui!</a>
+                </div>
+              </div>
+              
+              <div class="link-prop" *ngIf="nameTag === 'linkComponent'">
+                <hr>
+                <div class="parting">
+                  <p>Ícone</p>
+                </div>
+
+                <div class="property link">
+                  <div class="title-prop">
+                    <p>Link</p>
+                    <i class="fa-solid fa-circle-question" title="Redireciona o usuário para uma URL com um clique."></i>
+                  </div>
+
+                  <input type="text" placeholder="Ex: https://www.google.com/" [(ngModel)]="linkSource" (input)="updateUrl('href', linkSource)"/>
+                </div>
+              </div>
   
               <div class="spacing-prop">
                 <hr>
@@ -589,22 +640,6 @@
                     <option value="stretch">Esticar</option>
                     <option value="baseline">Linha base</option>
                   </select>
-                </div>
-              </div>
-
-              <div class="image-prop" *ngIf="nameTag === 'imageComponent'">
-                <hr>
-                <div class="parting">
-                  <p>Imagem</p>
-                </div>
-
-                <div class="property image">
-                  <div class="title-prop">
-                    <p>URL da Imagem</p>
-                    <i class="fa-solid fa-circle-question" title="URL ou caminho do arquivo de imagem a ser exibida."></i>
-                  </div>
-
-                  <input type="text" placeholder="Ex: https://example.com/image.png" [(ngModel)]="imageSource" (input)="updateUrlImage(imageSource)"/>
                 </div>
               </div>
             </div>
