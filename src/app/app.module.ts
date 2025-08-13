@@ -36,7 +36,7 @@ import { PropertiesWorkshopComponent } from './Components/properties-workshop/pr
 import { UniqueIdDirective } from './directives/uniqueId-component.directive';
 
 // Drag and Drop Components
-import { AreaComponent } from './dragAndDrop/screen/area/area.component';
+import { AreaComponent } from './dragAndDrop/component/area/area.component';
 import { TextComponent } from './dragAndDrop/component/text/text.component';
 import { InputComponent } from './dragAndDrop/component/input/input.component';
 import { ButtonComponent } from './dragAndDrop/component/button/button.component';

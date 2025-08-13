@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { AreaComponent } from 'src/app/dragAndDrop/screen/area/area.component';
+import { CdkService } from 'src/app/services/cdk.service';
+import { AreaComponent } from 'src/app/dragAndDrop/component/area/area.component';
 
 import { ButtonComponent } from 'src/app/dragAndDrop/component/button/button.component';
 import { TextComponent } from 'src/app/dragAndDrop/component/text/text.component';
@@ -9,6 +10,8 @@ import { InputComponent } from 'src/app/dragAndDrop/component/input/input.compon
 import { ImageComponent } from 'src/app/dragAndDrop/component/image/image.component';
 import { IconComponent } from 'src/app/dragAndDrop/component/icon/icon.component';
 import { LinkComponent } from 'src/app/dragAndDrop/component/link/link.component';
+import { ButtonSetScreen } from 'src/app/interfaces/buttonSetScreen.interface';
+import { UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-tools-workshop',
@@ -16,12 +19,15 @@ import { LinkComponent } from 'src/app/dragAndDrop/component/link/link.component
   styleUrls: ['./tools-workshop.component.css']
 })
 export class ToolsWorkshopComponent {
-  @Input() baseDropListIds: string[] = ['smartphoneList'];
+  @Input() baseDropListIds: string[] = ['homeList', 'paymentList', 'perfilList', 'configList', 'notifyList', 'messageList', 'helpList', 'favList', 'cartList', 'historyList', 'reportsList', 'loginList'];
   @Input() areaDropListIds: string[] = [];
-
+  
+  selectedScreen: ComponentDragDrop | null = null;
+  screenNameTag: string = '';
+  isOpen: boolean = false;
   selectedIndex: number = 1;
 
-  constructor(private propertyService: PropertyService) {}
+  constructor(private propertyService: PropertyService, private cdkService: CdkService) {}
 
   ngOnInit() {
     this.propertyService.setComponentData(this.components, this.screens);
@@ -37,6 +43,7 @@ export class ToolsWorkshopComponent {
   ];
 
   components: ComponentDragDrop[] = [
+    { text: 'Área', icon: 'fa-regular fa-object-group', nameTag: 'areaComponent', description: 'Container ou seção personalizável para componentes.', component: AreaComponent },
     { text: 'Mapa', icon: 'fa-solid fa-map', nameTag: 'mapComponent', description: 'Exibe a localização geográfica com suporte a zoom e marcações.', component: null },
     { text: 'Imagem', icon: 'fa-solid fa-image', nameTag: 'imageComponent', description: 'Exibe uma  imagens de seu interesse.', component: ImageComponent },
     { text: 'Audio Player', icon: 'fa-solid fa-music', nameTag: 'audioplayComponent', description: 'Componente para tocar arquivos de áudio com controles de reprodução.', component: null },
@@ -79,20 +86,17 @@ export class ToolsWorkshopComponent {
   ];
 
   screens: ComponentDragDrop[] = [
-    { text: 'Home', icon: 'fa-solid fa-house', nameTag: 'homeScreen', description: 'Tela principal do aplicativo com visão geral.', component: null },
-    { text: 'Área', icon: 'fa-regular fa-object-group', nameTag: 'areaScreen', description: 'Container ou seção personalizável para componentes.', component: AreaComponent },
     { text: 'Pagamento', icon: 'fa-solid fa-credit-card', nameTag: 'paymentScreen', description: 'Tela de inserção ou confirmação de pagamentos.', component: null },
     { text: 'Perfil', icon: 'fa-solid fa-user', nameTag: 'perfilScreen', description: 'Exibe ou edita informações do usuário.', component: null },
     { text: 'Configurações', icon: 'fa-solid fa-gear', nameTag: 'configScreen', description: 'Ajustes de preferências e comportamentos do app.', component: null },
     { text: 'Notificações', icon: 'fa-solid fa-bell', nameTag: 'notifyScreen', description: 'Lista de alertas e mensagens do sistema.', component: null },
-    { text: 'Mensagens', icon: 'fa-solid fa-envelope', nameTag: 'mensageScreen', description: 'Seção de mensagens privadas entre usuários.', component: null },
+    { text: 'Mensagens', icon: 'fa-solid fa-envelope', nameTag: 'messageScreen', description: 'Seção de mensagens privadas entre usuários.', component: null },
     { text: 'Ajuda', icon: 'fa-solid fa-circle-question', nameTag: 'helpScreen', description: 'Central de suporte e FAQs.', component: null },
     { text: 'Favoritos', icon: 'fa-solid fa-heart', nameTag: 'favScreen', description: 'Tela para visualizar e editar favoritos do usuário.', component: null },
     { text: 'Carrinho', icon: 'fa-solid fa-cart-shopping', nameTag: 'cartScreen', description: 'Resumo de compras ou itens selecionados.', component: null },
     { text: 'Histórico', icon: 'fa-solid fa-clock-rotate-left', nameTag: 'historyScreen', description: 'Registros de compras, navegação ou ações.', component: null },
     { text: 'Relatórios', icon: 'fa-solid fa-file-invoice', nameTag: 'reportsScreens', description: 'Tela com estatísticas e dados formatados.', component: null },
-    { text: 'Login', icon: 'fa-solid fa-right-to-bracket', nameTag: 'loginScreens', description: 'Tela de entrada do sistema com autenticação.', component: null },
-    { text: 'Logout', icon: 'fa-solid fa-right-from-bracket', nameTag: 'logoutScreens', description: 'Encerra sessão do usuário e retorna ao início.', component: null }
+    { text: 'Login', icon: 'fa-solid fa-right-to-bracket', nameTag: 'loginScreens', description: 'Tela de entrada do sistema com autenticação.', component: null }
   ];
 
   selectItem(index: number) {
@@ -122,5 +126,37 @@ export class ToolsWorkshopComponent {
 
   trackByFn(index: number, item: ComponentDragDrop) {
     return item.nameTag;
+  }
+
+  // Function to handle actions when a screen is clicked
+  askActionScreen(screen: ComponentDragDrop) {
+    this.selectedScreen = screen;
+    this.screenNameTag = screen.nameTag;
+    this.isOpen = true;
+  }
+
+  useScreen() {
+    if (this.selectedScreen) {
+      const listId = this.selectedScreen.nameTag
+      .replace('Screen', '')
+      .toLowerCase() + 'List';
+
+      const newButton: ButtonSetScreen = {
+        screen: this.selectedScreen.nameTag,
+        class: this.selectedScreen.icon,
+        title: this.selectedScreen.text,
+        selected: false,
+        list: listId
+      };
+
+      this.cdkService.addButton(newButton);
+      this.closePopUp();
+    }
+  }
+
+  closePopUp() {
+    this.selectedScreen = null;
+    this.screenNameTag = '';
+    this.isOpen = false;
   }
 }
