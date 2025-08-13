@@ -43,6 +43,7 @@ import { ButtonComponent } from './dragAndDrop/component/button/button.component
 import { ImageComponent } from './dragAndDrop/component/image/image.component';
 import { IconComponent } from './dragAndDrop/component/icon/icon.component';
 import { LinkComponent } from './dragAndDrop/component/link/link.component';
+import { DesktopScreenWorkshopComponent } from './Components/desktop-screen-workshop/desktop-screen-workshop.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { LinkComponent } from './dragAndDrop/component/link/link.component';
     ImageComponent,
     IconComponent,
     LinkComponent,
+    DesktopScreenWorkshopComponent,
   ],
   imports: [
     BrowserModule,

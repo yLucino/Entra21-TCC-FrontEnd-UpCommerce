@@ -25,3 +25,27 @@ main div {
   align-items: flex-end;
   padding-left: 50px;
 }
+
+main div.web {
+  display: grid;
+  grid-template-areas:
+    "desktop props"
+    "tools props";
+  gap: 20px;
+}
+
+main div.web > .desktop {
+  grid-area: desktop;
+  justify-self: center;
+  align-self: last baseline;
+}
+
+main div.web > .props {
+  grid-area: props;
+  justify-self: right;
+}
+
+main div.web > .tools {
+  grid-area: tools;
+  justify-self: center;
+}

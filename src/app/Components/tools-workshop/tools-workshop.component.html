@@ -1,32 +1,33 @@
 <section>
-  <div class="content-all">
-    <div class="box-buttons">
-      <button *ngFor="let item of btnsItems; let i = index"
-      [class.active]="selectedIndex === i"
-      (click)="selectItem(i)">
-        <i class="{{ item.icon }}"></i>
-        {{item.text}}
-      </button>
+  <div class="content-all {{typeCSS}}">
+    <div class="box-header {{typeCSS}}">
+      <div class="box-buttons {{typeCSS}}">
+        <button *ngFor="let item of btnsItems; let i = index"
+        [class.active]="selectedIndex === i"
+        (click)="selectItem(i)">
+          <i class="{{ item.icon }}"></i>
+          {{item.text}}
+        </button>
+      </div>
+  
+      <div class="box-input {{typeCSS}}">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" name="search" id="search" [(ngModel)]="searchTerm" placeholder="Pesquise por Telas ou Componentes...">
+      </div>
     </div>
-
-    <div class="box-input">
-      <i class="fa-solid fa-magnifying-glass"></i>
-      <input type="text" name="search" id="search" [(ngModel)]="searchTerm" placeholder="Pesquise por Telas ou Componentes...">
-    </div>
-
     <!-- Componentes -->
-    <div class="box-component" *ngIf="selectedIndex == 1" 
+    <div class="box-component {{typeCSS}}" *ngIf="selectedIndex == 1" 
     cdkDropList
     #toolsComponentList="cdkDropList"
     [id]="'toolsComponentList'"
     [cdkDropListData]="filteredComponents"
     [cdkDropListConnectedTo]="connectedDropListId">
-      <div cdkDrag [cdkDragData]="component" class="component" *ngFor="let component of filteredComponents; trackBy: trackByFn">
+      <div cdkDrag [cdkDragData]="component" class="component {{typeCSS}}" *ngFor="let component of filteredComponents; trackBy: trackByFn">
         <i [class]="component.icon"></i>
         <p>{{ component.text }}</p>
       </div>
 
-      <div class="no-component" *ngIf="filteredComponents.length === 0">
+      <div class="no-component {{typeCSS}}" *ngIf="filteredComponents.length === 0">
         <i class="fa-solid fa-triangle-exclamation"></i>
         <p>Nenhum componente encontrado</p>
         <p class="text-help-tip">Por favor, verifique a escrita e certifique-se de que está procurando no campo correto.</p>
@@ -34,13 +35,13 @@
     </div>
 
     <!-- Telas -->
-    <div class="box-screens" *ngIf="selectedIndex == 0">
-      <div class="screen" *ngFor="let screen of filteredScreens" (click)="askActionScreen(screen)">
+    <div class="box-screens {{typeCSS}}" *ngIf="selectedIndex == 0">
+      <div class="screen {{typeCSS}}" *ngFor="let screen of filteredScreens" (click)="askActionScreen(screen)">
         <i [class]="screen.icon"></i>
         <p>{{ screen.text }}</p>
       </div>
 
-      <div class="popUpAsk" *ngIf="isOpen && selectedScreen">
+      <div class="popUpAsk {{typeCSS}}" *ngIf="isOpen && selectedScreen">
         <p>Tela: {{ selectedScreen.text }}</p>
 
         <div class="box-btns">
@@ -49,7 +50,7 @@
         </div>
       </div>
 
-      <div class="no-component" *ngIf="filteredScreens.length === 0">
+      <div class="no-component {{typeCSS}}" *ngIf="filteredScreens.length === 0">
         <i class="fa-solid fa-triangle-exclamation"></i>
         <p>Nenhuma tela encontrada</p>
         <p class="text-help-tip">Por favor, verifique a escrita e certifique-se de que está procurando no campo correto.</p>

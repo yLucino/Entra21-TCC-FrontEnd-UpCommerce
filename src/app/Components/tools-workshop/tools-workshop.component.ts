@@ -19,6 +19,7 @@ import { UpperCasePipe } from '@angular/common';
   styleUrls: ['./tools-workshop.component.css']
 })
 export class ToolsWorkshopComponent {
+  @Input() typeCSS!: string;
   @Input() baseDropListIds: string[] = ['homeList', 'paymentList', 'perfilList', 'configList', 'notifyList', 'messageList', 'helpList', 'favList', 'cartList', 'historyList', 'reportsList', 'loginList'];
   @Input() areaDropListIds: string[] = [];
   
