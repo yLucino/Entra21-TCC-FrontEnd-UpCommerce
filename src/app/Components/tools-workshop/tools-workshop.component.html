@@ -34,15 +34,19 @@
     </div>
 
     <!-- Telas -->
-    <div class="box-screens" *ngIf="selectedIndex == 0"
-    cdkDropList
-    #toolsScreenList="cdkDropList"
-    [id]="'toolsScreenList'"
-    [cdkDropListData]="filteredScreens"
-    [cdkDropListConnectedTo]="connectedDropListId">
-      <div cdkDrag [cdkDragData]="screen" class="screen" *ngFor="let screen of filteredScreens; trackBy: trackByFn">
+    <div class="box-screens" *ngIf="selectedIndex == 0">
+      <div class="screen" *ngFor="let screen of filteredScreens" (click)="askActionScreen(screen)">
         <i [class]="screen.icon"></i>
-        <p>{{ screen.text }}</p>  
+        <p>{{ screen.text }}</p>
+      </div>
+
+      <div class="popUpAsk" *ngIf="isOpen && selectedScreen">
+        <p>Tela: {{ selectedScreen.text }}</p>
+
+        <div class="box-btns">
+          <button class="btn-use" (click)="useScreen()">Usar</button>
+          <button class="btn-close" (click)="closePopUp()" >Fechar</button>
+        </div>
       </div>
 
       <div class="no-component" *ngIf="filteredScreens.length === 0">

@@ -1,12 +1,12 @@
 <div 
-  class="child-drop-zone screen"
+  class="child-drop-zone component"
   cdkDropList
   [id]="areaListId"
   [cdkDropListEnterPredicate]="canEnterArea"
-  [cdkDropListConnectedTo]="['toolsComponentList', 'toolsScreenList']"
+  [cdkDropListConnectedTo]="['toolsComponentList']"
   (cdkDropListDropped)="drop($event)"
   appUniqueId
-  [nameTag]="'areaScreen'"
+  [nameTag]="'areaComponent'"
   (uniqueIdCreated)="onUniqueIdCreated($event)">
   
   <ng-container #dropHost></ng-container>

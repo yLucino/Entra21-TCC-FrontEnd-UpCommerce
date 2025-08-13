@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ComponentDragDrop } from 'src/app/interfaces/component.dragdrop.interface';
+import { CdkService } from 'src/app/services/cdk.service';
 import { PropertyService } from 'src/app/services/property.service';
 
 @Component({
@@ -113,11 +114,32 @@ export class PropertiesWorkshopComponent {
   nameTag: string | null = '';
   searchTerm: string = '';
 
+
+  fatherComponentId: string = 'homeList';
+
   private mutationObserver!: MutationObserver;
 
-  constructor(private propertyService: PropertyService) {}
+  constructor(private propertyService: PropertyService, private cdkService: CdkService) {}
 
   ngOnInit() {
+    this.cdkService.screenId$.subscribe(btn => {
+      if (btn) {
+        this.fatherComponentId = btn.list;
+
+        if (this.mutationObserver) {
+          this.mutationObserver.disconnect();
+        }
+
+        setTimeout(() => {
+          const smartphoneCDK = document.getElementById(this.fatherComponentId);
+          if (smartphoneCDK) {
+            this.observeComponentChanges(smartphoneCDK);
+            this.renderComponents();
+          }
+        });
+      }
+    });
+
     this.propertyService.getSelectedElement().subscribe(el => {
       if (el) {
         this.selectComponent(el); 
@@ -572,7 +594,7 @@ export class PropertiesWorkshopComponent {
   }
 
   ngAfterViewInit() {
-    const smartphoneCDK = document.getElementById('smartphoneList');
+    const smartphoneCDK = document.getElementById(this.fatherComponentId);
 
     if (smartphoneCDK) {
       this.observeComponentChanges(smartphoneCDK);
@@ -592,7 +614,7 @@ export class PropertiesWorkshopComponent {
   }
 
   renderComponents() {
-    const smartphoneCDK = document.getElementById('smartphoneList');
+    const smartphoneCDK = document.getElementById(this.fatherComponentId);
     if (!smartphoneCDK) return;
 
     const elements = Array.from(

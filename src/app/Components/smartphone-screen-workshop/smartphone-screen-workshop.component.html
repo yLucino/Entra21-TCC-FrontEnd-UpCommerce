@@ -2,17 +2,16 @@
   <div class="current-screen">
     <div class="screen">
       <div class="box-btns">
-        <button>
-          <i class="fa-solid fa-home"></i>
+        <button [class.selected]="button.selected" (click)="setScreen(button)" *ngFor="let button of buttons">
+          <i [class]="button.class"></i>
         </button>
       </div>
 
-      <p>Tela Inicial</p>
+      <p>{{titleScreen}}</p>
     </div>
   </div>
   
   <div class="content-all">
-
     <div class="notify-bar">
       <p class="time">{{currentTime}}</p>
 
@@ -25,15 +24,171 @@
       </div>
     </div>
 
-    <div class="drop-zone"
+    <!-- Home -->
+    <div
+      *ngIf="currentScreen === 'homeScreen'"
+      class="drop-zone home"
+      [id]="'homeList'"
       cdkDropList
-      #smartphoneList="cdkDropList"
-      [id]="'smartphoneList'"
       [cdkDropListEnterPredicate]="canEnterSmartphone"
       [cdkDropListConnectedTo]="connectedDropListId"
       (cdkDropListDropped)="drop($event)"
       (click)="deselectElement($event)">
-      
+
+      <ng-container #dropHost></ng-container>
+    </div>
+
+    <!-- payment -->
+    <div
+      *ngIf="currentScreen === 'paymentScreen'"
+      class="drop-zone payment"
+      [id]="'paymentList'"
+      cdkDropList
+      [cdkDropListEnterPredicate]="canEnterSmartphone"
+      [cdkDropListConnectedTo]="connectedDropListId"
+      (cdkDropListDropped)="drop($event)"
+      (click)="deselectElement($event)">
+
+      <ng-container #dropHost></ng-container>
+    </div>
+
+    <!-- perfil -->
+    <div
+      *ngIf="currentScreen === 'perfilScreen'"
+      class="drop-zone perfil"
+      [id]="'perfilList'"
+      cdkDropList
+      [cdkDropListEnterPredicate]="canEnterSmartphone"
+      [cdkDropListConnectedTo]="connectedDropListId"
+      (cdkDropListDropped)="drop($event)"
+      (click)="deselectElement($event)">
+
+      <ng-container #dropHost></ng-container>
+    </div>
+
+    <!-- config -->
+    <div
+      *ngIf="currentScreen === 'configScreen'"
+      class="drop-zone config"
+      [id]="'configList'"
+      cdkDropList
+      [cdkDropListEnterPredicate]="canEnterSmartphone"
+      [cdkDropListConnectedTo]="connectedDropListId"
+      (cdkDropListDropped)="drop($event)"
+      (click)="deselectElement($event)">
+
+      <ng-container #dropHost></ng-container>
+    </div>
+
+    <!-- notify -->
+    <div
+      *ngIf="currentScreen === 'notifyScreen'"
+      class="drop-zone notify"
+      [id]="'notifyList'"
+      cdkDropList
+      [cdkDropListEnterPredicate]="canEnterSmartphone"
+      [cdkDropListConnectedTo]="connectedDropListId"
+      (cdkDropListDropped)="drop($event)"
+      (click)="deselectElement($event)">
+
+      <ng-container #dropHost></ng-container>
+    </div>
+
+    <!-- message -->
+    <div
+      *ngIf="currentScreen === 'messageScreen'"
+      class="drop-zone message"
+      [id]="'messageList'"
+      cdkDropList
+      [cdkDropListEnterPredicate]="canEnterSmartphone"
+      [cdkDropListConnectedTo]="connectedDropListId"
+      (cdkDropListDropped)="drop($event)"
+      (click)="deselectElement($event)">
+
+      <ng-container #dropHost></ng-container>
+    </div>
+
+    <!-- help -->
+    <div
+      *ngIf="currentScreen === 'helpScreen'"
+      class="drop-zone help"
+      [id]="'helpList'"
+      cdkDropList
+      [cdkDropListEnterPredicate]="canEnterSmartphone"
+      [cdkDropListConnectedTo]="connectedDropListId"
+      (cdkDropListDropped)="drop($event)"
+      (click)="deselectElement($event)">
+
+      <ng-container #dropHost></ng-container>
+    </div>
+
+    <!-- fav -->
+    <div
+      *ngIf="currentScreen === 'favScreen'"
+      class="drop-zone fav"
+      [id]="'favList'"
+      cdkDropList
+      [cdkDropListEnterPredicate]="canEnterSmartphone"
+      [cdkDropListConnectedTo]="connectedDropListId"
+      (cdkDropListDropped)="drop($event)"
+      (click)="deselectElement($event)">
+
+      <ng-container #dropHost></ng-container>
+    </div>
+
+    <!-- cart -->
+    <div
+      *ngIf="currentScreen === 'cartScreen'"
+      class="drop-zone cart"
+      [id]="'cartList'"
+      cdkDropList
+      [cdkDropListEnterPredicate]="canEnterSmartphone"
+      [cdkDropListConnectedTo]="connectedDropListId"
+      (cdkDropListDropped)="drop($event)"
+      (click)="deselectElement($event)">
+
+      <ng-container #dropHost></ng-container>
+    </div>
+
+    <!-- history -->
+    <div
+      *ngIf="currentScreen === 'historyScreen'"
+      class="drop-zone history"
+      [id]="'historyList'"
+      cdkDropList
+      [cdkDropListEnterPredicate]="canEnterSmartphone"
+      [cdkDropListConnectedTo]="connectedDropListId"
+      (cdkDropListDropped)="drop($event)"
+      (click)="deselectElement($event)">
+
+      <ng-container #dropHost></ng-container>
+    </div>
+
+    <!-- Reports -->
+    <div
+      *ngIf="currentScreen === 'reportsScreen'"
+      class="drop-zone reports"
+      [id]="'reportsList'"
+      cdkDropList
+      [cdkDropListEnterPredicate]="canEnterSmartphone"
+      [cdkDropListConnectedTo]="connectedDropListId"
+      (cdkDropListDropped)="drop($event)"
+      (click)="deselectElement($event)">
+
+      <ng-container #dropHost></ng-container>
+    </div>
+
+    <!-- Login -->
+    <div
+      *ngIf="currentScreen === 'loginScreen'"
+      class="drop-zone login"
+      [id]="'loginList'"
+      cdkDropList
+      [cdkDropListEnterPredicate]="canEnterSmartphone"
+      [cdkDropListConnectedTo]="connectedDropListId"
+      (cdkDropListDropped)="drop($event)"
+      (click)="deselectElement($event)">
+
       <ng-container #dropHost></ng-container>
     </div>
 

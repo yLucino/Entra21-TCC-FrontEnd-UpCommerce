@@ -99,7 +99,7 @@ section {
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
-  gap: 5px;
+  gap: 8px;
   
   button {
     display: flex;

@@ -9,10 +9,13 @@ import {
   ViewContainerRef,
   OnInit
 } from '@angular/core';
+
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { AreaComponent } from 'src/app/dragAndDrop/screen/area/area.component';
+import { AreaComponent } from 'src/app/dragAndDrop/component/area/area.component';
 import { PropertyService } from 'src/app/services/property.service';
 import { PropertiesWorkshopComponent } from '../properties-workshop/properties-workshop.component';
+import { ButtonSetScreen } from 'src/app/interfaces/buttonSetScreen.interface';
+import { CdkService } from 'src/app/services/cdk.service';
 
 @Component({
   selector: 'app-smartphone-screen-workshop',
@@ -21,12 +24,20 @@ import { PropertiesWorkshopComponent } from '../properties-workshop/properties-w
 })
 export class SmartphoneScreenWorkshopComponent implements OnInit {
   @ViewChild('propertiesWorkshop') propertiesWorkshop!: PropertiesWorkshopComponent;
+  @ViewChild('dropHost', { read: ViewContainerRef }) viewContainerRef!: ViewContainerRef;
+  
   @Input() connectedDropListId: string[] = [];
+  
   @Output() areaCreated = new EventEmitter<string>();
   @Output() elementDeselected = new EventEmitter<void>();
-  currentTime: string = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-  @ViewChild('dropHost', { read: ViewContainerRef }) viewContainerRef!: ViewContainerRef;
+  currentTime: string = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  titleScreen: string = 'Início'; 
+  currentScreen: string = 'homeScreen'; 
+  
+  buttons: ButtonSetScreen[] = [
+    { screen: 'homeScreen', class: 'fa-solid fa-house', title: 'Início', selected: true, list: 'homeList' },
+  ];
 
   private lastSelectedElement: HTMLElement | null = null;
 
@@ -35,10 +46,20 @@ export class SmartphoneScreenWorkshopComponent implements OnInit {
 
   constructor(
     private injector: EnvironmentInjector,
-    private propertyService: PropertyService
+    private propertyService: PropertyService,
+    private cdkService: CdkService
   ) {}
 
   ngOnInit() {
+    this.cdkService.buttons$.subscribe(button => {
+      if (button) {
+        const exists = this.buttons.some(b => b.screen === button.screen);
+        if (!exists) {
+          this.buttons.push(button);
+        }
+      }
+    });
+
     this.propertyService.getSelectedElement().subscribe(el => {
       if (el) {
         if (this.lastSelectedElement) {
@@ -90,5 +111,29 @@ export class SmartphoneScreenWorkshopComponent implements OnInit {
       this.propertyService.setSelectedElement(null);
       this.elementDeselected.emit();
     }
+  }
+
+  // Function to set the current screen based on the button clicked
+  setScreen(btn: ButtonSetScreen) {
+    this.currentScreen = btn.screen;
+    this.titleScreen = btn.title;
+    this.setSelectedButton(btn);
+
+    if (this.currentScreen !== btn.screen) {
+      this.propertyService.setSelectedElement(null);
+      this.elementDeselected.emit();
+    }
+
+    this.cdkService.transferScreen(btn);
+  }
+
+  setSelectedButton(btn: ButtonSetScreen) {
+    this.buttons.forEach(button => {
+      if (button === btn) {
+        button.selected = true;
+      } else {
+        button.selected = false;
+      }
+    });
   }
 }
