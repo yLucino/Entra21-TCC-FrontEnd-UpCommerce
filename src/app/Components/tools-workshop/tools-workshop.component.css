@@ -1,4 +1,4 @@
-.content-all {
+.content-all.mobile {
   width: 410px;
   height: 680px;
   background: var(--primary-FFFFFF);
@@ -6,13 +6,13 @@
   padding: 20px;
 }
 
-.content-all .box-buttons {
+.content-all.mobile .box-buttons.mobile {
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
-.content-all .box-buttons button {
+.content-all.mobile .box-buttons.mobile button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,16 +26,16 @@
   transition: .3s;
 }
 
-.content-all .box-buttons button:hover {
+.content-all.mobile .box-buttons.mobile button:hover {
   transform: scale(.95);
 }
 
-.content-all .box-buttons button.active {
+.content-all.mobile .box-buttons.mobile button.active {
   background: var(--primary-00AEFF);
   color: var(--primary-FFFFFF);
 }
 
-.content-all .box-input {
+.content-all.mobile .box-input.mobile {
   position: relative;
   width: 100%;
   display: flex;
@@ -50,7 +50,7 @@
   }
 }
 
-.content-all .box-input input {
+.content-all.mobile .box-input.mobile input {
   width: 100%;
   height: 50px;
   padding: 0 35px 0 10px;
@@ -59,8 +59,8 @@
 }
 
 /* Components/Screens */
-.box-component,
-.box-screens {
+.box-component.mobile,
+.box-screens.mobile {
   position: relative;
   width: 100%;
   height: 75%;
@@ -73,7 +73,7 @@
   gap: 10px;
 }
 
-.component {
+.component.mobile {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -86,7 +86,7 @@
   cursor: grab;
 }
 
-.screen {
+.screen.mobile {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -100,25 +100,25 @@
   transition: .3s;
 }
 
-.screen:hover {
+.screen.mobile:hover {
   background: var(--primary-E0E0E0);
 }
 
-.component i,
-.screen i {
+.component.mobile i,
+.screen.mobile i {
   color: var(--primary-666666);
   size: 27px;
   font-size: 27px;
 }
 
-.component p,
-.screen p {
+.component.mobile p,
+.screen.mobile p {
   color: var(--primary-666666);
   font: var(--font-REGULAR-P-12);
 }
 
 /* PopUp Ask Action CSS */
-.popUpAsk {
+.popUpAsk.mobile {
   position: fixed;
   width: 170px;
   height: 100px;
@@ -202,5 +202,198 @@
   p.text-help-tip {
     font: var(--font-REGULAR-P-13);
     margin-top: 10px;
+  }
+}
+
+
+/* Desktop CSS */
+.content-all.desktop {
+  width: 97%;
+  display: flex;
+  height: 100%;
+  background: var(--primary-FFFFFF);
+  border-radius: 35px 35px 0 0;
+  padding: 30px 10px 10px 30px;
+}
+
+.content-all.desktop .box-header.desktop {
+  margin-right: 30px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content-all.desktop .box-buttons.desktop {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.content-all.desktop .box-buttons.desktop button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  height: 50px;
+  background: var(--primary-D9D9D9);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: .3s;
+  margin-bottom: 5px;
+}
+
+.content-all.desktop .box-buttons.desktop button:hover {
+  transform: scale(.95);
+}
+
+.content-all.desktop .box-buttons.desktop button.active {
+  background: var(--primary-00AEFF);
+  color: var(--primary-FFFFFF);
+}
+
+.content-all.desktop .box-input.desktop {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  i {
+    position: absolute;
+    color: var(--primary-666666);
+    right: 15px;
+  }
+}
+
+.content-all.desktop .box-input.desktop input {
+  width: 100%;
+  height: 50px;
+  padding: 0 35px 0 10px;
+  border-radius: 10px;
+  border: 2px solid var(--primary-666666);
+}
+
+/* Components/Screens */
+.box-component.desktop,
+.box-screens.desktop {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  align-content: flex-start;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.component.desktop {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 140px;
+  border: 1px dashed var(--primary-A6A6A6);
+  border-radius: 10px;
+  gap: 5px;
+  cursor: grab;
+}
+
+.screen.desktop {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 140px;
+  border: 1px dashed var(--primary-A6A6A6);
+  border-radius: 10px;
+  gap: 5px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.screen.desktop:hover {
+  background: var(--primary-E0E0E0);
+}
+
+.component.desktop i,
+.screen.desktop i {
+  color: var(--primary-666666);
+  size: 27px;
+  font-size: 27px;
+}
+
+.component.desktop p,
+.screen.desktop p {
+  color: var(--primary-666666);
+  font: var(--font-REGULAR-P-12);
+}
+
+/* PopUp Ask Action CSS */
+.popUpAsk.desktop {
+  position: fixed;
+  width: 170px;
+  height: 100px;
+  bottom: 200px;
+  left: 190px;
+  background: var(--primary-FFFFFF);
+  box-shadow: 0 0 10px var(--primary-ALPHA-000000-02);
+  border-radius: 20px 20px 0 0;
+  border-bottom: 8px solid var(--primary-00AEFF);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    font: var(--font-REGULAR-P-13);
+    color: var(--primary-000000b5);
+  }
+
+  .box-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    gap: 5px;
+
+    button {
+      width: 50px;
+      height: 25px;
+      color: var(--primary-FFFFFF);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all .3s;
+      font-size: 12px;
+    }
+    
+    button.btn-use {
+      background: var(--primary-00AEFF);
+    }
+
+    button.btn-close {
+      background: var(--primary-D9D9D9);
+      color: var(--primary-000000b5);
+    }
+    
+    button.btn-use:hover {
+      box-shadow: 0 0 5px var(--primary-00AEFF);
+      transform: scale(1.05);
+    }
+
+    button.btn-close:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 5px var(--primary-D9D9D9);
+    }
   }
 }

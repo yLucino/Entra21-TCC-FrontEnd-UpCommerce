@@ -19,17 +19,35 @@
     </div>
 
     <div class="web" *ngIf="currentStep === 3"> 
+      <app-desktop-screen-workshop
+        class="desktop"
+        [connectedDropListId]="['toolsComponentList']"
+        (areaCreated)="handleNewAreaId($event)"
+        (elementDeselected)="propertiesWorkshop.deselectElement()">
+      </app-desktop-screen-workshop>
 
+      <app-properties-workshop 
+        class="props"
+        #propertiesWorkshop>
+      </app-properties-workshop>
+      
+      <app-tools-workshop
+        class="tools"
+        [baseDropListIds]="['homeList', 'paymentList', 'perfilList', 'configList', 'notifyList', 'messageList', 'helpList', 'favList', 'cartList', 'historyList', 'reportsList', 'loginList']"
+        [areaDropListIds]="areaIds"
+        [typeCSS]="'desktop'">
+      </app-tools-workshop>
     </div>
 
     <div class="mobile" *ngIf="currentStep === 4">
       <app-tools-workshop
         [baseDropListIds]="['homeList', 'paymentList', 'perfilList', 'configList', 'notifyList', 'messageList', 'helpList', 'favList', 'cartList', 'historyList', 'reportsList', 'loginList']"
-        [areaDropListIds]="areaIds">
+        [areaDropListIds]="areaIds"
+        [typeCSS]="'mobile'">
       </app-tools-workshop>
 
       <app-smartphone-screen-workshop
-        [connectedDropListId]="['toolsComponentList', 'toolsScreenList']"
+        [connectedDropListId]="['toolsComponentList']"
         (areaCreated)="handleNewAreaId($event)"
         (elementDeselected)="propertiesWorkshop.deselectElement()">
       </app-smartphone-screen-workshop>

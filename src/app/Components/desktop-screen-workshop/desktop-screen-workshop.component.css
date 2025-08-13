@@ -1,0 +1,104 @@
+section {
+  position: relative;
+  margin-top: 50px;
+}
+
+.content-all {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 850px;
+  height: 480PX;
+  background: var(--primary-FFFFFF);
+  padding: 5px 8px;
+}
+
+/* Drop zone CSS */
+.drop-zone {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 3px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.drop-zone::-webkit-scrollbar {
+  width: 0;  
+  height: 0;
+}
+
+.drop-zone::-webkit-scrollbar-track,
+.drop-zone::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+/* PopUp Current Screen CSS */
+.current-screen {
+  position: absolute;
+  top: -6px;
+  left: -490px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    font: var(--font-BOLD-H4-16);
+    color: var(--primary-FFFFFF);
+    text-align: center;
+  }
+}
+
+.current-screen .screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.current-screen .screen .box-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  width: 45px;
+  flex-wrap: wrap;
+  gap: 8px;
+  
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    background: var(--primary-00AEFF);
+    transition: .3s;
+
+    i {
+      font-size: 18px;
+      color: var(--primary-FFFFFF);
+    }
+  }
+  
+  button.selected {
+    background: var(--primary-FFFFFF);
+    transform: scale(1.15);
+
+    i {
+      color: var(--primary-00AEFF);
+    }
+  }
+
+  button:hover {
+    transform: scale(0.94);
+    box-shadow: 0 0 5px var(--primary-00AEFF);
+  }
+}
