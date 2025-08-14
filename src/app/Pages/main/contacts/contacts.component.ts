@@ -19,6 +19,11 @@ export class ContactsComponent {
     {
       this.successInForm = true;
       this.erroInForm = false;
+
+      this.firstname = '';
+      this.lastname = '';
+      this.email = '';
+      this.message = '';
     } else {
       this.erroInForm = true;
       this.successInForm = false;

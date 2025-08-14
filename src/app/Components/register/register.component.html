@@ -19,6 +19,13 @@
         
         <label for="Password">Senha</label>
         <input type="password" name="Password" id="Password" placeholder="Senha" required [(ngModel)]="password">
+        
+        <label for="Role">Cargo</label>
+        <select name="Role" id="Role" required [(ngModel)]="role">
+          <option value="" disabled selected>Selecione um cargo</option>
+          <option value="Entrepreneur">Empreendedor</option>
+          <option value="Designer">Designer</option>
+        </select>
 
         <button type="submit">Cadastrar</button>
       </form>

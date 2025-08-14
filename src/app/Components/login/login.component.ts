@@ -1,6 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { trigger, transition, style, animate, AnimationEvent } from '@angular/animations';
 import { NgForm } from '@angular/forms';
+import { LoginService } from 'src/app/services/login.service';
+import { LoginInterface } from 'src/app/interfaces/login.interface';
+
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -28,8 +32,43 @@ export class LoginComponent {
   
   visible = true;
 
+  constructor(private loginService: LoginService) {}
+
   sendForm(form: NgForm) {
-    if (form.valid) {    }
+    if (form.valid) {
+      const data: LoginInterface = {
+        email: this.email,
+        password: this.password
+      };
+
+      this.loginService.login(data).subscribe({
+        next: (response) => {
+          Swal.fire({
+            toast: true,            
+            position: 'top-end',    
+            icon: 'success',    
+            title: 'Login feito com sucesso',
+            showConfirmButton: false,
+            timer: 3000, 
+            timerProgressBar: true  
+          });
+          localStorage.setItem('token', response.token);
+          this.closeLoginComponent();
+        },
+        error: (er) => {
+          Swal.fire({
+            toast: true,            
+            position: 'top-end',    
+            icon: 'error',    
+            title: 'Erro ao fazer login',
+            showConfirmButton: false,
+            timer: 3000, 
+            timerProgressBar: true 
+          });
+          console.log(er);
+        }
+      });
+    }
     else {
       this.erroInForm = true;
     }

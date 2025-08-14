@@ -68,6 +68,11 @@ section {
   justify-content: space-between;
   width: 430px;
   height: 545px;
+
+  p#textInfoErro {
+    bottom: -13px;
+    right: 170px;
+  }
 }
 
 .content-all .content-payment .infos .type-payment {
