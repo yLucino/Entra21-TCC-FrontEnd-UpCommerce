@@ -282,7 +282,7 @@
 .box-component.desktop,
 .box-screens.desktop {
   position: relative;
-  width: 100%;
+  width: 1070px;
   height: 160px;
   align-content: flex-start;
   overflow-y: scroll;
