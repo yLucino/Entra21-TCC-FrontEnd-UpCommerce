@@ -3,6 +3,7 @@ import { trigger, transition, style, animate, AnimationEvent } from '@angular/an
 import { NgForm } from '@angular/forms';
 import { LoginService } from 'src/app/services/login.service';
 import { LoginInterface } from 'src/app/interfaces/login.interface';
+import { AuthService } from 'src/app/services/auth.service';
 
 import Swal from 'sweetalert2';
 
@@ -32,7 +33,7 @@ export class LoginComponent {
   
   visible = true;
 
-  constructor(private loginService: LoginService) {}
+  constructor(private loginService: LoginService, private authService: AuthService) {}
 
   sendForm(form: NgForm) {
     if (form.valid) {
@@ -53,6 +54,7 @@ export class LoginComponent {
             timerProgressBar: true  
           });
           localStorage.setItem('token', response.token);
+          this.authService.setUser(response);
           this.closeLoginComponent();
         },
         error: (er) => {

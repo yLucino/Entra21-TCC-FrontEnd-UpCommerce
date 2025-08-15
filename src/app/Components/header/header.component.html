@@ -27,11 +27,36 @@
       <mat-icon class="search-icon">search</mat-icon>
     </div>
     
-    <div class="login-register-section">
+    <div class="login-register-section" *ngIf="!token">
       <a (click)="openLogin()">
         <mat-icon class="search-user">account_circle</mat-icon>
         <p>Login</p>
       </a>
+    </div>
+    
+    <div class="profile-section" *ngIf="token">
+      <a (click)="openMenu()">
+        <p>{{username}}</p>
+      </a>
+
+      <ul [class.isOpenMenu]="isMenuLoginOpen">
+        <li routerLink="profile">
+          <i class="fa-solid fa-user"></i>
+          Perfil
+        </li>
+        <li routerLink="workshop">
+          <i class="fa-solid fa-folder"></i>
+          Projetos
+        </li>
+        <li routerLink="library">
+          <i class="fa-solid fa-palette"></i>
+          Biblioteca
+        </li>
+        <li id="logout" (click)="logout()">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          Log out
+        </li>
+      </ul>
     </div>
   </nav>
 

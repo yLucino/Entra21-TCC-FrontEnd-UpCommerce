@@ -8,8 +8,8 @@ import { CreateLayoutsComponent } from './Pages/create-layouts/create-layouts.co
 
 const routes: Routes = [
   { path: '', component: MainComponent },
-  { path: 'Library', component: LibraryLayoutsComponent, canActivate: [authGuard] },
-  { path: 'Workshop', component: CreateLayoutsComponent, canActivate: [authGuard] }
+  { path: 'library', component: LibraryLayoutsComponent, canActivate: [authGuard] },
+  { path: 'workshop', component: CreateLayoutsComponent, canActivate: [authGuard] }
 ];
 
 @NgModule({
