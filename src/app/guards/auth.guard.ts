@@ -15,7 +15,7 @@ export const authGuard: CanActivateFn = (route, state) => {
       toast: true,            
       position: 'top-end',    
       icon: 'warning',    
-      title: 'Faça login para poder acessar!',
+      title: 'Faça login para acessar!',
       showConfirmButton: false,
       timer: 3000, 
       timerProgressBar: true 

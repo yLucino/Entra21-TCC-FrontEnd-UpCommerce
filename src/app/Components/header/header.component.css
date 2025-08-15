@@ -108,7 +108,12 @@ header button.menu-toggle:hover {
   border-radius: 50px;
 }
 
-header .login-register-section a {
+header .profile-section {
+  position: relative;
+}
+
+header .login-register-section a,
+header .profile-section a {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -120,7 +125,8 @@ header .login-register-section a {
   transition: border-radius .3s ease-in-out;
 }
 
-header .login-register-section a:hover {
+header .login-register-section a:hover,
+header .profile-section a:hover {
   border-radius: 35px;
 }
 
@@ -130,6 +136,53 @@ header .login-register-section a .search-user {
   font-size: 26px;
 }
 
-header .login-register-section a p {
+header .login-register-section a p,
+header .profile-section a p {
   font: var(--font-BOLD-H4-16);
+}
+
+header .profile-section a p {
+  letter-spacing: 1px;
+}
+
+header .profile-section ul {
+  position: absolute;
+  display: none;
+  opacity: 0;
+  width: 100%;
+  background: var(--primary-E9E9E9);
+  padding: 10px;
+  margin-top: 5px;
+  border-top: 5px solid var(--primary-0A8FCC);
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 0 10px var(--primary-ALPHA-000000-03);
+  flex-direction: column;
+  gap: 5px;
+  transition: .3s;
+}
+
+header .profile-section ul.isOpenMenu {
+  display: flex;
+  opacity: 1;
+}
+
+header .profile-section ul li {
+  cursor: pointer;
+  transition: .3s;
+  padding: 5px 10px;
+  border-radius: 8px;
+  color: var(--primary-002442);
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 5px;
+}
+
+header .profile-section ul li:hover {
+  background: var(--primary-c8c7c7);
+  color: var(--primary-156BA7);
+}
+
+header .profile-section ul li#logout:hover {
+  color: var(--secondary-EB3030);
 }

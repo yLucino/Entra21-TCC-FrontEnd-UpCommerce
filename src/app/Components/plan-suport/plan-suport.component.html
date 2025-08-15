@@ -123,4 +123,4 @@
   </div>
 </section>
 
-<app-plan-confirmation *ngIf="confirmationPopUpVisible" (closePlan)="toggleComponent('confirmation')" [username]="'Username'" [email]="'example@gmail.com'" [action]="'Solicitação'" (@fadeInOut.done)="onAnimationDone($event)"></app-plan-confirmation>
+<app-plan-confirmation *ngIf="confirmationPopUpVisible" (closePlan)="toggleComponent('confirmation')" [username]="username" [email]="email" [action]="'Solicitação'" (@fadeInOut.done)="onAnimationDone($event)"></app-plan-confirmation>

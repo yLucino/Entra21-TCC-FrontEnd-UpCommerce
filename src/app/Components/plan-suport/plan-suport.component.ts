@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { trigger, transition, style, animate, AnimationEvent } from '@angular/animations';
 import { NgForm } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
+import { LoginResponse } from 'src/app/interfaces/loginResponse.interface';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-plan-suport',
@@ -23,6 +26,23 @@ export class PlanSuportComponent {
   @Input() email: string | null = null;
   @Output() closePlan = new EventEmitter<void>();
 
+  token!: string | null;
+
+  constructor(private authService: AuthService) {}
+
+  ngOnInit() {
+    this.authService.user$.subscribe((data: LoginResponse | null) => {
+      if (data) {
+        this.username = data.user.name;
+        this.email = data.user.email;
+        this.token = data.token;
+      }
+      else {
+        this.token = null;
+      }
+    });
+  }
+
   suportPopUpVisible = true;
   confirmationPopUpVisible = false;
 
@@ -41,10 +61,20 @@ export class PlanSuportComponent {
   preferLayout = '';
 
   sendForm(form: NgForm) {
-    if (form.valid) {
+    if (form.valid && this.token != null) {
       this.toggleComponent('confirmation');
-    } else {
+    } else if (!form.valid) {
       this.erroInForm = true;
+    } else {
+      Swal.fire({
+          toast: true,            
+          position: 'top-end',    
+          icon: 'warning',    
+          title: 'Faça Login para enviar!',
+          showConfirmButton: false,
+          timer: 3000, 
+          timerProgressBar: true  
+      });
     }
   }
 
