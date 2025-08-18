@@ -46,6 +46,7 @@ import { ImageComponent } from './dragAndDrop/component/image/image.component';
 import { IconComponent } from './dragAndDrop/component/icon/icon.component';
 import { LinkComponent } from './dragAndDrop/component/link/link.component';
 import { DesktopScreenWorkshopComponent } from './Components/desktop-screen-workshop/desktop-screen-workshop.component';
+import { ProfileComponent } from './Pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import { DesktopScreenWorkshopComponent } from './Components/desktop-screen-work
     IconComponent,
     LinkComponent,
     DesktopScreenWorkshopComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

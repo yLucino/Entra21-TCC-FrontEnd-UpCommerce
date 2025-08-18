@@ -5,11 +5,13 @@ import { authGuard } from './guards/auth.guard';
 import { MainComponent } from './Pages/main/main.component';
 import { LibraryLayoutsComponent } from './Pages/library-layouts/library-layouts.component';
 import { CreateLayoutsComponent } from './Pages/create-layouts/create-layouts.component';
+import { ProfileComponent } from './Pages/profile/profile.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
   { path: 'library', component: LibraryLayoutsComponent, canActivate: [authGuard] },
-  { path: 'workshop', component: CreateLayoutsComponent, canActivate: [authGuard] }
+  { path: 'workshop', component: CreateLayoutsComponent, canActivate: [authGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [authGuard] }
 ];
 
 @NgModule({

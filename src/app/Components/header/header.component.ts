@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginResponse } from 'src/app/interfaces/loginResponse.interface';
+import { UserInterface } from 'src/app/interfaces/user.interface';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    this.authService.user$.subscribe((data: LoginResponse | null) => {
+    this.authService.user$.subscribe((data: UserInterface | null) => {
       if (data) {
         this.username = data.user.name.split(' ')[0];
         this.token = data.token;

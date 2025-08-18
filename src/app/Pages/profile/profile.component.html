@@ -1,0 +1,167 @@
+<section>
+  <div class="content-all">
+    <header>
+      <div class="logo">
+        <a routerLink="/">
+          <img src="../../../assets/images/Logo/LogoUpCommerce-3.png" alt="Imagem logo circular da UpCommerce.">
+          <h1>UpCommerce</h1>
+        </a>
+      </div>
+
+      <div class="box-nav">
+        <div class="profile-info-username">
+          <i class="fa-solid fa-circle-user"></i>
+          <h2>Perfil: {{data.user.name}}</h2>
+        </div>
+
+        <nav>
+          <ul>
+            <li routerLink="/library">
+              <i class="fa-solid fa-palette"></i>
+            </li>
+            <li routerLink="/workshop">
+              <i class="fa-solid fa-folder"></i>
+            </li>
+            <li routerLink="/">
+              <i class="fa-solid fa-house"></i>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="content-box">
+      <div class="info-user">
+        <div class="photo-user">
+          <img [src]="data.user.urlPhoto">
+        </div>
+
+        <div class="info">
+          <h1>{{data.user.name}}</h1>
+          <p>{{data.user.email}}</p>
+        </div>
+
+        <div class="social">
+          <ul>
+            <li>
+              <a href="https://www.linkedin.com/in/{{data.user.urlLinkedin}}" target="_blank">
+                <i class="fa-brands fa-linkedin"></i>
+                <p>{{data.user.urlLinkedin}}</p>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/{{data.user.urlInstagram}}" target="_blank">
+                <i class="fa-brands fa-square-instagram"></i>
+                <p>{{data.user.urlInstagram}}</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <hr>
+
+        <button class="btn-edit-profile">Editar Perfil</button>
+      </div>
+
+      <div class="info-projects">
+        <div class="projects">
+          <div class="title">
+            <i class="fa-solid fa-folder"></i>
+            <h2>Projetos</h2>
+          </div>
+
+          <div class="box-projects">
+            <div class="project">
+              <div class="preview">
+                <div class="img">
+                  <img [src]="project.urlLogo">
+                </div>
+
+                <div class="info">
+                  <h1>{{project.title}}</h1>
+                  <p>{{project.subTitle}}</p>
+                </div>
+              </div>
+
+              <div class="infos">
+                <div class="rating">
+                  <i id="star1" class="fa-solid fa-star"></i>
+                  <i id="star2" class="fa-solid fa-star"></i>
+                  <i id="star3" class="fa-solid fa-star"></i>
+                  <i id="star4" class="fa-solid fa-star"></i>
+                  <i id="star5" class="fa-solid fa-star"></i>
+                  <p>1.5mil</p>
+                </div>
+
+                <div class="description">
+                  <div class="title">
+                    <p>Descrição</p>
+                  </div>
+
+                  <p class="description">{{project.description}}</p>
+                </div>
+
+                <hr>
+
+                <div class="box-btns">
+                  <button class="more">Ver mais</button>
+                  <button class="edit">Editar Projeto</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="analysis">
+          <div class="title">
+            <i class="fa-solid fa-chart-line"></i>
+            <h2>Análise</h2>
+          </div>
+
+          <div class="card">
+            <svg viewBox="0 0 1300 150" xmlns="http://www.w3.org/2000/svg">
+              <!-- Linhas do grid -->
+              <line x1="40" y1="20"  x2="1260" y2="20"  class="axis"/>
+              <line x1="40" y1="45"  x2="1260" y2="45"  class="axis"/>
+              <line x1="40" y1="70"  x2="1260" y2="70"  class="axis"/>
+              <line x1="40" y1="95"  x2="1260" y2="95"  class="axis"/>
+              <line x1="40" y1="120" x2="1260" y2="120" class="axis"/>
+              <line x1="40" y1="145" x2="1260" y2="145" class="axis"/>
+
+              <!-- Eixo Y (valores) -->
+              <text x="10" y="145" class="label">0</text>
+              <text x="10" y="120" class="label">20</text>
+              <text x="10" y="95"  class="label">40</text>
+              <text x="10" y="70"  class="label">60</text>
+              <text x="10" y="45"  class="label">80</text>
+              <text x="10" y="20"  class="label">100</text>
+
+              <!-- Eixo X (meses) -->
+              <text x="100"  y="140" class="label">Jan</text>
+              <text x="200"  y="140" class="label">Feb</text>
+              <text x="300"  y="140" class="label">Mar</text>
+              <text x="400"  y="140" class="label">Apr</text>
+              <text x="500"  y="140" class="label">May</text>
+              <text x="600"  y="140" class="label">Jun</text>
+              <text x="700"  y="140" class="label">Jul</text>
+              <text x="800"  y="140" class="label">Aug</text>
+              <text x="900"  y="140" class="label">Sep</text>
+              <text x="1000" y="140" class="label">Oct</text>
+              <text x="1100" y="140" class="label">Nov</text>
+              <text x="1200" y="140" class="label">Dec</text>
+
+              <!-- Linha do gráfico (ajustada para altura 150) -->
+              <path d="M40 120 
+                      C200 80, 350 40, 500 90 
+                      C650 100, 800 50, 1000 30 
+                      C1150 70, 1260 110, 1280 90"
+                    class="line"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

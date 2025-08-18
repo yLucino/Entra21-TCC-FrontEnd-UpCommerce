@@ -14,6 +14,7 @@
   --primary-00AEFF: #00AEFF;
   --primary-009AEC: #009AEC;
   --primary-808080: #808080;
+  --primary-4A4A4A: #4A4A4A;
   --primary-A6A6A6: #A6A6A6;
   --primary-c8c7c7: #c8c7c7;
   --primary-D9D9D9: #D9D9D9;
@@ -24,6 +25,9 @@
   --primary-E0E0E0: #E0E0E0;
   --primary-E9E9E9: #E9E9E9;
   --primary-818181: #818181;
+  --primary-F3F3F3: #F3F3F3;
+  --primary-B3B3B3: #B3B3B3;
+  --primary-3F3F3F: #3F3F3F;
   --primary-FFFFFF: #FFFFFF;
 
   /* Cores Primárias ALPHA */
@@ -36,6 +40,7 @@
   --primary-ALPHA-001f3a-07: rgba(0, 31, 58, 0.702);
 
   /* Cores Secundárias */
+  --secondary-F7AE21: #F7AE21;
   --secondary-9E1010: #9E1010;
   --secondary-C41D1D: #C41D1D;
   --secondary-AE2D2D: #AE2D2D;
@@ -55,6 +60,8 @@
   --secondary-DFECF6: #DFECF6;
   --secondary-F8F9FB: #F8F9FB;
   --secondary-E8EBF1: #E8EBF1;
+  --secondary-494C6B: #494C6B;
+  --secondary-B7B8C4: #B7B8C4;
 
   /* Gradientes */
   --gradient-Grey-RightToLeft: linear-gradient(90deg,#575757 0%, #B7B7B7 100%);
@@ -65,6 +72,7 @@
   --gradient-Medium-BottomToTop: linear-gradient(180deg,#00305b 0%, #0a6fb7 100%);
   --gradient-Dark-TopToBottom: linear-gradient(180deg,#033d6b 0%, #00192d 100%);
   --gradient-Light-TopToBottom: linear-gradient(180deg,#42C3FF 0%, #156BA7 100%);
+  --gradient-ExtraLight-LeftToRight: linear-gradient(90deg,#42C3FF 0%, #156BA7 100%);
 
   /* Fonts Guides */
   /* BOLD */

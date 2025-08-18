@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { LoginResponse } from '../interfaces/loginResponse.interface';
+import { UserInterface } from '../interfaces/user.interface';
 import Swal from 'sweetalert2';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private userSubject = new BehaviorSubject<LoginResponse | null>(null);
+  private userSubject = new BehaviorSubject<UserInterface | null>(null);
   user$ = this.userSubject.asObservable();
 
   constructor() {
@@ -15,7 +15,7 @@ export class AuthService {
     }
   }
 
-  setUser(user: LoginResponse) {
+  setUser(user: UserInterface) {
     this.userSubject.next(user);
     localStorage.setItem('user', JSON.stringify(user));
   }
