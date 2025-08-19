@@ -55,6 +55,10 @@ li.active {
   transform: scale(1);
 }
 
+li.disabled {
+  cursor: not-allowed !important;
+}
+
 .content-all nav.menu ul li.active:hover {
   background: var(--primary-122B41);
   transform: scale(1);

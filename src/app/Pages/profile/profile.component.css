@@ -147,11 +147,23 @@ header .box-nav nav ul li:hover {
   }
 }
 
-.content-box .info-user .info h1 {
-  color: var(--primary-333333);
-  font: var(--font-BOLD-H2-28);
-  margin-top: 10px;
-  line-height: 17px;
+.content-box .info-user .info .name-role {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  
+  h1 {
+    color: var(--primary-333333);
+    font: var(--font-BOLD-H2-28);
+    margin-top: 10px;
+    line-height: 17px;
+  }
+
+  i {
+    font-size: 22px;
+    color: var(--primary-333333);
+  }
 }
 
 .content-box .info-user .info p {

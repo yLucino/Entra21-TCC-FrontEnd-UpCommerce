@@ -4,6 +4,7 @@
       <ul>
         <li *ngFor="let item of menuItems; let i = index"
             [class.active]="selectedIndex === i"
+            [class.disabled]="item.label === 'Modulos' || item.label === 'Backend' || item.label === 'CI/CD'"
             (click)="selectItem(i)">
           <i class="{{ item.icon }}"></i>
           <p>{{ item.label }}</p>

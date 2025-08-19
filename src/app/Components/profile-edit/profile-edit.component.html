@@ -1,0 +1,55 @@
+<section>
+  <div class="form-container {{hiddenClass}}">
+    <div class="close" (click)="closeMenuEdit()">
+      <i class="fa-solid fa-xmark"></i>
+    </div>
+
+    <h2>Editar Usuário</h2>
+
+    <form [formGroup]="userForm">
+      <label>Nome:</label>
+      <input type="text" formControlName="name" />
+
+      <label>Email:</label>
+      <input type="email" formControlName="email" />
+      
+      <label>Nova Senha:</label>
+      <div class="password-box">
+        <input [type]="passwordType" formControlName="password" />
+        <i class="fa-solid {{passwordClassEye}}" (click)="showPassword()"></i>
+      </div>
+
+      <label>Função (Role):</label>
+      <select formControlName="role">
+        <option value="Entrepreneur">Empreendedor</option>
+        <option value="Designer">Designer</option>
+      </select>
+
+      <label>Foto (URL):</label>
+      <input type="text" formControlName="urlPhoto" />
+
+      <label>LinkedIn:</label>
+      <input type="text" formControlName="urlLinkedin" placeholder="https://www.linkedin.com/in/" />
+
+      <label>Instagram:</label>
+      <input type="text" formControlName="urlInstagram" placeholder="https://www.instagram.com/" />
+
+      <button (click)="setMenuConfirmVisible()">Salvar</button>
+
+    </form>
+    
+  </div>
+  
+  <div class="confirm-edit-with-password" *ngIf="confirmEditMenuVisible">
+    <div class="close" (click)="setMenuConfirmVisible()">
+      <i class="fa-solid fa-xmark"></i>
+    </div>
+
+    <h2>Confirmação</h2>
+
+    <label>Senha:</label>
+    <input type="password" [(ngModel)]="password">
+
+    <button (click)="onSubmit()">Confirmar</button>
+  </div>
+</section>

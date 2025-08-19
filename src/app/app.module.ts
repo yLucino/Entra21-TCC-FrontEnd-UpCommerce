@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HttpClientModule } from '@angular/common/http';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
@@ -47,6 +47,7 @@ import { IconComponent } from './dragAndDrop/component/icon/icon.component';
 import { LinkComponent } from './dragAndDrop/component/link/link.component';
 import { DesktopScreenWorkshopComponent } from './Components/desktop-screen-workshop/desktop-screen-workshop.component';
 import { ProfileComponent } from './Pages/profile/profile.component';
+import { ProfileEditComponent } from './Components/profile-edit/profile-edit.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { ProfileComponent } from './Pages/profile/profile.component';
     LinkComponent,
     DesktopScreenWorkshopComponent,
     ProfileComponent,
+    ProfileEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -92,6 +94,7 @@ import { ProfileComponent } from './Pages/profile/profile.component';
     BrowserAnimationsModule,
     MatIconModule,
     FormsModule,
+    ReactiveFormsModule,
     DragDropModule,
     HttpClientModule,
     SweetAlert2Module.forRoot(),

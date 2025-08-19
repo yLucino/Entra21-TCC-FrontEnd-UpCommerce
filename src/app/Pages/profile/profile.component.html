@@ -1,5 +1,5 @@
 <section>
-  <div class="content-all">
+  <div class="content-all" *ngIf="user as u">
     <header>
       <div class="logo">
         <a routerLink="/">
@@ -11,7 +11,7 @@
       <div class="box-nav">
         <div class="profile-info-username">
           <i class="fa-solid fa-circle-user"></i>
-          <h2>Perfil: {{data.user.name}}</h2>
+          <h2>Perfil: {{u.name}}</h2>
         </div>
 
         <nav>
@@ -33,26 +33,30 @@
     <div class="content-box">
       <div class="info-user">
         <div class="photo-user">
-          <img [src]="data.user.urlPhoto">
+          <img [src]="u.urlPhoto">
         </div>
 
         <div class="info">
-          <h1>{{data.user.name}}</h1>
-          <p>{{data.user.email}}</p>
+          <div class="name-role">
+            <h1>{{u.name}}</h1>
+            <i class="fa-solid fa-briefcase" title="Empreendedor" *ngIf="u.role === 'Entrepreneur'"></i>
+            <i class="fa-solid fa-pen-nib" title="Designer" *ngIf="u.role === 'Designer'"></i>
+          </div>
+          <p>{{u.email}}</p>
         </div>
 
         <div class="social">
           <ul>
             <li>
-              <a href="https://www.linkedin.com/in/{{data.user.urlLinkedin}}" target="_blank">
+              <a [href]="u.urlLinkedin" target="_blank">
                 <i class="fa-brands fa-linkedin"></i>
-                <p>{{data.user.urlLinkedin}}</p>
+                <p>{{u.urlLinkedin!.split('/')[4]}}</p>
               </a>
             </li>
             <li>
-              <a href="https://www.instagram.com/{{data.user.urlInstagram}}" target="_blank">
+              <a [href]="u.urlInstagram" target="_blank">
                 <i class="fa-brands fa-square-instagram"></i>
-                <p>{{data.user.urlInstagram}}</p>
+                <p>{{u.urlInstagram!.split('/')[3]}}</p>
               </a>
             </li>
           </ul>
@@ -60,7 +64,7 @@
 
         <hr>
 
-        <button class="btn-edit-profile">Editar Perfil</button>
+        <button class="btn-edit-profile" (click)="toggleMenuEdit()">Editar Perfil</button>
       </div>
 
       <div class="info-projects">
@@ -165,3 +169,5 @@
     </div>
   </div>
 </section>
+
+<app-profile-edit *ngIf="visible" (closeMenu)="toggleMenuEdit()" (updatedUser)="ngOnInit()"></app-profile-edit>
