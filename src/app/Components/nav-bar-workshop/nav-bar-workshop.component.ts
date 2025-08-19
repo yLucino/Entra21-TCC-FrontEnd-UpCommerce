@@ -19,6 +19,8 @@ export class NavBarWorkshopComponent {
   ];
 
   selectItem(index: number) {
+    if (index === 1 || index === 2 || index === 5) return
+
     this.selectedIndex = index;
     this.stepChange.emit(index);
   }

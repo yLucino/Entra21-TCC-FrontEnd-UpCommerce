@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { trigger, transition, style, animate, AnimationEvent } from '@angular/animations';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { UserInterface } from 'src/app/interfaces/user.interface';
+import { UserTokenInterface } from 'src/app/interfaces/user.interface';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -31,7 +31,7 @@ export class PlanSuportComponent {
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    this.authService.user$.subscribe((data: UserInterface | null) => {
+    this.authService.user$.subscribe((data: UserTokenInterface | null) => {
       if (data) {
         this.username = data.user.name;
         this.email = data.user.email;

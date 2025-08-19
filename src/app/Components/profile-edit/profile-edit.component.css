@@ -1,0 +1,156 @@
+section {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: var(--primary-ALPHA-000000-02);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--primary-FFFFFF);
+  padding: 30px;
+  border-radius: 20px;
+  width: 500px;
+}
+
+.form-container.hidden {
+  display: none;
+}
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 0 20px 0 20px;
+  background: var(--primary-333333);
+  cursor: pointer;
+  transition: .2s;
+
+  i {
+    font-size: 20px;
+    color: var(--primary-FFFFFF);
+  }
+}
+
+.close:hover {
+  background: var(--primary-00AEFF);
+  color: var(--primary-333333);
+  box-shadow: 0 0px 5px var(--primary-006699);
+  transform: scale(1.01);
+}
+
+.form-container h2 {
+  font: var(--font-BOLD-H3-21);
+  color: var(--primary-333333);
+  margin-bottom: 10px;
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+label {
+  font: var(--font-REGULAR-P-13);
+  margin-top: 5px;
+}
+
+input, select {
+  margin-bottom: 10px;
+  font: var(--font-REGULAR-P-12);
+  color: var(--primary-000000b5);
+  height: 50px;
+  border: 1px solid var(--primary-ALPHA-01335E-04);
+  border-radius: 10px;
+  padding: 0 15px;
+  transition: .3s;
+}
+
+input:hover {
+  transform: scale(1.02);
+}
+
+button {
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  color: var(--primary-FFFFFF);
+  background: var(--primary-333333);
+  margin-top: 20px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+button:hover {
+  background: var(--primary-00AEFF);
+  color: var(--primary-333333);
+  box-shadow: 0 0px 5px var(--primary-006699);
+  transform: scale(1.02);
+}
+
+.password-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.password-box input {
+  width: 90%;
+}
+
+.password-box i {
+  position: absolute;
+  font-size: 22px;
+  color: var(--primary-333333);
+  right: 10px;
+  top: 15px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.password-box i:hover {
+  transform: scale(1.15);
+  color: var(--primary-00AEFF);
+}
+
+/* PopUp confirm edit with password CSS */
+.confirm-edit-with-password {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--primary-FFFFFF);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px var(--primary-ALPHA-000000-02);
+  width: 500px;
+
+  h2 {
+    width: 100%;
+    text-align: center;
+    font: var(--font-BOLD-H3-21);
+    color: var(--primary-333333);
+  }
+
+  button, input {
+    width: 100%;
+  }
+}
