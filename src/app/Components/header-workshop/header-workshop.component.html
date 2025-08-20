@@ -10,8 +10,9 @@
           <i class="fa-solid {{icon}}"></i>
         </button>
 
-        <input type="text" placeholder="Nome do projeto">
-        <button class="config">
+        <input type="text" placeholder="Nome do projeto" title="Para definir um nome para o projeto acesse as configurações ao lado" [(ngModel)]="title" disabled>
+
+        <button class="config" (click)="toggleMenuConfig()">
           <i class="fa-solid fa-gear"></i>
         </button>
       </div>
@@ -29,3 +30,26 @@
     </div>
   </div>
 </section>
+
+<div class="menu-config" *ngIf="menuConfig">
+  <div class="content-all">
+    <div class="close" (click)="toggleMenuConfig()">
+      <i class="fa-solid fa-xmark"></i>
+    </div>
+
+    <form>
+      <label>Nome do Projeto:</label>
+      <input type="text" placeholder="Nome do projeto" [(ngModel)]="title" />
+      <label>Slogan:</label>
+      <input type="text" placeholder="Slogan do projeto" [(ngModel)]="subTitle" />
+    
+      <label>Descrição:</label>
+      <textarea [(ngModel)]="description">Descrição do projeto.</textarea>
+    
+      <label>Logo (URL):</label>
+      <input type="text" placeholder="URL da logo do projeto" [(ngModel)]="urlLogo" />
+
+      <button (click)="sendForm()">Salvar</button>
+    </form>
+  </div>
+</div>

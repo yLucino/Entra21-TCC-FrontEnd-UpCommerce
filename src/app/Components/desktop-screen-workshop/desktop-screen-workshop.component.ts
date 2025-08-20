@@ -5,6 +5,7 @@ import { ButtonSetScreen } from 'src/app/interfaces/buttonSetScreen.interface';
 import { CdkService } from 'src/app/services/cdk.service';
 import { PropertyService } from 'src/app/services/property.service';
 import { PropertiesWorkshopComponent } from '../properties-workshop/properties-workshop.component';
+import { ProjectInterface } from 'src/app/interfaces/project.interface';
 
 @Component({
   selector: 'app-desktop-screen-workshop',
@@ -36,10 +37,14 @@ export class DesktopScreenWorkshopComponent {
   constructor(
     private injector: EnvironmentInjector,
     private propertyService: PropertyService,
-    private cdkService: CdkService
+    private cdkService: CdkService,
+    private vcr: ViewContainerRef
   ) {}
 
   ngOnInit() {
+    this.cdkService.setViewContainerRef(this.vcr);
+    // this.lodingProject(project); //passar project depois de pegar com o backend
+
     this.cdkService.buttons$.subscribe(button => {
       if (button) {
         const exists = this.buttons.some(b => b.screen === button.screen);
@@ -124,5 +129,9 @@ export class DesktopScreenWorkshopComponent {
         button.selected = false;
       }
     });
+  }
+
+  lodingProject(project: ProjectInterface) {
+    this.cdkService.deserializeProjeto(project);
   }
 }

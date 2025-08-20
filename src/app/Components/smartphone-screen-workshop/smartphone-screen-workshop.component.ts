@@ -16,6 +16,7 @@ import { PropertyService } from 'src/app/services/property.service';
 import { PropertiesWorkshopComponent } from '../properties-workshop/properties-workshop.component';
 import { ButtonSetScreen } from 'src/app/interfaces/buttonSetScreen.interface';
 import { CdkService } from 'src/app/services/cdk.service';
+import { ProjectInterface } from 'src/app/interfaces/project.interface';
 
 @Component({
   selector: 'app-smartphone-screen-workshop',
@@ -30,6 +31,12 @@ export class SmartphoneScreenWorkshopComponent implements OnInit {
   
   @Output() areaCreated = new EventEmitter<string>();
   @Output() elementDeselected = new EventEmitter<void>();
+
+  project!: ProjectInterface;
+  urlLogo: string = '';
+  title: string = '';
+  subTitle: string = '';
+  description: string = '';
 
   currentTime: string = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   titleScreen: string = 'Início'; 
@@ -47,10 +54,14 @@ export class SmartphoneScreenWorkshopComponent implements OnInit {
   constructor(
     private injector: EnvironmentInjector,
     private propertyService: PropertyService,
-    private cdkService: CdkService
+    private cdkService: CdkService,
+    private vcr: ViewContainerRef
   ) {}
 
   ngOnInit() {
+    this.cdkService.setViewContainerRef(this.vcr);
+    // this.lodingProject(project); //passar project depois de pegar com o backend
+
     this.cdkService.buttons$.subscribe(button => {
       if (button) {
         const exists = this.buttons.some(b => b.screen === button.screen);
@@ -135,5 +146,9 @@ export class SmartphoneScreenWorkshopComponent implements OnInit {
         button.selected = false;
       }
     });
+  }
+
+  lodingProject(project: ProjectInterface) {
+    this.cdkService.deserializeProjeto(project);
   }
 }

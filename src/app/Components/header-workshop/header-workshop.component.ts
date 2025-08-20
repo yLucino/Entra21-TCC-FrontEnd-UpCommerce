@@ -8,7 +8,13 @@ import { Component, Input } from '@angular/core';
 export class HeaderWorkshopComponent {
   @Input() currentMenu: number = 0;
   hidden = false;
+  menuConfig = false;
   icon = 'fa-arrow-right';
+
+  title!: string;
+  subTitle!: string;
+  description!: string;
+  urlLogo!: string;
 
   toggleHeaderHidden() {
     this.hidden = !this.hidden;
@@ -17,5 +23,15 @@ export class HeaderWorkshopComponent {
     } else {
       this.icon = 'fa-arrow-right';
     }
+  }
+
+  toggleMenuConfig() {
+    this.menuConfig = !this.menuConfig;
+  }
+
+  sendForm() {
+
+
+    this.menuConfig = false;
   }
 }
