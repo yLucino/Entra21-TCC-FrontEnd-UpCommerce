@@ -262,6 +262,7 @@ header .box-nav nav ul li:hover {
   padding: 10px 0 20px 0;
 }
 
+/* Project CSS */
 .info-projects .projects .box-projects .project {
   display: flex;
 }

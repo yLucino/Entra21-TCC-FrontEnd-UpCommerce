@@ -1,0 +1,75 @@
+<section>
+  <header>
+    <button class="filter">
+      <i class="fa-solid fa-filter"></i>
+    </button>
+
+    <div class="search-box">
+      <input type="text" placeholder="Pesquisar projeto..." name="searchProject">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </div>
+
+    <button class="confirm-search-filter">
+      Pesquisar
+      <i class="fa-solid fa-paper-plane"></i>
+    </button>
+  </header>
+
+  <div class="content-projects">
+    <div class="header-projects">
+      <div class="title">
+        <div class="flag"></div>
+        <h1>Meus Projetos</h1>
+      </div>
+      
+      <nav>
+        <ul>
+          <li id="fav">
+            <mat-icon>folder_special</mat-icon>
+          </li>
+          <li id="delete">
+            <mat-icon>folder_delete</mat-icon>
+          </li>
+          <li id="add">
+            <mat-icon>create_new_folder</mat-icon>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="projects-scroll">
+      <div class="project" *ngFor="let project of projects">
+        <div class="preview">
+          <div class="img">
+            <img [src]="project.urlLogo">
+          </div>
+        </div>
+        
+        <div class="infos">
+          <div class="info">
+            <h1>{{project.title}}</h1>
+          </div>
+
+          <hr>
+
+          <div class="box-btns">
+            <button class="more">
+              <i class="fa-solid fa-eye"></i>
+              Ver mais
+            </button>
+            <button class="edit">
+              <i class="fa-solid fa-pen-to-square"></i>
+              Editar Projeto
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="no-component" *ngIf="projects.length === 0">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <p>Nenhuma projeto encontrado</p>
+        <p class="text-help-tip">Por favor, verifique a escrita e/ou certifique-se de ter salvo o projeto.</p>
+      </div>
+    </div>
+  </div>
+</section>
