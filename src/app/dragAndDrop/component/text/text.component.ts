@@ -9,9 +9,11 @@ export class TextComponent {
   pDragId: string = '';
   @Input() pText: string = 'Seu texto!';
   @Output() created = new EventEmitter<string>();
-  
+
   onUniqueIdCreated(id: string) {
-    this.pDragId = id;
-    this.created.emit(id);
+    setTimeout(() => {
+      this.pDragId = id;
+      this.created.emit(id);
+    });
   }
 }

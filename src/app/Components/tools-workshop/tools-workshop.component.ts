@@ -96,8 +96,8 @@ export class ToolsWorkshopComponent {
     { text: 'Favoritos', icon: 'fa-solid fa-heart', nameTag: 'favScreen', description: 'Tela para visualizar e editar favoritos do usuário.', component: null },
     { text: 'Carrinho', icon: 'fa-solid fa-cart-shopping', nameTag: 'cartScreen', description: 'Resumo de compras ou itens selecionados.', component: null },
     { text: 'Histórico', icon: 'fa-solid fa-clock-rotate-left', nameTag: 'historyScreen', description: 'Registros de compras, navegação ou ações.', component: null },
-    { text: 'Relatórios', icon: 'fa-solid fa-file-invoice', nameTag: 'reportsScreens', description: 'Tela com estatísticas e dados formatados.', component: null },
-    { text: 'Login', icon: 'fa-solid fa-right-to-bracket', nameTag: 'loginScreens', description: 'Tela de entrada do sistema com autenticação.', component: null }
+    { text: 'Relatórios', icon: 'fa-solid fa-file-invoice', nameTag: 'reportsScreen', description: 'Tela com estatísticas e dados formatados.', component: null },
+    { text: 'Login', icon: 'fa-solid fa-right-to-bracket', nameTag: 'loginScreen', description: 'Tela de entrada do sistema com autenticação.', component: null }
   ];
 
   selectItem(index: number) {
@@ -147,7 +147,8 @@ export class ToolsWorkshopComponent {
         class: this.selectedScreen.icon,
         title: this.selectedScreen.text,
         selected: false,
-        list: listId
+        list: listId,
+        active: true
       };
 
       this.cdkService.addButton(newButton);

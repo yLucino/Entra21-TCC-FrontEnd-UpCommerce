@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ComponentDragDrop } from 'src/app/interfaces/component.dragdrop.interface';
+import { ProjectInterface } from 'src/app/interfaces/project.interface';
 import { CdkService } from 'src/app/services/cdk.service';
 import { PropertyService } from 'src/app/services/property.service';
 
@@ -9,6 +10,8 @@ import { PropertyService } from 'src/app/services/property.service';
   styleUrls: ['./properties-workshop.component.css']
 })
 export class PropertiesWorkshopComponent {
+  project!: ProjectInterface;
+
   // Inputs for the component
   @Input() title!: string;
   @Input() icon!: string;
@@ -670,5 +673,11 @@ export class PropertiesWorkshopComponent {
     return text
       ? text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
       : '';
+  }
+
+
+
+  saveProject() {
+    this.cdkService.saveProject();
   }
 }

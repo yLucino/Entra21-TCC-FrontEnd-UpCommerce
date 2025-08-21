@@ -10,7 +10,9 @@ export class IconComponent {
   @Output() created = new EventEmitter<string>();
 
   onUniqueIdCreated(id: string) {
-    this.iconDragId = id;
-    this.created.emit(id);
+    setTimeout(() => {
+      this.iconDragId = id;
+      this.created.emit(id);
+    });
   }
 }

@@ -4,4 +4,5 @@ export interface ButtonSetScreen {
   class: string;
   title: string;
   selected: boolean;
+  active: boolean;
 }

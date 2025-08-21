@@ -39,15 +39,16 @@
 
     <form>
       <label>Nome do Projeto:</label>
-      <input type="text" placeholder="Nome do projeto" [(ngModel)]="title" />
+      <input type="text" placeholder="Nome do projeto" [(ngModel)]="title" name="title"/>
+
       <label>Slogan:</label>
-      <input type="text" placeholder="Slogan do projeto" [(ngModel)]="subTitle" />
-    
+      <input type="text" placeholder="Slogan do projeto" [(ngModel)]="subTitle" name="subTitle"/>
+
       <label>Descrição:</label>
-      <textarea [(ngModel)]="description">Descrição do projeto.</textarea>
-    
+      <textarea [(ngModel)]="description" name="description"></textarea>
+
       <label>Logo (URL):</label>
-      <input type="text" placeholder="URL da logo do projeto" [(ngModel)]="urlLogo" />
+      <input type="text" placeholder="URL da logo do projeto" [(ngModel)]="urlLogo" name="urlLogo"/>
 
       <button (click)="sendForm()">Salvar</button>
     </form>

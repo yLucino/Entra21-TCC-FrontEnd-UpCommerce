@@ -13,7 +13,9 @@ export class InputComponent {
   @Output() created = new EventEmitter<string>();
   
   onUniqueIdCreated(id: string) {
-    this.inputDragId = id;
-    this.created.emit(id);
+    setTimeout(() => {
+      this.inputDragId = id;
+      this.created.emit(id);
+    });
   }
 }

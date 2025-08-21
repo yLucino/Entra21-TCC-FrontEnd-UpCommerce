@@ -1,10 +1,9 @@
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { Component, EnvironmentInjector, EventEmitter, Injector, Input, Output, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, EnvironmentInjector, EventEmitter, Injector, Input, Output, QueryList, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
 import { AreaComponent } from 'src/app/dragAndDrop/component/area/area.component';
 import { ButtonSetScreen } from 'src/app/interfaces/buttonSetScreen.interface';
 import { CdkService } from 'src/app/services/cdk.service';
 import { PropertyService } from 'src/app/services/property.service';
-import { PropertiesWorkshopComponent } from '../properties-workshop/properties-workshop.component';
 import { ProjectInterface } from 'src/app/interfaces/project.interface';
 
 @Component({
@@ -13,20 +12,32 @@ import { ProjectInterface } from 'src/app/interfaces/project.interface';
   styleUrls: ['./desktop-screen-workshop.component.css']
 })
 export class DesktopScreenWorkshopComponent {
-  @ViewChild('propertiesWorkshop') propertiesWorkshop!: PropertiesWorkshopComponent;
-  @ViewChild('dropHost', { read: ViewContainerRef }) viewContainerRef!: ViewContainerRef;
-  
-  @Input() connectedDropListId: string[] = [];
+  @ViewChildren('dropHost', { read: ViewContainerRef }) dropHosts!: QueryList<ViewContainerRef>;
+  @ViewChildren('cdkDropList', { read: ViewContainerRef }) cdkDropLists!: QueryList<ViewContainerRef>;
   
   @Output() areaCreated = new EventEmitter<string>();
   @Output() elementDeselected = new EventEmitter<void>();
-
-  currentTime: string = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  titleScreen: string = 'Início'; 
-  currentScreen: string = 'homeScreen'; 
   
+  @Input() connectedDropListId: string[] = [];
+
+  project!: ProjectInterface;
+
+  titleScreen: string = 'Início';
+  currentScreen: string = 'homeScreen';
+
   buttons: ButtonSetScreen[] = [
-    { screen: 'homeScreen', class: 'fa-solid fa-house', title: 'Início', selected: true, list: 'homeList' },
+    { screen: 'homeScreen', class: 'fa-solid fa-house', title: 'Início', selected: true, list: 'homeList', active: true },
+    { screen: 'paymentScreen', class: 'fa-solid fa-credit-card', title: 'Pagamento', selected: false, list: 'paymentList', active: false },
+    { screen: 'perfilScreen', class: 'fa-solid fa-user', title: 'Perfil', selected: false, list: 'perfilList', active: false },
+    { screen: 'configScreen', class: 'fa-solid fa-gear', title: 'Configurações', selected: false, list: 'configList', active: false },
+    { screen: 'notifyScreen', class: 'fa-solid fa-bell', title: 'Notificações', selected: false, list: 'notifyList', active: false },
+    { screen: 'messageScreen', class: 'fa-solid fa-envelope', title: 'Mensagens', selected: false, list: 'messageList', active: false },
+    { screen: 'helpScreen', class: 'fa-solid fa-circle-question', title: 'Ajuda', selected: false, list: 'helpList', active: false },
+    { screen: 'favScreen', class: 'fa-solid fa-heart', title: 'Favoritos', selected: false, list: 'favList', active: false },
+    { screen: 'cartScreen', class: 'fa-solid fa-cart-shopping', title: 'Carrinho', selected: false, list: 'cartList', active: false },
+    { screen: 'historyScreen', class: 'fa-solid fa-clock-rotate-left', title: 'Histórico', selected: false, list: 'historyList', active: false },
+    { screen: 'reportsScreen', class: 'fa-solid fa-file-invoice', title: 'Relatórios', selected: false, list: 'reportsList', active: false },
+    { screen: 'loginScreen', class: 'fa-solid fa-right-to-bracket', title: 'Login', selected: false, list: 'loginList', active: false },
   ];
 
   private lastSelectedElement: HTMLElement | null = null;
@@ -43,14 +54,10 @@ export class DesktopScreenWorkshopComponent {
 
   ngOnInit() {
     this.cdkService.setViewContainerRef(this.vcr);
-    // this.lodingProject(project); //passar project depois de pegar com o backend
 
     this.cdkService.buttons$.subscribe(button => {
       if (button) {
-        const exists = this.buttons.some(b => b.screen === button.screen);
-        if (!exists) {
-          this.buttons.push(button);
-        }
+        this.buttons.find(b => b.screen === button.screen)!.active = true;
       }
     });
 
@@ -68,6 +75,12 @@ export class DesktopScreenWorkshopComponent {
   drop(event: CdkDragDrop<any[]>) {
     const data = event.previousContainer.data[event.previousIndex];
 
+    const currentHost = this.dropHosts.find((_, i) =>
+      this.buttons[i].screen === this.currentScreen
+    );
+
+    if (!currentHost) return;
+
     const injector = Injector.create({
       providers: [
         { provide: 'text', useValue: data.text },
@@ -76,20 +89,25 @@ export class DesktopScreenWorkshopComponent {
       parent: this.injector
     });
 
-    const componentRef = this.viewContainerRef.createComponent(data.component, { injector });
-    const nativeElement = componentRef.location.nativeElement;
+    const componentRef = currentHost.createComponent(data.component, { injector });
+    const nativeEl = componentRef.location.nativeElement;
 
-    nativeElement.addEventListener('click', () => {
-      this.propertyService.setSelectedElement(nativeElement);
+    this.attachSelectionListener(nativeEl);
+
+    nativeEl.addEventListener('click', (event: any) => {
+      event.stopPropagation();
+      this.propertyService.setSelectedElement(nativeEl);
     });
 
     if (data.text === 'Área') {
       const instance = componentRef.instance as AreaComponent;
       instance.hovering.subscribe((hover: boolean) => this.isHoveringOverArea = hover);
-      instance.created.subscribe((id: string) => this.areaCreated.emit(id));
+      instance.created.subscribe((id: string) => {
+        this.connectedDropListId.push(id);
+        this.areaCreated.emit(id);
+      });
     }
 
-    // Se o componente possuir um Output chamado "created", escuta o evento
     if ((componentRef.instance as any).created instanceof EventEmitter) {
       (componentRef.instance as any).created.subscribe();
     }
@@ -107,31 +125,45 @@ export class DesktopScreenWorkshopComponent {
     }
   }
 
-  // Function to set the current screen based on the button clicked
   setScreen(btn: ButtonSetScreen) {
+    if (this.currentScreen !== btn.screen) {
+      this.propertyService.setSelectedElement(null);
+      this.lastSelectedElement?.classList.remove('selected-component');
+      this.lastSelectedElement = null;
+      this.elementDeselected.emit();
+    }
+
     this.currentScreen = btn.screen;
     this.titleScreen = btn.title;
     this.setSelectedButton(btn);
 
-    if (this.currentScreen !== btn.screen) {
-      this.propertyService.setSelectedElement(null);
-      this.elementDeselected.emit();
-    }
-
+    this.connectedDropListId = [btn.list];
     this.cdkService.transferScreen(btn);
   }
 
   setSelectedButton(btn: ButtonSetScreen) {
     this.buttons.forEach(button => {
-      if (button === btn) {
-        button.selected = true;
-      } else {
-        button.selected = false;
+      button.selected = (button === btn);
+    });
+  }
+
+  private attachSelectionListener(nativeEl: HTMLElement) {
+    nativeEl.addEventListener('click', (event) => {
+      event.stopPropagation();
+
+      if (this.lastSelectedElement) {
+        this.lastSelectedElement.classList.remove('selected-component');
       }
+
+      nativeEl.classList.add('selected-component');
+      this.lastSelectedElement = nativeEl;
+
+      this.propertyService.setSelectedElement(nativeEl);
     });
   }
 
   lodingProject(project: ProjectInterface) {
+    this.project = project;
     this.cdkService.deserializeProjeto(project);
   }
 }

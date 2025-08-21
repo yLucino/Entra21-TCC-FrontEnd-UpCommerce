@@ -55,7 +55,9 @@ export class AreaComponent {
   }
 
   onUniqueIdCreated(id: string) {
-    this.areaListId = id;
-    this.created.emit(id);
+    setTimeout(() => {
+      this.areaListId = id;
+      this.created.emit(id);
+    });
   }
 }
