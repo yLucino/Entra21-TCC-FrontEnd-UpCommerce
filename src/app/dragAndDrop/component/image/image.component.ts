@@ -10,7 +10,9 @@ export class ImageComponent {
   @Output() created = new EventEmitter<string>();
 
   onUniqueIdCreated(id: string) {
-    this.imageDragId = id;
-    this.created.emit(id);
+    setTimeout(() => {
+      this.imageDragId = id;
+      this.created.emit(id);
+    });
   }
 }

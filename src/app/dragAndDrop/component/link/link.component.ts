@@ -10,7 +10,9 @@ export class LinkComponent {
   @Output() created = new EventEmitter<string>();
 
   onUniqueIdCreated(id: string) {
-    this.linkDragId = id;
-    this.created.emit(id);
+    setTimeout(() => {
+      this.linkDragId = id;
+      this.created.emit(id);
+    });
   }
 }

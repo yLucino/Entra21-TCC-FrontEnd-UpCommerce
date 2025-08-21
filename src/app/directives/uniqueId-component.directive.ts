@@ -1,10 +1,4 @@
-import {
-  Directive,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output
-} from '@angular/core';
+import { Directive, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Directive({
   selector: '[appUniqueId]'
@@ -14,7 +8,10 @@ export class UniqueIdDirective implements OnInit {
   @Output() uniqueIdCreated = new EventEmitter<string>();
 
   ngOnInit(): void {
-    const uniqueId = `${this.nameTag}-${Math.floor(Math.random() * 10000000)}`;
-    this.uniqueIdCreated.emit(uniqueId);
+    const uniqueId = `${this.nameTag}-${Math.floor(Math.random() * 1_000_000)}`;
+
+    setTimeout(() => {
+      this.uniqueIdCreated.emit(uniqueId);
+    });
   }
 }

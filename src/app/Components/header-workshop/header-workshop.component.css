@@ -119,3 +119,110 @@ section {
 .content-all .box-header.hidden .box-btns {
   display: none;
 }
+
+.menu-config {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: var(--primary-ALPHA-000000-02);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-config .content-all {
+  position: relative;
+  background: var(--primary-FFFFFF);
+  width: 400px;
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-config .content-all form {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+
+  label {
+    font: var(--font-REGULAR-P-13);
+    color: var(--primary-333333);
+    margin-top: 5px;
+  }
+
+  input {
+    margin-bottom: 10px;
+    font: var(--font-REGULAR-P-12);
+    color: var(--primary-000000b5);
+    height: 50px;
+    border: 1px solid var(--primary-ALPHA-01335E-04);
+    border-radius: 10px;
+    padding: 0 15px;
+    transition: .3s;
+  }
+
+  textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    font: var(--font-REGULAR-P-12);
+    color: var(--primary-000000b5);
+    border: 1px solid var(--primary-ALPHA-01335E-04);
+    border-radius: 10px 10px 0 10px;
+    padding: 10px 15px;
+    max-height: 300px;
+    min-height: 80px;
+    resize: vertical;
+  }
+
+  button {
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    color: var(--primary-FFFFFF);
+    background: var(--primary-333333);
+    margin-top: 20px;
+    cursor: pointer;
+    transition: .3s;
+  }
+
+  button:hover {
+    background: var(--primary-00AEFF);
+    color: var(--primary-333333);
+    box-shadow: 0 0px 5px var(--primary-006699);
+    transform: scale(1.02);
+  }
+}
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 0 20px 0 20px;
+  background: var(--primary-333333);
+  cursor: pointer;
+  transition: .2s;
+
+  i {
+    font-size: 20px;
+    color: var(--primary-FFFFFF);
+  }
+}
+
+.close:hover {
+  background: var(--primary-00AEFF);
+  color: var(--primary-333333);
+  box-shadow: 0 0px 5px var(--primary-006699);
+  transform: scale(1.01);
+}

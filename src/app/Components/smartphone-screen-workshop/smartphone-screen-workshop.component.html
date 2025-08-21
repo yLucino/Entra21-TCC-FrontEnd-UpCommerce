@@ -2,7 +2,7 @@
   <div class="current-screen">
     <div class="screen">
       <div class="box-btns">
-        <button [class.selected]="button.selected" (click)="setScreen(button)" *ngFor="let button of buttons">
+        <button [hidden]="!button.active" [class.selected]="button.selected" (click)="setScreen(button)" *ngFor="let button of buttons">
           <i [class]="button.class"></i>
         </button>
       </div>
@@ -26,12 +26,12 @@
 
     <!-- Home -->
     <div
-      *ngIf="currentScreen === 'homeScreen'"
+      [hidden]="currentScreen !== 'homeScreen'"
       class="drop-zone home"
       [id]="'homeList'"
       cdkDropList
       [cdkDropListEnterPredicate]="canEnterSmartphone"
-      [cdkDropListConnectedTo]="connectedDropListId"
+      [cdkDropListConnectedTo]="currentScreen === 'homeScreen' ? connectedDropListId : ['']"
       (cdkDropListDropped)="drop($event)"
       (click)="deselectElement($event)">
 
@@ -40,12 +40,12 @@
 
     <!-- payment -->
     <div
-      *ngIf="currentScreen === 'paymentScreen'"
+      [hidden]="currentScreen !== 'paymentScreen'"
       class="drop-zone payment"
       [id]="'paymentList'"
       cdkDropList
       [cdkDropListEnterPredicate]="canEnterSmartphone"
-      [cdkDropListConnectedTo]="connectedDropListId"
+      [cdkDropListConnectedTo]="currentScreen === 'paymentScreen' ? connectedDropListId : ['']"
       (cdkDropListDropped)="drop($event)"
       (click)="deselectElement($event)">
 
@@ -54,12 +54,12 @@
 
     <!-- perfil -->
     <div
-      *ngIf="currentScreen === 'perfilScreen'"
+      [hidden]="currentScreen !== 'perfilScreen'"
       class="drop-zone perfil"
       [id]="'perfilList'"
       cdkDropList
       [cdkDropListEnterPredicate]="canEnterSmartphone"
-      [cdkDropListConnectedTo]="connectedDropListId"
+      [cdkDropListConnectedTo]="currentScreen === 'perfilScreen' ? connectedDropListId : ['']"
       (cdkDropListDropped)="drop($event)"
       (click)="deselectElement($event)">
 
@@ -68,12 +68,12 @@
 
     <!-- config -->
     <div
-      *ngIf="currentScreen === 'configScreen'"
+      [hidden]="currentScreen !== 'configScreen'"
       class="drop-zone config"
       [id]="'configList'"
       cdkDropList
       [cdkDropListEnterPredicate]="canEnterSmartphone"
-      [cdkDropListConnectedTo]="connectedDropListId"
+      [cdkDropListConnectedTo]="currentScreen === 'configScreen' ? connectedDropListId : ['']"
       (cdkDropListDropped)="drop($event)"
       (click)="deselectElement($event)">
 
@@ -82,12 +82,12 @@
 
     <!-- notify -->
     <div
-      *ngIf="currentScreen === 'notifyScreen'"
+      [hidden]="currentScreen !== 'notifyScreen'"
       class="drop-zone notify"
       [id]="'notifyList'"
       cdkDropList
       [cdkDropListEnterPredicate]="canEnterSmartphone"
-      [cdkDropListConnectedTo]="connectedDropListId"
+      [cdkDropListConnectedTo]="currentScreen === 'notifyScreen' ? connectedDropListId : ['']"
       (cdkDropListDropped)="drop($event)"
       (click)="deselectElement($event)">
 
@@ -96,12 +96,12 @@
 
     <!-- message -->
     <div
-      *ngIf="currentScreen === 'messageScreen'"
+      [hidden]="currentScreen !== 'messageScreen'"
       class="drop-zone message"
       [id]="'messageList'"
       cdkDropList
       [cdkDropListEnterPredicate]="canEnterSmartphone"
-      [cdkDropListConnectedTo]="connectedDropListId"
+      [cdkDropListConnectedTo]="currentScreen === 'messageScreen' ? connectedDropListId : ['']"
       (cdkDropListDropped)="drop($event)"
       (click)="deselectElement($event)">
 
@@ -110,12 +110,12 @@
 
     <!-- help -->
     <div
-      *ngIf="currentScreen === 'helpScreen'"
+      [hidden]="currentScreen !== 'helpScreen'"
       class="drop-zone help"
       [id]="'helpList'"
       cdkDropList
       [cdkDropListEnterPredicate]="canEnterSmartphone"
-      [cdkDropListConnectedTo]="connectedDropListId"
+      [cdkDropListConnectedTo]="currentScreen === 'helpScreen' ? connectedDropListId : ['']"
       (cdkDropListDropped)="drop($event)"
       (click)="deselectElement($event)">
 
@@ -124,12 +124,12 @@
 
     <!-- fav -->
     <div
-      *ngIf="currentScreen === 'favScreen'"
+      [hidden]="currentScreen !== 'favScreen'"
       class="drop-zone fav"
       [id]="'favList'"
       cdkDropList
       [cdkDropListEnterPredicate]="canEnterSmartphone"
-      [cdkDropListConnectedTo]="connectedDropListId"
+      [cdkDropListConnectedTo]="currentScreen === 'favScreen' ? connectedDropListId : ['']"
       (cdkDropListDropped)="drop($event)"
       (click)="deselectElement($event)">
 
@@ -138,12 +138,12 @@
 
     <!-- cart -->
     <div
-      *ngIf="currentScreen === 'cartScreen'"
+      [hidden]="currentScreen !== 'cartScreen'"
       class="drop-zone cart"
       [id]="'cartList'"
       cdkDropList
       [cdkDropListEnterPredicate]="canEnterSmartphone"
-      [cdkDropListConnectedTo]="connectedDropListId"
+      [cdkDropListConnectedTo]="currentScreen === 'cartScreen' ? connectedDropListId : ['']"
       (cdkDropListDropped)="drop($event)"
       (click)="deselectElement($event)">
 
@@ -152,12 +152,12 @@
 
     <!-- history -->
     <div
-      *ngIf="currentScreen === 'historyScreen'"
+      [hidden]="currentScreen !== 'historyScreen'"
       class="drop-zone history"
       [id]="'historyList'"
       cdkDropList
       [cdkDropListEnterPredicate]="canEnterSmartphone"
-      [cdkDropListConnectedTo]="connectedDropListId"
+      [cdkDropListConnectedTo]="currentScreen === 'historyScreen' ? connectedDropListId : ['']"
       (cdkDropListDropped)="drop($event)"
       (click)="deselectElement($event)">
 
@@ -166,12 +166,12 @@
 
     <!-- Reports -->
     <div
-      *ngIf="currentScreen === 'reportsScreen'"
+      [hidden]="currentScreen !== 'reportsScreen'"
       class="drop-zone reports"
       [id]="'reportsList'"
       cdkDropList
       [cdkDropListEnterPredicate]="canEnterSmartphone"
-      [cdkDropListConnectedTo]="connectedDropListId"
+      [cdkDropListConnectedTo]="currentScreen === 'reportsScreen' ? connectedDropListId : ['']"
       (cdkDropListDropped)="drop($event)"
       (click)="deselectElement($event)">
 
@@ -180,12 +180,12 @@
 
     <!-- Login -->
     <div
-      *ngIf="currentScreen === 'loginScreen'"
+      [hidden]="currentScreen !== 'loginScreen'"
       class="drop-zone login"
       [id]="'loginList'"
       cdkDropList
       [cdkDropListEnterPredicate]="canEnterSmartphone"
-      [cdkDropListConnectedTo]="connectedDropListId"
+      [cdkDropListConnectedTo]="currentScreen === 'loginScreen' ? connectedDropListId : ['']"
       (cdkDropListDropped)="drop($event)"
       (click)="deselectElement($event)">
 

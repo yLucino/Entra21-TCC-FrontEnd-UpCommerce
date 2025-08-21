@@ -67,6 +67,10 @@ section {
   scrollbar-width: none;
 }
 
+.drop-zone[hidden] {
+  display: none !important;
+}
+
 .drop-zone::-webkit-scrollbar {
   width: 0;  
   height: 0;
@@ -126,6 +130,10 @@ section {
     i {
       color: var(--primary-00AEFF);
     }
+  }
+ 
+  button[hidden] {
+    display: none !important;
   }
 
   button:hover {

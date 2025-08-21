@@ -10,7 +10,9 @@ export class ButtonComponent {
   @Output() created = new EventEmitter<string>();
 
   onUniqueIdCreated(id: string) {
-    this.btnDragId = id;
-    this.created.emit(id);
+    setTimeout(() => {
+      this.btnDragId = id;
+      this.created.emit(id);
+    });
   }
 }
