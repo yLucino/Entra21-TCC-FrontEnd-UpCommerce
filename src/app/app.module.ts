@@ -48,6 +48,7 @@ import { LinkComponent } from './dragAndDrop/component/link/link.component';
 import { DesktopScreenWorkshopComponent } from './Components/desktop-screen-workshop/desktop-screen-workshop.component';
 import { ProfileComponent } from './Pages/profile/profile.component';
 import { ProfileEditComponent } from './Components/profile-edit/profile-edit.component';
+import { ProjectsWorkshopComponent } from './Components/projects-workshop/projects-workshop.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { ProfileEditComponent } from './Components/profile-edit/profile-edit.com
     DesktopScreenWorkshopComponent,
     ProfileComponent,
     ProfileEditComponent,
+    ProjectsWorkshopComponent,
   ],
   imports: [
     BrowserModule,
