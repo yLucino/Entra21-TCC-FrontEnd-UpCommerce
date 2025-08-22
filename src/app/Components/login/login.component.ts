@@ -48,7 +48,7 @@ export class LoginComponent {
             toast: true,            
             position: 'top-end',    
             icon: 'success',    
-            title: 'Login feito com sucesso',
+            title: 'Login feito com sucesso!',
             showConfirmButton: false,
             timer: 3000, 
             timerProgressBar: true  
@@ -62,7 +62,7 @@ export class LoginComponent {
             toast: true,            
             position: 'top-end',    
             icon: 'error',    
-            title: 'Erro ao fazer login',
+            title: 'Erro ao fazer login!',
             showConfirmButton: false,
             timer: 3000, 
             timerProgressBar: true 

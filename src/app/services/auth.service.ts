@@ -15,9 +15,10 @@ export class AuthService {
     }
   }
 
-  setUser(user: UserTokenInterface) {
-    this.userSubject.next(user);
-    localStorage.setItem('user', JSON.stringify(user));
+  setUser(data: UserTokenInterface) {
+    this.userSubject.next(data);
+    localStorage.setItem('user', JSON.stringify(data));
+    localStorage.setItem('userId', JSON.stringify(data.user.id));
   }
 
   clearUser() {

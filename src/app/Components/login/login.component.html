@@ -12,10 +12,10 @@
     <div class="Inputs">
       <form #form="ngForm" (ngSubmit)="sendForm(form)">
         <label for="Email">Email</label>
-        <input type="email" name="Email" id="Email" placeholder="Email" required [(ngModel)]="email">
+        <input type="email" name="Email" id="EmailLogin" placeholder="Email" autocomplete="email" required [(ngModel)]="email">
         
         <label for="Password">Senha</label>
-        <input type="password" name="Password" id="Password" placeholder="Senha" required [(ngModel)]="password">
+        <input type="password" name="Password" placeholder="Senha" id="PasswordLogin" autocomplete="current-password" required [(ngModel)]="password">
 
         <a href="">Esqueceu a senha?</a>
 

@@ -27,10 +27,10 @@
           <li id="fav">
             <mat-icon>folder_special</mat-icon>
           </li>
-          <li id="delete">
+          <li id="delete" (click)="toggleMenuDelete()">
             <mat-icon>folder_delete</mat-icon>
           </li>
-          <li id="add">
+          <li id="add" (click)="toggleMenuAdd()">
             <mat-icon>create_new_folder</mat-icon>
           </li>
         </ul>
@@ -68,8 +68,86 @@
       <div class="no-component" *ngIf="projects.length === 0">
         <i class="fa-solid fa-triangle-exclamation"></i>
         <p>Nenhuma projeto encontrado</p>
-        <p class="text-help-tip">Por favor, verifique a escrita e/ou certifique-se de ter salvo o projeto.</p>
+        <p class="text-help-tip">Por favor, verifique a escrita e/ou certifique-se de ter salvo algum projeto.</p>
       </div>
     </div>
   </div>
 </section>
+
+<!-- PopUp's -->
+<div class="menu-add-project" *ngIf="menuAddVisible">
+  <div class="content-all">
+    <div class="close" (click)="toggleMenuAdd()">
+      <i class="fa-solid fa-xmark"></i>
+    </div>
+
+    <h1>Novo Projeto</h1>
+
+    <form>
+      <label>Nome do Projeto:</label>
+      <input type="text" placeholder="Nome do projeto" required [(ngModel)]="title" name="title"/>
+
+      <label>Slogan:</label>
+      <input type="text" placeholder="Slogan do projeto" [(ngModel)]="subTitle" name="subTitle"/>
+
+      <label>Descrição:</label>
+      <textarea [(ngModel)]="description" name="description"></textarea>
+
+      <label>Logo (URL):</label>
+      <input type="text" placeholder="URL da logo do projeto" [(ngModel)]="urlLogo" name="urlLogo"/>
+
+      <button (click)="createProject()">Criar Projeto</button>
+    </form>
+  </div>
+</div>
+
+<div class="menu-delete-project" *ngIf="menuDeleteVisible">
+  <div class="content-all">
+    <div class="close" (click)="toggleMenuDelete()">
+      <i class="fa-solid fa-xmark"></i>
+    </div>
+
+    <h1>Excluir Projeto</h1>
+
+    <ul>
+      <li *ngFor="let project of projects">
+        <div class="project-info">
+          <img [src]="project.urlLogo">
+          <p>{{project.title}} | ID: {{project.id}}</p>
+        </div>
+
+        <button (click)="openAskActionMenu(project)">
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
+      </li>
+    </ul>
+
+    <div class="no-component" *ngIf="projects.length === 0">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <p>Nenhuma projeto encontrado</p>
+      <p class="text-help-tip">Por favor, verifique certifique-se de ter salvo algum projeto.</p>
+    </div>
+  </div>
+</div>
+
+<div class="component-box-ask" *ngIf="menuAskVisible && projectToDelete">
+  <div class="component-box">
+    <h3>Confirmação de Exclusão</h3>
+    <div class="component-text">
+      <p>*Esta ação é irreversível*</p>
+      <p>*Excluir o projeto: {{projectToDelete.title}}?*</p>
+    </div>
+
+    <div class="buttons">
+      <button class="confirm-delete" (click)="deleteProject(projectToDelete.id!)">
+        <i class="fa-solid fa-trash-can"></i>
+        Confirmar
+      </button>
+      
+      <button class="cancel" (click)="cancelDeleteProject()">
+        <i class="fa-solid fa-xmark"></i>
+        Cancelar
+      </button>
+    </div>
+  </div>
+</div>
