@@ -259,12 +259,17 @@ header .box-nav nav ul li:hover {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 330px;
   padding: 10px 0 20px 0;
+  margin-bottom: 10px;
 }
 
 /* Project CSS */
 .info-projects .projects .box-projects .project {
   display: flex;
+  height: 313px;
 }
 
 .info-projects .projects .box-projects .project .preview {
@@ -276,6 +281,7 @@ header .box-nav nav ul li:hover {
   background: var(--primary-FFFFFF);
   padding: 20px;
   border-radius: 15px;
+  width: 300px;
   z-index: 2;
 }
 
@@ -463,4 +469,32 @@ svg .line {
 svg .label {
   font-size: 12px;
   fill: #666;
+}
+
+/* Nothing in Project CSS */
+.no-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 270px;
+  text-align: center;
+  margin-top: 30px;
+
+  i {
+    font-size: 50px;
+    color: var(--primary-000000b5);
+    margin-bottom: 10px;
+  }
+
+  p {
+    font: var(--font-BOLD-H4-16);
+    color: var(--primary-000000b5);
+  }
+  
+  p.text-help-tip {
+    font: var(--font-REGULAR-P-13);
+    margin-top: 10px;
+  }
 }

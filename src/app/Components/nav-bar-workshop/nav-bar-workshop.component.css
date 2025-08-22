@@ -22,6 +22,7 @@ section {
 }
 
 .content-all nav.menu ul li {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,6 +33,7 @@ section {
   border-radius: 10px;
   transition: .3s;
   cursor: pointer;
+  z-index: 10;
 
   i {
     font-size: 30px;
