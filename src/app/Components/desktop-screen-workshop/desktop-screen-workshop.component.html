@@ -1,5 +1,5 @@
 <section>
-  <div class="current-screen">
+  <div class="current-screen" *ngIf="project">
     <div class="screen">
       <p>{{titleScreen}}</p>
 
@@ -11,7 +11,7 @@
     </div>
   </div>
 
-  <div class="content-all">
+  <div class="content-all" *ngIf="project">
     <!-- Home -->
     <div
       [hidden]="currentScreen !== 'homeScreen'"
@@ -178,6 +178,14 @@
       (click)="deselectElement($event)">
 
       <ng-container #dropHost></ng-container>
+    </div>
+  </div>
+
+  <div class="no-project-load" *ngIf="!project">
+    <div class="content-all-no-project-load">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <p>Nenhum projeto foi Iniciado/Aberto!</p>
+      <p class="text-help-tip">Por favor, Acesse a área de projetos para criar ou abrir um novo.</p>
     </div>
   </div>
 </section>

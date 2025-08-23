@@ -1,5 +1,5 @@
-<section>
-  <div class="current-screen">
+<section >
+  <div class="current-screen" *ngIf="project">
     <div class="screen">
       <div class="box-btns">
         <button [hidden]="!button.active" [class.selected]="button.selected" (click)="setScreen(button)" *ngFor="let button of buttons">
@@ -11,7 +11,7 @@
     </div>
   </div>
   
-  <div class="content-all">
+  <div class="content-all" *ngIf="project">
     <div class="notify-bar">
       <p class="time">{{currentTime}}</p>
 
@@ -193,5 +193,13 @@
     </div>
 
     <div class="footer-bar"></div>
+  </div>
+  
+  <div class="no-project-load" *ngIf="!project">
+    <div class="content-all-no-project-load">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <p>Nenhum projeto foi Iniciado/Aberto!</p>
+      <p class="text-help-tip">Por favor, Acesse a área de projetos para criar ou abrir um novo.</p>
+    </div>
   </div>
 </section>

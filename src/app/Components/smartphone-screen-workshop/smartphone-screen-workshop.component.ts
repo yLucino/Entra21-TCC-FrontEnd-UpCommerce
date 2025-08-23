@@ -162,9 +162,4 @@ export class SmartphoneScreenWorkshopComponent implements OnInit {
       this.propertyService.setSelectedElement(nativeEl);
     });
   }
-
-  lodingProject(project: ProjectInterface) {
-    this.project = project;
-    this.cdkService.deserializeProjeto(project);
-  }
 }
