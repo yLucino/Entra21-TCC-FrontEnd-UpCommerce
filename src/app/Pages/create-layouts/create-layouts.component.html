@@ -1,13 +1,13 @@
 <section class="workshop" id="workshop">
-  <app-nav-bar-workshop (stepChange)="currentStep = $event"></app-nav-bar-workshop>
+  <app-nav-bar-workshop [selectedIndex]="currentStep" (stepChange)="currentStep = $event"></app-nav-bar-workshop>
 
   <header>
-    <app-header-workshop [currentMenu]="currentStep"></app-header-workshop>
+    <app-header-workshop [getHeader]="projectHeader$ | async" [currentMenu]="currentStep"></app-header-workshop>
   </header>
 
   <main>
     <div class="project" *ngIf="currentStep === 0">
-      <app-projects-workshop></app-projects-workshop>
+      <app-projects-workshop (openProject)="openProject($event)"></app-projects-workshop>
     </div>
 
     <div class="module" *ngIf="currentStep === 1">
@@ -20,6 +20,7 @@
 
     <div class="web" *ngIf="currentStep === 3"> 
       <app-desktop-screen-workshop
+        [projectId]="projectId"
         class="desktop"
         [connectedDropListId]="['toolsComponentList']"
         (areaCreated)="handleNewAreaId($event)"
@@ -47,6 +48,7 @@
       </app-tools-workshop>
 
       <app-smartphone-screen-workshop
+        [projectId]="projectId"
         [connectedDropListId]="['toolsComponentList']"
         (areaCreated)="handleNewAreaId($event)"
         (elementDeselected)="propertiesWorkshop.deselectElement()">

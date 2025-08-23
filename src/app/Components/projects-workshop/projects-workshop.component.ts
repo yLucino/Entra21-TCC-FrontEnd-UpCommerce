@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ProjectInterface } from 'src/app/interfaces/project.interface';
 import { UserTokenInterface } from 'src/app/interfaces/user.interface';
 import { ProjectService } from 'src/app/services/project.service';
@@ -10,6 +10,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./projects-workshop.component.css']
 })
 export class ProjectsWorkshopComponent implements OnInit {
+  @Output() openProject = new EventEmitter<number>();
+
   projects: ProjectInterface[] = [];
   projectToDelete!: ProjectInterface | null;
 
@@ -129,6 +131,11 @@ export class ProjectsWorkshopComponent implements OnInit {
         console.log(err);
       },
     });
+  }
+
+  // Functions to project actions
+  openProjectToEdit(projectId: number) {
+    this.openProject.emit(projectId);
   }
 
   // Component Visible Management

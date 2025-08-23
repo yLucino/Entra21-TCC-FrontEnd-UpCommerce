@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-nav-bar-workshop',
@@ -7,7 +7,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 export class NavBarWorkshopComponent {
   @Output() stepChange = new EventEmitter<number>();
-  selectedIndex: number = 0;
+  @Input() selectedIndex: number = 0;
 
   menuItems = [
     { label: 'Projetos', icon: 'fa-solid fa-folder' },

@@ -67,7 +67,9 @@ section {
   scrollbar-width: none;
 }
 
-.drop-zone[hidden] {
+.drop-zone[hidden],
+.current-screen[hidden],
+.content-all[hidden] {
   display: none !important;
 }
 
