@@ -678,6 +678,8 @@ export class PropertiesWorkshopComponent {
 
 
   saveProject() {
-    this.cdkService.saveProject();
+    if (this.project) {
+      this.cdkService.saveProject();
+    }
   }
 }
