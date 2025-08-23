@@ -49,6 +49,7 @@ import { DesktopScreenWorkshopComponent } from './Components/desktop-screen-work
 import { ProfileComponent } from './Pages/profile/profile.component';
 import { ProfileEditComponent } from './Components/profile-edit/profile-edit.component';
 import { ProjectsWorkshopComponent } from './Components/projects-workshop/projects-workshop.component';
+import { LoadingPopUpComponent } from './Components/loading-pop-up/loading-pop-up.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { ProjectsWorkshopComponent } from './Components/projects-workshop/projec
     ProfileComponent,
     ProfileEditComponent,
     ProjectsWorkshopComponent,
+    LoadingPopUpComponent,
   ],
   imports: [
     BrowserModule,

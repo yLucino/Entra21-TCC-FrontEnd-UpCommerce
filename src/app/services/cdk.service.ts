@@ -11,13 +11,9 @@ import { ImageComponent } from '../dragAndDrop/component/image/image.component';
 import { InputComponent } from '../dragAndDrop/component/input/input.component';
 import { IconComponent } from '../dragAndDrop/component/icon/icon.component';
 import { LinkComponent } from '../dragAndDrop/component/link/link.component';
+import { ProjectHeader } from '../interfaces/projectHeader.interface';
 
-export interface ProjectHeader {
-  title: string;
-  subTitle: string;
-  description: string;
-  urlLogo: string;
-}
+
 
 @Injectable({ providedIn: 'root' })
 export class CdkService {
@@ -223,7 +219,7 @@ export class CdkService {
     });
   }
 
-  deserializeProjeto(project: ProjectInterface): void {
+  deserializeProject(project: ProjectInterface): void {
     this.dropZonesIds.forEach(id => {
       const el = document.getElementById(id);
       if (el) el.innerHTML = "";

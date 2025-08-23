@@ -1,0 +1,9 @@
+<div class="overlay" *ngIf="isVisible">
+  <div class="popup">
+    <h2>Carregando "{{ projectTitle }}"...</h2>
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="progress"></div>
+    </div>
+    <p><span class="gradientText">{{ progress }}%</span></p>
+  </div>
+</div>

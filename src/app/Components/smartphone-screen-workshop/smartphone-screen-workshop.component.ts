@@ -5,6 +5,8 @@ import { PropertyService } from 'src/app/services/property.service';
 import { ButtonSetScreen } from 'src/app/interfaces/buttonSetScreen.interface';
 import { CdkService } from 'src/app/services/cdk.service';
 import { ProjectInterface } from 'src/app/interfaces/project.interface';
+import { ProjectService } from 'src/app/services/project.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-smartphone-screen-workshop',
@@ -20,7 +22,10 @@ export class SmartphoneScreenWorkshopComponent implements OnInit {
   
   @Input() connectedDropListId: string[] = [];
 
+  @Input() projectId!: number;
+  userId: number = Number(localStorage.getItem('userId'));
   project!: ProjectInterface;
+
 
   currentTime: string = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   titleScreen: string = 'Início';
@@ -50,7 +55,8 @@ export class SmartphoneScreenWorkshopComponent implements OnInit {
     private injector: EnvironmentInjector,
     private propertyService: PropertyService,
     private cdkService: CdkService,
-    private vcr: ViewContainerRef
+    private vcr: ViewContainerRef,
+    private projectService: ProjectService
   ) {}
 
   ngOnInit() {
@@ -69,6 +75,25 @@ export class SmartphoneScreenWorkshopComponent implements OnInit {
         }
         el.classList.add('selected-component');
         this.lastSelectedElement = el;
+      }
+    });
+
+    if (this.userId && this.projectId)
+    this.projectService.getProjectById(this.userId ,this.projectId).subscribe({
+      next: (res) => {
+        this.lodingProject(res);
+      },
+      error: (err) => {
+        Swal.fire({
+          toast: true,            
+          position: 'top-end',    
+          icon: 'error',    
+          title: 'Erro ao carregar o projeto!',
+          showConfirmButton: false,
+          timer: 3000, 
+          timerProgressBar: true
+        });
+        console.log(err);
       }
     });
   }
@@ -161,5 +186,10 @@ export class SmartphoneScreenWorkshopComponent implements OnInit {
 
       this.propertyService.setSelectedElement(nativeEl);
     });
+  }
+
+  lodingProject(project: ProjectInterface) {
+    this.project = project;
+    this.cdkService.deserializeProject(project);
   }
 }

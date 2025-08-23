@@ -1,13 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { CdkService, ProjectHeader } from 'src/app/services/cdk.service';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ProjectHeader } from 'src/app/interfaces/projectHeader.interface';
+import { CdkService } from 'src/app/services/cdk.service';
 
 @Component({
   selector: 'app-header-workshop',
   templateUrl: './header-workshop.component.html',
   styleUrls: ['./header-workshop.component.css']
 })
-export class HeaderWorkshopComponent implements OnInit {
+export class HeaderWorkshopComponent implements OnChanges {
   @Input() currentMenu: number = 0;
+  @Input() getHeader: ProjectHeader | null = null;
+
   hidden = false;
   menuConfig = false;
   icon = 'fa-arrow-right';
@@ -19,12 +22,16 @@ export class HeaderWorkshopComponent implements OnInit {
 
   constructor(private cdkService: CdkService) {}
 
-  ngOnInit(): void {
-    const header = this.cdkService.getProjectHeader();
-    this.title = header.title;
-    this.subTitle = header.subTitle;
-    this.description = header.description;
-    this.urlLogo = header.urlLogo;
+ngOnChanges(changes: SimpleChanges): void {
+    if (changes['getHeader']) {
+      const h = changes['getHeader'].currentValue as ProjectHeader | null;
+      if (h) {
+        this.title = h.title ?? '';
+        this.subTitle = h.subTitle ?? '';
+        this.description = h.description ?? 'Descrição do projeto.';
+        this.urlLogo = h.urlLogo ?? '';
+      }
+    }
   }
 
   toggleHeaderHidden() {

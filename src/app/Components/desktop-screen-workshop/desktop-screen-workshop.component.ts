@@ -5,6 +5,9 @@ import { ButtonSetScreen } from 'src/app/interfaces/buttonSetScreen.interface';
 import { CdkService } from 'src/app/services/cdk.service';
 import { PropertyService } from 'src/app/services/property.service';
 import { ProjectInterface } from 'src/app/interfaces/project.interface';
+import { ProjectService } from 'src/app/services/project.service';
+import Swal from 'sweetalert2';
+import { ProjectHeader } from 'src/app/interfaces/projectHeader.interface';
 
 @Component({
   selector: 'app-desktop-screen-workshop',
@@ -20,6 +23,8 @@ export class DesktopScreenWorkshopComponent {
   
   @Input() connectedDropListId: string[] = [];
 
+  @Input() projectId!: number;
+  userId: number = Number(localStorage.getItem('userId'));
   project!: ProjectInterface;
 
   titleScreen: string = 'Início';
@@ -49,7 +54,8 @@ export class DesktopScreenWorkshopComponent {
     private injector: EnvironmentInjector,
     private propertyService: PropertyService,
     private cdkService: CdkService,
-    private vcr: ViewContainerRef
+    private vcr: ViewContainerRef,
+    private projectService: ProjectService
   ) {}
 
   ngOnInit() {
@@ -68,6 +74,33 @@ export class DesktopScreenWorkshopComponent {
         }
         el.classList.add('selected-component');
         this.lastSelectedElement = el;
+      }
+    });
+
+    if (this.userId && this.projectId)
+    this.projectService.getProjectById(this.userId ,this.projectId).subscribe({
+      next: (res) => {
+        this.lodingProject(res);
+        const data: ProjectHeader = {
+          title: res.title,
+          subTitle: res.subTitle,
+          description: res.description,
+          urlLogo: res.urlLogo
+        }
+
+        this.cdkService.updateProjectHeader(data);
+      },
+      error: (err) => {
+        Swal.fire({
+          toast: true,            
+          position: 'top-end',    
+          icon: 'error',    
+          title: 'Erro ao carregar o projeto!',
+          showConfirmButton: false,
+          timer: 3000, 
+          timerProgressBar: true
+        });
+        console.log(err);
       }
     });
   }
@@ -164,6 +197,6 @@ export class DesktopScreenWorkshopComponent {
 
   lodingProject(project: ProjectInterface) {
     this.project = project;
-    this.cdkService.deserializeProjeto(project);
+    this.cdkService.deserializeProject(project);
   }
 }
