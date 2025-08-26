@@ -22,7 +22,7 @@ export class ProjectService {
   }
 
   putProject(userId: number, id: number, data: ProjectInterface): Observable<ProjectInterface> {
-    return this.http.post<ProjectInterface>(`${environment.apiUrl}/Project/user/${userId}/${id}`, data);
+    return this.http.put<ProjectInterface>(`${environment.apiUrl}/Project/user/${userId}/${id}`, data);
   }
 
   deleteProject(userId: number, id: number): Observable<ProjectInterface> {

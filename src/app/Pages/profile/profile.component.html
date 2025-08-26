@@ -33,7 +33,7 @@
     <div class="content-box">
       <div class="info-user">
         <div class="photo-user">
-          <img [src]="u.urlPhoto != '' ? u.urlPhoto : 'https://cdn-icons-png.flaticon.com/512/12225/12225935.png'">
+          <img [src]="u.urlPhoto != null ? u.urlPhoto : 'https://cdn-icons-png.flaticon.com/512/12225/12225935.png'">
         </div>
 
         <div class="info">
@@ -50,13 +50,13 @@
             <li>
               <a [href]="u.urlLinkedin" target="_blank">
                 <i class="fa-brands fa-linkedin"></i>
-                <p>{{u.urlLinkedin != '' ? u.urlLinkedin!.split('/')[4] : 'Insira seu LinkedIn Aqui.'}}</p>
+                <p>{{u.urlLinkedin != null ? u.urlLinkedin!.split('/')[4] : 'Insira seu LinkedIn Aqui.'}}</p>
               </a>
             </li>
             <li>
               <a [href]="u.urlInstagram" target="_blank">
                 <i class="fa-brands fa-square-instagram"></i>
-                <p>{{u.urlInstagram != '' ? u.urlInstagram!.split('/')[3] : 'Insira seu Instagram Aqui.'}}</p>
+                <p>{{u.urlInstagram != null ? u.urlInstagram!.split('/')[3] : 'Insira seu Instagram Aqui.'}}</p>
               </a>
             </li>
           </ul>

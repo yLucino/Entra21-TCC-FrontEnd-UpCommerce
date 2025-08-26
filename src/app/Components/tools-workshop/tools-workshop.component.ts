@@ -11,7 +11,6 @@ import { ImageComponent } from 'src/app/dragAndDrop/component/image/image.compon
 import { IconComponent } from 'src/app/dragAndDrop/component/icon/icon.component';
 import { LinkComponent } from 'src/app/dragAndDrop/component/link/link.component';
 import { ButtonSetScreen } from 'src/app/interfaces/buttonSetScreen.interface';
-import { UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-tools-workshop',
@@ -22,6 +21,7 @@ export class ToolsWorkshopComponent {
   @Input() typeCSS!: string;
   @Input() baseDropListIds: string[] = ['homeList', 'paymentList', 'perfilList', 'configList', 'notifyList', 'messageList', 'helpList', 'favList', 'cartList', 'historyList', 'reportsList', 'loginList'];
   @Input() areaDropListIds: string[] = [];
+  @Input() projectId!: number;
   
   selectedScreen: ComponentDragDrop | null = null;
   screenNameTag: string = '';

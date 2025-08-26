@@ -12,20 +12,14 @@ import Swal from 'sweetalert2';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  userId!: number;
+  userId: number = Number(localStorage.getItem('userId'));
   user!: UserInterface;
   projects: ProjectInterface[] = [];
   visible: boolean = false;
 
-  constructor(private authService: AuthService, private userService: UserService, private projectService: ProjectService) {}
+  constructor(private userService: UserService, private projectService: ProjectService) {}
 
   ngOnInit() {
-    this.authService.user$.subscribe((data: UserTokenInterface | null) => {
-      if (data) {
-        this.userId = data.user.id;
-      }
-    });
-
     this.userService.getUserById(this.userId).subscribe((user: UserInterface) => {
       if (user) {
         this.user = user;

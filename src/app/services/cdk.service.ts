@@ -12,6 +12,8 @@ import { InputComponent } from '../dragAndDrop/component/input/input.component';
 import { IconComponent } from '../dragAndDrop/component/icon/icon.component';
 import { LinkComponent } from '../dragAndDrop/component/link/link.component';
 import { ProjectHeader } from '../interfaces/projectHeader.interface';
+import { ProjectService } from './project.service';
+import Swal from 'sweetalert2';
 
 
 
@@ -35,8 +37,12 @@ export class CdkService {
     "loginList",
   ];
 
+  constructor(private projectService: ProjectService) {}
+
   buttons$ = this.buttonsSource.asObservable();
   screenId$ = this.screenSource.asObservable();
+  userId: number = Number(localStorage.getItem('userId'));
+  
 
   private viewContainerRef!: ViewContainerRef;
   private projectHeaderSource = new BehaviorSubject<ProjectHeader>({
@@ -72,8 +78,11 @@ export class CdkService {
   // Salvar CDK em JSON
   serializeComponent(element: HTMLElement): CdkComponent {
     const computed = window.getComputedStyle(element);
+    const id = element.id;
+    const cdkId = element.id;
+    let parentCdkId = element.parentElement?.parentElement?.getAttribute('id') || null;
 
-    const styles: ComponentStyles = {
+    const style: ComponentStyles = {
       width: parseInt(computed.width) || 0,
       height: parseInt(computed.height) || 0,
       marginLeft: parseInt(computed.marginLeft) || 0,
@@ -85,22 +94,25 @@ export class CdkService {
       paddingRight: parseInt(computed.paddingRight) || 0,
       paddingBottom: parseInt(computed.paddingBottom) || 0,
       borderSize: parseInt(computed.borderWidth) || 0,
-      borderColor: computed.borderColor,
-      borderType: computed.borderStyle,
+      borderColor: computed.borderColor || '',
+      borderType: computed.borderStyle || '',
       borderRadiusTopLeft: parseInt(computed.borderTopLeftRadius) || 0,
       borderRadiusTopRight: parseInt(computed.borderTopRightRadius) || 0,
       borderRadiusBottomLeft: parseInt(computed.borderBottomLeftRadius) || 0,
       borderRadiusBottomRight: parseInt(computed.borderBottomRightRadius) || 0,
-      backgroundColor: computed.backgroundColor,
-      color: computed.color,
-      fontFamily: computed.fontFamily,
-      textContent: element.textContent?.trim() || "",
+      backgroundColor: computed.backgroundColor || '',
+      color: computed.color || '',
+      fontFamily: computed.fontFamily || '',
+      textContent: element.textContent?.trim() || '',
       fontSize: parseInt(computed.fontSize) || 0,
-      fontWeight: computed.fontWeight,
-      textAlign: computed.textAlign,
+      fontWeight: computed.fontWeight || '',
+      textAlign: computed.textAlign || '',
       opacity: parseFloat(computed.opacity) || 1,
-      shadowX: 0, shadowY: 0, shadowBlur: 0, shadowColor: "#000000",
-      position: computed.position,
+      shadowX: 0, 
+      shadowY: 0, 
+      shadowBlur: 0, 
+      shadowColor: "#000000",
+      position: computed.position || '',
       top: parseInt(computed.top) || 0,
       left: parseInt(computed.left) || 0,
       right: parseInt(computed.right) || 0,
@@ -112,31 +124,37 @@ export class CdkService {
       hoverShadowY: 0,
       hoverShadowBlur: 0,
       hoverShadowColor: "#000000",
-      cursor: computed.cursor,
-      display: computed.display,
-      flexDirection: computed.flexDirection,
-      flexJustify: computed.justifyContent,
-      flexAlign: computed.alignContent,
-      flexWrap: computed.flexWrap,
-      flexGap: parseInt((computed as any).gap || "0"),
-      flexAlignItems: computed.alignItems,
-      alignSelf: computed.alignSelf,
-      newComponentId: element.id || "",
-      imageSource: element.getAttribute("src") || "",
-      iconSource: "",
-      linkSource: element.getAttribute("href") || ""
+      cursor: computed.cursor || '',
+      display: computed.display || '',
+      flexDirection: computed.flexDirection || '',
+      flexJustify: computed.justifyContent || '',
+      flexAlign: computed.alignContent || '',
+      flexWrap: computed.flexWrap || '',
+      flexGap: parseInt((computed as any).gap) || 0,
+      flexAlignItems: computed.alignItems || '',
+      alignSelf: computed.alignSelf || '',
+      newComponentId: element.id || '',
+      imageSource: element.getAttribute("src") || '',
+      iconSource: element.getAttribute("class") || '',
+      linkSource: element.getAttribute("href") || ''
     };
+
 
     const children: CdkComponent[] = Array.from(element.children)
       .filter(c => c instanceof HTMLElement)
       .map(c => this.serializeComponent(c as HTMLElement))
-      .filter(c => c.id || c.cdkId || c.styles);
+      .filter(c => c.id || c.cdkId || c.style);
+
+    if (cdkId === parentCdkId) {
+      parentCdkId = null;
+    }
 
     return {
-      id: element.id || '',
-      cdkId: element.parentElement?.parentElement?.getAttribute('id') || '',
-      styles,
-      children
+      id: id,
+      cdkId: cdkId,
+      parentCdkId: parentCdkId,
+      style: style,
+      children: children
     };
   }
 
@@ -162,10 +180,38 @@ export class CdkService {
       title: header.title || "Nome do Projeto",
       subTitle: header.subTitle || "Slogan do Projeto",
       description: header.description || "Descrição do Projeto",
+      userId: this.userId,
       component: rootComponents.length ? rootComponents : undefined
     };
 
-    console.log("PROJETO JSON:", JSON.stringify(projeto, null, 2));
+    console.log(JSON.stringify(projeto, null, 2));
+
+    if (header.id)
+    this.projectService.putProject(this.userId, header.id, projeto).subscribe({
+      next: () => {
+        Swal.fire({
+          toast: true,            
+          position: 'top-end',    
+          icon: 'success',    
+          title: 'Projeto salvo com sucesso!',
+          showConfirmButton: false,
+          timer: 3000, 
+          timerProgressBar: true  
+        });
+      },
+      error: (err) => {
+        Swal.fire({
+          toast: true,            
+          position: 'top-end',    
+          icon: 'error',    
+          title: 'Erro ao salvar o projeto!',
+          showConfirmButton: false,
+          timer: 3000, 
+          timerProgressBar: true
+        });
+        console.log(err);
+      }
+    });
   }
 
   getComponentRecursive(element: HTMLElement): CdkComponent | null {
@@ -183,15 +229,10 @@ export class CdkService {
 
     if (childComponents.length > 0) {
       component.children = childComponents;
-    } else {
-      delete component.children;
-    }
+    } 
 
     return component;
   }
-
-
-
 
   // Rendenizar Json Para CDK
   deserializeComponent(compData: any, parentEl: HTMLElement): void {

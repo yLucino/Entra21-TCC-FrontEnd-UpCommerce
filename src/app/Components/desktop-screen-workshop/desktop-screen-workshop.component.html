@@ -1,5 +1,5 @@
 <section>
-  <div class="current-screen" [hidden]="!project">
+  <div class="current-screen" *ngIf="project">
     <div class="screen">
       <p>{{titleScreen}}</p>
 
@@ -11,7 +11,7 @@
     </div>
   </div>
 
-  <div class="content-all" [hidden]="!project">
+  <div class="content-all" *ngIf="project">
     <!-- Home -->
     <div
       [hidden]="currentScreen !== 'homeScreen'"

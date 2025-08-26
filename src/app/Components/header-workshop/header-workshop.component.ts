@@ -22,7 +22,7 @@ export class HeaderWorkshopComponent implements OnChanges {
 
   constructor(private cdkService: CdkService) {}
 
-ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes: SimpleChanges): void {
     if (changes['getHeader']) {
       const h = changes['getHeader'].currentValue as ProjectHeader | null;
       if (h) {

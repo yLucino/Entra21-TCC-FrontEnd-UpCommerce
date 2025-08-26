@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ProjectInterface } from 'src/app/interfaces/project.interface';
-import { UserTokenInterface } from 'src/app/interfaces/user.interface';
 import { ProjectService } from 'src/app/services/project.service';
 import Swal from 'sweetalert2';
 

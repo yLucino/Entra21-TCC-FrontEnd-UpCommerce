@@ -10,7 +10,7 @@ import { PropertyService } from 'src/app/services/property.service';
   styleUrls: ['./properties-workshop.component.css']
 })
 export class PropertiesWorkshopComponent {
-  project!: ProjectInterface;
+  @Input() projectId!:number;
 
   // Inputs for the component
   @Input() title!: string;
@@ -678,7 +678,7 @@ export class PropertiesWorkshopComponent {
 
 
   saveProject() {
-    if (this.project) {
+    if (this.projectId) {
       this.cdkService.saveProject();
     }
   }

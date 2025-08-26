@@ -1,5 +1,5 @@
 <section >
-  <div class="current-screen" [hidden]="!project">
+  <div class="current-screen" *ngIf="project">
     <div class="screen">
       <div class="box-btns">
         <button [hidden]="!button.active" [class.selected]="button.selected" (click)="setScreen(button)" *ngFor="let button of buttons">
@@ -11,7 +11,7 @@
     </div>
   </div>
   
-  <div class="content-all" [hidden]="!project">
+  <div class="content-all" *ngIf="project">
     <div class="notify-bar">
       <p class="time">{{currentTime}}</p>
 
