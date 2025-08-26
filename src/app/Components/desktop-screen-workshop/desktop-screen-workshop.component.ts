@@ -25,6 +25,7 @@ export class DesktopScreenWorkshopComponent {
 
   @Input() projectId!: number;
   userId: number = Number(localStorage.getItem('userId'));
+  
   project!: ProjectInterface;
 
   titleScreen: string = 'Início';
@@ -82,6 +83,7 @@ export class DesktopScreenWorkshopComponent {
       next: (res) => {
         this.lodingProject(res);
         const data: ProjectHeader = {
+          id: this.projectId,
           title: res.title,
           subTitle: res.subTitle,
           description: res.description,

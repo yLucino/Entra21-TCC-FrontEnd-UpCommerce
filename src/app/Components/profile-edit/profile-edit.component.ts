@@ -17,7 +17,7 @@ export class ProfileEditComponent implements OnInit {
 
   userForm!: FormGroup;
   user!: UserInterface;
-  userId!: number;
+  userId: number = Number(localStorage.getItem('userId'));
   passwordClassEye = 'fa-eye-slash';
   passwordType = 'password'
   confirmEditMenuVisible = false;
@@ -43,8 +43,6 @@ export class ProfileEditComponent implements OnInit {
 
     this.authService.user$.subscribe((data: UserTokenInterface | null) => {
       if (data) {
-        this.userId = data.user.id;
-
         this.userService.getUserById(this.userId).subscribe((user: UserInterface) => {
           if (user) {
             this.user = user;

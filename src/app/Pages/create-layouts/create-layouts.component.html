@@ -28,11 +28,13 @@
       </app-desktop-screen-workshop>
 
       <app-properties-workshop 
+        [projectId]="projectId"
         class="props"
         #propertiesWorkshop>
       </app-properties-workshop>
       
       <app-tools-workshop
+        [projectId]="projectId"
         class="tools"
         [baseDropListIds]="['homeList', 'paymentList', 'perfilList', 'configList', 'notifyList', 'messageList', 'helpList', 'favList', 'cartList', 'historyList', 'reportsList', 'loginList']"
         [areaDropListIds]="areaIds"
@@ -42,6 +44,7 @@
 
     <div class="mobile" *ngIf="currentStep === 4">
       <app-tools-workshop
+        [projectId]="projectId"
         [baseDropListIds]="['homeList', 'paymentList', 'perfilList', 'configList', 'notifyList', 'messageList', 'helpList', 'favList', 'cartList', 'historyList', 'reportsList', 'loginList']"
         [areaDropListIds]="areaIds"
         [typeCSS]="'mobile'">
@@ -54,7 +57,7 @@
         (elementDeselected)="propertiesWorkshop.deselectElement()">
       </app-smartphone-screen-workshop>
 
-      <app-properties-workshop #propertiesWorkshop></app-properties-workshop>
+      <app-properties-workshop [projectId]="projectId" #propertiesWorkshop></app-properties-workshop>
     </div>
  
     <div class="cicd" *ngIf="currentStep === 5">

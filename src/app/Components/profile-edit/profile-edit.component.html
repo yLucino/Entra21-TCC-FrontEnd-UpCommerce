@@ -11,11 +11,11 @@
       <input type="text" formControlName="name" />
 
       <label>Email:</label>
-      <input type="email" formControlName="email" />
+      <input type="email" formControlName="email" autocomplete="email"/>
       
       <label>Nova Senha:</label>
       <div class="password-box">
-        <input [type]="passwordType" formControlName="password" />
+        <input [type]="passwordType" formControlName="password" autocomplete="new-password"/>
         <i class="fa-solid {{passwordClassEye}}" (click)="showPassword()"></i>
       </div>
 
@@ -47,7 +47,7 @@
     <h2>Confirmação</h2>
 
     <label>Senha:</label>
-    <input type="password" [(ngModel)]="password">
+    <input type="password" [(ngModel)]="password" autocomplete="current-password">
 
     <button (click)="onSubmit()">Confirmar</button>
   </div>
