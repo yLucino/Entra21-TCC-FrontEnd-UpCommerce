@@ -15,8 +15,6 @@ import { ProjectHeader } from '../interfaces/projectHeader.interface';
 import { ProjectService } from './project.service';
 import Swal from 'sweetalert2';
 
-
-
 @Injectable({ providedIn: 'root' })
 export class CdkService {
   private buttonsSource = new BehaviorSubject<ButtonSetScreen | null>(null);
@@ -43,7 +41,7 @@ export class CdkService {
   screenId$ = this.screenSource.asObservable();
   userId: number = Number(localStorage.getItem('userId'));
   
-
+  private dropHostMap = new Map<string, ViewContainerRef>();
   private viewContainerRef!: ViewContainerRef;
   private projectHeaderSource = new BehaviorSubject<ProjectHeader>({
     title: '',
@@ -54,6 +52,11 @@ export class CdkService {
 
   projectHeader$ = this.projectHeaderSource.asObservable();
 
+  setDropHostMap(map: Map<string, ViewContainerRef>) {
+    this.dropHostMap = map;
+  }
+
+  // Project
   updateProjectHeader(header: ProjectHeader) {
     this.projectHeaderSource.next(header);
   }
@@ -61,7 +64,6 @@ export class CdkService {
   getProjectHeader(): ProjectHeader {
     return this.projectHeaderSource.getValue();
   }
-
 
   setViewContainerRef(vcr: ViewContainerRef) {
     this.viewContainerRef = vcr;
@@ -135,7 +137,7 @@ export class CdkService {
       alignSelf: computed.alignSelf || '',
       newComponentId: element.id || '',
       imageSource: element.getAttribute("src") || '',
-      iconSource: element.getAttribute("class") || '',
+      iconSource: (element.getAttribute("class") || '').split(' ').filter(c => c !== 'selected-component').join(' '),
       linkSource: element.getAttribute("href") || ''
     };
 
@@ -144,10 +146,6 @@ export class CdkService {
       .filter(c => c instanceof HTMLElement)
       .map(c => this.serializeComponent(c as HTMLElement))
       .filter(c => c.id || c.cdkId || c.style);
-
-    if (cdkId === parentCdkId) {
-      parentCdkId = null;
-    }
 
     return {
       id: id,
@@ -169,49 +167,50 @@ export class CdkService {
         .filter(c => c instanceof HTMLElement)
         .forEach(child => {
           const component = this.getComponentRecursive(child as HTMLElement);
-          if (component) rootComponents.push(component);
+          if (!component) return;
+
+          rootComponents.push(component);
         });
     });
-    
+
     const header = this.getProjectHeader();
-    
+
     const projeto: ProjectInterface = {
       urlLogo: header.urlLogo || "URL da Logo do Projeto",
       title: header.title || "Nome do Projeto",
       subTitle: header.subTitle || "Slogan do Projeto",
       description: header.description || "Descrição do Projeto",
       userId: this.userId,
-      component: rootComponents.length ? rootComponents : undefined
+      component: rootComponents.length ? rootComponents : []
     };
 
-    console.log(JSON.stringify(projeto, null, 2));
-
-    if (header.id)
-    this.projectService.putProject(this.userId, header.id, projeto).subscribe({
-      next: () => {
-        Swal.fire({
-          toast: true,            
-          position: 'top-end',    
-          icon: 'success',    
-          title: 'Projeto salvo com sucesso!',
-          showConfirmButton: false,
-          timer: 3000, 
-          timerProgressBar: true  
-        });
-      },
-      error: (err) => {
-        Swal.fire({
-          toast: true,            
-          position: 'top-end',    
-          icon: 'error',    
-          title: 'Erro ao salvar o projeto!',
-          showConfirmButton: false,
-          timer: 3000, 
-          timerProgressBar: true
-        });
-        console.log(err);
-      }
-    });
+    if (header.id) {
+      this.projectService.putProject(this.userId, header.id, projeto).subscribe({
+        next: () => {
+          Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: 'Projeto salvo com sucesso!',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true
+          });
+        },
+        error: (err) => {
+          Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'error',
+            title: 'Erro ao salvar o projeto!',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true
+          });
+          console.log(err);
+        }
+      });
+    }
   }
 
   getComponentRecursive(element: HTMLElement): CdkComponent | null {
@@ -235,45 +234,49 @@ export class CdkService {
   }
 
   // Rendenizar Json Para CDK
-  deserializeComponent(compData: any, parentEl: HTMLElement): void {
-    if (!this.viewContainerRef) {
-      console.error("ViewContainerRef não foi definido!");
-      return;
+  deserializeComponent(compData: any, container: ViewContainerRef): void {
+    const compClass = this.getComponentClass(compData.cdkId);
+    if (!compClass) return;
+
+    const componentRef = container.createComponent<any>(compClass);
+
+    if ('backendId' in componentRef.instance) {
+      componentRef.instance.backendId = compData.id;
     }
 
-    const componentRef: any = this.viewContainerRef.createComponent(
-      this.getComponentClass(compData.type)
-    );
+    setTimeout(() => {
+      const instance = componentRef.instance as any;
+      const el = componentRef.location.nativeElement as HTMLElement;
 
-    if (compData.id) componentRef.location.nativeElement.id = compData.id;
+      this.applyStylesToElement(compData, el, compData.style || {});
 
-    Object.entries(compData.styles).forEach(([key, value]) => {
-      if (key in componentRef.instance) {
-        (componentRef.instance as any)[key] = this.parseValue(value);
+      if (instance instanceof AreaComponent) {
+        const areaInstance = instance as AreaComponent;
+        areaInstance.areaListId = compData.id;
+        areaInstance.childrenData = compData.children || [];
+        if (areaInstance.viewContainerRef) {
+          (compData.children || []).forEach((child: any) => {
+            this.deserializeComponent(child, areaInstance.viewContainerRef);
+          });
+        }
       }
-    });
-
-    parentEl.appendChild(componentRef.location.nativeElement);
-
-    compData.children.forEach((child: any) => {
-      this.deserializeComponent(child, componentRef.location.nativeElement);
     });
   }
 
   deserializeProject(project: ProjectInterface): void {
-    this.dropZonesIds.forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.innerHTML = "";
-    });
+    this.dropHostMap.forEach(container => container.clear());
 
     if (!project.component) return;
 
     project.component.forEach(comp => {
-      const parentCdkId = comp.cdkId;
-      const parentEl = document.getElementById(parentCdkId);
+      const parentCdkId = comp.parentCdkId;
+      if (parentCdkId) {
+        const parentCDK = this.dropHostMap.get(parentCdkId);
 
-      if (parentEl) {
-        this.deserializeComponent(comp, parentEl);
+        if (parentCDK) {
+          
+          this.deserializeComponent(comp, parentCDK);
+        }
       }
     });
   }
@@ -285,8 +288,10 @@ export class CdkService {
     return value;
   }
 
-  getComponentClass(type: string): any {
-    switch(type.toLowerCase()) {
+  getComponentClass(cdkId: string): any {
+    if (!cdkId) return null;
+
+    switch(cdkId.split('-')[0].toLowerCase()) {
       case "areacomponent": return AreaComponent;
       case "buttoncomponent": return ButtonComponent;
       case "textcomponent": return TextComponent;
@@ -294,6 +299,122 @@ export class CdkService {
       case "inputcomponent": return InputComponent;
       case "iconcomponent": return IconComponent;
       case "linkcomponent": return LinkComponent;
+    }
+  }
+
+  applyStylesToElement(compData: any, el: HTMLElement, styles: ComponentStyles) {
+    if (!styles || !el) return;
+    const wrapper = el.querySelector('.area-style-wrapper') as HTMLElement;
+
+    const elId = compData.id;
+
+    if (!elId) return;
+    
+    let cssRule = `#${elId} {`;
+
+    // Dimensões
+    if (styles.width !== undefined) cssRule += `width:${styles.width}px;`;
+    if (styles.height !== undefined) cssRule += `height:${styles.height}px;`;
+
+    // Margens
+    if (styles.marginLeft !== undefined) cssRule += `margin-left:${styles.marginLeft}px;`;
+    if (styles.marginTop !== undefined) cssRule += `margin-top:${styles.marginTop}px;`;
+    if (styles.marginRight !== undefined) cssRule += `margin-right:${styles.marginRight}px;`;
+    if (styles.marginBottom !== undefined) cssRule += `margin-bottom:${styles.marginBottom}px;`;
+
+    // Padding
+    if (styles.paddingLeft !== undefined) cssRule += `padding-left:${styles.paddingLeft}px;`;
+    if (styles.paddingTop !== undefined) cssRule += `padding-top:${styles.paddingTop}px;`;
+    if (styles.paddingRight !== undefined) cssRule += `padding-right:${styles.paddingRight}px;`;
+    if (styles.paddingBottom !== undefined) cssRule += `padding-bottom:${styles.paddingBottom}px;`;
+
+    // Bordas
+    if (styles.borderSize !== undefined) cssRule += `border-width:${styles.borderSize}px;`;
+    if (styles.borderColor) cssRule += `border-color:${styles.borderColor};`;
+    if (styles.borderType) cssRule += `border-style:${styles.borderType};`;
+    if (styles.borderRadiusTopLeft !== undefined) cssRule += `border-top-left-radius:${styles.borderRadiusTopLeft}px;`;
+    if (styles.borderRadiusTopRight !== undefined) cssRule += `border-top-right-radius:${styles.borderRadiusTopRight}px;`;
+    if (styles.borderRadiusBottomLeft !== undefined) cssRule += `border-bottom-left-radius:${styles.borderRadiusBottomLeft}px;`;
+    if (styles.borderRadiusBottomRight !== undefined) cssRule += `border-bottom-right-radius:${styles.borderRadiusBottomRight}px;`;
+
+    // Cores e fonte
+    if (styles.backgroundColor) cssRule += `background-color:${styles.backgroundColor};`;
+    if (styles.color) cssRule += `color:${styles.color};`;
+    if (styles.fontFamily) cssRule += `font-family:${styles.fontFamily};`;
+    if (styles.fontSize !== undefined) cssRule += `font-size:${styles.fontSize}px;`;
+    if (styles.fontWeight) cssRule += `font-weight:${styles.fontWeight};`;
+    if (styles.textAlign) cssRule += `text-align:${styles.textAlign};`;
+
+    // Outros
+    if (styles.opacity !== undefined) cssRule += `opacity:${styles.opacity};`;
+    if (styles.position) cssRule += `position:${styles.position};`;
+    if (styles.top !== undefined) cssRule += `top:${styles.top}px;`;
+    if (styles.left !== undefined) cssRule += `left:${styles.left}px;`;
+    if (styles.right !== undefined) cssRule += `right:${styles.right}px;`;
+    if (styles.bottom !== undefined) cssRule += `bottom:${styles.bottom}px;`;
+    if (styles.zIndex !== undefined) cssRule += `z-index:${styles.zIndex};`;
+    if (styles.cursor) cssRule += `cursor:${styles.cursor};`;
+    if (styles.display) cssRule += `display:${styles.display};`;
+
+    // Flexbox
+    if (styles.flexDirection) cssRule += `flex-direction:${styles.flexDirection};`;
+    if (styles.flexJustify) cssRule += `justify-content:${styles.flexJustify};`;
+    if (styles.flexAlignItems) cssRule += `align-items:${styles.flexAlignItems};`;
+    if (styles.flexWrap) cssRule += `flex-wrap:${styles.flexWrap};`;
+    if (styles.flexGap !== undefined) cssRule += `gap:${styles.flexGap}px;`;
+    if (styles.alignSelf) cssRule += `align-self:${styles.alignSelf};`;
+
+    // Box-shadow
+    if (styles.shadowColor) {
+      const x = styles.shadowX ?? 0;
+      const y = styles.shadowY ?? 0;
+      const blur = styles.shadowBlur ?? 0;
+      cssRule += `box-shadow:${x}px ${y}px ${blur}px ${styles.shadowColor};`;
+    }
+
+    cssRule += `}`;
+
+    // Inserir no head
+    let styleSheet = document.getElementById('dynamic-styles') as HTMLStyleElement;
+    if (!styleSheet) {
+      styleSheet = document.createElement('style');
+      styleSheet.id = 'dynamic-styles';
+      document.head.appendChild(styleSheet);
+    }
+    styleSheet.innerHTML += cssRule;
+
+    // Conteúdo e fontes
+    if (styles.textContent !== undefined) {
+      const tag = el.tagName.toLowerCase();
+
+      if (['button', 'span', 'label', 'p', 'h1','h2','h3','h4','h5','h6','a'].includes(tag)) {
+        const existingTextNode = Array.from(el.childNodes).find(
+          node => node.nodeType === Node.TEXT_NODE
+        ) as Text | undefined;
+
+        if (existingTextNode) {
+          existingTextNode.textContent = styles.textContent;
+        } else {
+          el.appendChild(document.createTextNode(styles.textContent));
+        }
+      }
+    }
+
+    // Imagem
+    if (styles.imageSource && el instanceof HTMLImageElement) {
+      el.src = styles.imageSource;
+    }
+
+    // Ícones
+    if (styles.iconSource) {
+      styles.iconSource.split(' ').forEach(cls => {
+        if (cls) el.classList.add(cls);
+      });
+    }
+
+    // Link
+    if (styles.linkSource && el instanceof HTMLAnchorElement) {
+      el.href = styles.linkSource;
     }
   }
 }

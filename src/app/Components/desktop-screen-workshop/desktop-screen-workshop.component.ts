@@ -1,5 +1,5 @@
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { Component, EnvironmentInjector, EventEmitter, Injector, Input, Output, QueryList, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
+import { ChangeDetectorRef, Component, EnvironmentInjector, EventEmitter, Injector, Input, NgZone, OnInit, Output, QueryList, ViewChildren, ViewContainerRef } from '@angular/core';
 import { AreaComponent } from 'src/app/dragAndDrop/component/area/area.component';
 import { ButtonSetScreen } from 'src/app/interfaces/buttonSetScreen.interface';
 import { CdkService } from 'src/app/services/cdk.service';
@@ -14,7 +14,7 @@ import { ProjectHeader } from 'src/app/interfaces/projectHeader.interface';
   templateUrl: './desktop-screen-workshop.component.html',
   styleUrls: ['./desktop-screen-workshop.component.css']
 })
-export class DesktopScreenWorkshopComponent {
+export class DesktopScreenWorkshopComponent implements OnInit {
   @ViewChildren('dropHost', { read: ViewContainerRef }) dropHosts!: QueryList<ViewContainerRef>;
   @ViewChildren('cdkDropList', { read: ViewContainerRef }) cdkDropLists!: QueryList<ViewContainerRef>;
   
@@ -30,6 +30,7 @@ export class DesktopScreenWorkshopComponent {
 
   titleScreen: string = 'Início';
   currentScreen: string = 'homeScreen';
+  list: string = "homeList";
 
   buttons: ButtonSetScreen[] = [
     { screen: 'homeScreen', class: 'fa-solid fa-house', title: 'Início', selected: true, list: 'homeList', active: true },
@@ -52,11 +53,13 @@ export class DesktopScreenWorkshopComponent {
   canEnterSmartphone = () => !this.isHoveringOverArea;
 
   constructor(
+    private ngZone: NgZone,
     private injector: EnvironmentInjector,
     private propertyService: PropertyService,
     private cdkService: CdkService,
     private vcr: ViewContainerRef,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit() {
@@ -81,7 +84,7 @@ export class DesktopScreenWorkshopComponent {
     if (this.userId && this.projectId)
     this.projectService.getProjectById(this.userId ,this.projectId).subscribe({
       next: (res) => {
-        this.lodingProject(res);
+        this.loadingProject(res);
         const data: ProjectHeader = {
           id: this.projectId,
           title: res.title,
@@ -138,8 +141,12 @@ export class DesktopScreenWorkshopComponent {
       const instance = componentRef.instance as AreaComponent;
       instance.hovering.subscribe((hover: boolean) => this.isHoveringOverArea = hover);
       instance.created.subscribe((id: string) => {
-        this.connectedDropListId.push(id);
-        this.areaCreated.emit(id);
+         this.ngZone.run(() => {
+          this.connectedDropListId.push(id);
+          this.areaCreated.emit(id);
+
+          this.cdr.detectChanges();
+        });
       });
     }
 
@@ -147,6 +154,63 @@ export class DesktopScreenWorkshopComponent {
       (componentRef.instance as any).created.subscribe();
     }
   }
+
+  simulateDrop(compData: any, container: ViewContainerRef) {
+    const compClass = this.cdkService.getComponentClass(compData.cdkId);
+    if (!compClass) return;
+
+    const injector = Injector.create({ providers: [], parent: this.injector });
+
+    const componentRef = container.createComponent(compClass, { injector });
+    const instance: any = componentRef.instance;
+    const nativeEl = componentRef.location.nativeElement;
+
+    if (instance instanceof AreaComponent) {
+      instance.areaListId = compData.id;
+      instance.childrenData = compData.children || [];
+    } else {
+      const keyMap: Record<string, string> = {
+        ButtonComponent: 'btnDragId',
+        LinkComponent: 'linkDragId',
+        TextComponent: 'pDragId',
+        IconComponent: 'iconDragId',
+        ImageComponent: 'imageDragId',
+        InputComponent: 'inputDragId'
+      };
+      const key = keyMap[instance.constructor.name];
+      if (key) instance[key] = compData.id;
+    }
+
+    if (compData.style) {
+      const innerEl = nativeEl.querySelector('.component') || nativeEl;
+      this.cdkService.applyStylesToElement(compData, innerEl, compData.style);
+    }
+
+    nativeEl.addEventListener('click', (event: any) => {
+      event.stopPropagation();
+      this.attachSelectionListener(nativeEl);
+    });
+
+    if (instance instanceof AreaComponent && instance.viewContainerRef) {
+      instance.childrenData.forEach((child: any) =>
+        this.simulateDrop(child, instance.viewContainerRef)
+      );
+
+      instance.hovering.subscribe((hover: boolean) => this.isHoveringOverArea = hover);
+      instance.created.subscribe((id: string) => {
+        this.ngZone.run(() => {
+          this.connectedDropListId.push(id);
+          this.areaCreated.emit(id);
+          this.cdr.detectChanges();
+        });
+      });
+    }
+
+    if (instance.created instanceof EventEmitter) {
+      this.ngZone.run(() => instance.created.emit(compData.id));
+    }
+  }
+
 
   deselectElement(event: MouseEvent) {
     const clickedElement = event.target as HTMLElement;
@@ -170,6 +234,7 @@ export class DesktopScreenWorkshopComponent {
 
     this.currentScreen = btn.screen;
     this.titleScreen = btn.title;
+    this.list = btn.list;
     this.setSelectedButton(btn);
 
     this.connectedDropListId = [btn.list];
@@ -197,8 +262,32 @@ export class DesktopScreenWorkshopComponent {
     });
   }
 
-  lodingProject(project: ProjectInterface) {
+  loadingProject(project: ProjectInterface) {
     this.project = project;
-    this.cdkService.deserializeProject(project);
+
+    this.ngZone.runOutsideAngular(() => {
+      requestAnimationFrame(() => {
+        const map = new Map<string, ViewContainerRef>();
+        this.dropHosts.forEach((container, i) => {
+          const id = this.buttons[i].list;
+          map.set(id, container);
+        });
+
+        this.cdkService.setDropHostMap(map);
+
+        project.component?.forEach(comp => {
+          const parentCDK = map.get(comp.parentCdkId || this.list);
+          if (parentCDK) {
+            this.simulateDrop(comp, parentCDK);
+          }
+        });
+
+        setTimeout(() => {
+          this.connectedDropListId = [this.list];
+          this.cdr.detectChanges();
+        });
+      });
+    });
   }
 }
+

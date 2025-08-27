@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-icon',
@@ -6,13 +6,13 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./icon.component.css']
 })
 export class IconComponent {
-  iconDragId: string = '';
+  @Input() iconDragId: string = '';
   @Output() created = new EventEmitter<string>();
 
   onUniqueIdCreated(id: string) {
-    setTimeout(() => {
+    if (!this.iconDragId) {
       this.iconDragId = id;
       this.created.emit(id);
-    });
+    }
   }
 }
