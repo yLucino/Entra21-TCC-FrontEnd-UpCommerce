@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-link',
@@ -6,13 +6,13 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./link.component.css']
 })
 export class LinkComponent {
-  linkDragId: string = '';
+  @Input() linkDragId: string = '';
   @Output() created = new EventEmitter<string>();
 
   onUniqueIdCreated(id: string) {
-    setTimeout(() => {
+    if (!this.linkDragId) {
       this.linkDragId = id;
       this.created.emit(id);
-    });
+    }
   }
 }

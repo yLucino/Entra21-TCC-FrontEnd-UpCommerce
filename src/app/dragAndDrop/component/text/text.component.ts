@@ -6,14 +6,14 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./text.component.css']
 })
 export class TextComponent {
-  pDragId: string = '';
+  @Input() pDragId: string = '';
   @Input() pText: string = 'Seu texto!';
   @Output() created = new EventEmitter<string>();
 
   onUniqueIdCreated(id: string) {
-    setTimeout(() => {
+    if (!this.pDragId) {
       this.pDragId = id;
       this.created.emit(id);
-    });
+    }
   }
 }

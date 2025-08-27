@@ -126,9 +126,29 @@ section header .search-box {
     border-top: 20px solid var(--primary-FFFFFF);
   }
 
-  h1 {
-    font: var(--font-BOLD-H1-38);
-    color: var(--primary-4A4A4A);
+  .text {
+    display: flex;
+    flex-direction: column;
+    
+    h1 {
+      height: 45px;
+      font: var(--font-BOLD-H1-38);
+      color: var(--primary-4A4A4A);
+    }
+    
+    p {
+      font: var(--font-BOLD-P-12);
+      color: var(--primary-4A4A4A);
+      cursor: pointer;
+      transition: .3s;
+      margin-left: 2px;
+      width: fit-content;
+    }
+
+    p:hover {
+      margin-left: 8px;
+      text-decoration: underline;
+    }
   }
 }
 

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 
 @Component({
@@ -8,14 +8,14 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class InputComponent {
   searchTerm: string = '';
-  inputDragId: string = '';
+  @Input() inputDragId: string = '';
 
   @Output() created = new EventEmitter<string>();
-  
+
   onUniqueIdCreated(id: string) {
-    setTimeout(() => {
+    if (!this.inputDragId) {
       this.inputDragId = id;
       this.created.emit(id);
-    });
+    }
   }
 }

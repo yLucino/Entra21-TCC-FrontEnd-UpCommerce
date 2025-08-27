@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-button-drag',
@@ -6,13 +6,13 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./button.component.css']
 })
 export class ButtonComponent {
-  btnDragId: string = '';
+  @Input() btnDragId: string = '';
   @Output() created = new EventEmitter<string>();
 
   onUniqueIdCreated(id: string) {
-    setTimeout(() => {
+    if (!this.btnDragId) {
       this.btnDragId = id;
-      this.created.emit(id);
-    });
+      this.created.emit(id); 
+    }
   }
 }

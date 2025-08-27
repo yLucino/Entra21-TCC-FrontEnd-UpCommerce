@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-image',
@@ -6,13 +6,13 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./image.component.css']
 })
 export class ImageComponent {
-  imageDragId: string = '';
+  @Input() imageDragId: string = '';
   @Output() created = new EventEmitter<string>();
 
   onUniqueIdCreated(id: string) {
-    setTimeout(() => {
+    if (!this.imageDragId) {
       this.imageDragId = id;
       this.created.emit(id);
-    });
+    }
   }
 }
