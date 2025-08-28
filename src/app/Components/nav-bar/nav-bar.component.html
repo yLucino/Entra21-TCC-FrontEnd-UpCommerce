@@ -1,38 +1,83 @@
-
 <nav>
-    <div class="logo">
-      <a routerLink="/">
-        <img src="../../../assets/images/Logo/LogoUpCommerce-3.png" alt="logo">
-        <h1>Up Commerce</h1>
-      </a>
-    </div>
+  <div class="logo" routerLink="/">
+    <img src="../../../assets/images/Logo/LogoUpCommerce-3.png" alt="logo">
+    <h1>UpCommerce</h1>
+  </div>
 
-    <div class="menu">
-        <p>Menu</p>
-        <ul>
-            <li><button><mat-icon>home</mat-icon> Início</button></li>
-            <li><button><mat-icon>category</mat-icon> Categorias</button></li>
-            <li><button><mat-icon>library_books</mat-icon> Biblioteca</button></li>
-            <li><button><mat-icon>workspace_premium</mat-icon> Premium</button></li>
-            <li><button><mat-icon>monetization_on</mat-icon> Free</button></li>
-            <li><button><mat-icon>favorite</mat-icon> Favoritos</button></li>
-          </ul>
-          <hr>
-          <ul>
-            <li><button><mat-icon>add_circle</mat-icon> Criar</button></li>
-            <li><button><mat-icon>send</mat-icon> Solicitar layouts</button></li>
-            <li><button><mat-icon>groups</mat-icon> Web Designers</button></li>
-          </ul>
-          <hr>
+  <div class="menu">
+    <h1>Menu</h1>
 
-          <div class="username">
-            <div class="img-user">
-              <img src="https://pt.quizur.com/_image?href=https%3A%2F%2Fimg.quizur.com%2Ff%2Fimg6300f25c178f07.26094452.png%3FlastEdited%3D1661006458%3Fo%3Dfeed&w=250&h=300&f=webp" alt="">
-            </div>
-            <div class="dados">
-              <h5>Username</h5>
-              <p>examplegmail.com</p>
-            </div>
-          </div>
+    <ul>
+      <li>
+        <button routerLink="/">
+          <i class="fa-solid fa-house"></i>
+          Início
+        </button>
+      </li>
+      <li>
+        <button>
+          <i class="fa-solid fa-shapes"></i>
+          Categorias
+        </button>
+      </li>
+      <li>
+        <button >
+          <i class="fa-solid fa-folder"></i>
+          Biblioteca
+        </button>
+      </li>
+      <li>
+        <button>
+          <mat-icon>workspace_premium</mat-icon>
+          Premium
+        </button>
+      </li>
+      <li>
+        <button>
+          <mat-icon>monetization_on</mat-icon>
+          Free
+        </button>
+      </li>
+      <li>
+        <button>
+          <i class="fa-solid fa-heart"></i>
+          Favoritos
+        </button>
+      </li>
+    </ul>
+    
+    <hr>
+
+    <ul>
+      <li>
+        <button routerLink="/workshop">
+          <i class="fa-solid fa-pen-to-square"></i>
+          Criar
+        </button>
+      </li>
+      <li>
+        <button>
+          <mat-icon>table</mat-icon>
+          Solicitar layouts
+        </button>
+      </li>
+      <li>
+        <button>
+          <i class="fa-solid fa-pen-nib"></i>
+          Web Designers
+        </button>
+      </li>
+    </ul>
+
+    <hr>
+
+    <div class="user">
+      <img routerLink="/profile" [src]="urlPhoto" alt="Foto de perfil do usuário.">
+
+      <div class="info">
+        <h2>{{username}}</h2>
+        <p>{{email}}</p>
+      </div>
     </div>
+  </div>
 </nav>

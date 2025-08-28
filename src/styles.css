@@ -6,7 +6,10 @@
   --primary-002442: #001221;
   --primary-122B41: #122b41;
   --primary-053B69: #053B69;
+  --primary-01335E: #01335E;
+  --primary-00305B: #00305B;
   --primary-135087: #135087;
+  --primary-00446D: #00446D;
   --primary-0E548F: #0E548F;
   --primary-006699: #006699;
   --primary-0A8FCC: #0A8FCC;
@@ -22,11 +25,13 @@
   --primary-000000b5: #000000b5;
   --primary-333333: #333333;
   --primary-666666: #666666;
+  --primary-6C6A6A: #6C6A6A;
   --primary-E0E0E0: #E0E0E0;
   --primary-E9E9E9: #E9E9E9;
   --primary-818181: #818181;
   --primary-F3F3F3: #F3F3F3;
   --primary-B3B3B3: #B3B3B3;
+  --primary-D4D4D4: #D4D4D4;
   --primary-3F3F3F: #3F3F3F;
   --primary-4A4A4A: #4A4A4A;
   --primary-FFFFFF: #FFFFFF;
@@ -74,6 +79,9 @@
   --gradient-Dark-TopToBottom: linear-gradient(180deg,#033d6b 0%, #00192d 100%);
   --gradient-Light-TopToBottom: linear-gradient(180deg,#42C3FF 0%, #156BA7 100%);
   --gradient-ExtraLight-LeftToRight: linear-gradient(90deg,#42C3FF 0%, #156BA7 100%);
+  --gradient-ExtraLight-BottomToTop: linear-gradient(0deg,#42C3FF 0%, #156BA7 100%);
+  --gradient-Free: linear-gradient(90deg,#096900 0%, #11C900 100%);
+  --gradient-Premium: linear-gradient(90deg,#156BA7 0%, #01ABFA 100%);
 
   /* Fonts Guides */
   /* BOLD */

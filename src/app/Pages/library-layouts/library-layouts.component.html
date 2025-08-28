@@ -1,27 +1,32 @@
 <div class="container">
-    <div class="container-nav">
-        <app-nav-bar></app-nav-bar>
+  <div class="container-nav">
+    <app-nav-bar></app-nav-bar>
+  </div>
+
+  <div class="content">
+    <div class="container-search">
+      <div class="search-box">
+        <button class="filtro">
+          <i class="fa-solid fa-filter"></i>
+        </button>
+
+        <input class="search-input" placeholder="Pesquisar..." type="text">
+        
+        <button class="pesquisar">
+          Pesquisar
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </div>
     </div>
 
-    <div class="content">
-        <div class="container-search">
-            <div class="search-box">
-                <button class="filtro">
-                    <mat-icon>filter_alt</mat-icon>
-                </button>
-                <input class="search-input" placeholder="Pesquisar..." type="text">
-                <button class="pesquisar">Pesquisar</button>
-              </div>
-        </div>
-    
-        <div class="container-cards">
-            <app-card-layouts></app-card-layouts>
-            <app-card-layouts></app-card-layouts>
-            <app-card-layouts></app-card-layouts>
-            <app-card-layouts></app-card-layouts>
-            <!-- <app-card-layouts *ngFor="let card of cards" [card]="card"></app-card-layouts> -->
-        </div>
-
+    <div class="container-cards">
+      <app-card-layouts *ngFor="let project of projects"
+        [id]="project.id"
+        [title]="project.title"
+        [infos]="project.infos"
+        [tag]="project.tag"
+        [img]="project.img"
+      ></app-card-layouts>
     </div>
-    
+  </div>
 </div>
