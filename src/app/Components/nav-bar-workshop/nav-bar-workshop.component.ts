@@ -8,6 +8,7 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 export class NavBarWorkshopComponent {
   @Output() stepChange = new EventEmitter<number>();
   @Input() selectedIndex: number = 0;
+  @Input() projectChanged: boolean = false;
 
   menuItems = [
     { label: 'Projetos', icon: 'fa-solid fa-folder' },
@@ -21,7 +22,10 @@ export class NavBarWorkshopComponent {
   selectItem(index: number) {
     if (index === 1 || index === 2 || index === 5) return
 
-    this.selectedIndex = index;
+    if (!this.projectChanged) {
+      this.selectedIndex = index;
+    }
+    
     this.stepChange.emit(index);
   }
 }

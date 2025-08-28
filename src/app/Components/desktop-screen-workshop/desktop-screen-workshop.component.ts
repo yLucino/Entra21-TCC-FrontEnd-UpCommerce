@@ -25,7 +25,6 @@ export class DesktopScreenWorkshopComponent implements OnInit {
 
   @Input() projectId!: number;
   userId: number = Number(localStorage.getItem('userId'));
-  
   project!: ProjectInterface;
 
   titleScreen: string = 'Início';
@@ -165,6 +164,11 @@ export class DesktopScreenWorkshopComponent implements OnInit {
     const instance: any = componentRef.instance;
     const nativeEl = componentRef.location.nativeElement;
 
+    if (compData.genericName) {
+      const innerEl = nativeEl.querySelector('.component') || nativeEl;
+      innerEl.setAttribute('data-generic-name', compData.genericName);
+    }
+
     if (instance instanceof AreaComponent) {
       instance.areaListId = compData.id;
       instance.childrenData = compData.children || [];
@@ -290,4 +294,3 @@ export class DesktopScreenWorkshopComponent implements OnInit {
     });
   }
 }
-

@@ -1,5 +1,5 @@
 <section class="workshop" id="workshop">
-  <app-nav-bar-workshop [selectedIndex]="currentStep" (stepChange)="currentStep = $event"></app-nav-bar-workshop>
+  <app-nav-bar-workshop [projectChanged]="projectChanged" [selectedIndex]="currentStep" (stepChange)="onStepChangeRequest($event)"></app-nav-bar-workshop>
 
   <header>
     <app-header-workshop [getHeader]="projectHeader$ | async" [currentMenu]="currentStep"></app-header-workshop>
@@ -29,6 +29,7 @@
 
       <app-properties-workshop 
         [projectId]="projectId"
+        (projectStatus)="onProjectChange($event)"
         class="props"
         #propertiesWorkshop>
       </app-properties-workshop>
@@ -57,7 +58,11 @@
         (elementDeselected)="propertiesWorkshop.deselectElement()">
       </app-smartphone-screen-workshop>
 
-      <app-properties-workshop [projectId]="projectId" #propertiesWorkshop></app-properties-workshop>
+      <app-properties-workshop 
+        [projectId]="projectId"
+        (projectStatus)="onProjectChange($event)"
+        #propertiesWorkshop>
+      </app-properties-workshop>
     </div>
  
     <div class="cicd" *ngIf="currentStep === 5">

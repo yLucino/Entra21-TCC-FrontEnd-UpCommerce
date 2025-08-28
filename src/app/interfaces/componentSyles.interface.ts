@@ -52,6 +52,8 @@ export interface ComponentStyles {
   hoverShadowBlur?: number;
   hoverShadowColor?: string;
 
+  transition?: string;
+
   cursor?: string;
 
   display?: string;

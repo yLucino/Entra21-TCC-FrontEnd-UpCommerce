@@ -1,12 +1,13 @@
-import { Component, Input, Output, EventEmitter, EnvironmentInjector, Injector, ViewContainerRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { ChangeDetectorRef, Component, EnvironmentInjector, EventEmitter, Injector, Input, NgZone, OnInit, Output, QueryList, ViewChildren, ViewContainerRef } from '@angular/core';
 import { AreaComponent } from 'src/app/dragAndDrop/component/area/area.component';
-import { PropertyService } from 'src/app/services/property.service';
 import { ButtonSetScreen } from 'src/app/interfaces/buttonSetScreen.interface';
 import { CdkService } from 'src/app/services/cdk.service';
+import { PropertyService } from 'src/app/services/property.service';
 import { ProjectInterface } from 'src/app/interfaces/project.interface';
 import { ProjectService } from 'src/app/services/project.service';
 import Swal from 'sweetalert2';
+import { ProjectHeader } from 'src/app/interfaces/projectHeader.interface';
 
 @Component({
   selector: 'app-smartphone-screen-workshop',
@@ -26,10 +27,10 @@ export class SmartphoneScreenWorkshopComponent implements OnInit {
   userId: number = Number(localStorage.getItem('userId'));
   project!: ProjectInterface;
 
-
-  currentTime: string = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   titleScreen: string = 'Início';
   currentScreen: string = 'homeScreen';
+  list: string = "homeList";
+  currentTime: string = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
   buttons: ButtonSetScreen[] = [
     { screen: 'homeScreen', class: 'fa-solid fa-house', title: 'Início', selected: true, list: 'homeList', active: true },
@@ -52,11 +53,13 @@ export class SmartphoneScreenWorkshopComponent implements OnInit {
   canEnterSmartphone = () => !this.isHoveringOverArea;
 
   constructor(
+    private ngZone: NgZone,
     private injector: EnvironmentInjector,
     private propertyService: PropertyService,
     private cdkService: CdkService,
     private vcr: ViewContainerRef,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit() {
@@ -81,7 +84,16 @@ export class SmartphoneScreenWorkshopComponent implements OnInit {
     if (this.userId && this.projectId)
     this.projectService.getProjectById(this.userId ,this.projectId).subscribe({
       next: (res) => {
-        this.lodingProject(res);
+        this.loadingProject(res);
+        const data: ProjectHeader = {
+          id: this.projectId,
+          title: res.title,
+          subTitle: res.subTitle,
+          description: res.description,
+          urlLogo: res.urlLogo
+        }
+
+        this.cdkService.updateProjectHeader(data);
       },
       error: (err) => {
         Swal.fire({
@@ -129,13 +141,78 @@ export class SmartphoneScreenWorkshopComponent implements OnInit {
       const instance = componentRef.instance as AreaComponent;
       instance.hovering.subscribe((hover: boolean) => this.isHoveringOverArea = hover);
       instance.created.subscribe((id: string) => {
-        this.connectedDropListId.push(id);
-        this.areaCreated.emit(id);
+         this.ngZone.run(() => {
+          this.connectedDropListId.push(id);
+          this.areaCreated.emit(id);
+
+          this.cdr.detectChanges();
+        });
       });
     }
 
     if ((componentRef.instance as any).created instanceof EventEmitter) {
       (componentRef.instance as any).created.subscribe();
+    }
+  }
+
+  simulateDrop(compData: any, container: ViewContainerRef) {
+    const compClass = this.cdkService.getComponentClass(compData.cdkId);
+    if (!compClass) return;
+
+    const injector = Injector.create({ providers: [], parent: this.injector });
+
+    const componentRef = container.createComponent(compClass, { injector });
+    const instance: any = componentRef.instance;
+    const nativeEl = componentRef.location.nativeElement;
+
+    if (compData.genericName) {
+      const innerEl = nativeEl.querySelector('.component') || nativeEl;
+      innerEl.setAttribute('data-generic-name', compData.genericName);
+    }
+
+    if (instance instanceof AreaComponent) {
+      instance.areaListId = compData.id;
+      instance.childrenData = compData.children || [];
+    } else {
+      const keyMap: Record<string, string> = {
+        ButtonComponent: 'btnDragId',
+        LinkComponent: 'linkDragId',
+        TextComponent: 'pDragId',
+        IconComponent: 'iconDragId',
+        ImageComponent: 'imageDragId',
+        InputComponent: 'inputDragId'
+      };
+      const key = keyMap[instance.constructor.name];
+      if (key) instance[key] = compData.id;
+    }
+
+    if (compData.style) {
+      const innerEl = nativeEl.querySelector('.component') || nativeEl;
+      this.cdkService.applyStylesToElement(compData, innerEl, compData.style);
+    }
+
+    nativeEl.addEventListener('click', (event: any) => {
+      event.stopPropagation();
+      this.attachSelectionListener(nativeEl);
+    });
+
+    if (instance instanceof AreaComponent && instance.viewContainerRef) {
+      instance.childrenData.forEach((child: any) =>
+        this.simulateDrop(child, instance.viewContainerRef)
+      );
+
+      instance.hovering.subscribe((hover: boolean) => this.isHoveringOverArea = hover);
+      instance.created.subscribe((id: string) => {
+        this.ngZone.run(() => {
+          this.connectedDropListId.push(id);
+          this.areaCreated.emit(id);
+          this.cdr.detectChanges();
+        });
+      });
+    }
+
+    if (instance.created instanceof EventEmitter) {
+      this.ngZone.run(() => instance.created.emit(compData.id));
     }
   }
 
@@ -161,6 +238,7 @@ export class SmartphoneScreenWorkshopComponent implements OnInit {
 
     this.currentScreen = btn.screen;
     this.titleScreen = btn.title;
+    this.list = btn.list;
     this.setSelectedButton(btn);
 
     this.connectedDropListId = [btn.list];
@@ -188,8 +266,31 @@ export class SmartphoneScreenWorkshopComponent implements OnInit {
     });
   }
 
-  lodingProject(project: ProjectInterface) {
+  loadingProject(project: ProjectInterface) {
     this.project = project;
-    this.cdkService.deserializeProject(project);
+
+    this.ngZone.runOutsideAngular(() => {
+      requestAnimationFrame(() => {
+        const map = new Map<string, ViewContainerRef>();
+        this.dropHosts.forEach((container, i) => {
+          const id = this.buttons[i].list;
+          map.set(id, container);
+        });
+
+        this.cdkService.setDropHostMap(map);
+
+        project.component?.forEach(comp => {
+          const parentCDK = map.get(comp.parentCdkId || this.list);
+          if (parentCDK) {
+            this.simulateDrop(comp, parentCDK);
+          }
+        });
+
+        setTimeout(() => {
+          this.connectedDropListId = [this.list];
+          this.cdr.detectChanges();
+        });
+      });
+    });
   }
 }
