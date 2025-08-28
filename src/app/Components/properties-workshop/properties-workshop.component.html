@@ -5,7 +5,7 @@
         <div class="header">
           <button class="btn-save" (click)="saveProject()">
             Salvar
-            <div class="status-circle" title="Você possui mudanças a serem salvas."></div>
+            <div class="status-circle" title="Você possui mudanças a serem salvas." *ngIf="projectChange"></div>
           </button>
 
           <div class="box-prop-explorer">
@@ -23,6 +23,7 @@
           <div class="nothingSelected" *ngIf="selectedElement === null && displayWindow === 'properties'">
             <i class="fa-solid fa-computer-mouse"></i>
             <p>Nenhum componente selecionado</p>
+            <p>*Selecione com um double click*</p>
             <span>Selecione um componente na área de trabalho para editar suas propriedades.</span>
           </div>
         </div>
@@ -34,12 +35,12 @@
 
               <div class="text">
                 <p>{{title}}</p>
-                <p id="componentId">{{id}}</p>
+                <p id="componentId">{{genericName}}</p>
               </div>
             </div>
   
             <div class="actions">
-              <button class="rename-btn" (click)="actionComponent(selectedElement, 'rename')" title="Renomear Componente">
+              <button class="rename-btn" (click)="actionComponent(selectedElement, null, 'rename')" title="Renomear Componente">
                 <i id="action-rename" class="fa-solid fa-edit"></i>
               </button>
               
@@ -47,7 +48,7 @@
                 <i id="action-info" class="fa-solid fa-circle-info"></i>
               </button>
   
-              <button class="remove-btn" (click)="actionComponent(selectedElement, 'delete')" title="Remover Componente">
+              <button class="remove-btn" (click)="actionComponent(selectedElement, null, 'delete')" title="Remover Componente">
                 <i id="action-remove" class="fa-solid fa-trash-can"></i>
               </button>
             </div>
@@ -658,7 +659,7 @@
                 <div class="info">
                   <i class="fa-solid fa-caret-right"></i>
                   <i [class]="el.icon"></i>
-                  <p (click)="actionComponent(el.component, 'rename')">{{el.component.id}}</p>
+                  <p (click)="actionComponent(el.component, el, 'rename')">{{el.genericName}}</p>
                 </div>
                 
                 <div class="actions">
@@ -670,7 +671,7 @@
                     <i class="fa-solid fa-circle-info action-info"></i>
                   </button>
 
-                  <button (click)="actionComponent(el.component, 'delete')" class="delete-button" title="Remover Componente">
+                  <button (click)="actionComponent(el.component, null, 'delete')" class="delete-button" title="Remover Componente">
                     <i class="fa-solid fa-trash-can action-remove"></i>
                   </button>
                 </div>

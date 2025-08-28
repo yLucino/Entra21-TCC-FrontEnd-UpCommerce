@@ -1,8 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { ComponentDragDrop } from 'src/app/interfaces/component.dragdrop.interface';
 import { ProjectInterface } from 'src/app/interfaces/project.interface';
 import { CdkService } from 'src/app/services/cdk.service';
+import { ProjectService } from 'src/app/services/project.service';
 import { PropertyService } from 'src/app/services/property.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-properties-workshop',
@@ -11,12 +13,16 @@ import { PropertyService } from 'src/app/services/property.service';
 })
 export class PropertiesWorkshopComponent {
   @Input() projectId!:number;
+  userId: number = Number(localStorage.getItem('userId'));
+  projectChange: boolean = false
+  @Output() projectStatus = new EventEmitter<boolean>();
 
   // Inputs for the component
   @Input() title!: string;
   @Input() icon!: string;
   @Input() textPreviewComponent!: string;
   @Input() id!: string;
+  @Input() genericName!: string;
 
   @Input() width!: number;
   @Input() height!: number;
@@ -113,7 +119,7 @@ export class PropertiesWorkshopComponent {
   askDeleteComponent = false;
   askRanameComponent = false;
   componentToDelete: HTMLElement | null = null;
-  componentToRename: HTMLElement | null = null;
+  componentToRename: ComponentDragDrop | null = null;
   nameTag: string | null = '';
   searchTerm: string = '';
 
@@ -122,7 +128,11 @@ export class PropertiesWorkshopComponent {
 
   private mutationObserver!: MutationObserver;
 
-  constructor(private propertyService: PropertyService, private cdkService: CdkService) {}
+  constructor(
+    private propertyService: PropertyService,
+    private cdkService: CdkService,
+    private cdr: ChangeDetectorRef,
+  ) {}
 
   ngOnInit() {
     this.cdkService.screenId$.subscribe(btn => {
@@ -522,6 +532,7 @@ export class PropertiesWorkshopComponent {
 
     const foundInComponents = this.propertyService.components.find(c => c.nameTag === nameTag);
     const foundInScreens = this.propertyService.screens.find(s => s.nameTag === nameTag);
+    const genericName = component.getAttribute('data-generic-name') || component.id;
     const found = foundInComponents || foundInScreens;
 
     if (found) {
@@ -529,6 +540,7 @@ export class PropertiesWorkshopComponent {
       this.icon = found.icon;
       this.textPreviewComponent = found.description;
       this.id = component.id;
+      this.genericName = genericName;
     }
 
     // Propriedades HTML
@@ -546,15 +558,19 @@ export class PropertiesWorkshopComponent {
 
     // Propriedades CSS
     this.loadStylesFromElement(component);
+    this.changedProject();
+    this.cdr.detectChanges();
   }
 
-  actionComponent(component: HTMLElement, action: string) {
+  actionComponent(component: HTMLElement, fullComponent: ComponentDragDrop | null, action: string) {
     if (action === 'delete') {
       this.askDeleteComponent = true;
       this.componentToDelete = component;
     } else if (action === 'rename') {
       this.askRanameComponent = true;
-      this.componentToRename = component;
+      if (fullComponent !== null) this.componentToRename = fullComponent;
+      const comp = this.components.find(c => c.component.id === component.id);
+      if (comp) this.componentToRename = comp;
     }
   }
 
@@ -564,17 +580,20 @@ export class PropertiesWorkshopComponent {
       this.deselectElement();
       this.propertyService.setSelectedElement(null);
     }
-
+    this.renderComponents();
+    this.cdr.detectChanges();
     this.closeDeleteDialog();
+    this.changedProject();
   }
   
   confirmRename() {
-    if (this.componentToRename?.parentElement && this.newComponentId !== '') {
-      this.componentToRename.id = this.newComponentId;
-      this.id = this.newComponentId;
+    if (this.componentToRename && this.newComponentId !== '') {
+      this.componentToRename.genericName = this.newComponentId;
+      this.componentToRename.component.setAttribute('data-generic-name', this.newComponentId);
     }
 
     this.closeDeleteDialog();
+    this.changedProject();
   }
 
   cancel() {
@@ -630,18 +649,24 @@ export class PropertiesWorkshopComponent {
       const nameTag = element.getAttribute('ng-reflect-name-tag');
       const foundInComponents = this.propertyService.components.find(c => c.nameTag === nameTag);
       const foundInScreens = this.propertyService.screens.find(s => s.nameTag === nameTag);
+      const genericName = element.getAttribute('data-generic-name') || element.id;
       const found = foundInComponents || foundInScreens;
 
       if (found) {
-        this.components.push({
+        const newComp: ComponentDragDrop = {
           text: found.text,
           icon: found.icon,
           nameTag: nameTag || '',
           description: found.description,
-          component: element
-        });
+          component: element,
+          genericName: genericName
+        }
+
+        this.components = [...this.components, newComp];
       }
     });
+
+    this.cdr.detectChanges();
   }
 
   toggleWindow(window: string) {
@@ -664,8 +689,12 @@ export class PropertiesWorkshopComponent {
       const tagMatch = el.nameTag 
         ? this.normalize(el.nameTag).includes(search) 
         : false;
+      
+      const genericName = el.genericName 
+        ? this.normalize(el.genericName).includes(search) 
+        : false;
 
-      return idMatch || tagMatch || textMatch;
+      return idMatch || tagMatch || textMatch || genericName;
     });
   }
 
@@ -675,11 +704,27 @@ export class PropertiesWorkshopComponent {
       : '';
   }
 
-
+  // Save Project
+  changedProject() {
+    this.projectChange = true;
+    this.projectStatus.emit(true);
+  }
 
   saveProject() {
-    if (this.projectId) {
+    if (this.projectId && this.projectChange) {
       this.cdkService.saveProject();
+      this.projectChange = false;
+      this.projectStatus.emit(false);
+    } else {
+      Swal.fire({
+        toast: true,            
+        position: 'top-end',    
+        icon: 'warning',    
+        title: 'Sem mudanças para salvar!',
+        showConfirmButton: false,
+        timer: 3000, 
+        timerProgressBar: true 
+      })
     }
   }
 }

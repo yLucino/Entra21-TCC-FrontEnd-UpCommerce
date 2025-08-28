@@ -82,7 +82,55 @@ export class CdkService {
     const computed = window.getComputedStyle(element);
     const id = element.id;
     const cdkId = element.id;
-    let parentCdkId = element.parentElement?.parentElement?.getAttribute('id') || null;
+    const parentCdkId = element.parentElement?.parentElement?.getAttribute('id') || null;
+
+    // Shadow normal
+    const shadowBox = computed.boxShadow; 
+    let shadowColor = 'rgb(0, 0, 0)';
+    let shadowX = 0;
+    let shadowY = 0;
+    let shadowBlur = 0;
+
+    if (shadowBox && shadowBox !== 'none') {
+      const match = shadowBox.match(/^(rgba?\([^)]+\)|#[0-9a-fA-F]+)\s+([-\d.]+)px\s+([-\d.]+)px\s+([-\d.]+)px/);
+      if (match) {
+        shadowColor = match[1];
+        shadowX = parseFloat(match[2]);
+        shadowY = parseFloat(match[3]);
+        shadowBlur = parseFloat(match[4]);
+      }
+    }
+
+    // Hover
+    const clone = element.cloneNode(true) as HTMLElement;
+    clone.style.display = 'block';
+    clone.style.position = 'absolute';
+    clone.style.visibility = 'hidden';
+    document.body.appendChild(clone);
+    const hoverComputed = getComputedStyle(clone, ':hover');
+
+    let hoverShadowColor = 'rgb(0, 0, 0)';
+    let hoverShadowX = 0, hoverShadowY = 0, hoverShadowBlur = 0;
+    let hoverScale: string = '1';
+
+    if (hoverComputed.boxShadow && hoverComputed.boxShadow !== 'none') {
+      const matchHover = hoverComputed.boxShadow.match(/^(rgba?\([^)]+\)|#[0-9a-fA-F]+)\s+([-\d.]+)px\s+([-\d.]+)px\s+([-\d.]+)px/);
+      if (matchHover) {
+        hoverShadowColor = matchHover[1];
+        hoverShadowX = parseFloat(matchHover[2]);
+        hoverShadowY = parseFloat(matchHover[3]);
+        hoverShadowBlur = parseFloat(matchHover[4]);
+      }
+    }
+
+    if (hoverComputed.transform && hoverComputed.transform !== 'none') {
+      const scaleMatch = hoverComputed.transform.match(/scale\(([\d.]+)\)/);
+      if (scaleMatch) hoverScale = scaleMatch[1];
+    }
+
+    const transition = computed.transition || '';
+
+    document.body.removeChild(clone);
 
     const style: ComponentStyles = {
       width: parseInt(computed.width) || 0,
@@ -110,22 +158,23 @@ export class CdkService {
       fontWeight: computed.fontWeight || '',
       textAlign: computed.textAlign || '',
       opacity: parseFloat(computed.opacity) || 1,
-      shadowX: 0, 
-      shadowY: 0, 
-      shadowBlur: 0, 
-      shadowColor: "#000000",
+      shadowX,
+      shadowY,
+      shadowBlur,
+      shadowColor,
       position: computed.position || '',
       top: parseInt(computed.top) || 0,
       left: parseInt(computed.left) || 0,
       right: parseInt(computed.right) || 0,
       bottom: parseInt(computed.bottom) || 0,
       zIndex: parseInt(computed.zIndex) || 0,
-      hoverScale: "",
+      hoverScale,
       hoverBorderRadius: 0,
-      hoverShadowX: 0,
-      hoverShadowY: 0,
-      hoverShadowBlur: 0,
-      hoverShadowColor: "#000000",
+      hoverShadowX,
+      hoverShadowY,
+      hoverShadowBlur,
+      hoverShadowColor,
+      transition,
       cursor: computed.cursor || '',
       display: computed.display || '',
       flexDirection: computed.flexDirection || '',
@@ -141,20 +190,23 @@ export class CdkService {
       linkSource: element.getAttribute("href") || ''
     };
 
-
     const children: CdkComponent[] = Array.from(element.children)
       .filter(c => c instanceof HTMLElement)
       .map(c => this.serializeComponent(c as HTMLElement))
       .filter(c => c.id || c.cdkId || c.style);
 
+    const genericName = element.getAttribute("data-generic-name") || element.id;
+
     return {
-      id: id,
-      cdkId: cdkId,
-      parentCdkId: parentCdkId,
-      style: style,
-      children: children
+      id,
+      cdkId,
+      parentCdkId,
+      genericName,
+      style,
+      children
     };
   }
+
 
   saveProject(): void {
     const rootComponents: CdkComponent[] = [];
@@ -248,12 +300,17 @@ export class CdkService {
       const instance = componentRef.instance as any;
       const el = componentRef.location.nativeElement as HTMLElement;
 
+      if (compData.genericName) {
+        el.setAttribute('data-generic-name', compData.genericName);
+      }
+
       this.applyStylesToElement(compData, el, compData.style || {});
 
       if (instance instanceof AreaComponent) {
         const areaInstance = instance as AreaComponent;
         areaInstance.areaListId = compData.id;
         areaInstance.childrenData = compData.children || [];
+
         if (areaInstance.viewContainerRef) {
           (compData.children || []).forEach((child: any) => {
             this.deserializeComponent(child, areaInstance.viewContainerRef);
@@ -304,7 +361,6 @@ export class CdkService {
 
   applyStylesToElement(compData: any, el: HTMLElement, styles: ComponentStyles) {
     if (!styles || !el) return;
-    const wrapper = el.querySelector('.area-style-wrapper') as HTMLElement;
 
     const elId = compData.id;
 
