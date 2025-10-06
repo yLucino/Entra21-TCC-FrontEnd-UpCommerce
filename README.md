@@ -59,8 +59,8 @@ npm install
 
 ## Referências
 
-📷 <a href="https://www.github.com/sgarciaisabela" target="_blank">Canva da UpCommerce</a><br>
-🎥 <a href="https://www.github.com/sgarciaisabela" target="_blank">AdSense da UpCommerce</a><br>
+📷 <a href="https://www.canva.com/design/DAGktZRjSS0/83JcUau1N7sM14nT80oxHA/edit?utm_content=DAGktZRjSS0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank">Canva da UpCommerce</a><br>
+🎥 <a href="https://www.youtube.com/watch?v=H5BG7qBKjlM" target="_blank">AdSense da UpCommerce</a><br>
 
 ## Agradecimentos
 
